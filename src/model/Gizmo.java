@@ -9,13 +9,15 @@ public class Gizmo implements IGizmo{
 	protected Color color;
 	protected String key;
 	protected IGizmo connectedGizmo;//gizmo to trigger when this gizmo is triggered
-	
+	protected IGizmo gizmoConnected;//gizmo that it is connected to
+
 	public Gizmo(int x, int y){
 		this.x = x;
 		this.y= y;
 		this.color = Color.BLUE;
 		angle = 0;  //default angle facing upward
 		connectedGizmo = null;
+		gizmoConnected = null;
 	}
 	
 	@Override
@@ -100,5 +102,14 @@ public class Gizmo implements IGizmo{
 	public void setConnectedGizmo(IGizmo connectedGizmo) {
 		this.connectedGizmo = connectedGizmo;
 	}
-		
+	
+	@Override
+	public IGizmo getGizmoConnected() {
+		return gizmoConnected;
+	}
+
+	@Override
+	public void setGizmoConnected(IGizmo gizmoConnected) {
+		this.gizmoConnected = gizmoConnected;
+	}
 }

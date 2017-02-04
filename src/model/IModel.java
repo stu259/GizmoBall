@@ -5,7 +5,7 @@ public interface IModel {
 	public void addAbsorber();
 	public void rotateGizmo(IGizmo gizmo);
 	public void connectGizmo(IGizmo gizmo1, IGizmo gizmo2);
-	public void disconnectGizmo(IGizmo gizmo);
+	public boolean disconnectGizmo(IGizmo gizmo);
 	public void keyConnectGizmo(IGizmo gizmo, String key);
 	public void removeKey(IGizmo gizmo);
     public void deleteGizmo(IGizmo gizmo);
