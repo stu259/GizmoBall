@@ -1,9 +1,8 @@
 package model;
 
 public interface IModel {
-	
-	public void addGizmo();
-	public void addBall();
+	public boolean addGizmo(IGizmo gizmo);
+	public void addBall(Ball ball);
 	public void addAbsorber();
 	public void rotateGizmo();
 	public void connectGizmo();
@@ -14,4 +13,5 @@ public interface IModel {
     public void setFriction();
     public void setGravity();
     public void moveGizmo();
+	public void runMode();
 }

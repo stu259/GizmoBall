@@ -1,22 +1,44 @@
 package model;
 
+import java.awt.Color;
+
 public class Gizmo implements IGizmo{
 
-	protected int x1, y1, angle, size;
+	protected int x, y, angle, size;
 	protected double coef;
-	protected String color;
+	protected Color color;
 	
-	public Gizmo(int x1, int y1, String color){
-		this.x1 = x1;
-		this.y1= y1;
+	public Gizmo(int x, int y, Color color){
+		this.x = x;
+		this.y= y;
 		this.color = color;
 		angle = 0;  //default angle facing upward
 	}
 	
 	@Override
+	public int getStartX() {
+		return x;
+	}
+
+	@Override
+	public int getStartY() {
+		return y;
+	}
+
+	@Override
+	public int getEndX() {
+		return x+size;
+	}
+
+	@Override
+	public int getEndY() {
+		return y+size;
+	}
+	
+	@Override
 	public void newPosition(int x, int y) {
-		x1 = x;
-		y1 = y;
+		this.x = x;
+		this.y = y;
 	}
 
 	@Override
@@ -25,20 +47,9 @@ public class Gizmo implements IGizmo{
 		else angle += 90;
 	}
 	
-	@Override
-	public int[] getStartPosition() {
-		int[] pos = {x1, y1};
-		return pos;
-	}
 	
 	@Override
-	public int[] getEndPosition() {
-		int[] pos = {x1+size, y1+size};
-		return pos;
-	}
-	
-	@Override
-	public void changeColor(String color) {
+	public void changeColor(Color color) {
 		this.color = color; 
 	}
 
@@ -53,12 +64,17 @@ public class Gizmo implements IGizmo{
 	}
 
 	@Override
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
 	@Override
 	public int getSize() {
 		return size;
+	}
+	
+	@Override
+	public Gizmo copy(){
+		return this.copy();
 	}
 }

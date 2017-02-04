@@ -1,14 +1,16 @@
 package model;
 
-public class LeftFlipper extends Gizmo{
+import java.awt.Color;
+
+public class RightFlipperGizmo extends Gizmo{
 	
 	private int angularVel;
 	
-	public LeftFlipper (int x1, int y1, String color) {
+	public RightFlipperGizmo (int x1, int y1, Color color) {
 		super(x1, y1, color);
 		size = 2; //flipper has predefined size of 2
 		coef = 0.95;
-		angularVel = 1080;
+		angularVel = -1080;
 	}
 	
 	/*
