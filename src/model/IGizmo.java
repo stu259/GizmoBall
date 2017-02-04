@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.util.List;
 
 public interface IGizmo {
 	/*
@@ -77,7 +78,11 @@ public interface IGizmo {
 
 	public void setConnectedGizmo(IGizmo connectedGizmo);
 
-	public IGizmo getGizmoConnected();
+	public List<IGizmo> getGizmosConnected();
 
-	public void setGizmoConnected(IGizmo gizmoConnected);
+	public void addGizmoConnected(IGizmo gizmoConnected);
+
+	public void clearGizmoConnected();
+
+	public void removeGizmoConnected(IGizmo gizmo);
 }
