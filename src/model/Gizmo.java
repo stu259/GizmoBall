@@ -8,10 +8,10 @@ public class Gizmo implements IGizmo{
 	protected double coef;
 	protected Color color;
 	
-	public Gizmo(int x, int y, Color color){
+	public Gizmo(int x, int y){
 		this.x = x;
 		this.y= y;
-		this.color = color;
+		this.color = Color.BLUE;
 		angle = 0;  //default angle facing upward
 	}
 	
