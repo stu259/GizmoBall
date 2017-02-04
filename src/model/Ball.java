@@ -6,6 +6,7 @@ public class Ball {
 	private Vect vel;
 	private double minSpeed, maxSpeed, radius, x, y;
 	private Color color;
+	private boolean paused;
 	
 	/*
 	 * Direction must be in radians
@@ -18,16 +19,37 @@ public class Ball {
 		vel = new Vect(xVel, yVel);
 		color = Color.CYAN;
 		radius = 0.25;
+		paused = false;
 	}
 	
 	/*
-	 * return the position of the ball
+	 * Return the X coordinate of the ball
 	 */
-	public double[] getPosition(){
-		double[] pos = {x,y};
-		return pos;
+	public double getX() {
+		return x;
 	}
-	
+
+	/*
+	 * Return the Y coordinate of the ball
+	 */
+	public double getY() {
+		return y;
+	}
+
+	/*
+	 * Return whether or not the ball is paused
+	 */
+	public boolean isPaused() {
+		return paused;
+	}
+
+	/*
+	 * set whether or not the ball is paused
+	 */
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
+
 	/*
 	 * Returns the velocity of the ball
 	 */

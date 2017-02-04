@@ -14,4 +14,7 @@ public interface IModel {
     public void setGravity(double g);
     public void moveGizmo(int x, int y, IGizmo gizmo);
 	public void runMode();
+	void moveBalls();
+	void resume();
+	void pause();
 }

@@ -2,10 +2,11 @@ package model;
 import physics.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Model implements IModel{
+public class Model extends Observable implements IModel{
 	//			   (triggers)
 	//lines/circles    ->    gizmos (color change, connections)
 	//	   flippers    ->    lines/circles
@@ -367,6 +368,49 @@ public class Model implements IModel{
 		}
 		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel));
 		
+	}
+	
+	@Override
+	public void moveBalls(){
+		for(Ball ball : balls){
+			CollisionInfo colInfo = timeUntilCollision();
+			double colTime = colInfo.getColTime();
+			if(!ball.isPaused() && ball!=null){
+				if(colTime > time){//nein Kollision
+					ball = calculateBallTime(ball, time);
+				} else{
+					ball = calculateBallTime(ball, colTime);
+					ball.setVelocity(colInfo.getUpdatedVel());
+				}
+			}
+		}
+		
+		this.setChanged();
+		this.notifyObservers();  //update board both in gui and model
+	}
+	
+	private Ball calculateBallTime(Ball ball, double newTime){
+		double vectX = ball.getVelocity().x();
+		double vectY = ball.getVelocity().y();
+		double x = ball.getX() + (vectX*newTime);
+		double y = ball.getY() + (vectY*newTime);
+		ball.setX(x);
+		ball.setY(y);
+		
+		return ball;
+	}
+	
+	@Override
+	public void resume(){
+		for(Ball ball : balls)
+			ball.setPaused(false);
+	}
+	
+	@Override
+	//pauses all the balls and therefore pauses the game
+	public void pause(){
+		for(Ball ball : balls)
+			ball.setPaused(true);
 	}
 	
 	private class CollisionInfo{
