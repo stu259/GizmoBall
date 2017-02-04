@@ -76,4 +76,8 @@ public interface IGizmo {
 	public IGizmo getConnectedGizmo();
 
 	public void setConnectedGizmo(IGizmo connectedGizmo);
+
+	public IGizmo getGizmoConnected();
+
+	public void setGizmoConnected(IGizmo gizmoConnected);
 }

@@ -355,12 +355,25 @@ public class Model implements IModel{
 	@Override
 	public void connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
 		gizmo1.setConnectedGizmo(gizmo2);
+		gizmo1.setGizmoConnected(null);
 		gizmo2.setConnectedGizmo(null);
+		gizmo2.setGizmoConnected(gizmo1);
 	}
 
 	@Override
-	public void disconnectGizmo(IGizmo gizmo) {
-		gizmo.setConnectedGizmo(null);
+	public boolean disconnectGizmo(IGizmo gizmo) {
+		if(gizmo.getConnectedGizmo() != null){
+			gizmo.getConnectedGizmo().setGizmoConnected(null);
+			gizmo.setConnectedGizmo(null);
+		}
+		else if(gizmo.getGizmoConnected() != null){
+			gizmo.getGizmoConnected().setConnectedGizmo(null);
+			gizmo.setGizmoConnected(null);
+		}
+		else{
+			return false;
+		}
+		return true;
 	}
 
 	@Override
