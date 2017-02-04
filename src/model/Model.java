@@ -10,40 +10,48 @@ public class Model implements IModel{
 	//			   (triggers)
 	//lines/circles    ->    gizmos (color change, connections)
 	//	   flippers    ->    lines/circles
-	
+
 	private List<IGizmo> gizmos;
 	private List<Ball> balls;
 	private List<Absorber> absorber;
 	private List<LineSegment> lines;
 	private List<Circle> circles;
-	
+	//connections for triggering both redrawing of lines and 
 	private HashMap<Circle, IGizmo> circlesToGizmos;
 	private HashMap<LineSegment, IGizmo> linesToGizmos;
 	private HashMap<IGizmo , LineSegment> flippersToLines;
 	private HashMap<IGizmo , Circle> flippersToCircles;
-	
-	
-	
-	private int boardSize, boardScale;
-	
-	
+
+	private int modelSize, boardScale, boardSize;
+
+
 	public Model(){
-		boardSize = 2000; //this is 20x20*L; L=100
-		boardScale = boardSize/20;
-		makeWalls(boardSize);
-		
+		modelSize = 2000; //this is 20x20*L; L=100
+		boardSize = 20;
+		boardScale = modelSize/boardSize; // = 100
+		makeWalls(modelSize);
+
 		gizmos = new ArrayList<IGizmo>();
 		balls = new ArrayList<Ball>();
 		absorber = new ArrayList<Absorber>();
 		lines = new ArrayList<LineSegment>();
 		circles = new ArrayList<Circle>();
-		
+
 		linesToGizmos = new HashMap<LineSegment , IGizmo>();
 		circlesToGizmos = new HashMap<Circle , IGizmo>();
 		flippersToLines = new HashMap<IGizmo , LineSegment>();
 		flippersToCircles = new HashMap<IGizmo , Circle>();
 	}
-	
+
+
+	/**
+	 * 
+	 * 
+	 * 			RUNNING CODE
+	 * 
+	 * 
+	 */
+
 	/*
 	 * Called when all data from build mode is to be translated into the run mode
 	 * Creates all line segments and circles to be processed for the physics engine
@@ -54,34 +62,34 @@ public class Model implements IModel{
 			//add method to draw gizmo
 			if(gizmo instanceof SquareGizmo)
 				makeSquare(gizmo.copy());
-			
+
 			else if(gizmo instanceof TriangleGizmo)
 				makeTriangle(gizmo.copy());
-			
-//			else if(gizmo instanceof RightFlipperGizmo)
-//				makeRightFlipper(gizmo.copy());
-//			
-//			else if(gizmo instanceof LeftFlipperGizmo)
-//				makeLeftFlipper(gizmo.copy());
-			
+
+			//			else if(gizmo instanceof RightFlipperGizmo)
+			//				makeRightFlipper(gizmo.copy());
+			//			
+			//			else if(gizmo instanceof LeftFlipperGizmo)
+			//				makeLeftFlipper(gizmo.copy());
+
 			else if(gizmo instanceof CircleGizmo)
 				makeCircleGizmo(gizmo.copy());
 		}
 	}
-	
+
 	private void makeCircleGizmo(IGizmo gizmo) {
 		int x1 = gizmo.getStartX()*boardScale;
 		int x2 = gizmo.getEndX()*boardScale;
 		int y1 = gizmo.getStartY()*boardScale;
 		int y2 = gizmo.getEndY()*boardScale;
-		
+
 		double radius = gizmo.getSize()/2;
 		//get midpoints
 		Circle circle = new Circle((x1+x2)/2, (y1+y2)/2, radius);
 		circlesToGizmos.put(circle, gizmo);
 		circles.add(circle);
 	}
-	
+
 	private void makeTriangle(IGizmo gizmo) {
 		//the right angled corner should be in the top-left position by default
 		//THIS IS A MUST!!!! DO NOT CHANGE
@@ -90,7 +98,7 @@ public class Model implements IModel{
 		int y1 = gizmo.getStartY()*boardScale;
 		int y2 = gizmo.getEndY()*boardScale;
 		int direction = gizmo.getRotation();
-		
+
 		//keeps track of the triangle rotation for edge and corner placement
 		switch(direction){
 		case 0: //right-angle is top-left (this is by default)
@@ -198,8 +206,8 @@ public class Model implements IModel{
 		int x2 = gizmo.getEndX()*boardScale;
 		int y1 = gizmo.getStartY()*boardScale;
 		int y2 = gizmo.getEndY()*boardScale;
-		
-		
+
+
 		//create lines and corners
 		LineSegment left = new LineSegment(x1, y1, x1, y2);
 		LineSegment bottom = new LineSegment(x1, y2, x2, y2);
@@ -209,8 +217,8 @@ public class Model implements IModel{
 		Circle bottomLeft = new Circle(x1, y2, 0);
 		Circle topRight = new Circle(x2, y1, 0);
 		Circle bottomRight = new Circle(x2, y2, 0);
-		
-		
+
+
 		//create connections for the lines -> gizmo
 		linesToGizmos.put(left, gizmo);
 		linesToGizmos.put(bottom, gizmo);
@@ -232,30 +240,57 @@ public class Model implements IModel{
 		circles.add(topRight);
 		circles.add(bottomRight);
 	}
-	
 
-	@Override
-	public boolean addGizmo(IGizmo gizmo) {
-		//check if gizmo can be added (check outside board, position, size, then scale)
-		if(gizmo.getStartX() < 0 || gizmo.getEndX() > boardSize 
-				|| gizmo.getStartY() < 0 || gizmo.getEndY() > boardSize)
+	//Makes the walls for the outer edges of the board
+	private void makeWalls(int boardSize){
+		LineSegment topWall = new LineSegment(0, 0, boardSize, 0);
+		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);
+		LineSegment bottomWall = new LineSegment(0, boardSize, boardSize, boardSize);
+		LineSegment leftWall = new LineSegment(0, 0, 0, boardSize);
+		lines.add(topWall);
+		lines.add(rightWall);
+		lines.add(bottomWall);
+		lines.add(leftWall);
+	}
+
+
+	/**
+	 * 
+	 * 
+	 * 			BUILDING CODE BEYOND THIS POINT
+	 * 
+	 * 
+	 */
+	//check if object can be added (check outside board, position, size, then scale)
+	//Params: startx, starty, endx, endy
+	private boolean validatePosition(double sx, double sy, double ex, double ey){
+		//check if gizmo is somehow placed outside of board (shouldnt happen)
+		if(sx < 0 || ex > boardSize 
+				|| sy < 0 || ey > boardSize)
 			return false;
 		
-		for(IGizmo giz : gizmos)
-			if((giz.getStartX() < gizmo.getStartX() && gizmo.getStartX() < giz.getEndX())
-					&& (giz.getStartY() < gizmo.getStartY() && gizmo.getStartY() < giz.getEndY()))
+		//check if given coordinates overlaps with any other gizmo position
+		for(IGizmo gizmo : gizmos)
+			if(sx < gizmo.getEndX() && ex > gizmo.getStartX()
+					&& sy < gizmo.getEndY() && ey > gizmo.getEndY())
 				return false;
-		
-		//TODO CHECK FOR ABSORBER OVERLAPPING AS WELL
-		
-		//add gizmo to gizmo list
-		gizmos.add(gizmo);
-		
-		//TODO DRAW ABSORBERS HERE (MAYBE)
 		
 		return true;
 	}
-	
+
+	@Override
+	public boolean addGizmo(IGizmo gizmo) {
+
+		//TODO CHECK FOR ABSORBER OVERLAPPING AS WELL
+
+		//add gizmo to gizmo list
+		gizmos.add(gizmo);
+
+		//TODO DRAW ABSORBERS HERE (MAYBE)
+
+		return true;
+	}
+
 	//Adds param ball to the list of balls on the board
 	public void addBall(Ball ball){
 		balls.add(ball);
@@ -318,19 +353,5 @@ public class Model implements IModel{
 	public void moveGizmo() {
 		// TODO Auto-generated method stub
 
-	}
-	
-	/*
-	 * Makes the walls for the outer edges of the board
-	 */
-	private void makeWalls(int boardSize){
-		LineSegment topWall = new LineSegment(0, 0, boardSize, 0);
-		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);
-		LineSegment bottomWall = new LineSegment(0, boardSize, boardSize, boardSize);
-		LineSegment leftWall = new LineSegment(0, 0, 0, boardSize);
-		lines.add(topWall);
-		lines.add(rightWall);
-		lines.add(bottomWall);
-		lines.add(leftWall);
 	}
 }
