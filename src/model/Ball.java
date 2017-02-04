@@ -71,6 +71,13 @@ public class Ball {
 	}
 	
 	/*
+	 * returns the center of the ball
+	 */
+	public Vect getCenter(){
+		return new Vect(x,y);
+	}
+	
+	/*
 	 * Set the color of the ball
 	 */
 	public void setColor(Color color){

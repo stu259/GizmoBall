@@ -1,6 +1,6 @@
 package model;
 public interface IModel {
-	public boolean addGizmo(IGizmo gizmo);
+	public boolean addGizmo(IGizmo gizmo, String key);
 	public void addBall(Ball ball);
 	public void addAbsorber();
 	public void rotateGizmo(IGizmo gizmo);

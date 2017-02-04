@@ -1,6 +1,5 @@
 package model;
-import physics.Circle;
-import physics.LineSegment;
+import physics.*;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class Model implements IModel{
 	//lines/circles    ->    gizmos (color change, connections)
 	//	   flippers    ->    lines/circles
 
-	private List<IGizmo> gizmos;
+	private Map<String, IGizmo> gizmos;
 	private List<Ball> balls;
 	private List<Absorber> absorber;
 	private List<LineSegment> lines;
@@ -19,12 +18,14 @@ public class Model implements IModel{
 	
 	private double gravity;
 	private double friction;
+	private Vect velocity;
+	private double time = 0.05;
 	
 	//connections for triggering both redrawing of lines and 
-	private HashMap<Circle, IGizmo> circlesToGizmos;
-	private HashMap<LineSegment, IGizmo> linesToGizmos;
-	private HashMap<IGizmo , List<LineSegment>> flippersToLines;
-	private HashMap<IGizmo , List<Circle>> flippersToCircles;
+	private Map<Circle, IGizmo> circlesToGizmos;
+	private Map<LineSegment, IGizmo> linesToGizmos;
+	private Map<IGizmo , List<LineSegment>> flippersToLines;
+	private Map<IGizmo , List<Circle>> flippersToCircles;
 
 	private int modelSize, boardScale, boardSize;
 
@@ -35,7 +36,7 @@ public class Model implements IModel{
 		boardScale = modelSize/boardSize; // = 100
 		makeWalls(modelSize);
 
-		gizmos = new ArrayList<IGizmo>();
+		gizmos = new HashMap<String, IGizmo>();
 		balls = new ArrayList<Ball>();
 		absorber = new ArrayList<Absorber>();
 		lines = new ArrayList<LineSegment>();
@@ -71,7 +72,8 @@ public class Model implements IModel{
 		flippersToLines.clear();
 		flippersToCircles.clear();
 		
-		for(IGizmo gizmo : gizmos){
+		for(String key : gizmos.keySet()){
+			IGizmo gizmo = gizmos.get(key);
 			//add method to draw gizmo
 			if(gizmo instanceof SquareGizmo)
 				makeSquare(gizmo.copy());
@@ -296,8 +298,62 @@ public class Model implements IModel{
 		lines.add(bottomWall);
 		lines.add(leftWall);
 	}
+	
+	private CollisionInfo timeUntilCollision(){
+		double lowestColTime = Double.MAX_VALUE;
+		Ball collidingBall = null;
+		Vect updatedVel = new Vect(0,0);
+		
+		for(Ball ball: balls){
+			Circle circ = ball.getCircle();
+			Vect vel = ball.getVelocity();
+			double nextTime = 0;
+			for(LineSegment line: lines){
+				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
+				if(nextTime < lowestColTime){
+					lowestColTime = nextTime;
+					collidingBall = ball;
+					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
+				}
+			}
+			for(Circle circle: circles){
+				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);
+				if(nextTime < lowestColTime){
+					lowestColTime = nextTime;
+					collidingBall = ball;
+					updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel, circlesToGizmos.get(circle).getCof());
+				}
+			}
+			
+		}
+		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel));
+		
+	}
+	
+	private class CollisionInfo{
+		double colTime;
+		Ball collidingBall;
+		Vect updatedVel;
+		
+		public CollisionInfo(double t, Ball b, Vect v){
+			colTime = t;
+			collidingBall = b;
+			updatedVel = v;
+		}
 
+		public double getColTime() {
+			return colTime;
+		}
 
+		public Ball getCollidingBall() {
+			return collidingBall;
+		}
+
+		public Vect getUpdatedVel() {
+			return updatedVel;
+		}		
+	}
+	
 	/**
 	 * 
 	 * 
@@ -314,23 +370,25 @@ public class Model implements IModel{
 			return false;
 		
 		//check if given coordinates overlaps with any other gizmo position
-		for(IGizmo gizmo : gizmos)
+		for(String key: gizmos.keySet()){
+			IGizmo gizmo = gizmos.get(key);
 			if(sx < gizmo.getEndX() && ex > gizmo.getStartX()
 					&& sy < gizmo.getEndY() && ey > gizmo.getEndY())
 				return false;
+		}
 		
 		return true;
 	}
 
 	@Override
-	public boolean addGizmo(IGizmo gizmo) {
+	public boolean addGizmo(IGizmo gizmo, String key) {
 		if(!validatePosition(gizmo.getStartX() , gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
 			return false;
 		
 		//TODO CHECK FOR ABSORBER OVERLAPPING AS WELL
 
 		//add gizmo to gizmo list
-		gizmos.add(gizmo);
+		gizmos.put(key,gizmo);
 
 		//TODO DRAW ABSORBERS HERE (MAYBE)
 
