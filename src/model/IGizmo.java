@@ -62,4 +62,18 @@ public interface IGizmo {
 	 * Returns a copy of the gizmo for passing between methods 
 	 */
 	public Gizmo copy();
+	
+	/*
+	 * Sets the key
+	 */
+	public void setKey(String k);
+	
+	/*
+	 * gets the key
+	 */
+	public String getKey();
+
+	public IGizmo getConnectedGizmo();
+
+	public void setConnectedGizmo(IGizmo connectedGizmo);
 }

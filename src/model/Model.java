@@ -16,6 +16,10 @@ public class Model implements IModel{
 	private List<Absorber> absorber;
 	private List<LineSegment> lines;
 	private List<Circle> circles;
+	
+	private double gravity;
+	private double friction;
+	
 	//connections for triggering both redrawing of lines and 
 	private HashMap<Circle, IGizmo> circlesToGizmos;
 	private HashMap<LineSegment, IGizmo> linesToGizmos;
@@ -58,6 +62,15 @@ public class Model implements IModel{
 	 */
 	@Override
 	public void runMode(){
+		
+		//clear dataStructures
+		lines.clear();
+		circles.clear();
+		linesToGizmos.clear();
+		circlesToGizmos.clear();
+		flippersToLines.clear();
+		flippersToCircles.clear();
+		
 		for(IGizmo gizmo : gizmos){
 			//add method to draw gizmo
 			if(gizmo instanceof SquareGizmo)
@@ -302,56 +315,56 @@ public class Model implements IModel{
 	}
 
 	@Override
-	public void rotateGizmo() {
-		// TODO Auto-generated method stub
-
+	public void rotateGizmo(IGizmo gizmo) {
+		gizmo.rotate();
 	}
 
 	@Override
-	public void connectGizmo() {
-		// TODO Auto-generated method stub
-
+	public void connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
+		gizmo1.setConnectedGizmo(gizmo2);
+		gizmo2.setConnectedGizmo(null);
 	}
 
 	@Override
-	public void disconnectGizmo() {
-		// TODO Auto-generated method stub
-
+	public void disconnectGizmo(IGizmo gizmo) {
+		gizmo.setConnectedGizmo(null);
 	}
 
 	@Override
-	public void keyConnectGizmo() {
-		// TODO Auto-generated method stub
-
+	public void keyConnectGizmo(IGizmo gizmo, String k) {
+		gizmo.setKey(k);
+	}
+	
+	@Override
+	public void removeKey(IGizmo gizmo){
+		gizmo.setKey("");
 	}
 
 	@Override
-	public void deleteGizmo() {
-		// TODO Auto-generated method stub
-
+	public void deleteGizmo(IGizmo gizmo) {
+		gizmos.remove(gizmo);
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		gizmos.clear();
+		balls.clear();
+		absorber.clear();
 	}
 
 	@Override
-	public void setFriction() {
-		// TODO Auto-generated method stub
-
+	public void setFriction(double f) {
+		friction = f;
 	}
 
 	@Override
-	public void setGravity() {
-		// TODO Auto-generated method stub
-
+	public void setGravity(double g) {
+		gravity = g;
 	}
 
 	@Override
-	public void moveGizmo() {
-		// TODO Auto-generated method stub
-
+	public void moveGizmo(int x, int y, IGizmo gizmo) {
+		if(validatePosition(x, y, x+gizmo.getSize(), y+gizmo.getSize()))
+			gizmo.newPosition(x, y);
 	}
 }

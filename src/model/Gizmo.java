@@ -7,12 +7,15 @@ public class Gizmo implements IGizmo{
 	protected int x, y, angle, size;
 	protected double coef;
 	protected Color color;
+	protected String key;
+	protected IGizmo connectedGizmo;//gizmo to trigger when this gizmo is triggered
 	
 	public Gizmo(int x, int y){
 		this.x = x;
 		this.y= y;
 		this.color = Color.BLUE;
 		angle = 0;  //default angle facing upward
+		connectedGizmo = null;
 	}
 	
 	@Override
@@ -77,4 +80,25 @@ public class Gizmo implements IGizmo{
 	public Gizmo copy(){
 		return this.copy();
 	}
+	
+	@Override
+	public void setKey(String k){
+		key = k;
+	}
+	
+	@Override
+	public String getKey(){
+		return key;
+	}
+	
+	@Override
+	public IGizmo getConnectedGizmo() {
+		return connectedGizmo;
+	}
+	
+	@Override
+	public void setConnectedGizmo(IGizmo connectedGizmo) {
+		this.connectedGizmo = connectedGizmo;
+	}
+		
 }
