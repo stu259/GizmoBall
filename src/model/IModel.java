@@ -1,5 +1,4 @@
 package model;
-
 public interface IModel {
 	public boolean addGizmo(IGizmo gizmo);
 	public void addBall(Ball ball);
