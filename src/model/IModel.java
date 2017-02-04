@@ -15,18 +15,75 @@ public interface IModel {
 	 * adds an absorber to the 
 	 */
 	public void addAbsorber();
+	
+	/*
+	 * Rotates the given Gizmo by rotating its line segments
+	 * and corners in the model
+	 */
 	public void rotateGizmo(IGizmo gizmo);
+	
+	/*
+	 * Connects gizmos to trigger on another
+	 */
 	public boolean connectGizmo(IGizmo gizmo1, IGizmo gizmo2);
+	
+	/*
+	 * Disconnects connected gizmos
+	 */
 	public boolean disconnectGizmo(IGizmo gizmo);
+	
+	/*
+	 * Connects key actions to given gizmo
+	 */
 	public void keyConnectGizmo(IGizmo gizmo, String key);
+	
+	/*
+	 * Disconnects key actions bound to the given gizmo
+	 */
 	public void removeKey(IGizmo gizmo);
+	
+	/*
+	 * Removes a given gizmo from the board
+	 */
     public void deleteGizmo(IGizmo gizmo);
+    
+    /*
+     * Removes all gizmos from the board
+     */
     public void clear();
+    
+    /*
+     * Sets friction
+     */
     public void setFriction(double f);
+    
+    /*
+     * Sets the gravity
+     */
     public void setGravity(double g);
+    
+    /*
+     * Moves gizmo 
+     */
     public void moveGizmo(int x, int y, IGizmo gizmo);
+    
+    /*
+     * Calls methods when switched to run mode
+     */
 	public void runMode();
-	void moveBalls();
-	void resume();
-	void pause();
+	
+	/*
+	 * Moves balls based on their direction and collisions
+	 */
+	public void moveBalls();
+	
+	/*
+	 * Resumes all balls from paused state
+	 */
+	public void resume();
+	
+	/*
+	 * Puts all balls into paused state
+	 */
+	public void pause();
 }

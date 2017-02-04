@@ -377,9 +377,9 @@ public class Model extends Observable implements IModel{
 			double colTime = colInfo.getColTime();
 			if(!ball.isPaused() && ball!=null){
 				if(colTime > time){//nein Kollision
-					ball = calculateBallTime(ball, time);
+					ball = calculateBallMove(ball, time);
 				} else{
-					ball = calculateBallTime(ball, colTime);
+					ball = calculateBallMove(ball, colTime);
 					ball.setVelocity(colInfo.getUpdatedVel());
 				}
 			}
@@ -389,7 +389,7 @@ public class Model extends Observable implements IModel{
 		this.notifyObservers();  //update board both in gui and model
 	}
 	
-	private Ball calculateBallTime(Ball ball, double newTime){
+	private Ball calculateBallMove(Ball ball, double newTime){
 		double vectX = ball.getVelocity().x();
 		double vectY = ball.getVelocity().y();
 		double x = ball.getX() + (vectX*newTime);
