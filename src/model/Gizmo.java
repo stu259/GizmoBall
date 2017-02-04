@@ -1,6 +1,8 @@
 package model;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Gizmo implements IGizmo{
 
@@ -8,8 +10,8 @@ public class Gizmo implements IGizmo{
 	protected double coef;
 	protected Color color;
 	protected String key;
-	protected IGizmo connectedGizmo;//gizmo to trigger when this gizmo is triggered
-	protected IGizmo gizmoConnected;//gizmo that it is connected to
+	protected IGizmo connectedGizmo;//gizmo to trigger when this gizmo is hit by the ball
+	protected List<IGizmo> gizmosConnected;//list of gizmos which can trigger this gizmo
 
 	public Gizmo(int x, int y){
 		this.x = x;
@@ -17,7 +19,7 @@ public class Gizmo implements IGizmo{
 		this.color = Color.BLUE;
 		angle = 0;  //default angle facing upward
 		connectedGizmo = null;
-		gizmoConnected = null;
+		gizmosConnected = new ArrayList<IGizmo>();
 	}
 	
 	@Override
@@ -104,12 +106,22 @@ public class Gizmo implements IGizmo{
 	}
 	
 	@Override
-	public IGizmo getGizmoConnected() {
-		return gizmoConnected;
+	public List<IGizmo> getGizmosConnected() {
+		return gizmosConnected;
 	}
 
 	@Override
-	public void setGizmoConnected(IGizmo gizmoConnected) {
-		this.gizmoConnected = gizmoConnected;
+	public void addGizmoConnected(IGizmo gizmoConnected) {
+		gizmosConnected.add(gizmoConnected);
+	}
+	
+	@Override
+	public void clearGizmoConnected(){
+		gizmosConnected.clear();
+	}
+	
+	@Override
+	public void removeGizmoConnected(IGizmo gizmo){
+		gizmosConnected.remove(gizmo);
 	}
 }
