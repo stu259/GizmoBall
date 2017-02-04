@@ -193,20 +193,44 @@ public class Model implements IModel{
 	}
 
 	private void makeSquare(IGizmo gizmo) {
+		//get x and y coordinates of starting and ending points of the gizmo
 		int x1 = gizmo.getStartX()*boardScale;
 		int x2 = gizmo.getEndX()*boardScale;
 		int y1 = gizmo.getStartY()*boardScale;
 		int y2 = gizmo.getEndY()*boardScale;
 		
-		lines.add(new LineSegment(x1, y1, x1, y2));
-		lines.add(new LineSegment(x1, y2, x2, y2));
-		lines.add(new LineSegment(x2, y2, x2, y1));
-		lines.add(new LineSegment(x2, y1, x1, y1));
+		
+		//create lines and corners
+		LineSegment left = new LineSegment(x1, y1, x1, y2);
+		LineSegment bottom = new LineSegment(x1, y2, x2, y2);
+		LineSegment right = new LineSegment(x2, y2, x2, y1);
+		LineSegment top = new LineSegment(x2, y1, x1, y1);
+		Circle topLeft = new Circle(x1, y1, 0);
+		Circle bottomLeft = new Circle(x1, y2, 0);
+		Circle topRight = new Circle(x2, y1, 0);
+		Circle bottomRight = new Circle(x2, y2, 0);
+		
+		
+		//create connections for the lines -> gizmo
+		linesToGizmos.put(left, gizmo);
+		linesToGizmos.put(bottom, gizmo);
+		linesToGizmos.put(right, gizmo);
+		linesToGizmos.put(top, gizmo);
+		//create connections for the circles -> gizmo
+		circlesToGizmos.put(topLeft, gizmo);
+		circlesToGizmos.put(bottomLeft, gizmo);
+		circlesToGizmos.put(topRight, gizmo);
+		circlesToGizmos.put(bottomRight, gizmo);
+		//add lines to list of alllines
+		lines.add(left);
+		lines.add(bottom);
+		lines.add(right);
+		lines.add(top);
 		//adds little circles to ensure that corners have collision
-		circles.add(new Circle(x1, y1, 0));
-		circles.add(new Circle(x1, y2, 0));
-		circles.add(new Circle(x2, y1, 0));
-		circles.add(new Circle(x2, y2, 0));
+		circles.add(topLeft);
+		circles.add(bottomLeft);
+		circles.add(topRight);
+		circles.add(bottomRight);
 	}
 	
 
