@@ -17,6 +17,11 @@ public class Model implements IModel{
 	private List<LineSegment> lines;
 	private List<Circle> circles;
 	
+	private HashMap<Circle, IGizmo> circlesToGizmos;
+	private HashMap<LineSegment, IGizmo> linesToGizmos;
+	private HashMap<IGizmo , LineSegment> flippersToLines;
+	private HashMap<IGizmo , Circle> flippersToCircles;
+	
 	
 	
 	private int boardSize, boardScale;
@@ -32,6 +37,11 @@ public class Model implements IModel{
 		absorber = new ArrayList<Absorber>();
 		lines = new ArrayList<LineSegment>();
 		circles = new ArrayList<Circle>();
+		
+		linesToGizmos = new HashMap<LineSegment , IGizmo>();
+		circlesToGizmos = new HashMap<Circle , IGizmo>();
+		flippersToLines = new HashMap<IGizmo , LineSegment>();
+		flippersToCircles = new HashMap<IGizmo , Circle>();
 	}
 	
 	/*
