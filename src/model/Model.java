@@ -23,8 +23,8 @@ public class Model implements IModel{
 	//connections for triggering both redrawing of lines and 
 	private HashMap<Circle, IGizmo> circlesToGizmos;
 	private HashMap<LineSegment, IGizmo> linesToGizmos;
-	private HashMap<IGizmo , LineSegment> flippersToLines;
-	private HashMap<IGizmo , Circle> flippersToCircles;
+	private HashMap<IGizmo , List<LineSegment>> flippersToLines;
+	private HashMap<IGizmo , List<Circle>> flippersToCircles;
 
 	private int modelSize, boardScale, boardSize;
 
@@ -43,8 +43,8 @@ public class Model implements IModel{
 
 		linesToGizmos = new HashMap<LineSegment , IGizmo>();
 		circlesToGizmos = new HashMap<Circle , IGizmo>();
-		flippersToLines = new HashMap<IGizmo , LineSegment>();
-		flippersToCircles = new HashMap<IGizmo , Circle>();
+		flippersToLines = new HashMap<IGizmo , List<LineSegment>>();
+		flippersToCircles = new HashMap<IGizmo , List<Circle>>();
 	}
 
 
@@ -79,8 +79,8 @@ public class Model implements IModel{
 			else if(gizmo instanceof TriangleGizmo)
 				makeTriangle(gizmo.copy());
 
-			//			else if(gizmo instanceof RightFlipperGizmo)
-			//				makeRightFlipper(gizmo.copy());
+			else if(gizmo instanceof RightFlipperGizmo)
+				makeRightFlipper(gizmo.copy());
 			//			
 			//			else if(gizmo instanceof LeftFlipperGizmo)
 			//				makeLeftFlipper(gizmo.copy());
@@ -90,6 +90,37 @@ public class Model implements IModel{
 		}
 	}
 
+	private void makeRightFlipper(IGizmo gizmo){
+		int x1 = gizmo.getStartX()*boardScale;
+		int x2 = gizmo.getEndX()*boardScale;
+		int y1 = gizmo.getStartY()*boardScale;
+		int y2 = gizmo.getEndY()*boardScale;
+		double radius = 0.25;
+		
+		//drawing circles .25 radius
+		Circle topCircle = new Circle(x2 - (radius * boardScale) , y1 + (radius*boardScale), radius);
+		Circle botCircle = new Circle(x2 - (radius * boardScale) , y2 - (radius*boardScale), radius);
+		List<Circle> tempCirc = new ArrayList<Circle>();
+		tempCirc.add(topCircle);
+		tempCirc.add(botCircle);
+		circles.addAll(tempCirc);
+		//drawing lines
+		LineSegment right = new LineSegment(x2, y1+(radius*boardScale), x2, y2-(radius*boardScale));
+		LineSegment left = new LineSegment(x2-(2*radius*boardScale) , y1+(radius*boardScale) , x2-(2*radius*boardScale) , y2-(radius*boardScale));
+		List<LineSegment> tempLines = new ArrayList<LineSegment>();
+		tempLines.add(right);
+		tempLines.add(left);
+		lines.addAll(tempLines);
+		//connect lines/corners to flipper gizmo
+		linesToGizmos.put(right, gizmo);
+		linesToGizmos.put(left, gizmo);
+		circlesToGizmos.put(topCircle, gizmo);
+		circlesToGizmos.put(botCircle, gizmo);
+		//connect flipper to lines and circle (used for rotation)
+		flippersToLines.put(gizmo, tempLines);
+		flippersToCircles.put(gizmo, tempCirc);
+	}
+	
 	private void makeCircleGizmo(IGizmo gizmo) {
 		int x1 = gizmo.getStartX()*boardScale;
 		int x2 = gizmo.getEndX()*boardScale;
@@ -293,7 +324,9 @@ public class Model implements IModel{
 
 	@Override
 	public boolean addGizmo(IGizmo gizmo) {
-
+		if(!validatePosition(gizmo.getStartX() , gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
+			return false;
+		
 		//TODO CHECK FOR ABSORBER OVERLAPPING AS WELL
 
 		//add gizmo to gizmo list
