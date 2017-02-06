@@ -16,15 +16,11 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 	
 	public AddGizmosListener(IModel model, String gizmo) {
 		this.model=model;
-		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		String key= gizmo.getKey();
-		if (model.addGizmo(gizmo, key)){
-			
-		};
+		
 	}
 
 	@Override

@@ -2,51 +2,63 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class Build extends JPanel {
+public class Build extends JPanel implements ActionListener{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	Display d;
+	JButton gizmosButton,operationsButton,setupButton,backButton;
 
 	public Build() {
-//		addButtons();
-//		gizmos();
-//		operations();
-		setup();
+		addButtons();
 	}
 
 	
 	private void addButtons() {
 		setLayout(new GridLayout(4, 1));
+		
+		removeAll();
 
-		JButton gizmosButton = new JButton("Add Gizmos");
+		gizmosButton = new JButton("Add Gizmos");
 		gizmosButton.setMaximumSize(new Dimension(100, 100));
 		add(gizmosButton);
+		gizmosButton.setActionCommand("add gizmos");
+		gizmosButton.addActionListener(this);
+		
 
 		JButton operationsButton = new JButton("Operations");
 		operationsButton.setMaximumSize(new Dimension(100, 100));
 		add(operationsButton);
+		operationsButton.setActionCommand("operations");
+		operationsButton.addActionListener(this);
 
 		JButton setupButton = new JButton("Setup");
 		setupButton.setMaximumSize(new Dimension(100, 100));
 		add(setupButton);
+		setupButton.setActionCommand("setup");
+		setupButton.addActionListener(this);
 
 		JButton RunButton = new JButton("Run Mode");
 		RunButton.setMaximumSize(new Dimension(100, 100));
 		add(RunButton);
+		
+		this.revalidate();
+        validate();
+
 	}
 
 	private void gizmos() {
 		setLayout(new GridLayout(6, 1));
-
+		
+		removeAll();
+		
 		JButton squareButton = new JButton("Square");
 		squareButton.setMaximumSize(new Dimension(100, 100));
 		add(squareButton);
@@ -70,11 +82,20 @@ public class Build extends JPanel {
 		JButton backButton = new JButton("Back");
 		backButton.setMaximumSize(new Dimension(100, 100));
 		add(backButton);
+		backButton.setActionCommand("back");
+		backButton.addActionListener(this);
+		
+		
+		this.revalidate();
+        validate();
+
 	}
 
 	private void operations() {
 		setLayout(new GridLayout(8, 1));
-
+		
+		removeAll();
+		
 		JButton rotateButton = new JButton("Rotate");
 		rotateButton.setMaximumSize(new Dimension(100, 100));
 		add(rotateButton);
@@ -106,10 +127,17 @@ public class Build extends JPanel {
 		JButton backButton = new JButton("Back");
 		backButton.setMaximumSize(new Dimension(100, 100));
 		add(backButton);
+		backButton.setActionCommand("back");
+		backButton.addActionListener(this);
+		
+		this.revalidate();
+        validate();
 	}
 
 	private void setup() {
 		setLayout(new GridLayout(5, 1));
+		
+		removeAll();
 
 		JPanel ballPanel = new JPanel();
 		ballPanel.setLayout(new GridLayout(1, 2));
@@ -155,6 +183,31 @@ public class Build extends JPanel {
 		JButton backButton = new JButton("Back");
 		backButton.setMaximumSize(new Dimension(100, 100));
 		add(backButton);
+		backButton.setActionCommand("back");
+		backButton.addActionListener(this);
+		
+		this.revalidate();
+        validate();
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("add gizmos")){
+			gizmos();
+		}
+		if (e.getActionCommand().equals("operations")){
+			operations();
+		}
+		if (e.getActionCommand().equals("setup")){
+			setup();
+		}
+		if (e.getActionCommand().equals("back")){
+			addButtons();
+		}
+		
+		
+		
 	}
 
 }

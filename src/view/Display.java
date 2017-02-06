@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.WindowConstants;
 
 public class Display extends JFrame implements IDisplay {
 
@@ -21,7 +22,7 @@ public class Display extends JFrame implements IDisplay {
 
 	private void createGUI() {
 
-		new JFrame("Gizmo Ball");
+		JFrame frame = new JFrame("Gizmo Ball");
 
 		cp = this.getContentPane();
 		addMenuBar();
@@ -31,6 +32,7 @@ public class Display extends JFrame implements IDisplay {
 
 		setLocationRelativeTo(null);
 		setVisible(true);
+		
 	}
 
 	public void build() {

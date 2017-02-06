@@ -1,7 +1,4 @@
 package controller.buildListeners;
-import java.util.HashSet;
-import java.util.Set;
-import controller.BuildListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,21 +7,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputListener;
 
 public class AbsorberListener implements ActionListener, MouseInputListener {
-/**
- * <pre>
- *           0..*     0..*
- * AbsorberListener ------------------------> BuildListener
- *           absorberListener        &gt;       buildListener
- * </pre>
- */
-private Set<BuildListener> buildListener;
-
-public Set<BuildListener> getBuildListener() {
-   if (this.buildListener == null) {
-this.buildListener = new HashSet<BuildListener>();
-   }
-   return this.buildListener;
-}
 
 
 	@Override
