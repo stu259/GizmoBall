@@ -18,11 +18,12 @@ public class Build extends JPanel {
 
 	public Build() {
 //		addButtons();
-//		gizmo();
+//		gizmos();
 //		operations();
 		setup();
 	}
 
+	
 	private void addButtons() {
 		setLayout(new GridLayout(4, 1));
 

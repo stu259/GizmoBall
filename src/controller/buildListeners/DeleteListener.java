@@ -2,31 +2,27 @@ package controller.buildListeners;
 import java.util.HashSet;
 import java.util.Set;
 import controller.BuildListener;
+import model.IGizmo;
+import model.IModel;
+import view.IDisplay;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
 public class DeleteListener implements ActionListener {
-/**
- * <pre>
- *           0..*     0..*
- * DeleteListener ------------------------> BuildListener
- *           deleteListener        &gt;       buildListener
- * </pre>
- */
-private Set<BuildListener> buildListener;
-
-public Set<BuildListener> getBuildListener() {
-   if (this.buildListener == null) {
-this.buildListener = new HashSet<BuildListener>();
-   }
-   return this.buildListener;
-}
-
+	
+	private IDisplay display;
+	private IModel model;
+	
+	public DeleteListener(IDisplay display,IModel model) {
+		this.display=display;
+		this.model=model;		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

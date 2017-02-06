@@ -1,7 +1,4 @@
 package controller.buildListeners;
-import java.util.HashSet;
-import java.util.Set;
-import controller.BuildListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,34 +6,25 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
+import model.IGizmo;
 import model.IModel;
+import view.IDisplay;
 
 public class AddGizmosListener implements ActionListener, MouseInputListener {
-/**
- * <pre>
- *           0..*     0..*
- * AddGizmosListener ------------------------> BuildListener
- *           addGizmosListener        &gt;       buildListener1
- * </pre>
- */
-private Set<BuildListener> buildListener1;
-
-public Set<BuildListener> getBuildListener1() {
-   if (this.buildListener1 == null) {
-this.buildListener1 = new HashSet<BuildListener>();
-   }
-   return this.buildListener1;
-}
-
-
-
-	public AddGizmosListener(IModel model, String Gizmo) {
-		// TODO Auto-generated constructor stub
+	
+	private IModel model;
+	
+	public AddGizmosListener(IModel model, String gizmo) {
+		this.model=model;
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		String key= gizmo.getKey();
+		if (model.addGizmo(gizmo, key)){
+			
+		};
 	}
 
 	@Override
