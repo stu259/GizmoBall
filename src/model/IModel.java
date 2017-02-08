@@ -1,4 +1,7 @@
 package model;
+
+import java.io.File;
+
 public interface IModel {
 	/*
 	 * checks if there is room for that gizmo.
@@ -86,4 +89,17 @@ public interface IModel {
 	 * Puts all balls into paused state
 	 */
 	public void pause();
+	
+	/**
+	 * Saves current game state
+	 */
+	public void save(File f);
+	
+	/**
+	 * Load in Game
+	 * @param f 
+	 */
+	public void load(File f);
+
+	
 }

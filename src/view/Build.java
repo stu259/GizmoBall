@@ -13,7 +13,7 @@ import controller.buildListeners.*;
 public class Build extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	IDisplay d;
+	private IDisplay d;
 	private AddGizmoButtonListener agbL;
 	private OperationsListener operL;
 	private SetupListener setL;
