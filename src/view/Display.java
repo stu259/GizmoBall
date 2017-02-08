@@ -36,7 +36,7 @@ public class Display extends JFrame implements IDisplay {
 	}
 
 	public Build build() {
-		Build b = new Build();
+		Build b = new Build(this);
 		BuildBoard bb = new BuildBoard();
 		cp.add(b, BorderLayout.LINE_START);
 		cp.add(bb, BorderLayout.CENTER);

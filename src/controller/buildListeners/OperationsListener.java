@@ -14,7 +14,6 @@ private IDisplay display;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			System.out.println("hi");
 			display.build().operations();	
 	}
 }

@@ -13,14 +13,15 @@ import controller.buildListeners.*;
 public class Build extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	Display d;
+	IDisplay d;
 	private AddGizmoButtonListener agbL;
 	private OperationsListener operL;
 	private SetupListener setL;
 	private BackListener backL;
 	JButton gizmosButton,operationsButton,setupButton,backButton;
 
-	public Build() {
+	public Build(IDisplay display) {
+		d= display;
 		addButtons();
 	}
 
@@ -33,14 +34,14 @@ public class Build extends JPanel{
 		gizmosButton = new JButton("Add Gizmos");
 		gizmosButton.setMaximumSize(new Dimension(100, 100));
 		add(gizmosButton);
-		agbL= new AddGizmoButtonListener(d); //need to pass the previous display (not working yet)
+		agbL= new AddGizmoButtonListener(d); 
 		gizmosButton.addActionListener(agbL);
 		
 
 		JButton operationsButton = new JButton("Operations");
 		operationsButton.setMaximumSize(new Dimension(100, 100));
 		add(operationsButton);
-		operL= new OperationsListener(d);  //need to pass the previous display (not working yet)
+		operL= new OperationsListener(d);  
 		operationsButton.addActionListener(operL);
 
 		JButton setupButton = new JButton("Setup");
@@ -54,8 +55,11 @@ public class Build extends JPanel{
 		RunButton.setMaximumSize(new Dimension(100, 100));
 		add(RunButton);
 		
-		this.revalidate();
+		
+		//this.revalidate();
         validate();
+        repaint();
+
 
 	}
 
@@ -90,8 +94,13 @@ public class Build extends JPanel{
 		backL = new BackListener(d);
 		backButton.addActionListener(backL);
 		
-		this.revalidate();
-        validate();
+		
+		repaint();
+		validate();
+		//this.revalidate();
+        //validate();
+        
+
 
 	}
 
