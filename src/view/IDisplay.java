@@ -1,7 +1,7 @@
 package view;
 
 public interface IDisplay {
-	public void build();
+	public Build build();
 
 	public void run();
 

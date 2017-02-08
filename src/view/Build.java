@@ -2,18 +2,22 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.buildListeners.*;
 
-public class Build extends JPanel implements ActionListener{
+
+public class Build extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	Display d;
+	private AddGizmoButtonListener agbL;
+	private OperationsListener operL;
+	private SetupListener setL;
+	private BackListener backL;
 	JButton gizmosButton,operationsButton,setupButton,backButton;
 
 	public Build() {
@@ -21,7 +25,7 @@ public class Build extends JPanel implements ActionListener{
 	}
 
 	
-	private void addButtons() {
+	public void addButtons() {
 		setLayout(new GridLayout(4, 1));
 		
 		removeAll();
@@ -29,22 +33,23 @@ public class Build extends JPanel implements ActionListener{
 		gizmosButton = new JButton("Add Gizmos");
 		gizmosButton.setMaximumSize(new Dimension(100, 100));
 		add(gizmosButton);
-		gizmosButton.setActionCommand("add gizmos");
-		gizmosButton.addActionListener(this);
+		agbL= new AddGizmoButtonListener(d); //need to pass the previous display (not working yet)
+		gizmosButton.addActionListener(agbL);
 		
 
 		JButton operationsButton = new JButton("Operations");
 		operationsButton.setMaximumSize(new Dimension(100, 100));
 		add(operationsButton);
-		operationsButton.setActionCommand("operations");
-		operationsButton.addActionListener(this);
+		operL= new OperationsListener(d);  //need to pass the previous display (not working yet)
+		operationsButton.addActionListener(operL);
 
 		JButton setupButton = new JButton("Setup");
 		setupButton.setMaximumSize(new Dimension(100, 100));
 		add(setupButton);
-		setupButton.setActionCommand("setup");
-		setupButton.addActionListener(this);
-
+		setL = new SetupListener(d);
+		setupButton.addActionListener(setL);
+		
+		
 		JButton RunButton = new JButton("Run Mode");
 		RunButton.setMaximumSize(new Dimension(100, 100));
 		add(RunButton);
@@ -54,7 +59,7 @@ public class Build extends JPanel implements ActionListener{
 
 	}
 
-	private void gizmos() {
+	public void gizmos() {
 		setLayout(new GridLayout(6, 1));
 		
 		removeAll();
@@ -82,16 +87,15 @@ public class Build extends JPanel implements ActionListener{
 		JButton backButton = new JButton("Back");
 		backButton.setMaximumSize(new Dimension(100, 100));
 		add(backButton);
-		backButton.setActionCommand("back");
-		backButton.addActionListener(this);
-		
+		backL = new BackListener(d);
+		backButton.addActionListener(backL);
 		
 		this.revalidate();
         validate();
 
 	}
 
-	private void operations() {
+	public void operations() {
 		setLayout(new GridLayout(8, 1));
 		
 		removeAll();
@@ -127,14 +131,14 @@ public class Build extends JPanel implements ActionListener{
 		JButton backButton = new JButton("Back");
 		backButton.setMaximumSize(new Dimension(100, 100));
 		add(backButton);
-		backButton.setActionCommand("back");
-		backButton.addActionListener(this);
+		backL = new BackListener(d);
+		backButton.addActionListener(backL);
 		
 		this.revalidate();
         validate();
 	}
 
-	private void setup() {
+	public void setup() {
 		setLayout(new GridLayout(5, 1));
 		
 		removeAll();
@@ -183,31 +187,12 @@ public class Build extends JPanel implements ActionListener{
 		JButton backButton = new JButton("Back");
 		backButton.setMaximumSize(new Dimension(100, 100));
 		add(backButton);
-		backButton.setActionCommand("back");
-		backButton.addActionListener(this);
-		
+		backL = new BackListener(d);
+		backButton.addActionListener(backL);
+	
 		this.revalidate();
         validate();
-	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("add gizmos")){
-			gizmos();
-		}
-		if (e.getActionCommand().equals("operations")){
-			operations();
-		}
-		if (e.getActionCommand().equals("setup")){
-			setup();
-		}
-		if (e.getActionCommand().equals("back")){
-			addButtons();
-		}
-		
-		
-		
-	}
+	}		
+	
 
 }
