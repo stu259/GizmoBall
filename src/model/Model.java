@@ -24,8 +24,8 @@ public class Model extends Observable implements IModel {
 	private List<LineSegment> lines;
 	private List<Circle> circles;
 
-	private double gravity;
-	private double friction;
+	private double gravity = 25;
+	private double friction = 0.025;
 
 	private Vect velocity;
 	private double time = 0.05;
@@ -383,9 +383,9 @@ public class Model extends Observable implements IModel {
 
 	@Override
 	public void moveBalls() {
+		CollisionInfo colInfo = timeUntilCollision();
+		double colTime = colInfo.getColTime();
 		for (Ball ball : balls) {
-			CollisionInfo colInfo = timeUntilCollision();
-			double colTime = colInfo.getColTime();
 			if (!ball.isPaused() && ball != null) {
 				if (colTime > time) {// nein Kollision
 					ball = calculateBallMove(ball, time);
@@ -475,7 +475,7 @@ public class Model extends Observable implements IModel {
 	//adds a gizmo given the type of gizmo, a key and coords.
 	@Override
 	public boolean addGizmo(String gizmo, String key, int x, int y){
-		switch (gizmo){
+		switch (gizmo.toLowerCase()){
 		case "triangle":
 			return addGizmo(new TriangleGizmo(x,y),key);
 		case "circle":
@@ -508,6 +508,10 @@ public class Model extends Observable implements IModel {
 	// Adds param ball to the list of balls on the board
 	public void addBall(Ball ball) {
 		balls.add(ball);
+	}
+	
+	public void addBall(String key, double x, double y, double velx, double vely){
+		balls.add(new Ball(x,y,velx,vely));
 	}
 
 	public void addAbsorber() {
@@ -575,10 +579,30 @@ public class Model extends Observable implements IModel {
 	public void setFriction(double f) {
 		friction = f;
 	}
+	
+	public void applyFriction(Ball ball, double time){
+		double mu = friction;
+		double mu2 = friction;
+		
+		double xVel = ball.getVelocity().x();
+		double yVel = ball.getVelocity().y();
+		
+		double newX = xVel * (1 - (mu * time) - (mu2 * xVel) * time);
+		double newY = yVel * (1 - (mu * time) - (mu2 * yVel) * time);		
+		
+		Vect newV = new Vect(newX,newY);
+		ball.setVelocity(newV);
+	}
 
 	@Override
 	public void setGravity(double g) {
 		gravity = g;
+	}
+	
+	public void applyGravity(Ball ball, double time){
+		Vect currentVel = ball.getVelocity();
+		Vect velGravity = new Vect(currentVel.x(),(currentVel.y() + (gravity * time)));
+		ball.setVelocity(velGravity);
 	}
 
 	@Override
