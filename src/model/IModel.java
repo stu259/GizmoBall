@@ -18,7 +18,7 @@ public interface IModel {
 	/*
 	 * adds an absorber to the 
 	 */
-	public void addAbsorber();
+	public boolean addAbsorber(String key, int x, int y, int ex, int ey);
 	
 	/*
 	 * Rotates the given Gizmo by rotating its line segments
@@ -49,7 +49,7 @@ public interface IModel {
 	/*
 	 * Removes a given gizmo from the board
 	 */
-    public void deleteGizmo(IGizmo gizmo);
+    public void deleteGizmo(String key);
     
     /*
      * Removes all gizmos from the board
