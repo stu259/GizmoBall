@@ -42,7 +42,6 @@ public class Model extends Observable implements IModel {
 		modelSize = 2000; // this is 20x20*L; L=100
 		boardSize = 20;
 		boardScale = modelSize / boardSize; // = 100
-		makeWalls(modelSize);
 
 		gizmos = new HashMap<String, IGizmo>();
 		balls = new ArrayList<Ball>();
@@ -54,6 +53,8 @@ public class Model extends Observable implements IModel {
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
 		flippersToLines = new HashMap<IGizmo, List<LineSegment>>();
 		flippersToCircles = new HashMap<IGizmo, List<Circle>>();
+		
+		makeWalls(modelSize);
 	}
 
 	/**
