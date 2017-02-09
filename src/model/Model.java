@@ -581,9 +581,55 @@ public class Model extends Observable implements IModel {
 
 	@Override
 	public void load(File f) {
+		String line;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(f));
-			while ((reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null) {
+				String[] splitCommand = line.toLowerCase().split(" ");
+				switch (splitCommand[0]) {
+				case "circle":
+					IGizmo c = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case "triangle":
+					IGizmo t = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case "square":
+					IGizmo s = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case "leftflipper":
+					IGizmo lF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case "rightflipper":
+					IGizmo rF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case "absorber":
+					break;
+				case "ball":
+					break;
+				case "rotate":
+					gizmos.get(splitCommand[1]).rotate();
+					break;
+				case "delete":
+					gizmos.get(splitCommand[1]);// delete
+					break;
+				case "move":
+					gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
+							Integer.parseInt(splitCommand[3]));
+					break;
+				case "keyconnect":
+					gizmos.get(splitCommand[4]);// connect
+					break;
+				case "connect":
+					gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
+					break;
+				case "friction":
+					setFriction(Double.parseDouble((splitCommand[1])));
+					break;
+				case "gravity":
+					setGravity(Double.parseDouble((splitCommand[1])));
+					break;
+				}
+
 			}
 			reader.close();
 
