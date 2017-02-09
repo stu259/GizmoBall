@@ -470,7 +470,25 @@ public class Model extends Observable implements IModel {
 		}
 		return true;
 	}
-
+	
+	//adds a gizmo given the type of gizmo, a key and coords.
+	@Override
+	public boolean addGizmo(String gizmo, String key, int x, int y){
+		switch (gizmo){
+		case "triangle":
+			return addGizmo(new TriangleGizmo(x,y),key);
+		case "circle":
+			return addGizmo(new CircleGizmo(x,y),key);
+		case "square":
+			return addGizmo(new SquareGizmo(x,y),key);
+		case "rightFlipper":
+			return addGizmo(new RightFlipperGizmo(x,y),key);
+		case "leftFlipper":
+			return addGizmo(new LeftFlipperGizmo(x,y),key);
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean addGizmo(IGizmo gizmo, String key) {
 		if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))

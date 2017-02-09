@@ -8,6 +8,7 @@ public interface IModel {
 	 * then adds it to the board.
 	 */
 	public boolean addGizmo(IGizmo gizmo, String key);
+	public boolean addGizmo(String gizmo, String key, int x, int y);
 	
 	/*
 	 * adds one ball to board
