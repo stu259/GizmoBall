@@ -474,7 +474,7 @@ public class Model extends Observable implements IModel {
 	//adds a gizmo given the type of gizmo, a key and coords.
 	@Override
 	public boolean addGizmo(String gizmo, String key, int x, int y){
-		switch (gizmo){
+		switch (gizmo.toLowerCase()){
 		case "triangle":
 			return addGizmo(new TriangleGizmo(x,y),key);
 		case "circle":
