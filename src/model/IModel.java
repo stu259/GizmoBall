@@ -99,8 +99,9 @@ public interface IModel {
 	/**
 	 * Load in Game
 	 * @param f 
+	 * @return 
 	 */
-	public void load(File f);
+	public boolean load(File f);
 
 	
 }

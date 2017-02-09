@@ -53,7 +53,7 @@ public class Model extends Observable implements IModel {
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
 		flippersToLines = new HashMap<IGizmo, List<LineSegment>>();
 		flippersToCircles = new HashMap<IGizmo, List<Circle>>();
-		
+
 		makeWalls(modelSize);
 	}
 
@@ -471,25 +471,25 @@ public class Model extends Observable implements IModel {
 		}
 		return true;
 	}
-	
-	//adds a gizmo given the type of gizmo, a key and coords.
+
+	// adds a gizmo given the type of gizmo, a key and coords.
 	@Override
-	public boolean addGizmo(String gizmo, String key, int x, int y){
-		switch (gizmo.toLowerCase()){
+	public boolean addGizmo(String gizmo, String key, int x, int y) {
+		switch (gizmo.toLowerCase()) {
 		case "triangle":
-			return addGizmo(new TriangleGizmo(x,y),key);
+			return addGizmo(new TriangleGizmo(x, y), key);
 		case "circle":
-			return addGizmo(new CircleGizmo(x,y),key);
+			return addGizmo(new CircleGizmo(x, y), key);
 		case "square":
-			return addGizmo(new SquareGizmo(x,y),key);
+			return addGizmo(new SquareGizmo(x, y), key);
 		case "rightFlipper":
-			return addGizmo(new RightFlipperGizmo(x,y),key);
+			return addGizmo(new RightFlipperGizmo(x, y), key);
 		case "leftFlipper":
-			return addGizmo(new LeftFlipperGizmo(x,y),key);
+			return addGizmo(new LeftFlipperGizmo(x, y), key);
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean addGizmo(IGizmo gizmo, String key) {
 		if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
@@ -509,9 +509,9 @@ public class Model extends Observable implements IModel {
 	public void addBall(Ball ball) {
 		balls.add(ball);
 	}
-	
-	public void addBall(String key, double x, double y, double velx, double vely){
-		balls.add(new Ball(x,y,velx,vely));
+
+	public void addBall(String key, double x, double y, double velx, double vely) {
+		balls.add(new Ball(x, y, velx, vely));
 	}
 
 	public void addAbsorber() {
@@ -579,18 +579,18 @@ public class Model extends Observable implements IModel {
 	public void setFriction(double f) {
 		friction = f;
 	}
-	
-	public void applyFriction(Ball ball, double time){
+
+	public void applyFriction(Ball ball, double time) {
 		double mu = friction;
 		double mu2 = friction;
-		
+
 		double xVel = ball.getVelocity().x();
 		double yVel = ball.getVelocity().y();
-		
+
 		double newX = xVel * (1 - (mu * time) - (mu2 * xVel) * time);
-		double newY = yVel * (1 - (mu * time) - (mu2 * yVel) * time);		
-		
-		Vect newV = new Vect(newX,newY);
+		double newY = yVel * (1 - (mu * time) - (mu2 * yVel) * time);
+
+		Vect newV = new Vect(newX, newY);
 		ball.setVelocity(newV);
 	}
 
@@ -598,10 +598,10 @@ public class Model extends Observable implements IModel {
 	public void setGravity(double g) {
 		gravity = g;
 	}
-	
-	public void applyGravity(Ball ball, double time){
+
+	public void applyGravity(Ball ball, double time) {
 		Vect currentVel = ball.getVelocity();
-		Vect velGravity = new Vect(currentVel.x(),(currentVel.y() + (gravity * time)));
+		Vect velGravity = new Vect(currentVel.x(), (currentVel.y() + (gravity * time)));
 		ball.setVelocity(velGravity);
 	}
 
@@ -623,7 +623,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public void load(File f) {
+	public boolean load(File f) {
 		String line;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(f));
@@ -635,34 +635,70 @@ public class Model extends Observable implements IModel {
 				case "square":
 				case "leftflipper":
 				case "rightflipper":
-					addGizmo(splitCommand[0],splitCommand[1],(Integer.parseInt(splitCommand[2])),(Integer.parseInt(splitCommand[3])));
+					if (splitCommand.length != 4)
+						return false;
+					else if (!addGizmo(splitCommand[0], splitCommand[1], (Integer.parseInt(splitCommand[2])),
+							(Integer.parseInt(splitCommand[3]))))
+						return false;
 					break;
 				case "absorber":
+					if (splitCommand.length != 6)
+						return false;
 					break;
 				case "ball":
+					if (splitCommand.length != 6)
+						return false;
+					else
+						addBall(splitCommand[1], Double.parseDouble(splitCommand[2]),
+								Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
+								Double.parseDouble(splitCommand[5]));
 					break;
 				case "rotate":
-					gizmos.get(splitCommand[1]).rotate();
+					if (splitCommand.length != 2)
+						return false;
+					else
+						gizmos.get(splitCommand[1]).rotate();
 					break;
 				case "delete":
-					gizmos.get(splitCommand[1]);// delete
-					break;
+					if (splitCommand.length != 2)
+						return false;
+					else
+						// deleteGizmo(splitCommand[1]);
+						break;
 				case "move":
-					gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
-							Integer.parseInt(splitCommand[3]));
+					if (splitCommand.length != 4)
+						return false;
+					else
+						gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
+								Integer.parseInt(splitCommand[3]));
 					break;
 				case "keyconnect":
-					gizmos.get(splitCommand[4]);// connect
+					if (splitCommand.length != 5)
+						return false;
+					else
+						gizmos.get(splitCommand[4]);// connect
 					break;
 				case "connect":
-					gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
+					if (splitCommand.length != 3)
+						return false;
+					else
+						gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
 					break;
 				case "friction":
-					setFriction(Double.parseDouble((splitCommand[1])));
-					break;
+					if (splitCommand.length != 3)
+						return false;
+					else
+						// setFriction(Double.parseDouble((splitCommand[1])),Double.parseDouble((splitCommand[2])));
+						break;
 				case "gravity":
-					setGravity(Double.parseDouble((splitCommand[1])));
+					if (splitCommand.length != 3)
+						return false;
+					else
+						setGravity(Double.parseDouble((splitCommand[1])));
 					break;
+				default:
+					return false;
+
 				}
 
 			}
@@ -673,5 +709,6 @@ public class Model extends Observable implements IModel {
 		} catch (IOException e) {
 			System.out.println("IO Exception");
 		}
+		return true;
 	}
 }
