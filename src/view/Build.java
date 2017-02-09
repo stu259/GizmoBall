@@ -18,7 +18,7 @@ public class Build extends JPanel{
 	private OperationsListener operL;
 	private SetupListener setL;
 	private BackListener backL;
-	JButton gizmosButton,operationsButton,setupButton,backButton;
+	private JButton gizmosButton,operationsButton,setupButton,backButton;
 
 	public Build(IDisplay display) {
 		d= display;
@@ -29,38 +29,29 @@ public class Build extends JPanel{
 	public void addButtons() {
 		setLayout(new GridLayout(4, 1));
 		
-		removeAll();
-
 		gizmosButton = new JButton("Add Gizmos");
 		gizmosButton.setMaximumSize(new Dimension(100, 100));
-		add(gizmosButton);
 		agbL= new AddGizmoButtonListener(d); 
 		gizmosButton.addActionListener(agbL);
-		
+		add(gizmosButton);		
 
 		JButton operationsButton = new JButton("Operations");
 		operationsButton.setMaximumSize(new Dimension(100, 100));
-		add(operationsButton);
 		operL= new OperationsListener(d);  
 		operationsButton.addActionListener(operL);
+		add(operationsButton);
 
 		JButton setupButton = new JButton("Setup");
 		setupButton.setMaximumSize(new Dimension(100, 100));
-		add(setupButton);
 		setL = new SetupListener(d);
 		setupButton.addActionListener(setL);
+		add(setupButton);
 		
 		
 		JButton RunButton = new JButton("Run Mode");
 		RunButton.setMaximumSize(new Dimension(100, 100));
 		add(RunButton);
 		
-		
-		//this.revalidate();
-        validate();
-        repaint();
-
-
 	}
 
 	public void gizmos() {

@@ -9,9 +9,14 @@ import javax.swing.JPanel;
 
 public class BuildBoard extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public BuildBoard() {
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		setSize(new Dimension(500, 500));
+		setSize(500,500);
 		setBackground(Color.white);
 
 	}
@@ -22,14 +27,14 @@ public class BuildBoard extends JPanel {
 		int gridsize = 20;
 		super.paintComponent(g);
 
-		int htOfRow = height / (gridsize);
-		for (int i = 1; i <= gridsize; i++) {
-			g.drawLine(0, i * htOfRow, width, i * htOfRow);
-		}
+//		int htOfRow = height / (20);
+//		for (int i = 1; i <= 20; i++) {
+//			g.drawLine( i * htOfRow,0, i * htOfRow,width);
+//		}
 
-		int wdOfRow = width / (gridsize);
-		for (int i = 1; i <= gridsize; i++) {
-			g.drawLine(i * wdOfRow, 0, i * wdOfRow, height);
+		int wdOfRow = width / (20);
+		for (int i = 1; i <= 20; i++) {
+			g.drawLine(i * wdOfRow,0,i * wdOfRow,height);
 		}
 
 	}

@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.io.File;
 
@@ -11,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.LoadListener;
@@ -19,48 +19,28 @@ import model.IModel;
 
 public class Display extends JFrame implements IDisplay {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
+	private JPanel panel;
 	private SaveListener sL;
 	private LoadListener lL;
 	private IModel m;
 
-	Container cp;
-
 	public Display() {
-		createGUI();
-	}
-
-	private void createGUI() {
-
-		JFrame frame = new JFrame("Gizmo Ball");
-
-		cp = this.getContentPane();
+		initialise();
 		addMenuBar();
 		build();
-		pack();
-		setSize(new Dimension(800, 700));
+		tidy();
+	}
 
+	private void initialise() {
 		setLocationRelativeTo(null);
-		setVisible(true);
-
-	}
-
-	public Build build() {
-		Build b = new Build(this);
-		BuildBoard bb = new BuildBoard();
-		cp.add(b, BorderLayout.LINE_START);
-		cp.add(bb, BorderLayout.CENTER);
-		this.setTitle("BUILD MODE");
-		return b;
-	}
-
-	public void run() {
-		Run r = new Run();
-		RunBoard rb = new RunBoard();
-		cp.add(r, BorderLayout.LINE_START);
-		cp.add(rb, BorderLayout.CENTER);
-		this.setTitle("RUN MODE");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		add(panel);
 	}
 
 	private void addMenuBar() {
@@ -88,6 +68,28 @@ public class Display extends JFrame implements IDisplay {
 
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
+	}
+	
+	public void build(){
+		panel.add(new Build(this),BorderLayout.LINE_START);
+		panel.add(new BuildBoard(),BorderLayout.CENTER);
+		this.setTitle("BUILD MODE");
+	}
+	
+	public void run(){
+		panel.add(new Run(),BorderLayout.LINE_START);
+		panel.add(new RunBoard(),BorderLayout.CENTER);
+		this.setTitle("RUN MODE");
+	}
+	
+	private void tidy() {
+		panel.setSize(800,700);
+		panel.setMaximumSize(new Dimension(800, 700));
+		pack();
+		setSize(new Dimension(800, 700));
+		setMaximumSize(new Dimension(800, 700));
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 
 	public File saveDialog() {
