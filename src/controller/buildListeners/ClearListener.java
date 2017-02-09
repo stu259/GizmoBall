@@ -18,7 +18,6 @@ public class ClearListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		model.clear();
-		display.build();
 	}
 
 }

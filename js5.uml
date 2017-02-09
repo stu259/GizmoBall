@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_Wfd-MO44EeaU89L7aVifXA" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_Wfd-Me44EeaU89L7aVifXA" source="codegen">
         <details xmi:id="_Wfd-Mu44EeaU89L7aVifXA" key="codegenDirectory" value="/js5/src"/>
-        <details xmi:id="_WzqskO44EeaU89L7aVifXA" key="AssociatedSourceCode" value="/js5/src/controller/BuildListener.java;2448748481/1;/js5/src/controller/IListener.java;2188095891/1;/js5/src/controller/LoadListener.java;1374410673/1;/js5/src/controller/SaveListener.java;4244864299/1;/js5/src/controller/buildListeners/AbsorberListener.java;1643539944/1;/js5/src/controller/buildListeners/AddGizmoButtonListener.java;259126311/1;/js5/src/controller/buildListeners/AddGizmosListener.java;2238157182/1;/js5/src/controller/buildListeners/BackListener.java;1401266122/1;/js5/src/controller/buildListeners/BallListener.java;2130395406/1;/js5/src/controller/buildListeners/BindListener.java;1534529117/1;/js5/src/controller/buildListeners/ClearListener.java;3510221567/1;/js5/src/controller/buildListeners/ConnectListener.java;3782897681/1;/js5/src/controller/buildListeners/DeleteListener.java;517952022/1;/js5/src/controller/buildListeners/DisconnectListener.java;3019397297/1;/js5/src/controller/buildListeners/DoNothingKeyListener.java;3012898527/1;/js5/src/controller/buildListeners/FrictionListener.java;563782775/1;/js5/src/controller/buildListeners/GravityListener.java;97638001/1;/js5/src/controller/buildListeners/MoveListener.java;3432614872/1;/js5/src/controller/buildListeners/OperationsListener.java;4001584085/1;/js5/src/controller/buildListeners/RotateListener.java;2257485087/1;/js5/src/controller/buildListeners/RunModeListener.java;4177711569/1;/js5/src/controller/buildListeners/SetupListener.java;3447496992/1;/js5/src/controller/runListeners/BuildModeListener.java;923171996/1;/js5/src/controller/runListeners/StartStopListener.java;675180548/1;/js5/src/model/Absorber.java;2669736872/1;/js5/src/model/Ball.java;1811314041/1;/js5/src/model/CircleGizmo.java;3324841098/1;/js5/src/model/Gizmo.java;3443200372/1;/js5/src/model/IGizmo.java;4260950121/1;/js5/src/model/IModel.java;3934475613/1;/js5/src/model/LeftFlipperGizmo.java;2018380673/1;/js5/src/view/a.java;3888504151/1;/js5/src/model/RightFlipperGizmo.java;3431462076/1;/js5/src/model/SquareGizmo.java;3426461273/1;/js5/src/model/TriangleGizmo.java;2406715065/1;/js5/src/view/Build.java;1006300523/1;/js5/src/view/BuildBoard.java;2816232034/1;/js5/src/view/Display.java;1082905519/1;/js5/src/view/IDisplay.java;2024610473/1;/js5/src/view/Run.java;4136529489/1;/js5/src/view/RunBoard.java;2791955097/1;/js5/src/model/Model.java;995045282/1;"/>
+        <details xmi:id="_WzqskO44EeaU89L7aVifXA" key="AssociatedSourceCode" value="/js5/src/controller/BuildListener.java;2448748481/1;/js5/src/controller/IListener.java;2188095891/1;/js5/src/controller/LoadListener.java;1374410673/1;/js5/src/controller/SaveListener.java;4244864299/1;/js5/src/controller/buildListeners/AbsorberListener.java;1643539944/1;/js5/src/controller/buildListeners/AddGizmoButtonListener.java;2120704869/1;/js5/src/controller/buildListeners/AddGizmosListener.java;2238157182/1;/js5/src/controller/buildListeners/BackListener.java;963021534/1;/js5/src/controller/buildListeners/BallListener.java;2130395406/1;/js5/src/controller/buildListeners/BindListener.java;1534529117/1;/js5/src/controller/buildListeners/ClearListener.java;2006514167/1;/js5/src/controller/buildListeners/ConnectListener.java;3782897681/1;/js5/src/controller/buildListeners/DeleteListener.java;517952022/1;/js5/src/controller/buildListeners/DisconnectListener.java;3019397297/1;/js5/src/controller/buildListeners/DoNothingKeyListener.java;3012898527/1;/js5/src/controller/buildListeners/FrictionListener.java;563782775/1;/js5/src/controller/buildListeners/GravityListener.java;97638001/1;/js5/src/controller/buildListeners/MoveListener.java;3432614872/1;/js5/src/controller/buildListeners/OperationsListener.java;2186840366/1;/js5/src/controller/buildListeners/RotateListener.java;2257485087/1;/js5/src/controller/buildListeners/RunModeListener.java;4177711569/1;/js5/src/controller/buildListeners/SetupListener.java;2764948441/1;/js5/src/controller/runListeners/BuildModeListener.java;923171996/1;/js5/src/controller/runListeners/StartStopListener.java;675180548/1;/js5/src/model/Absorber.java;2669736872/1;/js5/src/model/Ball.java;1811314041/1;/js5/src/model/CircleGizmo.java;3324841098/1;/js5/src/model/Gizmo.java;3443200372/1;/js5/src/model/IGizmo.java;4260950121/1;/js5/src/model/IModel.java;3934475613/1;/js5/src/model/LeftFlipperGizmo.java;2018380673/1;/js5/src/view/a.java;3888504151/1;/js5/src/model/RightFlipperGizmo.java;3431462076/1;/js5/src/model/SquareGizmo.java;3426461273/1;/js5/src/model/TriangleGizmo.java;2406715065/1;/js5/src/view/Build.java;2611467020/1;/js5/src/view/BuildBoard.java;2816232034/1;/js5/src/view/Display.java;1538439622/1;/js5/src/view/IDisplay.java;2780396388/1;/js5/src/view/Run.java;4136529489/1;/js5/src/view/RunBoard.java;2791955097/1;/js5/src/model/Model.java;2930123431/1;"/>
       </contents>
       <contents xmi:type="ecore:EAnnotation" xmi:id="_hXzYsO5DEeattc1cqqUY1g" source="preferences">
         <contents xmi:type="ecore:EAnnotation" xmi:id="_hXz_wO5DEeattc1cqqUY1g" source="com.yattasolutions.codegen.reverse">
@@ -268,7 +268,6 @@
             <ownedParameter xmi:id="_WnJThe44EeaU89L7aVifXA" name="arg0" type="_WjVxkO44EeaU89L7aVifXA"/>
             <language>java</language>
             <body>model.clear();
-		display.build();
 	</body>
           </ownedBehavior>
           <ownedOperation xmi:id="_WjuzIO44EeaU89L7aVifXA" name="ClearListener" method="_WnJTgO44EeaU89L7aVifXA">
@@ -581,7 +580,9 @@
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwGKMO5DEeattc1cqqUY1g" name="LoadListener" specification="_kr_tUO5DEeattc1cqqUY1g">
           <ownedParameter xmi:id="_kwGKMe5DEeattc1cqqUY1g" name="display" type="_WhwdMO44EeaU89L7aVifXA"/>
           <ownedParameter xmi:id="_kwGKMu5DEeattc1cqqUY1g" name="model" type="_WhG88O44EeaU89L7aVifXA"/>
-          <ownedParameter xmi:id="_kwGKM-5DEeattc1cqqUY1g" type="_WfqLcO44EeaU89L7aVifXA" direction="return"/>
+          <ownedParameter xmi:id="_kwGKM-5DEeattc1cqqUY1g" type="_WfqLcO44EeaU89L7aVifXA" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>d = display;
 		m = model;
@@ -614,7 +615,9 @@
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwHYUO5DEeattc1cqqUY1g" name="SaveListener" specification="_ksD-wO5DEeattc1cqqUY1g">
           <ownedParameter xmi:id="_kwHYUe5DEeattc1cqqUY1g" name="display" type="_WhwdMO44EeaU89L7aVifXA"/>
           <ownedParameter xmi:id="_kwHYUu5DEeattc1cqqUY1g" name="model" type="_WhG88O44EeaU89L7aVifXA"/>
-          <ownedParameter xmi:id="_kwHYU-5DEeattc1cqqUY1g" type="_WfrZkO44EeaU89L7aVifXA" direction="return"/>
+          <ownedParameter xmi:id="_kwHYU-5DEeattc1cqqUY1g" type="_WfrZkO44EeaU89L7aVifXA" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>d = display;
 		m = model;
@@ -2238,9 +2241,55 @@
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwRJUu5DEeattc1cqqUY1g" name="load" specification="_kvuWwO5DEeattc1cqqUY1g">
           <ownedParameter xmi:id="_kwRJU-5DEeattc1cqqUY1g" name="f" type="_kvMyUO5DEeattc1cqqUY1g"/>
           <language>java</language>
-          <body>try {
+          <body>String line;
+		try {
 			BufferedReader reader = new BufferedReader(new FileReader(f));
-			while ((reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null) {
+				String[] splitCommand = line.toLowerCase().split(&quot; &quot;);
+				switch (splitCommand[0]) {
+				case &quot;circle&quot;:
+					IGizmo c = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case &quot;triangle&quot;:
+					IGizmo t = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case &quot;square&quot;:
+					IGizmo s = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case &quot;leftflipper&quot;:
+					IGizmo lF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case &quot;rightflipper&quot;:
+					IGizmo rF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					break;
+				case &quot;absorber&quot;:
+					break;
+				case &quot;ball&quot;:
+					break;
+				case &quot;rotate&quot;:
+					gizmos.get(splitCommand[1]).rotate();
+					break;
+				case &quot;delete&quot;:
+					gizmos.get(splitCommand[1]);// delete
+					break;
+				case &quot;move&quot;:
+					gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
+							Integer.parseInt(splitCommand[3]));
+					break;
+				case &quot;keyconnect&quot;:
+					gizmos.get(splitCommand[4]);// connect
+					break;
+				case &quot;connect&quot;:
+					gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
+					break;
+				case &quot;friction&quot;:
+					setFriction(Double.parseDouble((splitCommand[1])));
+					break;
+				case &quot;gravity&quot;:
+					setGravity(Double.parseDouble((splitCommand[1])));
+					break;
+				}
+
 			}
 			reader.close();
 
@@ -2394,7 +2443,9 @@
             </ownedParameter>
             <ownedParameter xmi:id="_kwOtEe5DEeattc1cqqUY1g" name="b" type="_WgWvAO44EeaU89L7aVifXA"/>
             <ownedParameter xmi:id="_kwPUIO5DEeattc1cqqUY1g" name="v" type="_j7KGQO5DEeattc1cqqUY1g"/>
-            <ownedParameter xmi:id="_kwPUIe5DEeattc1cqqUY1g" type="_WiCKAO44EeaU89L7aVifXA" direction="return"/>
+            <ownedParameter xmi:id="_kwPUIe5DEeattc1cqqUY1g" type="_WiCKAO44EeaU89L7aVifXA" direction="return">
+              <name xsi:nil="true"/>
+            </ownedParameter>
             <language>java</language>
             <body>colTime = t;
 			collidingBall = b;
@@ -2419,7 +2470,9 @@
 		</body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnX9BO44EeaU89L7aVifXA" name="getUpdatedVel" specification="_WiD_MO44EeaU89L7aVifXA">
-            <ownedParameter xmi:id="_kwPUIu5DEeattc1cqqUY1g" type="_j7KGQO5DEeattc1cqqUY1g" direction="return"/>
+            <ownedParameter xmi:id="_kwPUIu5DEeattc1cqqUY1g" type="_j7KGQO5DEeattc1cqqUY1g" direction="return">
+              <name xsi:nil="true"/>
+            </ownedParameter>
             <language>java</language>
             <body>return updatedVel;
 		</body>
@@ -2546,13 +2599,13 @@
         <ownedAttribute xmi:id="_Wmt1su44EeaU89L7aVifXA" name="operL" visibility="private" type="_WgMW8O44EeaU89L7aVifXA" association="_WoBdQO44EeaU89L7aVifXA"/>
         <ownedAttribute xmi:id="_Wmt1tO44EeaU89L7aVifXA" name="setL" visibility="private" type="_WgTrsO44EeaU89L7aVifXA" association="_WoCEUO44EeaU89L7aVifXA"/>
         <ownedAttribute xmi:id="_Wmucwe44EeaU89L7aVifXA" name="backL" visibility="private" type="_Wf2_wO44EeaU89L7aVifXA" association="_WoCrYO44EeaU89L7aVifXA"/>
-        <ownedAttribute xmi:id="_Wmucw-44EeaU89L7aVifXA" name="gizmosButton" visibility="package" type="_WkNUQe44EeaU89L7aVifXA" association="_WoD5ge44EeaU89L7aVifXA"/>
-        <ownedAttribute xmi:id="_Wnn0r-44EeaU89L7aVifXA" name="operationsButton" visibility="package" type="_WkNUQe44EeaU89L7aVifXA" association="_WoLOQe44EeaU89L7aVifXA"/>
-        <ownedAttribute xmi:id="_Wnobsu44EeaU89L7aVifXA" name="setupButton" visibility="package" type="_WkNUQe44EeaU89L7aVifXA" association="_WoL1Ue44EeaU89L7aVifXA"/>
-        <ownedAttribute xmi:id="_Wnobte44EeaU89L7aVifXA" name="backButton" visibility="package" type="_WkNUQe44EeaU89L7aVifXA" association="_WoMcYe44EeaU89L7aVifXA"/>
+        <ownedAttribute xmi:id="_PHlq4O6qEeahn87eW_7N0g" name="gizmosButton" visibility="package" type="_WkNUQe44EeaU89L7aVifXA" association="_PHxREO6qEeahn87eW_7N0g"/>
+        <ownedAttribute xmi:id="_PHs_oO6qEeahn87eW_7N0g" name="operationsButton" visibility="package" type="_WkNUQe44EeaU89L7aVifXA" association="_PH4l0e6qEeahn87eW_7N0g"/>
+        <ownedAttribute xmi:id="_PHtmsu6qEeahn87eW_7N0g" name="setupButton" visibility="package" type="_WkNUQe44EeaU89L7aVifXA" association="_PH5M4e6qEeahn87eW_7N0g"/>
+        <ownedAttribute xmi:id="_PHuNwu6qEeahn87eW_7N0g" name="backButton" visibility="package" type="_WkNUQe44EeaU89L7aVifXA" association="_PH7CEe6qEeahn87eW_7N0g"/>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnU5sO44EeaU89L7aVifXA" name="Build" specification="_WkQ-oO44EeaU89L7aVifXA">
-          <ownedParameter xmi:id="_WnU5se44EeaU89L7aVifXA" name="display" type="_WhwdMO44EeaU89L7aVifXA"/>
-          <ownedParameter xmi:id="_WnU5su44EeaU89L7aVifXA" type="_Whc7MO44EeaU89L7aVifXA" direction="return">
+          <ownedParameter xmi:id="_nFDJkO6qEeahn87eW_7N0g" name="display" type="_WhwdMO44EeaU89L7aVifXA"/>
+          <ownedParameter xmi:id="_nFDJke6qEeahn87eW_7N0g" type="_Whc7MO44EeaU89L7aVifXA" direction="return">
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
@@ -2831,9 +2884,7 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnVgx-44EeaU89L7aVifXA" name="build" specification="_WhsLwO44EeaU89L7aVifXA">
-          <ownedParameter xmi:id="_WnVgyO44EeaU89L7aVifXA" type="_Whc7MO44EeaU89L7aVifXA" direction="return">
-            <name xsi:nil="true"/>
-          </ownedParameter>
+          <ownedParameter xmi:id="_H4R5oO6sEeahn87eW_7N0g" type="_Whc7MO44EeaU89L7aVifXA" direction="return"/>
           <language>java</language>
           <body>Build b = new Build(this);
 		BuildBoard bb = new BuildBoard();
@@ -2880,7 +2931,9 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwImcO5DEeattc1cqqUY1g" name="saveDialog" specification="_ksJeUO5DEeattc1cqqUY1g">
-          <ownedParameter xmi:id="_kwImce5DEeattc1cqqUY1g" type="_kvMyUO5DEeattc1cqqUY1g" direction="return"/>
+          <ownedParameter xmi:id="_kwImce5DEeattc1cqqUY1g" type="_kvMyUO5DEeattc1cqqUY1g" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>String filePath = (String) JOptionPane.showInputDialog(new JFrame(), &quot;Enter name for save&quot;, &quot;Customized Dialog&quot;,
 				JOptionPane.PLAIN_MESSAGE);
@@ -2889,7 +2942,9 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwJNgO5DEeattc1cqqUY1g" name="loadDialog" specification="_ksKFYO5DEeattc1cqqUY1g">
-          <ownedParameter xmi:id="_kwJNge5DEeattc1cqqUY1g" type="_kvMyUO5DEeattc1cqqUY1g" direction="return"/>
+          <ownedParameter xmi:id="_kwJNge5DEeattc1cqqUY1g" type="_kvMyUO5DEeattc1cqqUY1g" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;GIZMO FILES&quot;, &quot;gizmo&quot;);
@@ -2926,7 +2981,7 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Interface" xmi:id="_WhwdMO44EeaU89L7aVifXA" name="IDisplay">
         <ownedOperation xmi:id="_WhxEQO44EeaU89L7aVifXA" name="build">
-          <ownedParameter xmi:id="_WkZhgO44EeaU89L7aVifXA" type="_Whc7MO44EeaU89L7aVifXA" direction="return"/>
+          <ownedParameter xmi:id="_OTC9oO6sEeahn87eW_7N0g" type="_Whc7MO44EeaU89L7aVifXA" direction="return"/>
         </ownedOperation>
         <ownedOperation xmi:id="_WhxrUO44EeaU89L7aVifXA" name="run"/>
         <ownedOperation xmi:id="_ks2o8O5DEeattc1cqqUY1g" name="saveDialog">
@@ -3019,23 +3074,11 @@
       <packagedElement xmi:type="uml:Association" xmi:id="_WoCrYO44EeaU89L7aVifXA" name="" memberEnd="_WoCrYe44EeaU89L7aVifXA _Wmucwe44EeaU89L7aVifXA">
         <ownedEnd xmi:id="_WoCrYe44EeaU89L7aVifXA" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_WoCrYO44EeaU89L7aVifXA"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_WoD5ge44EeaU89L7aVifXA" name="" memberEnd="_WoD5gu44EeaU89L7aVifXA _Wmucw-44EeaU89L7aVifXA">
-        <ownedEnd xmi:id="_WoD5gu44EeaU89L7aVifXA" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_WoD5ge44EeaU89L7aVifXA"/>
-      </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_WoFHoO44EeaU89L7aVifXA" name="" memberEnd="_WoFHoe44EeaU89L7aVifXA _Wmvq4u44EeaU89L7aVifXA">
         <ownedEnd xmi:id="_WoFHoe44EeaU89L7aVifXA" name="" type="_WhpIcO44EeaU89L7aVifXA" association="_WoFHoO44EeaU89L7aVifXA"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_WoFuse44EeaU89L7aVifXA" name="" memberEnd="_WoFusu44EeaU89L7aVifXA _WmwR8-44EeaU89L7aVifXA">
         <ownedEnd xmi:id="_WoFusu44EeaU89L7aVifXA" name="" type="_WhxrUe44EeaU89L7aVifXA" association="_WoFuse44EeaU89L7aVifXA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_WoLOQe44EeaU89L7aVifXA" name="" memberEnd="_WoLOQu44EeaU89L7aVifXA _Wnn0r-44EeaU89L7aVifXA">
-        <ownedEnd xmi:id="_WoLOQu44EeaU89L7aVifXA" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_WoLOQe44EeaU89L7aVifXA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_WoL1Ue44EeaU89L7aVifXA" name="" memberEnd="_WoL1Uu44EeaU89L7aVifXA _Wnobsu44EeaU89L7aVifXA">
-        <ownedEnd xmi:id="_WoL1Uu44EeaU89L7aVifXA" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_WoL1Ue44EeaU89L7aVifXA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_WoMcYe44EeaU89L7aVifXA" name="" memberEnd="_WoMcYu44EeaU89L7aVifXA _Wnobte44EeaU89L7aVifXA">
-        <ownedEnd xmi:id="_WoMcYu44EeaU89L7aVifXA" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_WoMcYe44EeaU89L7aVifXA"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_kwhA8e5DEeattc1cqqUY1g" name="" memberEnd="_kwhA8u5DEeattc1cqqUY1g _kv8ZMO5DEeattc1cqqUY1g">
         <ownedEnd xmi:id="_kwhA8u5DEeattc1cqqUY1g" name="" type="_WhpIcO44EeaU89L7aVifXA" association="_kwhA8e5DEeattc1cqqUY1g"/>
@@ -3045,6 +3088,18 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_kwjdMO5DEeattc1cqqUY1g" name="" memberEnd="_kwjdMe5DEeattc1cqqUY1g _kwBRse5DEeattc1cqqUY1g">
         <ownedEnd xmi:id="_kwjdMe5DEeattc1cqqUY1g" name="" type="_WhpIcO44EeaU89L7aVifXA" association="_kwjdMO5DEeattc1cqqUY1g"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_PHxREO6qEeahn87eW_7N0g" name="" memberEnd="_PHxREe6qEeahn87eW_7N0g _PHlq4O6qEeahn87eW_7N0g">
+        <ownedEnd xmi:id="_PHxREe6qEeahn87eW_7N0g" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_PHxREO6qEeahn87eW_7N0g"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_PH4l0e6qEeahn87eW_7N0g" name="" memberEnd="_PH4l0u6qEeahn87eW_7N0g _PHs_oO6qEeahn87eW_7N0g">
+        <ownedEnd xmi:id="_PH4l0u6qEeahn87eW_7N0g" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_PH4l0e6qEeahn87eW_7N0g"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_PH5M4e6qEeahn87eW_7N0g" name="" memberEnd="_PH5M4u6qEeahn87eW_7N0g _PHtmsu6qEeahn87eW_7N0g">
+        <ownedEnd xmi:id="_PH5M4u6qEeahn87eW_7N0g" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_PH5M4e6qEeahn87eW_7N0g"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_PH7CEe6qEeahn87eW_7N0g" name="" memberEnd="_PH7CEu6qEeahn87eW_7N0g _PHuNwu6qEeahn87eW_7N0g">
+        <ownedEnd xmi:id="_PH7CEu6qEeahn87eW_7N0g" name="" type="_Whc7MO44EeaU89L7aVifXA" association="_PH7CEe6qEeahn87eW_7N0g"/>
       </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_WdNUYO44EeaU89L7aVifXA" name="physics">
@@ -3486,8 +3541,6 @@
   <UMLLabProfile:LegacyStyledElement xmi:id="_Wmt1s-44EeaU89L7aVifXA" base_Element="_Wmt1su44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_WmucwO44EeaU89L7aVifXA" base_Element="_Wmt1tO44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_Wmucwu44EeaU89L7aVifXA" base_Element="_Wmucwe44EeaU89L7aVifXA"/>
-  <UMLLabProfile:MultiDeclaration xmi:id="_WmucxO44EeaU89L7aVifXA" base_Property="_Wmucw-44EeaU89L7aVifXA" siblings="_Wnn0r-44EeaU89L7aVifXA _Wnobsu44EeaU89L7aVifXA _Wnobte44EeaU89L7aVifXA" root="true"/>
-  <UMLLabProfile:LegacyStyledElement xmi:id="_WmvD0O44EeaU89L7aVifXA" base_Element="_Wmucw-44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_WmwR8O44EeaU89L7aVifXA" base_Element="_Wmvq4u44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_Wmw5AO44EeaU89L7aVifXA" base_Element="_WmwR8-44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_WmxgEe44EeaU89L7aVifXA" base_Element="_WmxgEO44EeaU89L7aVifXA"/>
@@ -3524,12 +3577,6 @@
   <UMLLabProfile:LegacyStyledElement xmi:id="_Wni8IO44EeaU89L7aVifXA" base_Element="_WniVE-44EeaU89L7aVifXA"/>
   <UMLLabProfile:MultiDeclaration xmi:id="_WnjjMO44EeaU89L7aVifXA" base_Property="_Wni8Ie44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_WnjjMe44EeaU89L7aVifXA" base_Element="_Wni8Ie44EeaU89L7aVifXA"/>
-  <UMLLabProfile:MultiDeclaration xmi:id="_WnobsO44EeaU89L7aVifXA" base_Property="_Wnn0r-44EeaU89L7aVifXA"/>
-  <UMLLabProfile:LegacyStyledElement xmi:id="_Wnobse44EeaU89L7aVifXA" base_Element="_Wnn0r-44EeaU89L7aVifXA"/>
-  <UMLLabProfile:MultiDeclaration xmi:id="_Wnobs-44EeaU89L7aVifXA" base_Property="_Wnobsu44EeaU89L7aVifXA"/>
-  <UMLLabProfile:LegacyStyledElement xmi:id="_WnobtO44EeaU89L7aVifXA" base_Element="_Wnobsu44EeaU89L7aVifXA"/>
-  <UMLLabProfile:MultiDeclaration xmi:id="_WnpCwO44EeaU89L7aVifXA" base_Property="_Wnobte44EeaU89L7aVifXA"/>
-  <UMLLabProfile:LegacyStyledElement xmi:id="_WnpCwe44EeaU89L7aVifXA" base_Element="_Wnobte44EeaU89L7aVifXA"/>
   <UMLLabProfile:MultiDeclaration xmi:id="_Wnpp0O44EeaU89L7aVifXA" base_Property="_WnpCwu44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_Wnpp0e44EeaU89L7aVifXA" base_Element="_WnpCwu44EeaU89L7aVifXA"/>
   <UMLLabProfile:MultiDeclaration xmi:id="_Wnpp0-44EeaU89L7aVifXA" base_Property="_Wnpp0u44EeaU89L7aVifXA"/>
@@ -3557,7 +3604,6 @@
   <UMLLabProfile:Reference xmi:id="_WoBdQu44EeaU89L7aVifXA" base_Element="_WoBdQO44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoCEUu44EeaU89L7aVifXA" base_Element="_WoCEUO44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoD5gO44EeaU89L7aVifXA" base_Element="_WoCrYO44EeaU89L7aVifXA"/>
-  <UMLLabProfile:Reference xmi:id="_WoEgkO44EeaU89L7aVifXA" base_Element="_WoD5ge44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoFusO44EeaU89L7aVifXA" base_Element="_WoFHoO44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoGVwO44EeaU89L7aVifXA" base_Element="_WoFuse44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoGVw-44EeaU89L7aVifXA" base_Element="_WoGVwe44EeaU89L7aVifXA"/>
@@ -3572,9 +3618,6 @@
   <UMLLabProfile:Reference xmi:id="_WoKAI-44EeaU89L7aVifXA" base_Element="_WoKAIe44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoKnMO44EeaU89L7aVifXA" base_Element="_WoKAJO44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoLOQO44EeaU89L7aVifXA" base_Element="_WoKnMe44EeaU89L7aVifXA"/>
-  <UMLLabProfile:Reference xmi:id="_WoL1UO44EeaU89L7aVifXA" base_Element="_WoLOQe44EeaU89L7aVifXA"/>
-  <UMLLabProfile:Reference xmi:id="_WoMcYO44EeaU89L7aVifXA" base_Element="_WoL1Ue44EeaU89L7aVifXA"/>
-  <UMLLabProfile:Reference xmi:id="_WoNDcO44EeaU89L7aVifXA" base_Element="_WoMcYe44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_j7LUYO5DEeattc1cqqUY1g" base_Element="_j7KGQO5DEeattc1cqqUY1g"/>
   <UMLLabProfile:Reference xmi:id="_kvNZYO5DEeattc1cqqUY1g" base_Element="_kvMyUO5DEeattc1cqqUY1g"/>
   <UMLLabProfile:Reference xmi:id="_kvQcsO5DEeattc1cqqUY1g" base_Element="_kvPOkO5DEeattc1cqqUY1g"/>
@@ -3608,4 +3651,16 @@
   <UMLLabProfile:Reference xmi:id="_kwiPEO5DEeattc1cqqUY1g" base_Element="_kwhA8e5DEeattc1cqqUY1g"/>
   <UMLLabProfile:Reference xmi:id="_kwi2IO5DEeattc1cqqUY1g" base_Element="_kwiPEe5DEeattc1cqqUY1g"/>
   <UMLLabProfile:Reference xmi:id="_kwkEQO5DEeattc1cqqUY1g" base_Element="_kwjdMO5DEeattc1cqqUY1g"/>
+  <UMLLabProfile:MultiDeclaration xmi:id="_PHmR8O6qEeahn87eW_7N0g" base_Property="_PHlq4O6qEeahn87eW_7N0g" siblings="_PHs_oO6qEeahn87eW_7N0g _PHtmsu6qEeahn87eW_7N0g _PHuNwu6qEeahn87eW_7N0g" root="true"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_PHm5AO6qEeahn87eW_7N0g" base_Element="_PHlq4O6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:MultiDeclaration xmi:id="_PHtmsO6qEeahn87eW_7N0g" base_Property="_PHs_oO6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_PHtmse6qEeahn87eW_7N0g" base_Element="_PHs_oO6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:MultiDeclaration xmi:id="_PHuNwO6qEeahn87eW_7N0g" base_Property="_PHtmsu6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_PHuNwe6qEeahn87eW_7N0g" base_Element="_PHtmsu6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:MultiDeclaration xmi:id="_PHu00O6qEeahn87eW_7N0g" base_Property="_PHuNwu6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_PHu00e6qEeahn87eW_7N0g" base_Element="_PHuNwu6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:Reference xmi:id="_PHyfMO6qEeahn87eW_7N0g" base_Element="_PHxREO6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:Reference xmi:id="_PH5M4O6qEeahn87eW_7N0g" base_Element="_PH4l0e6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:Reference xmi:id="_PH7CEO6qEeahn87eW_7N0g" base_Element="_PH5M4e6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:Reference xmi:id="_PH7pIO6qEeahn87eW_7N0g" base_Element="_PH7CEe6qEeahn87eW_7N0g"/>
 </xmi:XMI>
