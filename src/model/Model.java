@@ -630,19 +630,11 @@ public class Model extends Observable implements IModel {
 				String[] splitCommand = line.toLowerCase().split(" ");
 				switch (splitCommand[0]) {
 				case "circle":
-					IGizmo c = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
 				case "triangle":
-					IGizmo t = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
 				case "square":
-					IGizmo s = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
 				case "leftflipper":
-					IGizmo lF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
 				case "rightflipper":
-					IGizmo rF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					addGizmo(splitCommand[0],splitCommand[1],(Integer.parseInt(splitCommand[2])),(Integer.parseInt(splitCommand[3])));
 					break;
 				case "absorber":
 					break;
