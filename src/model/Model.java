@@ -55,7 +55,7 @@ public class Model extends Observable implements IModel {
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
 		flippersToLines = new HashMap<IGizmo, List<LineSegment>>();
 		flippersToCircles = new HashMap<IGizmo, List<Circle>>();
-		
+
 		load(new File("test.gizmo"));
 	}
 
@@ -74,8 +74,8 @@ public class Model extends Observable implements IModel {
 	 */
 	@Override
 	public void runMode() {
-		
-		//clear dataStructures
+
+		// clear dataStructures
 		lines.clear();
 		circles.clear();
 		linesToGizmos.clear();
@@ -84,7 +84,7 @@ public class Model extends Observable implements IModel {
 		flippersToCircles.clear();
 
 		makeWalls(modelSize);
-		
+
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
 			// add method to draw gizmo
@@ -102,13 +102,13 @@ public class Model extends Observable implements IModel {
 
 			else if (gizmo instanceof CircleGizmo)
 				makeCircleGizmo(gizmo.copy());
-			
+
 			else if (gizmo instanceof AbsorberGizmo)
 				makeAbsorberGizmo(gizmo.copy());
 		}
 	}
 
-	private void makeAbsorberGizmo(IGizmo gizmo){
+	private void makeAbsorberGizmo(IGizmo gizmo) {
 		// get x and y coordinates of starting and ending points of the gizmo
 		int x1 = gizmo.getStartX() * boardScale;
 		int x2 = gizmo.getEndX() * boardScale;
@@ -136,7 +136,7 @@ public class Model extends Observable implements IModel {
 		circlesToAbsorber.put(topRight, gizmo);
 		circlesToAbsorber.put(bottomRight, gizmo);
 	}
-	
+
 	private void makeLeftFlipper(IGizmo gizmo) {
 		int x1 = gizmo.getStartX() * boardScale;
 		int x2 = gizmo.getEndX() * boardScale;
@@ -372,7 +372,7 @@ public class Model extends Observable implements IModel {
 		circles.add(topRight);
 		circles.add(bottomRight);
 	}
-	
+
 	private void makeWalls(int boardSize) {
 		LineSegment topWall = new LineSegment(0, 0, boardSize, 0);
 		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);
@@ -510,18 +510,18 @@ public class Model extends Observable implements IModel {
 
 	// adds a gizmo given the type of gizmo, a key and coords.
 	@Override
-	public boolean addGizmo(String gizmo, String key, int x, int y){
-		switch (gizmo.toLowerCase()){
-			case "triangle":
-				return addGizmo(new TriangleGizmo(x,y),key);
-			case "circle":
-				return addGizmo(new CircleGizmo(x,y),key);
-			case "square":
-				return addGizmo(new SquareGizmo(x,y),key);
-			case "rightflipper":
-				return addGizmo(new RightFlipperGizmo(x,y),key);
-			case "leftflipper":
-				return addGizmo(new LeftFlipperGizmo(x,y),key);
+	public boolean addGizmo(String gizmo, String key, int x, int y) {
+		switch (gizmo.toLowerCase()) {
+		case "triangle":
+			return addGizmo(new TriangleGizmo(x, y), key);
+		case "circle":
+			return addGizmo(new CircleGizmo(x, y), key);
+		case "square":
+			return addGizmo(new SquareGizmo(x, y), key);
+		case "rightflipper":
+			return addGizmo(new RightFlipperGizmo(x, y), key);
+		case "leftflipper":
+			return addGizmo(new LeftFlipperGizmo(x, y), key);
 		}
 		return false;
 	}
@@ -544,27 +544,27 @@ public class Model extends Observable implements IModel {
 		balls.add(ball);
 	}
 
-	public boolean addBall(String key, double x, double y, double velx, double vely){
-		Ball ball = new Ball(x,y,velx,vely);
-		
+	public boolean addBall(String key, double x, double y, double velx, double vely) {
+		Ball ball = new Ball(x, y, velx, vely);
+
 		double r = ball.getRadius();
-		
-		if(!validatePosition(x-r, y-r, x+r, y+r))
+
+		if (!validatePosition(x - r, y - r, x + r, y + r))
 			return false;
-		
+
 		balls.add(ball);
 		return true;
 	}
 
 	public boolean addAbsorber(String key, int x, int y, int ex, int ey) {
-		if(!validatePosition(x, y, ex, ey))
+		if (!validatePosition(x, y, ex, ey))
 			return false;
-		
-		//add to list of gizmos
+
+		// add to list of gizmos
 		gizmos.put(key, new AbsorberGizmo(x, y, ex, ey));
-		
-		//draw absorber
-		
+
+		// draw absorber
+
 		return true;
 	}
 
@@ -612,7 +612,7 @@ public class Model extends Observable implements IModel {
 		gizmo.setKey("");
 	}
 
-	/*TODO REWRITE TO REMOVE FROM THE MAPS AND LISTS*/
+	/* TODO REWRITE TO REMOVE FROM THE MAPS AND LISTS */
 	@Override
 	public void deleteGizmo(String key) {
 		gizmos.remove(key);
@@ -712,8 +712,8 @@ public class Model extends Observable implements IModel {
 					if (splitCommand.length != 2)
 						return false;
 					else
-						// deleteGizmo(splitCommand[1]);
-						break;
+						deleteGizmo(splitCommand[1]);
+					break;
 				case "move":
 					if (splitCommand.length != 4)
 						return false;
@@ -724,26 +724,33 @@ public class Model extends Observable implements IModel {
 				case "keyconnect":
 					if (splitCommand.length != 5)
 						return false;
-					else
+					else {
 						gizmos.get(splitCommand[4]);// connect
+						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2] + " "
+								+ splitCommand[3] + " " + splitCommand[4]);
+					}
 					break;
 				case "connect":
 					if (splitCommand.length != 3)
 						return false;
 					else
-						//gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
-					break;
+					System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
+						// gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
+						break;
 				case "friction":
 					if (splitCommand.length != 3)
 						return false;
 					else
+						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						// setFriction(Double.parseDouble((splitCommand[1])),Double.parseDouble((splitCommand[2])));
 						break;
 				case "gravity":
 					if (splitCommand.length != 3)
 						return false;
-					else
+					else{
 						setGravity(Double.parseDouble((splitCommand[1])));
+						System.out.println(splitCommand[0] + " " + splitCommand[1]);
+					}
 					break;
 				case "":
 					break;
