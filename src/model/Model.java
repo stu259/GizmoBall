@@ -20,17 +20,18 @@ public class Model extends Observable implements IModel {
 
 	private Map<String, IGizmo> gizmos;
 	private List<Ball> balls;
-	private List<Absorber> absorber;
 	private List<LineSegment> lines;
 	private List<Circle> circles;
 
-	private double gravity;
-	private double friction;
+	private double gravity = 25;
+	private double friction = 0.025;
 
 	private Vect velocity;
 	private double time = 0.05;
 
 	// connections for triggering both redrawing of lines and
+	private Map<LineSegment, IGizmo> linesToAbsorber;
+	private Map<Circle, IGizmo> circlesToAbsorber;
 	private Map<Circle, IGizmo> circlesToGizmos;
 	private Map<LineSegment, IGizmo> linesToGizmos;
 	private Map<IGizmo, List<LineSegment>> flippersToLines;
@@ -42,18 +43,20 @@ public class Model extends Observable implements IModel {
 		modelSize = 2000; // this is 20x20*L; L=100
 		boardSize = 20;
 		boardScale = modelSize / boardSize; // = 100
-		makeWalls(modelSize);
 
 		gizmos = new HashMap<String, IGizmo>();
 		balls = new ArrayList<Ball>();
-		absorber = new ArrayList<Absorber>();
 		lines = new ArrayList<LineSegment>();
 		circles = new ArrayList<Circle>();
 
+		linesToAbsorber = new HashMap<LineSegment, IGizmo>();
+		circlesToAbsorber = new HashMap<Circle, IGizmo>();
 		linesToGizmos = new HashMap<LineSegment, IGizmo>();
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
 		flippersToLines = new HashMap<IGizmo, List<LineSegment>>();
 		flippersToCircles = new HashMap<IGizmo, List<Circle>>();
+
+		load(new File("test.gizmo"));
 	}
 
 	/**
@@ -80,14 +83,16 @@ public class Model extends Observable implements IModel {
 		flippersToLines.clear();
 		flippersToCircles.clear();
 
+		makeWalls(modelSize);
+
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
 			// add method to draw gizmo
 			if (gizmo instanceof SquareGizmo)
-				makeSquare(gizmo.copy());
+				makeSquareGizmo(gizmo.copy());
 
 			else if (gizmo instanceof TriangleGizmo)
-				makeTriangle(gizmo.copy());
+				makeTriangleGizmo(gizmo.copy());
 
 			else if (gizmo instanceof RightFlipperGizmo)
 				makeRightFlipper(gizmo.copy());
@@ -97,7 +102,39 @@ public class Model extends Observable implements IModel {
 
 			else if (gizmo instanceof CircleGizmo)
 				makeCircleGizmo(gizmo.copy());
+
+			else if (gizmo instanceof AbsorberGizmo)
+				makeAbsorberGizmo(gizmo.copy());
 		}
+	}
+
+	private void makeAbsorberGizmo(IGizmo gizmo) {
+		// get x and y coordinates of starting and ending points of the gizmo
+		int x1 = gizmo.getStartX() * boardScale;
+		int x2 = gizmo.getEndX() * boardScale;
+		int y1 = gizmo.getStartY() * boardScale;
+		int y2 = gizmo.getEndY() * boardScale;
+
+		// create lines and corners
+		LineSegment left = new LineSegment(x1, y1, x1, y2);
+		LineSegment bottom = new LineSegment(x1, y2, x2, y2);
+		LineSegment right = new LineSegment(x2, y2, x2, y1);
+		LineSegment top = new LineSegment(x2, y1, x1, y1);
+		Circle topLeft = new Circle(x1, y1, 0);
+		Circle bottomLeft = new Circle(x1, y2, 0);
+		Circle topRight = new Circle(x2, y1, 0);
+		Circle bottomRight = new Circle(x2, y2, 0);
+
+		// create connections for the lines -> absorber
+		linesToAbsorber.put(left, gizmo);
+		linesToAbsorber.put(bottom, gizmo);
+		linesToAbsorber.put(right, gizmo);
+		linesToAbsorber.put(top, gizmo);
+		// create connections for the circles -> absorber
+		circlesToAbsorber.put(topLeft, gizmo);
+		circlesToAbsorber.put(bottomLeft, gizmo);
+		circlesToAbsorber.put(topRight, gizmo);
+		circlesToAbsorber.put(bottomRight, gizmo);
 	}
 
 	private void makeLeftFlipper(IGizmo gizmo) {
@@ -183,7 +220,7 @@ public class Model extends Observable implements IModel {
 		circles.add(circle);
 	}
 
-	private void makeTriangle(IGizmo gizmo) {
+	private void makeTriangleGizmo(IGizmo gizmo) {
 		// the right angled corner should be in the top-left position by default
 		// THIS IS A MUST!!!! DO NOT CHANGE
 		int x1 = gizmo.getStartX() * boardScale;
@@ -297,7 +334,7 @@ public class Model extends Observable implements IModel {
 		}
 	}
 
-	private void makeSquare(IGizmo gizmo) {
+	private void makeSquareGizmo(IGizmo gizmo) {
 		// get x and y coordinates of starting and ending points of the gizmo
 		int x1 = gizmo.getStartX() * boardScale;
 		int x2 = gizmo.getEndX() * boardScale;
@@ -336,7 +373,6 @@ public class Model extends Observable implements IModel {
 		circles.add(bottomRight);
 	}
 
-	// Makes the walls for the outer edges of the board
 	private void makeWalls(int boardSize) {
 		LineSegment topWall = new LineSegment(0, 0, boardSize, 0);
 		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);
@@ -382,9 +418,9 @@ public class Model extends Observable implements IModel {
 
 	@Override
 	public void moveBalls() {
+		CollisionInfo colInfo = timeUntilCollision();
+		double colTime = colInfo.getColTime();
 		for (Ball ball : balls) {
-			CollisionInfo colInfo = timeUntilCollision();
-			double colTime = colInfo.getColTime();
 			if (!ball.isPaused() && ball != null) {
 				if (colTime > time) {// nein Kollision
 					ball = calculateBallMove(ball, time);
@@ -438,6 +474,7 @@ public class Model extends Observable implements IModel {
 			return colTime;
 		}
 
+		@SuppressWarnings("unused")
 		public Ball getCollidingBall() {
 			return collidingBall;
 		}
@@ -471,6 +508,24 @@ public class Model extends Observable implements IModel {
 		return true;
 	}
 
+	// adds a gizmo given the type of gizmo, a key and coords.
+	@Override
+	public boolean addGizmo(String gizmo, String key, int x, int y) {
+		switch (gizmo.toLowerCase()) {
+		case "triangle":
+			return addGizmo(new TriangleGizmo(x, y), key);
+		case "circle":
+			return addGizmo(new CircleGizmo(x, y), key);
+		case "square":
+			return addGizmo(new SquareGizmo(x, y), key);
+		case "rightflipper":
+			return addGizmo(new RightFlipperGizmo(x, y), key);
+		case "leftflipper":
+			return addGizmo(new LeftFlipperGizmo(x, y), key);
+		}
+		return false;
+	}
+
 	@Override
 	public boolean addGizmo(IGizmo gizmo, String key) {
 		if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
@@ -481,8 +536,6 @@ public class Model extends Observable implements IModel {
 		// add gizmo to gizmo list
 		gizmos.put(key, gizmo);
 
-		// TODO DRAW ABSORBERS HERE (MAYBE)
-
 		return true;
 	}
 
@@ -491,9 +544,28 @@ public class Model extends Observable implements IModel {
 		balls.add(ball);
 	}
 
-	public void addAbsorber() {
-		// TODO Auto-generated method stub
+	public boolean addBall(String key, double x, double y, double velx, double vely) {
+		Ball ball = new Ball(x, y, velx, vely);
 
+		double r = ball.getRadius();
+
+		if (!validatePosition(x - r, y - r, x + r, y + r))
+			return false;
+
+		balls.add(ball);
+		return true;
+	}
+
+	public boolean addAbsorber(String key, int x, int y, int ex, int ey) {
+		if (!validatePosition(x, y, ex, ey))
+			return false;
+
+		// add to list of gizmos
+		gizmos.put(key, new AbsorberGizmo(x, y, ex, ey));
+
+		// draw absorber
+
+		return true;
 	}
 
 	@Override
@@ -540,16 +612,16 @@ public class Model extends Observable implements IModel {
 		gizmo.setKey("");
 	}
 
+	/* TODO REWRITE TO REMOVE FROM THE MAPS AND LISTS */
 	@Override
-	public void deleteGizmo(IGizmo gizmo) {
-		gizmos.remove(gizmo);
+	public void deleteGizmo(String key) {
+		gizmos.remove(key);
 	}
 
 	@Override
 	public void clear() {
 		gizmos.clear();
 		balls.clear();
-		absorber.clear();
 	}
 
 	@Override
@@ -557,9 +629,29 @@ public class Model extends Observable implements IModel {
 		friction = f;
 	}
 
+	public void applyFriction(Ball ball, double time) {
+		double mu = friction;
+		double mu2 = friction;
+
+		double xVel = ball.getVelocity().x();
+		double yVel = ball.getVelocity().y();
+
+		double newX = xVel * (1 - (mu * time) - (mu2 * xVel) * time);
+		double newY = yVel * (1 - (mu * time) - (mu2 * yVel) * time);
+
+		Vect newV = new Vect(newX, newY);
+		ball.setVelocity(newV);
+	}
+
 	@Override
 	public void setGravity(double g) {
 		gravity = g;
+	}
+
+	public void applyGravity(Ball ball, double time) {
+		Vect currentVel = ball.getVelocity();
+		Vect velGravity = new Vect(currentVel.x(), (currentVel.y() + (gravity * time)));
+		ball.setVelocity(velGravity);
 	}
 
 	@Override
@@ -580,7 +672,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public void load(File f) {
+	public boolean load(File f) {
 		String line;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(f));
@@ -588,46 +680,83 @@ public class Model extends Observable implements IModel {
 				String[] splitCommand = line.toLowerCase().split(" ");
 				switch (splitCommand[0]) {
 				case "circle":
-					IGizmo c = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
 				case "triangle":
-					IGizmo t = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
 				case "square":
-					IGizmo s = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
 				case "leftflipper":
-					IGizmo lF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
 				case "rightflipper":
-					IGizmo rF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
+					if (splitCommand.length != 4)
+						return false;
+					else if (!addGizmo(splitCommand[0], splitCommand[1], (Integer.parseInt(splitCommand[2])),
+							(Integer.parseInt(splitCommand[3]))))
+						return false;
 					break;
 				case "absorber":
+					if (splitCommand.length != 6)
+						return false;
 					break;
 				case "ball":
+					if (splitCommand.length != 6)
+						return false;
+					else
+						addBall(splitCommand[1], Double.parseDouble(splitCommand[2]),
+								Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
+								Double.parseDouble(splitCommand[5]));
 					break;
 				case "rotate":
-					gizmos.get(splitCommand[1]).rotate();
+					if (splitCommand.length != 2)
+						return false;
+					else
+						gizmos.get(splitCommand[1]).rotate();
 					break;
 				case "delete":
-					gizmos.get(splitCommand[1]);// delete
+					if (splitCommand.length != 2)
+						return false;
+					else
+						deleteGizmo(splitCommand[1]);
 					break;
 				case "move":
-					gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
-							Integer.parseInt(splitCommand[3]));
+					if (splitCommand.length != 4)
+						return false;
+					else
+						gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
+								Integer.parseInt(splitCommand[3]));
 					break;
 				case "keyconnect":
-					gizmos.get(splitCommand[4]);// connect
+					if (splitCommand.length != 5)
+						return false;
+					else {
+						gizmos.get(splitCommand[4]);// connect
+						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2] + " "
+								+ splitCommand[3] + " " + splitCommand[4]);
+					}
 					break;
 				case "connect":
-					gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
-					break;
+					if (splitCommand.length != 3)
+						return false;
+					else
+					System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
+						// gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
+						break;
 				case "friction":
-					setFriction(Double.parseDouble((splitCommand[1])));
-					break;
+					if (splitCommand.length != 3)
+						return false;
+					else
+						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
+						// setFriction(Double.parseDouble((splitCommand[1])),Double.parseDouble((splitCommand[2])));
+						break;
 				case "gravity":
-					setGravity(Double.parseDouble((splitCommand[1])));
+					if (splitCommand.length != 3)
+						return false;
+					else{
+						setGravity(Double.parseDouble((splitCommand[1])));
+						System.out.println(splitCommand[0] + " " + splitCommand[1]);
+					}
 					break;
+				case "":
+					break;
+				default:
+					return false;
+
 				}
 
 			}
@@ -638,5 +767,7 @@ public class Model extends Observable implements IModel {
 		} catch (IOException e) {
 			System.out.println("IO Exception");
 		}
+		return true;
 	}
+
 }

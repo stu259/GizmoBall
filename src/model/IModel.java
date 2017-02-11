@@ -8,6 +8,7 @@ public interface IModel {
 	 * then adds it to the board.
 	 */
 	public boolean addGizmo(IGizmo gizmo, String key);
+	public boolean addGizmo(String gizmo, String key, int x, int y);
 	
 	/*
 	 * adds one ball to board
@@ -17,7 +18,7 @@ public interface IModel {
 	/*
 	 * adds an absorber to the 
 	 */
-	public void addAbsorber();
+	public boolean addAbsorber(String key, int x, int y, int ex, int ey);
 	
 	/*
 	 * Rotates the given Gizmo by rotating its line segments
@@ -48,7 +49,7 @@ public interface IModel {
 	/*
 	 * Removes a given gizmo from the board
 	 */
-    public void deleteGizmo(IGizmo gizmo);
+    public void deleteGizmo(String key);
     
     /*
      * Removes all gizmos from the board
@@ -98,8 +99,9 @@ public interface IModel {
 	/**
 	 * Load in Game
 	 * @param f 
+	 * @return 
 	 */
-	public void load(File f);
+	public boolean load(File f);
 
 	
 }

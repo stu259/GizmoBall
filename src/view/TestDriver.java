@@ -2,12 +2,10 @@ package view;
 
 import model.Model;
 
-public class a {
+public class TestDriver {
 
 	public static void main(String[] args) {
-		Model m = new Model();
-		//Display d = new Display();
+		TestingGUI x =new TestingGUI();
 
 	}
-
 }

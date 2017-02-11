@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_Wfd-MO44EeaU89L7aVifXA" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_Wfd-Me44EeaU89L7aVifXA" source="codegen">
         <details xmi:id="_Wfd-Mu44EeaU89L7aVifXA" key="codegenDirectory" value="/js5/src"/>
-        <details xmi:id="_WzqskO44EeaU89L7aVifXA" key="AssociatedSourceCode" value="/js5/src/controller/BuildListener.java;2448748481/1;/js5/src/controller/IListener.java;2188095891/1;/js5/src/controller/LoadListener.java;1374410673/1;/js5/src/controller/SaveListener.java;4244864299/1;/js5/src/controller/buildListeners/AbsorberListener.java;1643539944/1;/js5/src/controller/buildListeners/AddGizmoButtonListener.java;2120704869/1;/js5/src/controller/buildListeners/AddGizmosListener.java;2238157182/1;/js5/src/controller/buildListeners/BackListener.java;963021534/1;/js5/src/controller/buildListeners/BallListener.java;2130395406/1;/js5/src/controller/buildListeners/BindListener.java;1534529117/1;/js5/src/controller/buildListeners/ClearListener.java;2006514167/1;/js5/src/controller/buildListeners/ConnectListener.java;3782897681/1;/js5/src/controller/buildListeners/DeleteListener.java;517952022/1;/js5/src/controller/buildListeners/DisconnectListener.java;3019397297/1;/js5/src/controller/buildListeners/DoNothingKeyListener.java;3012898527/1;/js5/src/controller/buildListeners/FrictionListener.java;563782775/1;/js5/src/controller/buildListeners/GravityListener.java;97638001/1;/js5/src/controller/buildListeners/MoveListener.java;3432614872/1;/js5/src/controller/buildListeners/OperationsListener.java;2186840366/1;/js5/src/controller/buildListeners/RotateListener.java;2257485087/1;/js5/src/controller/buildListeners/RunModeListener.java;4177711569/1;/js5/src/controller/buildListeners/SetupListener.java;2764948441/1;/js5/src/controller/runListeners/BuildModeListener.java;923171996/1;/js5/src/controller/runListeners/StartStopListener.java;675180548/1;/js5/src/model/Absorber.java;2669736872/1;/js5/src/model/Ball.java;1811314041/1;/js5/src/model/CircleGizmo.java;3324841098/1;/js5/src/model/Gizmo.java;3443200372/1;/js5/src/model/IGizmo.java;4260950121/1;/js5/src/model/IModel.java;3934475613/1;/js5/src/model/LeftFlipperGizmo.java;2018380673/1;/js5/src/view/a.java;3888504151/1;/js5/src/model/RightFlipperGizmo.java;3431462076/1;/js5/src/model/SquareGizmo.java;3426461273/1;/js5/src/model/TriangleGizmo.java;2406715065/1;/js5/src/view/Build.java;2611467020/1;/js5/src/view/BuildBoard.java;2816232034/1;/js5/src/view/Display.java;1538439622/1;/js5/src/view/IDisplay.java;2780396388/1;/js5/src/view/Run.java;4136529489/1;/js5/src/view/RunBoard.java;2791955097/1;/js5/src/model/Model.java;2930123431/1;"/>
+        <details xmi:id="_WzqskO44EeaU89L7aVifXA" key="AssociatedSourceCode" value="/js5/src/controller/BuildListener.java;2455926548/1;/js5/src/controller/IListener.java;2188095891/1;/js5/src/controller/LoadListener.java;1374410673/1;/js5/src/controller/SaveListener.java;1326237679/1;/js5/src/controller/buildListeners/AbsorberListener.java;1643539944/1;/js5/src/controller/buildListeners/AddGizmoButtonListener.java;2120704869/1;/js5/src/controller/buildListeners/AddGizmosListener.java;2337054749/1;/js5/src/controller/buildListeners/BackListener.java;963021534/1;/js5/src/controller/buildListeners/BallListener.java;2130395406/1;/js5/src/controller/buildListeners/BindListener.java;1534529117/1;/js5/src/controller/buildListeners/ClearListener.java;57950692/1;/js5/src/controller/buildListeners/ConnectListener.java;3782897681/1;/js5/src/controller/buildListeners/DeleteListener.java;158759117/1;/js5/src/controller/buildListeners/DisconnectListener.java;3019397297/1;/js5/src/controller/buildListeners/DoNothingKeyListener.java;1429081953/1;/js5/src/controller/buildListeners/FrictionListener.java;563782775/1;/js5/src/controller/buildListeners/GravityListener.java;97638001/1;/js5/src/controller/buildListeners/MoveListener.java;3432614872/1;/js5/src/controller/buildListeners/OperationsListener.java;2186840366/1;/js5/src/controller/buildListeners/RotateListener.java;2257485087/1;/js5/src/controller/buildListeners/RunModeListener.java;4177711569/1;/js5/src/controller/buildListeners/SetupListener.java;2764948441/1;/js5/src/controller/runListeners/BuildModeListener.java;923171996/1;/js5/src/controller/runListeners/StartStopListener.java;675180548/1;/js5/src/model/Ball.java;1811314041/1;/js5/src/model/CircleGizmo.java;3324841098/1;/js5/src/model/Gizmo.java;3443200372/1;/js5/src/model/IGizmo.java;4260950121/1;/js5/src/model/IModel.java;22548985/1;/js5/src/model/LeftFlipperGizmo.java;2018380673/1;/js5/src/view/a.java;3042051516/1;/js5/src/model/RightFlipperGizmo.java;3431462076/1;/js5/src/model/SquareGizmo.java;3426461273/1;/js5/src/model/TriangleGizmo.java;2406715065/1;/js5/src/view/Build.java;2611467020/1;/js5/src/view/BuildBoard.java;2816232034/1;/js5/src/view/Display.java;2316458824/1;/js5/src/view/IDisplay.java;2780396388/1;/js5/src/view/Run.java;4136529489/1;/js5/src/view/RunBoard.java;2791955097/1;/js5/src/model/Model.java;585487193/1;"/>
       </contents>
       <contents xmi:type="ecore:EAnnotation" xmi:id="_hXzYsO5DEeattc1cqqUY1g" source="preferences">
         <contents xmi:type="ecore:EAnnotation" xmi:id="_hXz_wO5DEeattc1cqqUY1g" source="com.yattasolutions.codegen.reverse">
@@ -170,7 +170,7 @@
               <name xsi:nil="true"/>
             </ownedParameter>
             <language>java</language>
-            <body>this.model=model;
+            <body>this.model=model;&#xD;
 	</body>
           </ownedBehavior>
           <ownedOperation xmi:id="_WjqhsO44EeaU89L7aVifXA" name="AddGizmosListener" method="_WnIscO44EeaU89L7aVifXA">
@@ -260,14 +260,14 @@
               <name xsi:nil="true"/>
             </ownedParameter>
             <language>java</language>
-            <body>this.display=display;
-		this.model=model;	
+            <body>this.display=display;&#xD;
+		this.model=model;	&#xD;
 	</body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnJThO44EeaU89L7aVifXA" name="actionPerformed" specification="_WlmbYe44EeaU89L7aVifXA">
             <ownedParameter xmi:id="_WnJThe44EeaU89L7aVifXA" name="arg0" type="_WjVxkO44EeaU89L7aVifXA"/>
             <language>java</language>
-            <body>model.clear();
+            <body>model.clear();&#xD;
 	</body>
           </ownedBehavior>
           <ownedOperation xmi:id="_WjuzIO44EeaU89L7aVifXA" name="ClearListener" method="_WnJTgO44EeaU89L7aVifXA">
@@ -299,8 +299,8 @@
               <name xsi:nil="true"/>
             </ownedParameter>
             <language>java</language>
-            <body>this.display=display;
-		this.model=model;		
+            <body>this.display=display;&#xD;
+		this.model=model;		&#xD;
 	</body>
           </ownedBehavior>
           <ownedOperation xmi:id="_Wjx2cO44EeaU89L7aVifXA" name="DeleteListener" method="_WnJThu44EeaU89L7aVifXA">
@@ -329,7 +329,7 @@
               <name xsi:nil="true"/>
             </ownedParameter>
             <language>java</language>
-            <body>// TODO Auto-generated constructor stub
+            <body>// TODO Auto-generated constructor stub&#xD;
 	</body>
           </ownedBehavior>
           <ownedOperation xmi:id="_Wj2u8O44EeaU89L7aVifXA" name="DoNothingKeyListener" method="_WnJ6kO44EeaU89L7aVifXA">
@@ -496,10 +496,10 @@
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
-          <body>model = m;
-		gizmo = g;
-		mouseListener = new AddGizmosListener(model, gizmo);
-		keyListener = new DoNothingKeyListener(model);
+          <body>model = m;&#xD;
+		gizmo = g;&#xD;
+		mouseListener = new AddGizmosListener(model, gizmo);&#xD;
+		keyListener = new DoNothingKeyListener(model);&#xD;
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_WjaqEO44EeaU89L7aVifXA" name="BuildListener" method="_WnDz8O44EeaU89L7aVifXA">
@@ -619,18 +619,18 @@
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
-          <body>d = display;
-		m = model;
+          <body>d = display;&#xD;
+		m = model;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwHYVO5DEeattc1cqqUY1g" name="actionPerformed" specification="_WlMywO44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_kwH_YO5DEeattc1cqqUY1g" name="e" type="_WjVxkO44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>File f = d.saveDialog();
-		if (f != null) {
-			m.save(f);
-		}
-
+          <body>File f = d.saveDialog();&#xD;
+		if (f != null) {&#xD;
+			m.save(f);&#xD;
+		}&#xD;
+&#xD;
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_WlMywO44EeaU89L7aVifXA" name="actionPerformed" method="_kwHYVO5DEeattc1cqqUY1g">
@@ -1341,6 +1341,24 @@
           <ownedComment xmi:id="_Wnn0oO44EeaU89L7aVifXA">
             <body>adds an absorber to the</body>
           </ownedComment>
+          <ownedParameter xmi:id="_bFdRoO7XEeaI8-Ybn7rKsQ" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFdRoe7XEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFdRou7XEeaI8-Ybn7rKsQ" name="x">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFdRo-7XEeaI8-Ybn7rKsQ" name="y">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFdRpO7XEeaI8-Ybn7rKsQ" name="ex">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFdRpe7XEeaI8-Ybn7rKsQ" name="ey">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
         </ownedOperation>
         <ownedOperation xmi:id="_WhIyIO44EeaU89L7aVifXA" name="clear">
           <ownedComment xmi:id="_Wnn0p-44EeaU89L7aVifXA">
@@ -1385,7 +1403,7 @@
         </ownedOperation>
         <ownedOperation xmi:id="_WkIbwO44EeaU89L7aVifXA" name="addGizmo">
           <ownedComment xmi:id="_WnnNle44EeaU89L7aVifXA">
-            <body>checks if there is room for that gizmo.
+            <body>checks if there is room for that gizmo.&#xD;
 	 * then adds it to the board.</body>
           </ownedComment>
           <ownedParameter xmi:id="_WkIbwe44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
@@ -1404,7 +1422,7 @@
         </ownedOperation>
         <ownedOperation xmi:id="_WkJC0u44EeaU89L7aVifXA" name="rotateGizmo">
           <ownedComment xmi:id="_Wnn0oe44EeaU89L7aVifXA">
-            <body>Rotates the given Gizmo by rotating its line segments
+            <body>Rotates the given Gizmo by rotating its line segments&#xD;
 	 * and corners in the model</body>
           </ownedComment>
           <ownedParameter xmi:id="_WkJC0-44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
@@ -1447,7 +1465,9 @@
           <ownedComment xmi:id="_Wnn0pu44EeaU89L7aVifXA">
             <body>Removes a given gizmo from the board</body>
           </ownedComment>
-          <ownedParameter xmi:id="_WkKQ8e44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
+          <ownedParameter xmi:id="_WkKQ8e44EeaU89L7aVifXA" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
         </ownedOperation>
         <ownedOperation xmi:id="_WkKQ8u44EeaU89L7aVifXA" name="moveGizmo">
           <ownedComment xmi:id="_Wnn0qu44EeaU89L7aVifXA">
@@ -1469,10 +1489,27 @@
         </ownedOperation>
         <ownedOperation xmi:id="_Pi9NIO46EeaU89L7aVifXA" name="load">
           <ownedComment xmi:id="_PjHlMO46EeaU89L7aVifXA">
-            <body>Load in Game
+            <body>Load in Game&#xD;
 	 * @param f</body>
           </ownedComment>
           <ownedParameter xmi:id="_kvzPQe5DEeattc1cqqUY1g" name="f" type="_kvMyUO5DEeattc1cqqUY1g"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_bFcqkO7XEeaI8-Ybn7rKsQ" name="addGizmo">
+          <ownedParameter xmi:id="_bFcqke7XEeaI8-Ybn7rKsQ" name="gizmo">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFcqku7XEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFcqk-7XEeaI8-Ybn7rKsQ" name="x">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFcqlO7XEeaI8-Ybn7rKsQ" name="y">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_bFcqle7XEeaI8-Ybn7rKsQ" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_WhO4wO44EeaU89L7aVifXA" name="LeftFlipperGizmo">
@@ -1617,9 +1654,6 @@
         <ownedAttribute xmi:id="_WmxgE-44EeaU89L7aVifXA" name="balls" visibility="private" type="_WgWvAO44EeaU89L7aVifXA" isOrdered="true" association="_WoGVxO44EeaU89L7aVifXA">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WmxgFO44EeaU89L7aVifXA" value="*"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_WmyHIe44EeaU89L7aVifXA" name="absorber" visibility="private" type="_WgWH8O44EeaU89L7aVifXA" isOrdered="true" association="_WoG80e44EeaU89L7aVifXA">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WmyHIu44EeaU89L7aVifXA" value="*"/>
-        </ownedAttribute>
         <ownedAttribute xmi:id="_WmyHJO44EeaU89L7aVifXA" name="lines" visibility="private" type="_kvqFUO5DEeattc1cqqUY1g" isOrdered="true" association="_WoHj4e44EeaU89L7aVifXA">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WmyuMO44EeaU89L7aVifXA" value="*"/>
         </ownedAttribute>
@@ -1628,9 +1662,11 @@
         </ownedAttribute>
         <ownedAttribute xmi:id="_Wmz8UO44EeaU89L7aVifXA" name="gravity" visibility="private">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_SjGPAO7XEeaI8-Ybn7rKsQ" value="25"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_Wm0jYe44EeaU89L7aVifXA" name="friction" visibility="private">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_SjG2EO7XEeaI8-Ybn7rKsQ" value="0.025"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_Wm1xgO44EeaU89L7aVifXA" name="velocity" visibility="private" type="_j7KGQO5DEeattc1cqqUY1g" association="_WoIK8e44EeaU89L7aVifXA"/>
         <ownedAttribute xmi:id="_Wm2Yke44EeaU89L7aVifXA" name="time" visibility="private">
@@ -1658,302 +1694,316 @@
         <ownedAttribute xmi:id="_Wnpp0u44EeaU89L7aVifXA" name="boardSize" visibility="private">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
         </ownedAttribute>
+        <ownedAttribute xmi:id="_V3Ju0O7ZEeaI8-Ybn7rKsQ" name="linesToAbsorber" visibility="private" type="_Wg8k4O44EeaU89L7aVifXA" association="_V3POYO7ZEeaI8-Ybn7rKsQ">
+          <qualifier xmi:id="_V3KV4e7ZEeaI8-Ybn7rKsQ" type="_kvqFUO5DEeattc1cqqUY1g"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_nVUHcO7cEeaI8-Ybn7rKsQ" name="circlesToAbsorber" visibility="private" type="_Wg8k4O44EeaU89L7aVifXA" association="_nVXKwO7cEeaI8-Ybn7rKsQ">
+          <qualifier xmi:id="_nVUHcu7cEeaI8-Ybn7rKsQ" type="_Wj9coO44EeaU89L7aVifXA"/>
+        </ownedAttribute>
         <interfaceRealization xmi:id="_WkfBEO44EeaU89L7aVifXA" client="_Wh18wO44EeaU89L7aVifXA" supplier="_WhG88O44EeaU89L7aVifXA" contract="_WhG88O44EeaU89L7aVifXA"/>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu4O44EeaU89L7aVifXA" name="Model" specification="_Wh5nIO44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnWu4e44EeaU89L7aVifXA" type="_Wh18wO44EeaU89L7aVifXA" direction="return">
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
-          <body>modelSize = 2000; // this is 20x20*L; L=100
-		boardSize = 20;
-		boardScale = modelSize / boardSize; // = 100
-		makeWalls(modelSize);
-
-		gizmos = new HashMap&lt;String, IGizmo>();
-		balls = new ArrayList&lt;Ball>();
-		absorber = new ArrayList&lt;Absorber>();
-		lines = new ArrayList&lt;LineSegment>();
-		circles = new ArrayList&lt;Circle>();
-
-		linesToGizmos = new HashMap&lt;LineSegment, IGizmo>();
-		circlesToGizmos = new HashMap&lt;Circle, IGizmo>();
-		flippersToLines = new HashMap&lt;IGizmo, List&lt;LineSegment>>();
-		flippersToCircles = new HashMap&lt;IGizmo, List&lt;Circle>>();
+          <body>modelSize = 2000; // this is 20x20*L; L=100&#xD;
+		boardSize = 20;&#xD;
+		boardScale = modelSize / boardSize; // = 100&#xD;
+&#xD;
+		gizmos = new HashMap&lt;String, IGizmo>();&#xD;
+		balls = new ArrayList&lt;Ball>();&#xD;
+		lines = new ArrayList&lt;LineSegment>();&#xD;
+		circles = new ArrayList&lt;Circle>();&#xD;
+&#xD;
+		linesToAbsorber = new HashMap&lt;LineSegment, IGizmo>();&#xD;
+		circlesToAbsorber = new HashMap&lt;Circle, IGizmo>();&#xD;
+		linesToGizmos = new HashMap&lt;LineSegment, IGizmo>();&#xD;
+		circlesToGizmos = new HashMap&lt;Circle, IGizmo>();&#xD;
+		flippersToLines = new HashMap&lt;IGizmo, List&lt;LineSegment>>();&#xD;
+		flippersToCircles = new HashMap&lt;IGizmo, List&lt;Circle>>();&#xD;
+		&#xD;
+		//TESTING - REMOVE WHEN NOT NEEDED&#xD;
+		this.runMode();&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu4u44EeaU89L7aVifXA" name="runMode" specification="_Wh7cUu44EeaU89L7aVifXA">
           <language>java</language>
-          <body>lines.clear();
-		circles.clear();
-		linesToGizmos.clear();
-		circlesToGizmos.clear();
-		flippersToLines.clear();
-		flippersToCircles.clear();
-
-		for (String key : gizmos.keySet()) {
-			IGizmo gizmo = gizmos.get(key);
-			// add method to draw gizmo
-			if (gizmo instanceof SquareGizmo)
-				makeSquare(gizmo.copy());
-
-			else if (gizmo instanceof TriangleGizmo)
-				makeTriangle(gizmo.copy());
-
-			else if (gizmo instanceof RightFlipperGizmo)
-				makeRightFlipper(gizmo.copy());
-
-			else if (gizmo instanceof LeftFlipperGizmo)
-				makeLeftFlipper(gizmo.copy());
-
-			else if (gizmo instanceof CircleGizmo)
-				makeCircleGizmo(gizmo.copy());
-		}
+          <body>lines.clear();&#xD;
+		circles.clear();&#xD;
+		linesToGizmos.clear();&#xD;
+		circlesToGizmos.clear();&#xD;
+		flippersToLines.clear();&#xD;
+		flippersToCircles.clear();&#xD;
+&#xD;
+		makeWalls(modelSize);&#xD;
+		&#xD;
+		for (String key : gizmos.keySet()) {&#xD;
+			IGizmo gizmo = gizmos.get(key);&#xD;
+			// add method to draw gizmo&#xD;
+			if (gizmo instanceof SquareGizmo)&#xD;
+				makeSquareGizmo(gizmo.copy());&#xD;
+&#xD;
+			else if (gizmo instanceof TriangleGizmo)&#xD;
+				makeTriangleGizmo(gizmo.copy());&#xD;
+&#xD;
+			else if (gizmo instanceof RightFlipperGizmo)&#xD;
+				makeRightFlipper(gizmo.copy());&#xD;
+&#xD;
+			else if (gizmo instanceof LeftFlipperGizmo)&#xD;
+				makeLeftFlipper(gizmo.copy());&#xD;
+&#xD;
+			else if (gizmo instanceof CircleGizmo)&#xD;
+				makeCircleGizmo(gizmo.copy());&#xD;
+			&#xD;
+			else if (gizmo instanceof AbsorberGizmo)&#xD;
+				makeAbsorberGizmo(gizmo.copy());&#xD;
+		}&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu4-44EeaU89L7aVifXA" name="makeLeftFlipper" specification="_Wkg2QO44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnWu5O44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
-		double radius = 0.25;
-
-		// drawing circles .25 radius
-		Circle topCircle = new Circle(x1 + (radius * boardScale), y1 + (radius * boardScale), radius);
-		Circle botCircle = new Circle(x1 + (radius * boardScale), y2 - (radius * boardScale), radius);
-		List&lt;Circle> tempCirc = new ArrayList&lt;Circle>();
-		tempCirc.add(topCircle);
-		tempCirc.add(botCircle);
-		circles.addAll(tempCirc);
-
-		// drawing lines
-		LineSegment right = new LineSegment(x1 + (2 * radius * boardScale), y1 + (radius * boardScale),
-				x1 + (2 * radius * boardScale), y2 - (radius * boardScale));
-		LineSegment left = new LineSegment(x1, y1 + (radius * boardScale), x1, y2 - (radius * boardScale));
-		List&lt;LineSegment> tempLines = new ArrayList&lt;LineSegment>();
-		tempLines.add(right);
-		tempLines.add(left);
-		lines.addAll(tempLines);
-
-		// connect lines/corners to flipper gizmo
-		linesToGizmos.put(right, gizmo);
-		linesToGizmos.put(left, gizmo);
-		circlesToGizmos.put(topCircle, gizmo);
-		circlesToGizmos.put(botCircle, gizmo);
-
-		// connect flipper to lines and circle (used for rotation)
-		flippersToLines.put(gizmo, tempLines);
-		flippersToCircles.put(gizmo, tempCirc);
+          <body>int x1 = gizmo.getStartX() * boardScale;&#xD;
+		int x2 = gizmo.getEndX() * boardScale;&#xD;
+		int y1 = gizmo.getStartY() * boardScale;&#xD;
+		int y2 = gizmo.getEndY() * boardScale;&#xD;
+		double radius = 0.25;&#xD;
+&#xD;
+		// drawing circles .25 radius&#xD;
+		Circle topCircle = new Circle(x1 + (radius * boardScale), y1 + (radius * boardScale), radius);&#xD;
+		Circle botCircle = new Circle(x1 + (radius * boardScale), y2 - (radius * boardScale), radius);&#xD;
+		List&lt;Circle> tempCirc = new ArrayList&lt;Circle>();&#xD;
+		tempCirc.add(topCircle);&#xD;
+		tempCirc.add(botCircle);&#xD;
+		circles.addAll(tempCirc);&#xD;
+&#xD;
+		// drawing lines&#xD;
+		LineSegment right = new LineSegment(x1 + (2 * radius * boardScale), y1 + (radius * boardScale),&#xD;
+				x1 + (2 * radius * boardScale), y2 - (radius * boardScale));&#xD;
+		LineSegment left = new LineSegment(x1, y1 + (radius * boardScale), x1, y2 - (radius * boardScale));&#xD;
+		List&lt;LineSegment> tempLines = new ArrayList&lt;LineSegment>();&#xD;
+		tempLines.add(right);&#xD;
+		tempLines.add(left);&#xD;
+		lines.addAll(tempLines);&#xD;
+&#xD;
+		// connect lines/corners to flipper gizmo&#xD;
+		linesToGizmos.put(right, gizmo);&#xD;
+		linesToGizmos.put(left, gizmo);&#xD;
+		circlesToGizmos.put(topCircle, gizmo);&#xD;
+		circlesToGizmos.put(botCircle, gizmo);&#xD;
+&#xD;
+		// connect flipper to lines and circle (used for rotation)&#xD;
+		flippersToLines.put(gizmo, tempLines);&#xD;
+		flippersToCircles.put(gizmo, tempCirc);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu5e44EeaU89L7aVifXA" name="makeRightFlipper" specification="_WkhdUO44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnWu5u44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
-		double radius = 0.25;
-
-		// drawing circles .25 radius
-		Circle topCircle = new Circle(x2 - (radius * boardScale), y1 + (radius * boardScale), radius);
-		Circle botCircle = new Circle(x2 - (radius * boardScale), y2 - (radius * boardScale), radius);
-		List&lt;Circle> tempCirc = new ArrayList&lt;Circle>();
-		tempCirc.add(topCircle);
-		tempCirc.add(botCircle);
-		circles.addAll(tempCirc);
-
-		// drawing lines
-		LineSegment right = new LineSegment(x2, y1 + (radius * boardScale), x2, y2 - (radius * boardScale));
-		LineSegment left = new LineSegment(x2 - (2 * radius * boardScale), y1 + (radius * boardScale),
-				x2 - (2 * radius * boardScale), y2 - (radius * boardScale));
-		List&lt;LineSegment> tempLines = new ArrayList&lt;LineSegment>();
-		tempLines.add(right);
-		tempLines.add(left);
-		lines.addAll(tempLines);
-
-		// connect lines/corners to flipper gizmo
-		linesToGizmos.put(right, gizmo);
-		linesToGizmos.put(left, gizmo);
-		circlesToGizmos.put(topCircle, gizmo);
-		circlesToGizmos.put(botCircle, gizmo);
-
-		// connect flipper to lines and circle (used for rotation)
-		flippersToLines.put(gizmo, tempLines);
-		flippersToCircles.put(gizmo, tempCirc);
+          <body>int x1 = gizmo.getStartX() * boardScale;&#xD;
+		int x2 = gizmo.getEndX() * boardScale;&#xD;
+		int y1 = gizmo.getStartY() * boardScale;&#xD;
+		int y2 = gizmo.getEndY() * boardScale;&#xD;
+		double radius = 0.25;&#xD;
+&#xD;
+		// drawing circles .25 radius&#xD;
+		Circle topCircle = new Circle(x2 - (radius * boardScale), y1 + (radius * boardScale), radius);&#xD;
+		Circle botCircle = new Circle(x2 - (radius * boardScale), y2 - (radius * boardScale), radius);&#xD;
+		List&lt;Circle> tempCirc = new ArrayList&lt;Circle>();&#xD;
+		tempCirc.add(topCircle);&#xD;
+		tempCirc.add(botCircle);&#xD;
+		circles.addAll(tempCirc);&#xD;
+&#xD;
+		// drawing lines&#xD;
+		LineSegment right = new LineSegment(x2, y1 + (radius * boardScale), x2, y2 - (radius * boardScale));&#xD;
+		LineSegment left = new LineSegment(x2 - (2 * radius * boardScale), y1 + (radius * boardScale),&#xD;
+				x2 - (2 * radius * boardScale), y2 - (radius * boardScale));&#xD;
+		List&lt;LineSegment> tempLines = new ArrayList&lt;LineSegment>();&#xD;
+		tempLines.add(right);&#xD;
+		tempLines.add(left);&#xD;
+		lines.addAll(tempLines);&#xD;
+&#xD;
+		// connect lines/corners to flipper gizmo&#xD;
+		linesToGizmos.put(right, gizmo);&#xD;
+		linesToGizmos.put(left, gizmo);&#xD;
+		circlesToGizmos.put(topCircle, gizmo);&#xD;
+		circlesToGizmos.put(botCircle, gizmo);&#xD;
+&#xD;
+		// connect flipper to lines and circle (used for rotation)&#xD;
+		flippersToLines.put(gizmo, tempLines);&#xD;
+		flippersToCircles.put(gizmo, tempCirc);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu5-44EeaU89L7aVifXA" name="makeCircleGizmo" specification="_WkhdUu44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnWu6O44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
-
-		double radius = gizmo.getSize() / 2;
-		// get midpoints
-		Circle circle = new Circle((x1 + x2) / 2, (y1 + y2) / 2, radius);
-		circlesToGizmos.put(circle, gizmo);
-		circles.add(circle);
+          <body>int x1 = gizmo.getStartX() * boardScale;&#xD;
+		int x2 = gizmo.getEndX() * boardScale;&#xD;
+		int y1 = gizmo.getStartY() * boardScale;&#xD;
+		int y2 = gizmo.getEndY() * boardScale;&#xD;
+&#xD;
+		double radius = gizmo.getSize() / 2;&#xD;
+		// get midpoints&#xD;
+		Circle circle = new Circle((x1 + x2) / 2, (y1 + y2) / 2, radius);&#xD;
+		circlesToGizmos.put(circle, gizmo);&#xD;
+		circles.add(circle);&#xD;
 	</body>
         </ownedBehavior>
-        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu6e44EeaU89L7aVifXA" name="makeTriangle" specification="_WkiEYO44EeaU89L7aVifXA">
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu6e44EeaU89L7aVifXA" name="makeTriangleGizmo" specification="_WkiEYO44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnWu6u44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>// the right angled corner should be in the top-left position by default
-		// THIS IS A MUST!!!! DO NOT CHANGE
-		int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
-		int direction = gizmo.getRotation();
-
-		// keeps track of the triangle rotation for edge and corner placement
-		switch (direction) {
-		case 0: // right-angle is top-left (this is by default)
-			LineSegment line1 = new LineSegment(x1, y1, x1, y2); // left edge
-			LineSegment line2 = new LineSegment(x1, y2, x2, y1); // hypotenuse
-																	// edge
-			LineSegment line3 = new LineSegment(x2, y1, x1, y1); // top edge
-			Circle circle1 = new Circle(x1, y1, 0);
-			Circle circle2 = new Circle(x2, y1, 0);
-			Circle circle3 = new Circle(x1, y2, 0);
-			// add lines to line list
-			lines.add(line1);
-			lines.add(line2);
-			lines.add(line3);
-			// add lines to hashmap
-			linesToGizmos.put(line1, gizmo);
-			linesToGizmos.put(line2, gizmo);
-			linesToGizmos.put(line3, gizmo);
-			// add circles to circle list
-			circles.add(circle1);
-			circles.add(circle2);
-			circles.add(circle3);
-			// add circles to hashmap
-			circlesToGizmos.put(circle1, gizmo);
-			circlesToGizmos.put(circle2, gizmo);
-			circlesToGizmos.put(circle3, gizmo);
-			break;
-		case 90: // right-angle is top right
-			LineSegment line4 = new LineSegment(x2, y1, x1, y1); // top edge
-			LineSegment line5 = new LineSegment(x1, y1, x2, y2); // hypotenuse
-																	// edge
-			LineSegment line6 = new LineSegment(x2, y2, x2, y1); // right edge
-			Circle circle4 = new Circle(x1, y1, 0);
-			Circle circle5 = new Circle(x2, y1, 0);
-			Circle circle6 = new Circle(x2, y2, 0);
-			// add lines to line list
-			lines.add(line4);
-			lines.add(line5);
-			lines.add(line6);
-			// add lines to hashmap
-			linesToGizmos.put(line4, gizmo);
-			linesToGizmos.put(line5, gizmo);
-			linesToGizmos.put(line6, gizmo);
-			// add circles to circle list
-			circles.add(circle4);
-			circles.add(circle5);
-			circles.add(circle6);
-			// add circles to hashmap
-			circlesToGizmos.put(circle4, gizmo);
-			circlesToGizmos.put(circle5, gizmo);
-			circlesToGizmos.put(circle6, gizmo);
-			break;
-		case 180: // right-angle is bottom right
-			LineSegment line7 = new LineSegment(x2, y2, x1, y2); // bottom edge
-			LineSegment line8 = new LineSegment(x1, y2, x2, y1); // hypotenuse
-																	// edge
-			LineSegment line9 = new LineSegment(x2, y1, x2, y2); // right edge
-			Circle circle7 = new Circle(x2, y2, 0);
-			Circle circle8 = new Circle(x2, y1, 0);
-			Circle circle9 = new Circle(x1, y2, 0);
-			// add lines to line list
-			lines.add(line7);
-			lines.add(line8);
-			lines.add(line9);
-			// add lines to hashmap
-			linesToGizmos.put(line7, gizmo);
-			linesToGizmos.put(line8, gizmo);
-			linesToGizmos.put(line9, gizmo);
-			// add circles to circle list
-			circles.add(circle7);
-			circles.add(circle8);
-			circles.add(circle9);
-			// add circles to hashmap
-			circlesToGizmos.put(circle7, gizmo);
-			circlesToGizmos.put(circle8, gizmo);
-			circlesToGizmos.put(circle9, gizmo);
-			break;
-		case 270: // right-angle is bottom left
-			LineSegment line10 = new LineSegment(x1, y2, x2, y2); // bottom edge
-			LineSegment line11 = new LineSegment(x1, y1, x2, y2); // hypotenuse
-																	// edge
-			LineSegment line12 = new LineSegment(x1, y1, x1, y2); // left edge
-			Circle circle10 = new Circle(x1, y1, 0);
-			Circle circle11 = new Circle(x1, y2, 0);
-			Circle circle12 = new Circle(x2, y2, 0);
-			// add lines to line list
-			lines.add(line10);
-			lines.add(line11);
-			lines.add(line12);
-			// add lines to hashmap
-			linesToGizmos.put(line10, gizmo);
-			linesToGizmos.put(line11, gizmo);
-			linesToGizmos.put(line12, gizmo);
-			// add circles to circle list
-			circles.add(circle10);
-			circles.add(circle11);
-			circles.add(circle12);
-			// add circles to hashmap
-			circlesToGizmos.put(circle10, gizmo);
-			circlesToGizmos.put(circle11, gizmo);
-			circlesToGizmos.put(circle12, gizmo);
-			break;
-		}
+          <body>// the right angled corner should be in the top-left position by default&#xD;
+		// THIS IS A MUST!!!! DO NOT CHANGE&#xD;
+		int x1 = gizmo.getStartX() * boardScale;&#xD;
+		int x2 = gizmo.getEndX() * boardScale;&#xD;
+		int y1 = gizmo.getStartY() * boardScale;&#xD;
+		int y2 = gizmo.getEndY() * boardScale;&#xD;
+		int direction = gizmo.getRotation();&#xD;
+&#xD;
+		// keeps track of the triangle rotation for edge and corner placement&#xD;
+		switch (direction) {&#xD;
+		case 0: // right-angle is top-left (this is by default)&#xD;
+			LineSegment line1 = new LineSegment(x1, y1, x1, y2); // left edge&#xD;
+			LineSegment line2 = new LineSegment(x1, y2, x2, y1); // hypotenuse&#xD;
+																	// edge&#xD;
+			LineSegment line3 = new LineSegment(x2, y1, x1, y1); // top edge&#xD;
+			Circle circle1 = new Circle(x1, y1, 0);&#xD;
+			Circle circle2 = new Circle(x2, y1, 0);&#xD;
+			Circle circle3 = new Circle(x1, y2, 0);&#xD;
+			// add lines to line list&#xD;
+			lines.add(line1);&#xD;
+			lines.add(line2);&#xD;
+			lines.add(line3);&#xD;
+			// add lines to hashmap&#xD;
+			linesToGizmos.put(line1, gizmo);&#xD;
+			linesToGizmos.put(line2, gizmo);&#xD;
+			linesToGizmos.put(line3, gizmo);&#xD;
+			// add circles to circle list&#xD;
+			circles.add(circle1);&#xD;
+			circles.add(circle2);&#xD;
+			circles.add(circle3);&#xD;
+			// add circles to hashmap&#xD;
+			circlesToGizmos.put(circle1, gizmo);&#xD;
+			circlesToGizmos.put(circle2, gizmo);&#xD;
+			circlesToGizmos.put(circle3, gizmo);&#xD;
+			break;&#xD;
+		case 90: // right-angle is top right&#xD;
+			LineSegment line4 = new LineSegment(x2, y1, x1, y1); // top edge&#xD;
+			LineSegment line5 = new LineSegment(x1, y1, x2, y2); // hypotenuse&#xD;
+																	// edge&#xD;
+			LineSegment line6 = new LineSegment(x2, y2, x2, y1); // right edge&#xD;
+			Circle circle4 = new Circle(x1, y1, 0);&#xD;
+			Circle circle5 = new Circle(x2, y1, 0);&#xD;
+			Circle circle6 = new Circle(x2, y2, 0);&#xD;
+			// add lines to line list&#xD;
+			lines.add(line4);&#xD;
+			lines.add(line5);&#xD;
+			lines.add(line6);&#xD;
+			// add lines to hashmap&#xD;
+			linesToGizmos.put(line4, gizmo);&#xD;
+			linesToGizmos.put(line5, gizmo);&#xD;
+			linesToGizmos.put(line6, gizmo);&#xD;
+			// add circles to circle list&#xD;
+			circles.add(circle4);&#xD;
+			circles.add(circle5);&#xD;
+			circles.add(circle6);&#xD;
+			// add circles to hashmap&#xD;
+			circlesToGizmos.put(circle4, gizmo);&#xD;
+			circlesToGizmos.put(circle5, gizmo);&#xD;
+			circlesToGizmos.put(circle6, gizmo);&#xD;
+			break;&#xD;
+		case 180: // right-angle is bottom right&#xD;
+			LineSegment line7 = new LineSegment(x2, y2, x1, y2); // bottom edge&#xD;
+			LineSegment line8 = new LineSegment(x1, y2, x2, y1); // hypotenuse&#xD;
+																	// edge&#xD;
+			LineSegment line9 = new LineSegment(x2, y1, x2, y2); // right edge&#xD;
+			Circle circle7 = new Circle(x2, y2, 0);&#xD;
+			Circle circle8 = new Circle(x2, y1, 0);&#xD;
+			Circle circle9 = new Circle(x1, y2, 0);&#xD;
+			// add lines to line list&#xD;
+			lines.add(line7);&#xD;
+			lines.add(line8);&#xD;
+			lines.add(line9);&#xD;
+			// add lines to hashmap&#xD;
+			linesToGizmos.put(line7, gizmo);&#xD;
+			linesToGizmos.put(line8, gizmo);&#xD;
+			linesToGizmos.put(line9, gizmo);&#xD;
+			// add circles to circle list&#xD;
+			circles.add(circle7);&#xD;
+			circles.add(circle8);&#xD;
+			circles.add(circle9);&#xD;
+			// add circles to hashmap&#xD;
+			circlesToGizmos.put(circle7, gizmo);&#xD;
+			circlesToGizmos.put(circle8, gizmo);&#xD;
+			circlesToGizmos.put(circle9, gizmo);&#xD;
+			break;&#xD;
+		case 270: // right-angle is bottom left&#xD;
+			LineSegment line10 = new LineSegment(x1, y2, x2, y2); // bottom edge&#xD;
+			LineSegment line11 = new LineSegment(x1, y1, x2, y2); // hypotenuse&#xD;
+																	// edge&#xD;
+			LineSegment line12 = new LineSegment(x1, y1, x1, y2); // left edge&#xD;
+			Circle circle10 = new Circle(x1, y1, 0);&#xD;
+			Circle circle11 = new Circle(x1, y2, 0);&#xD;
+			Circle circle12 = new Circle(x2, y2, 0);&#xD;
+			// add lines to line list&#xD;
+			lines.add(line10);&#xD;
+			lines.add(line11);&#xD;
+			lines.add(line12);&#xD;
+			// add lines to hashmap&#xD;
+			linesToGizmos.put(line10, gizmo);&#xD;
+			linesToGizmos.put(line11, gizmo);&#xD;
+			linesToGizmos.put(line12, gizmo);&#xD;
+			// add circles to circle list&#xD;
+			circles.add(circle10);&#xD;
+			circles.add(circle11);&#xD;
+			circles.add(circle12);&#xD;
+			// add circles to hashmap&#xD;
+			circlesToGizmos.put(circle10, gizmo);&#xD;
+			circlesToGizmos.put(circle11, gizmo);&#xD;
+			circlesToGizmos.put(circle12, gizmo);&#xD;
+			break;&#xD;
+		}&#xD;
 	</body>
         </ownedBehavior>
-        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu6-44EeaU89L7aVifXA" name="makeSquare" specification="_WkiEYu44EeaU89L7aVifXA">
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWu6-44EeaU89L7aVifXA" name="makeSquareGizmo" specification="_WkiEYu44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnWu7O44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>// get x and y coordinates of starting and ending points of the gizmo
-		int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
-
-		// create lines and corners
-		LineSegment left = new LineSegment(x1, y1, x1, y2);
-		LineSegment bottom = new LineSegment(x1, y2, x2, y2);
-		LineSegment right = new LineSegment(x2, y2, x2, y1);
-		LineSegment top = new LineSegment(x2, y1, x1, y1);
-		Circle topLeft = new Circle(x1, y1, 0);
-		Circle bottomLeft = new Circle(x1, y2, 0);
-		Circle topRight = new Circle(x2, y1, 0);
-		Circle bottomRight = new Circle(x2, y2, 0);
-
-		// create connections for the lines -> gizmo
-		linesToGizmos.put(left, gizmo);
-		linesToGizmos.put(bottom, gizmo);
-		linesToGizmos.put(right, gizmo);
-		linesToGizmos.put(top, gizmo);
-		// create connections for the circles -> gizmo
-		circlesToGizmos.put(topLeft, gizmo);
-		circlesToGizmos.put(bottomLeft, gizmo);
-		circlesToGizmos.put(topRight, gizmo);
-		circlesToGizmos.put(bottomRight, gizmo);
-		// add lines to list of alllines
-		lines.add(left);
-		lines.add(bottom);
-		lines.add(right);
-		lines.add(top);
-		// adds little circles to ensure that corners have collision
-		circles.add(topLeft);
-		circles.add(bottomLeft);
-		circles.add(topRight);
-		circles.add(bottomRight);
+          <body>// get x and y coordinates of starting and ending points of the gizmo&#xD;
+		int x1 = gizmo.getStartX() * boardScale;&#xD;
+		int x2 = gizmo.getEndX() * boardScale;&#xD;
+		int y1 = gizmo.getStartY() * boardScale;&#xD;
+		int y2 = gizmo.getEndY() * boardScale;&#xD;
+&#xD;
+		// create lines and corners&#xD;
+		LineSegment left = new LineSegment(x1, y1, x1, y2);&#xD;
+		LineSegment bottom = new LineSegment(x1, y2, x2, y2);&#xD;
+		LineSegment right = new LineSegment(x2, y2, x2, y1);&#xD;
+		LineSegment top = new LineSegment(x2, y1, x1, y1);&#xD;
+		Circle topLeft = new Circle(x1, y1, 0);&#xD;
+		Circle bottomLeft = new Circle(x1, y2, 0);&#xD;
+		Circle topRight = new Circle(x2, y1, 0);&#xD;
+		Circle bottomRight = new Circle(x2, y2, 0);&#xD;
+&#xD;
+		// create connections for the lines -> gizmo&#xD;
+		linesToGizmos.put(left, gizmo);&#xD;
+		linesToGizmos.put(bottom, gizmo);&#xD;
+		linesToGizmos.put(right, gizmo);&#xD;
+		linesToGizmos.put(top, gizmo);&#xD;
+		// create connections for the circles -> gizmo&#xD;
+		circlesToGizmos.put(topLeft, gizmo);&#xD;
+		circlesToGizmos.put(bottomLeft, gizmo);&#xD;
+		circlesToGizmos.put(topRight, gizmo);&#xD;
+		circlesToGizmos.put(bottomRight, gizmo);&#xD;
+		// add lines to list of alllines&#xD;
+		lines.add(left);&#xD;
+		lines.add(bottom);&#xD;
+		lines.add(right);&#xD;
+		lines.add(top);&#xD;
+		// adds little circles to ensure that corners have collision&#xD;
+		circles.add(topLeft);&#xD;
+		circles.add(bottomLeft);&#xD;
+		circles.add(topRight);&#xD;
+		circles.add(bottomRight);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnXV8O44EeaU89L7aVifXA" name="makeWalls" specification="_Wh8qcO44EeaU89L7aVifXA">
@@ -1961,14 +2011,14 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
           <language>java</language>
-          <body>LineSegment topWall = new LineSegment(0, 0, boardSize, 0);
-		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);
-		LineSegment bottomWall = new LineSegment(0, boardSize, boardSize, boardSize);
-		LineSegment leftWall = new LineSegment(0, 0, 0, boardSize);
-		lines.add(topWall);
-		lines.add(rightWall);
-		lines.add(bottomWall);
-		lines.add(leftWall);
+          <body>LineSegment topWall = new LineSegment(0, 0, boardSize, 0);&#xD;
+		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);&#xD;
+		LineSegment bottomWall = new LineSegment(0, boardSize, boardSize, boardSize);&#xD;
+		LineSegment leftWall = new LineSegment(0, 0, 0, boardSize);&#xD;
+		lines.add(topWall);&#xD;
+		lines.add(rightWall);&#xD;
+		lines.add(bottomWall);&#xD;
+		lines.add(leftWall);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnXV8u44EeaU89L7aVifXA" name="timeUntilCollision" specification="_Wh9RgO44EeaU89L7aVifXA">
@@ -1976,54 +2026,54 @@
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
-          <body>double lowestColTime = Double.MAX_VALUE;
-		Ball collidingBall = null;
-		Vect updatedVel = new Vect(0, 0);
-
-		for (Ball ball : balls) {
-			Circle circ = ball.getCircle();
-			Vect vel = ball.getVelocity();
-			double nextTime = 0;
-			for (LineSegment line : lines) {
-				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
-				if (nextTime &lt; lowestColTime) {
-					lowestColTime = nextTime;
-					collidingBall = ball;
-					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
-				}
-			}
-			for (Circle circle : circles) {
-				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);
-				if (nextTime &lt; lowestColTime) {
-					lowestColTime = nextTime;
-					collidingBall = ball;
-					updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
-							circlesToGizmos.get(circle).getCof());
-				}
-			}
-
-		}
-		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel));
-
+          <body>double lowestColTime = Double.MAX_VALUE;&#xD;
+		Ball collidingBall = null;&#xD;
+		Vect updatedVel = new Vect(0, 0);&#xD;
+&#xD;
+		for (Ball ball : balls) {&#xD;
+			Circle circ = ball.getCircle();&#xD;
+			Vect vel = ball.getVelocity();&#xD;
+			double nextTime = 0;&#xD;
+			for (LineSegment line : lines) {&#xD;
+				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);&#xD;
+				if (nextTime &lt; lowestColTime) {&#xD;
+					lowestColTime = nextTime;&#xD;
+					collidingBall = ball;&#xD;
+					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());&#xD;
+				}&#xD;
+			}&#xD;
+			for (Circle circle : circles) {&#xD;
+				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);&#xD;
+				if (nextTime &lt; lowestColTime) {&#xD;
+					lowestColTime = nextTime;&#xD;
+					collidingBall = ball;&#xD;
+					updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,&#xD;
+							circlesToGizmos.get(circle).getCof());&#xD;
+				}&#xD;
+			}&#xD;
+&#xD;
+		}&#xD;
+		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel));&#xD;
+&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnXV9O44EeaU89L7aVifXA" name="moveBalls" specification="_Wh9Rge44EeaU89L7aVifXA">
           <language>java</language>
-          <body>for (Ball ball : balls) {
-			CollisionInfo colInfo = timeUntilCollision();
-			double colTime = colInfo.getColTime();
-			if (!ball.isPaused() &amp;&amp; ball != null) {
-				if (colTime > time) {// nein Kollision
-					ball = calculateBallMove(ball, time);
-				} else {
-					ball = calculateBallMove(ball, colTime);
-					ball.setVelocity(colInfo.getUpdatedVel());
-				}
-			}
-		}
-
-		this.setChanged();
-		this.notifyObservers(); // update board both in gui and model
+          <body>CollisionInfo colInfo = timeUntilCollision();&#xD;
+		double colTime = colInfo.getColTime();&#xD;
+		for (Ball ball : balls) {&#xD;
+			if (!ball.isPaused() &amp;&amp; ball != null) {&#xD;
+				if (colTime > time) {// nein Kollision&#xD;
+					ball = calculateBallMove(ball, time);&#xD;
+				} else {&#xD;
+					ball = calculateBallMove(ball, colTime);&#xD;
+					ball.setVelocity(colInfo.getUpdatedVel());&#xD;
+				}&#xD;
+			}&#xD;
+		}&#xD;
+&#xD;
+		this.setChanged();&#xD;
+		this.notifyObservers(); // update board both in gui and model&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnXV9e44EeaU89L7aVifXA" name="calculateBallMove" specification="_Wkirce44EeaU89L7aVifXA">
@@ -2035,26 +2085,26 @@
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
-          <body>double vectX = ball.getVelocity().x();
-		double vectY = ball.getVelocity().y();
-		double x = ball.getX() + (vectX * newTime);
-		double y = ball.getY() + (vectY * newTime);
-		ball.setX(x);
-		ball.setY(y);
-
-		return ball;
+          <body>double vectX = ball.getVelocity().x();&#xD;
+		double vectY = ball.getVelocity().y();&#xD;
+		double x = ball.getX() + (vectX * newTime);&#xD;
+		double y = ball.getY() + (vectY * newTime);&#xD;
+		ball.setX(x);&#xD;
+		ball.setY(y);&#xD;
+&#xD;
+		return ball;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnXV-e44EeaU89L7aVifXA" name="resume" specification="_Wh94ku44EeaU89L7aVifXA">
           <language>java</language>
-          <body>for (Ball ball : balls)
-			ball.setPaused(false);
+          <body>for (Ball ball : balls)&#xD;
+			ball.setPaused(false);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnXV-u44EeaU89L7aVifXA" name="pause" specification="_Wh-fo-44EeaU89L7aVifXA">
           <language>java</language>
-          <body>for (Ball ball : balls)
-			ball.setPaused(true);
+          <body>for (Ball ball : balls)&#xD;
+			ball.setPaused(true);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnX9Bu44EeaU89L7aVifXA" name="validatePosition" specification="_WiEmQO44EeaU89L7aVifXA">
@@ -2075,17 +2125,17 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
-          <body>// check if gizmo is somehow placed outside of board (shouldnt happen)
-		if (sx &lt; 0 || ex > boardSize || sy &lt; 0 || ey > boardSize)
-			return false;
-
-		// check if given coordinates overlaps with any other gizmo position
-		for (String key : gizmos.keySet()) {
-			IGizmo gizmo = gizmos.get(key);
-			if (sx &lt; gizmo.getEndX() &amp;&amp; ex > gizmo.getStartX() &amp;&amp; sy &lt; gizmo.getEndY() &amp;&amp; ey > gizmo.getEndY())
-				return false;
-		}
-		return true;
+          <body>// check if gizmo is somehow placed outside of board (shouldnt happen)&#xD;
+		if (sx &lt; 0 || ex > boardSize || sy &lt; 0 || ey > boardSize)&#xD;
+			return false;&#xD;
+&#xD;
+		// check if given coordinates overlaps with any other gizmo position&#xD;
+		for (String key : gizmos.keySet()) {&#xD;
+			IGizmo gizmo = gizmos.get(key);&#xD;
+			if (sx &lt; gizmo.getEndX() &amp;&amp; ex > gizmo.getStartX() &amp;&amp; sy &lt; gizmo.getEndY() &amp;&amp; ey > gizmo.getEndY())&#xD;
+				return false;&#xD;
+		}&#xD;
+		return true;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnYkEO44EeaU89L7aVifXA" name="addGizmo" specification="_Wkj5kO44EeaU89L7aVifXA">
@@ -2098,35 +2148,27 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
-          <body>if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
-			return false;
-
-		// TODO CHECK FOR ABSORBER OVERLAPPING AS WELL
-
-		// add gizmo to gizmo list
-		gizmos.put(key, gizmo);
-
-		// TODO DRAW ABSORBERS HERE (MAYBE)
-
-		return true;
+          <body>if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))&#xD;
+			return false;&#xD;
+&#xD;
+		// TODO CHECK FOR ABSORBER OVERLAPPING AS WELL&#xD;
+&#xD;
+		// add gizmo to gizmo list&#xD;
+		gizmos.put(key, gizmo);&#xD;
+&#xD;
+		return true;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnZLIO44EeaU89L7aVifXA" name="addBall" specification="_WklHsu44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnZLIe44EeaU89L7aVifXA" name="ball" type="_WgWvAO44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>balls.add(ball);
-	</body>
-        </ownedBehavior>
-        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnZyMO44EeaU89L7aVifXA" name="addAbsorber" specification="_WiF0YO44EeaU89L7aVifXA">
-          <language>java</language>
-          <body>// TODO Auto-generated method stub
-
+          <body>balls.add(ball);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnZyMe44EeaU89L7aVifXA" name="rotateGizmo" specification="_WkluwO44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnZyMu44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>gizmo.rotate();
+          <body>gizmo.rotate();&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnaZQO44EeaU89L7aVifXA" name="connectGizmo" specification="_WkmV0u44EeaU89L7aVifXA">
@@ -2137,13 +2179,13 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
-          <body>if (gizmo2.getConnectedGizmo() != null) {
-			gizmo1.setConnectedGizmo(gizmo2);
-			gizmo2.setConnectedGizmo(null);
-			gizmo2.addGizmoConnected(gizmo1);
-			return true;
-		}
-		return false;
+          <body>if (gizmo2.getConnectedGizmo() != null) {&#xD;
+			gizmo1.setConnectedGizmo(gizmo2);&#xD;
+			gizmo2.setConnectedGizmo(null);&#xD;
+			gizmo2.addGizmoConnected(gizmo1);&#xD;
+			return true;&#xD;
+		}&#xD;
+		return false;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnbAUO44EeaU89L7aVifXA" name="disconnectGizmo" specification="_Wkm84-44EeaU89L7aVifXA">
@@ -2153,20 +2195,20 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
-          <body>boolean removed = false;
-		if (gizmo.getConnectedGizmo() != null) {
-			gizmo.getConnectedGizmo().removeGizmoConnected(gizmo);
-			gizmo.setConnectedGizmo(null);
-			removed = true;
-		}
-		if (gizmo.getGizmosConnected().size() > 0) {
-			for (IGizmo giz : gizmo.getGizmosConnected()) {
-				giz.setConnectedGizmo(null);
-			}
-			gizmo.clearGizmoConnected();
-			removed = true;
-		}
-		return removed;
+          <body>boolean removed = false;&#xD;
+		if (gizmo.getConnectedGizmo() != null) {&#xD;
+			gizmo.getConnectedGizmo().removeGizmoConnected(gizmo);&#xD;
+			gizmo.setConnectedGizmo(null);&#xD;
+			removed = true;&#xD;
+		}&#xD;
+		if (gizmo.getGizmosConnected().size() > 0) {&#xD;
+			for (IGizmo giz : gizmo.getGizmosConnected()) {&#xD;
+				giz.setConnectedGizmo(null);&#xD;
+			}&#xD;
+			gizmo.clearGizmoConnected();&#xD;
+			removed = true;&#xD;
+		}&#xD;
+		return removed;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnbAU-44EeaU89L7aVifXA" name="keyConnectGizmo" specification="_Wknj8-44EeaU89L7aVifXA">
@@ -2175,26 +2217,27 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <language>java</language>
-          <body>gizmo.setKey(k);
+          <body>gizmo.setKey(k);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnbnYO44EeaU89L7aVifXA" name="removeKey" specification="_WkoLA-44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WnbnYe44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>gizmo.setKey(&quot;&quot;);
+          <body>gizmo.setKey(&quot;&quot;);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnbnYu44EeaU89L7aVifXA" name="deleteGizmo" specification="_WkoyEu44EeaU89L7aVifXA">
-          <ownedParameter xmi:id="_WnbnY-44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
+          <ownedParameter xmi:id="_lA-NoO7ZEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
           <language>java</language>
-          <body>gizmos.remove(gizmo);
+          <body>gizmos.remove(key);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WncOcO44EeaU89L7aVifXA" name="clear" specification="_WiGbcO44EeaU89L7aVifXA">
           <language>java</language>
-          <body>gizmos.clear();
-		balls.clear();
-		absorber.clear();
+          <body>gizmos.clear();&#xD;
+		balls.clear();&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WncOce44EeaU89L7aVifXA" name="setFriction" specification="_WiHCg-44EeaU89L7aVifXA">
@@ -2202,7 +2245,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
           </ownedParameter>
           <language>java</language>
-          <body>friction = f;
+          <body>friction = f;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WncOc-44EeaU89L7aVifXA" name="setGravity" specification="_WiIQoO44EeaU89L7aVifXA">
@@ -2210,7 +2253,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
           </ownedParameter>
           <language>java</language>
-          <body>gravity = g;
+          <body>gravity = g;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WncOde44EeaU89L7aVifXA" name="moveGizmo" specification="_WkpZIu44EeaU89L7aVifXA">
@@ -2222,82 +2265,229 @@
           </ownedParameter>
           <ownedParameter xmi:id="_WncOeO44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
           <language>java</language>
-          <body>if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize()))
-			gizmo.newPosition(x, y);
+          <body>if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize()))&#xD;
+			gizmo.newPosition(x, y);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwRJUO5DEeattc1cqqUY1g" name="save" specification="_kvshkO5DEeattc1cqqUY1g">
           <ownedParameter xmi:id="_kwRJUe5DEeattc1cqqUY1g" name="f" type="_kvMyUO5DEeattc1cqqUY1g"/>
           <language>java</language>
-          <body>FileWriter writer;
-		try {
-			writer = new FileWriter(f);
-			writer.close();
-		} catch (IOException e) {
-			System.out.println(&quot;IO Exception&quot;);
-		}
+          <body>FileWriter writer;&#xD;
+		try {&#xD;
+			writer = new FileWriter(f);&#xD;
+			writer.close();&#xD;
+		} catch (IOException e) {&#xD;
+			System.out.println(&quot;IO Exception&quot;);&#xD;
+		}&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwRJUu5DEeattc1cqqUY1g" name="load" specification="_kvuWwO5DEeattc1cqqUY1g">
           <ownedParameter xmi:id="_kwRJU-5DEeattc1cqqUY1g" name="f" type="_kvMyUO5DEeattc1cqqUY1g"/>
           <language>java</language>
-          <body>String line;
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(f));
-			while ((line = reader.readLine()) != null) {
-				String[] splitCommand = line.toLowerCase().split(&quot; &quot;);
-				switch (splitCommand[0]) {
-				case &quot;circle&quot;:
-					IGizmo c = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
-				case &quot;triangle&quot;:
-					IGizmo t = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
-				case &quot;square&quot;:
-					IGizmo s = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
-				case &quot;leftflipper&quot;:
-					IGizmo lF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
-				case &quot;rightflipper&quot;:
-					IGizmo rF = new Gizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]));
-					break;
-				case &quot;absorber&quot;:
-					break;
-				case &quot;ball&quot;:
-					break;
-				case &quot;rotate&quot;:
-					gizmos.get(splitCommand[1]).rotate();
-					break;
-				case &quot;delete&quot;:
-					gizmos.get(splitCommand[1]);// delete
-					break;
-				case &quot;move&quot;:
-					gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
-							Integer.parseInt(splitCommand[3]));
-					break;
-				case &quot;keyconnect&quot;:
-					gizmos.get(splitCommand[4]);// connect
-					break;
-				case &quot;connect&quot;:
-					gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
-					break;
-				case &quot;friction&quot;:
-					setFriction(Double.parseDouble((splitCommand[1])));
-					break;
-				case &quot;gravity&quot;:
-					setGravity(Double.parseDouble((splitCommand[1])));
-					break;
-				}
-
-			}
-			reader.close();
-
-		} catch (FileNotFoundException e) {
-
-		} catch (IOException e) {
-			System.out.println(&quot;IO Exception&quot;);
-		}
+          <body>String line;&#xD;
+		try {&#xD;
+			BufferedReader reader = new BufferedReader(new FileReader(f));&#xD;
+			while ((line = reader.readLine()) != null) {&#xD;
+				String[] splitCommand = line.toLowerCase().split(&quot; &quot;);&#xD;
+				switch (splitCommand[0]) {&#xD;
+				case &quot;circle&quot;:&#xD;
+				case &quot;triangle&quot;:&#xD;
+				case &quot;square&quot;:&#xD;
+				case &quot;leftflipper&quot;:&#xD;
+				case &quot;rightflipper&quot;:&#xD;
+					addGizmo(splitCommand[0],splitCommand[1],(Integer.parseInt(splitCommand[2])),(Integer.parseInt(splitCommand[3])));&#xD;
+					break;&#xD;
+				case &quot;absorber&quot;:&#xD;
+					break;&#xD;
+				case &quot;ball&quot;:&#xD;
+					break;&#xD;
+				case &quot;rotate&quot;:&#xD;
+					gizmos.get(splitCommand[1]).rotate();&#xD;
+					break;&#xD;
+				case &quot;delete&quot;:&#xD;
+					gizmos.get(splitCommand[1]);// delete&#xD;
+					break;&#xD;
+				case &quot;move&quot;:&#xD;
+					gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),&#xD;
+							Integer.parseInt(splitCommand[3]));&#xD;
+					break;&#xD;
+				case &quot;keyconnect&quot;:&#xD;
+					gizmos.get(splitCommand[4]);// connect&#xD;
+					break;&#xD;
+				case &quot;connect&quot;:&#xD;
+					gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));&#xD;
+					break;&#xD;
+				case &quot;friction&quot;:&#xD;
+					setFriction(Double.parseDouble((splitCommand[1])));&#xD;
+					break;&#xD;
+				case &quot;gravity&quot;:&#xD;
+					setGravity(Double.parseDouble((splitCommand[1])));&#xD;
+					break;&#xD;
+				}&#xD;
+&#xD;
+			}&#xD;
+			reader.close();&#xD;
+&#xD;
+		} catch (FileNotFoundException e) {&#xD;
+&#xD;
+		} catch (IOException e) {&#xD;
+			System.out.println(&quot;IO Exception&quot;);&#xD;
+		}&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_Sjl-QO7XEeaI8-Ybn7rKsQ" name="addGizmo" specification="_SjeCcO7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_Sjl-Qe7XEeaI8-Ybn7rKsQ" name="gizmo">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_Sjl-Qu7XEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_Sjl-Q-7XEeaI8-Ybn7rKsQ" name="x">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_Sjl-RO7XEeaI8-Ybn7rKsQ" name="y">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_Sjl-Re7XEeaI8-Ybn7rKsQ" direction="return">
+            <name xsi:nil="true"/>
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>switch (gizmo.toLowerCase()){&#xD;
+			case &quot;triangle&quot;:&#xD;
+				return addGizmo(new TriangleGizmo(x,y),key);&#xD;
+			case &quot;circle&quot;:&#xD;
+				return addGizmo(new CircleGizmo(x,y),key);&#xD;
+			case &quot;square&quot;:&#xD;
+				return addGizmo(new SquareGizmo(x,y),key);&#xD;
+			case &quot;rightFlipper&quot;:&#xD;
+				return addGizmo(new RightFlipperGizmo(x,y),key);&#xD;
+			case &quot;leftFlipper&quot;:&#xD;
+				return addGizmo(new LeftFlipperGizmo(x,y),key);&#xD;
+		}&#xD;
+		return false;&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_SjmlUO7XEeaI8-Ybn7rKsQ" name="addBall" specification="_SjfQkO7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_77LiwO7dEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_77Liwe7dEeaI8-Ybn7rKsQ" name="x">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_77Liwu7dEeaI8-Ybn7rKsQ" name="y">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_77Liw-7dEeaI8-Ybn7rKsQ" name="velx">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_77LixO7dEeaI8-Ybn7rKsQ" name="vely">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_77Lixe7dEeaI8-Ybn7rKsQ" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>Ball ball = new Ball(x,y,velx,vely);&#xD;
+		&#xD;
+		double r = ball.getRadius();&#xD;
+		&#xD;
+		if(!validatePosition(x-r, y-r, x+r, y+r))&#xD;
+			&#xD;
+		balls.add(ball);&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_SjnMYO7XEeaI8-Ybn7rKsQ" name="applyFriction" specification="_Sjgese7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_SjnMYe7XEeaI8-Ybn7rKsQ" name="ball" type="_WgWvAO44EeaU89L7aVifXA"/>
+          <ownedParameter xmi:id="_SjnMYu7XEeaI8-Ybn7rKsQ" name="time">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>double mu = friction;&#xD;
+		double mu2 = friction;&#xD;
+		&#xD;
+		double xVel = ball.getVelocity().x();&#xD;
+		double yVel = ball.getVelocity().y();&#xD;
+		&#xD;
+		double newX = xVel * (1 - (mu * time) - (mu2 * xVel) * time);&#xD;
+		double newY = yVel * (1 - (mu * time) - (mu2 * yVel) * time);		&#xD;
+		&#xD;
+		Vect newV = new Vect(newX,newY);&#xD;
+		ball.setVelocity(newV);&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_SjnMY-7XEeaI8-Ybn7rKsQ" name="applyGravity" specification="_SjhFwO7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_SjnMZO7XEeaI8-Ybn7rKsQ" name="ball" type="_WgWvAO44EeaU89L7aVifXA"/>
+          <ownedParameter xmi:id="_SjnMZe7XEeaI8-Ybn7rKsQ" name="time">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>Vect currentVel = ball.getVelocity();&#xD;
+		Vect velGravity = new Vect(currentVel.x(),(currentVel.y() + (gravity * time)));&#xD;
+		ball.setVelocity(velGravity);&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_f_MAsO7XEeaI8-Ybn7rKsQ" name="addAbsorber" specification="_WiF0YO44EeaU89L7aVifXA">
+          <ownedParameter xmi:id="_f_MAsu7XEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_f_MAs-7XEeaI8-Ybn7rKsQ" name="x">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_f_MAtO7XEeaI8-Ybn7rKsQ" name="y">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_f_MAte7XEeaI8-Ybn7rKsQ" name="ex">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_f_MAtu7XEeaI8-Ybn7rKsQ" name="ey">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_f_MAt-7XEeaI8-Ybn7rKsQ" direction="return">
+            <name xsi:nil="true"/>
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
+          <language>java</language>
+          <body>if(!validatePosition(x, y, ex, ey))&#xD;
+			return false;&#xD;
+		&#xD;
+		//add to list of gizmos&#xD;
+		gizmos.put(key, new AbsorberGizmo(x, y, ex, ey));&#xD;
+		&#xD;
+		//draw absorber&#xD;
+		&#xD;
+		return true;&#xD;
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_nVVVkO7cEeaI8-Ybn7rKsQ" name="makeAbsorberGizmo" specification="_iEKzYO7bEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_nVVVke7cEeaI8-Ybn7rKsQ" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
+          <language>java</language>
+          <body>// get x and y coordinates of starting and ending points of the gizmo&#xD;
+		int x1 = gizmo.getStartX() * boardScale;&#xD;
+		int x2 = gizmo.getEndX() * boardScale;&#xD;
+		int y1 = gizmo.getStartY() * boardScale;&#xD;
+		int y2 = gizmo.getEndY() * boardScale;&#xD;
+&#xD;
+		// create lines and corners&#xD;
+		LineSegment left = new LineSegment(x1, y1, x1, y2);&#xD;
+		LineSegment bottom = new LineSegment(x1, y2, x2, y2);&#xD;
+		LineSegment right = new LineSegment(x2, y2, x2, y1);&#xD;
+		LineSegment top = new LineSegment(x2, y1, x1, y1);&#xD;
+		Circle topLeft = new Circle(x1, y1, 0);&#xD;
+		Circle bottomLeft = new Circle(x1, y2, 0);&#xD;
+		Circle topRight = new Circle(x2, y1, 0);&#xD;
+		Circle bottomRight = new Circle(x2, y2, 0);&#xD;
+&#xD;
+		// create connections for the lines -> absorber&#xD;
+		linesToAbsorber.put(left, gizmo);&#xD;
+		linesToAbsorber.put(bottom, gizmo);&#xD;
+		linesToAbsorber.put(right, gizmo);&#xD;
+		linesToAbsorber.put(top, gizmo);&#xD;
+		// create connections for the circles -> absorber&#xD;
+		circlesToAbsorber.put(topLeft, gizmo);&#xD;
+		circlesToAbsorber.put(bottomLeft, gizmo);&#xD;
+		circlesToAbsorber.put(topRight, gizmo);&#xD;
+		circlesToAbsorber.put(bottomRight, gizmo);&#xD;
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_Wh5nIO44EeaU89L7aVifXA" name="Model" method="_WnWu4O44EeaU89L7aVifXA">
@@ -2320,10 +2510,10 @@
         <ownedOperation xmi:id="_Wh-fo-44EeaU89L7aVifXA" name="pause" method="_WnXV-u44EeaU89L7aVifXA"/>
         <ownedOperation xmi:id="_WiEmQO44EeaU89L7aVifXA" name="validatePosition" visibility="private" method="_WnX9Bu44EeaU89L7aVifXA">
           <ownedComment xmi:id="_WnqQ4O44EeaU89L7aVifXA">
-            <body>
-	 * 
-	 * BUILDING CODE BEYOND THIS POINT
-	 * 
+            <body>&#xD;
+	 * &#xD;
+	 * BUILDING CODE BEYOND THIS POINT&#xD;
+	 * &#xD;
 	 *</body>
           </ownedComment>
           <ownedParameter xmi:id="_WiEmQe44EeaU89L7aVifXA" name="sx">
@@ -2342,7 +2532,26 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation xmi:id="_WiF0YO44EeaU89L7aVifXA" name="addAbsorber" method="_WnZyMO44EeaU89L7aVifXA"/>
+        <ownedOperation xmi:id="_WiF0YO44EeaU89L7aVifXA" name="addAbsorber" method="_f_MAsO7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_Sjf3oO7XEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_Sjf3oe7XEeaI8-Ybn7rKsQ" name="x">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_Sjf3ou7XEeaI8-Ybn7rKsQ" name="y">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_Sjf3o-7XEeaI8-Ybn7rKsQ" name="ex">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjgesO7XEeaI8-Ybn7rKsQ" name="ey">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_f_JkcO7XEeaI8-Ybn7rKsQ" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
+        </ownedOperation>
         <ownedOperation xmi:id="_WiGbcO44EeaU89L7aVifXA" name="clear" method="_WncOcO44EeaU89L7aVifXA"/>
         <ownedOperation xmi:id="_WiHCg-44EeaU89L7aVifXA" name="setFriction" method="_WncOce44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WiHpkO44EeaU89L7aVifXA" name="f">
@@ -2363,10 +2572,10 @@
         <ownedOperation xmi:id="_WkhdUu44EeaU89L7aVifXA" name="makeCircleGizmo" visibility="private" method="_WnWu5-44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WkhdU-44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_WkiEYO44EeaU89L7aVifXA" name="makeTriangle" visibility="private" method="_WnWu6e44EeaU89L7aVifXA">
+        <ownedOperation xmi:id="_WkiEYO44EeaU89L7aVifXA" name="makeTriangleGizmo" visibility="private" method="_WnWu6e44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WkiEYe44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_WkiEYu44EeaU89L7aVifXA" name="makeSquare" visibility="private" method="_WnWu6-44EeaU89L7aVifXA">
+        <ownedOperation xmi:id="_WkiEYu44EeaU89L7aVifXA" name="makeSquareGizmo" visibility="private" method="_WnWu6-44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WkiEY-44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
         </ownedOperation>
         <ownedOperation xmi:id="_Wkirce44EeaU89L7aVifXA" name="calculateBallMove" visibility="private" method="_WnXV9e44EeaU89L7aVifXA">
@@ -2414,7 +2623,9 @@
           <ownedParameter xmi:id="_WkoLBO44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
         </ownedOperation>
         <ownedOperation xmi:id="_WkoyEu44EeaU89L7aVifXA" name="deleteGizmo" method="_WnbnYu44EeaU89L7aVifXA">
-          <ownedParameter xmi:id="_WkoyE-44EeaU89L7aVifXA" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
+          <ownedParameter xmi:id="_WnbnY-44EeaU89L7aVifXA" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
         </ownedOperation>
         <ownedOperation xmi:id="_WkpZIu44EeaU89L7aVifXA" name="moveGizmo" method="_WncOde44EeaU89L7aVifXA">
           <ownedParameter xmi:id="_WkpZI-44EeaU89L7aVifXA" name="x">
@@ -2430,6 +2641,58 @@
         </ownedOperation>
         <ownedOperation xmi:id="_kvuWwO5DEeattc1cqqUY1g" name="load" method="_kwRJUu5DEeattc1cqqUY1g">
           <ownedParameter xmi:id="_kvuWwe5DEeattc1cqqUY1g" name="f" type="_kvMyUO5DEeattc1cqqUY1g"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_SjeCcO7XEeaI8-Ybn7rKsQ" name="addGizmo" method="_Sjl-QO7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_SjeCce7XEeaI8-Ybn7rKsQ" name="gizmo">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjeCcu7XEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjeCc-7XEeaI8-Ybn7rKsQ" name="x">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjeCdO7XEeaI8-Ybn7rKsQ" name="y">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjepgO7XEeaI8-Ybn7rKsQ" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_SjfQkO7XEeaI8-Ybn7rKsQ" name="addBall" method="_SjmlUO7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_SjfQke7XEeaI8-Ybn7rKsQ" name="key">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjfQku7XEeaI8-Ybn7rKsQ" name="x">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjfQk-7XEeaI8-Ybn7rKsQ" name="y">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjfQlO7XEeaI8-Ybn7rKsQ" name="velx">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_SjfQle7XEeaI8-Ybn7rKsQ" name="vely">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_77JGgO7dEeaI8-Ybn7rKsQ" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_Sjgese7XEeaI8-Ybn7rKsQ" name="applyFriction" method="_SjnMYO7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_Sjgesu7XEeaI8-Ybn7rKsQ" name="ball" type="_WgWvAO44EeaU89L7aVifXA"/>
+          <ownedParameter xmi:id="_Sjges-7XEeaI8-Ybn7rKsQ" name="time">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_SjhFwO7XEeaI8-Ybn7rKsQ" name="applyGravity" method="_SjnMY-7XEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_SjhFwe7XEeaI8-Ybn7rKsQ" name="ball" type="_WgWvAO44EeaU89L7aVifXA"/>
+          <ownedParameter xmi:id="_SjhFwu7XEeaI8-Ybn7rKsQ" name="time">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_iEKzYO7bEeaI8-Ybn7rKsQ" name="makeAbsorberGizmo" visibility="private" method="_nVVVkO7cEeaI8-Ybn7rKsQ">
+          <ownedParameter xmi:id="_iELacO7bEeaI8-Ybn7rKsQ" name="gizmo" type="_Wg8k4O44EeaU89L7aVifXA"/>
         </ownedOperation>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_WiCKAO44EeaU89L7aVifXA" name="CollisionInfo" visibility="private">
           <ownedAttribute xmi:id="_Wm-7cu44EeaU89L7aVifXA" name="colTime" visibility="package">
@@ -2447,9 +2710,9 @@
               <name xsi:nil="true"/>
             </ownedParameter>
             <language>java</language>
-            <body>colTime = t;
-			collidingBall = b;
-			updatedVel = v;
+            <body>colTime = t;&#xD;
+			collidingBall = b;&#xD;
+			updatedVel = v;&#xD;
 		</body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnX9AO44EeaU89L7aVifXA" name="getColTime" specification="_WiDYIO44EeaU89L7aVifXA">
@@ -2458,7 +2721,7 @@
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
             </ownedParameter>
             <language>java</language>
-            <body>return colTime;
+            <body>return colTime;&#xD;
 		</body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnX9Au44EeaU89L7aVifXA" name="getCollidingBall" specification="_WiDYIu44EeaU89L7aVifXA">
@@ -2466,7 +2729,7 @@
               <name xsi:nil="true"/>
             </ownedParameter>
             <language>java</language>
-            <body>return collidingBall;
+            <body>return collidingBall;&#xD;
 		</body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnX9BO44EeaU89L7aVifXA" name="getUpdatedVel" specification="_WiD_MO44EeaU89L7aVifXA">
@@ -2474,7 +2737,7 @@
               <name xsi:nil="true"/>
             </ownedParameter>
             <language>java</language>
-            <body>return updatedVel;
+            <body>return updatedVel;&#xD;
 		</body>
           </ownedBehavior>
           <ownedOperation xmi:id="_WiDYIO44EeaU89L7aVifXA" name="getColTime" method="_WnX9AO44EeaU89L7aVifXA">
@@ -2537,9 +2800,6 @@
       <packagedElement xmi:type="uml:Association" xmi:id="_WoGVxO44EeaU89L7aVifXA" name="" memberEnd="_WoGVxe44EeaU89L7aVifXA _WmxgE-44EeaU89L7aVifXA">
         <ownedEnd xmi:id="_WoGVxe44EeaU89L7aVifXA" name="" type="_Wh18wO44EeaU89L7aVifXA" association="_WoGVxO44EeaU89L7aVifXA"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_WoG80e44EeaU89L7aVifXA" name="" memberEnd="_WoG80u44EeaU89L7aVifXA _WmyHIe44EeaU89L7aVifXA">
-        <ownedEnd xmi:id="_WoG80u44EeaU89L7aVifXA" name="" type="_Wh18wO44EeaU89L7aVifXA" association="_WoG80e44EeaU89L7aVifXA"/>
-      </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_WoHj4e44EeaU89L7aVifXA" name="" memberEnd="_WoHj4u44EeaU89L7aVifXA _WmyHJO44EeaU89L7aVifXA">
         <ownedEnd xmi:id="_WoHj4u44EeaU89L7aVifXA" name="" type="_Wh18wO44EeaU89L7aVifXA" association="_WoHj4e44EeaU89L7aVifXA"/>
       </packagedElement>
@@ -2567,6 +2827,13 @@
       <packagedElement xmi:type="uml:Association" xmi:id="_WoKnMe44EeaU89L7aVifXA" name="" memberEnd="_WoKnMu44EeaU89L7aVifXA _Wm_ig-44EeaU89L7aVifXA">
         <ownedEnd xmi:id="_WoKnMu44EeaU89L7aVifXA" name="" type="_WiCKAO44EeaU89L7aVifXA" association="_WoKnMe44EeaU89L7aVifXA"/>
       </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_V3HSkO7ZEeaI8-Ybn7rKsQ" name="AbsorberGizmo"/>
+      <packagedElement xmi:type="uml:Association" xmi:id="_V3POYO7ZEeaI8-Ybn7rKsQ" name="" memberEnd="_V3POYe7ZEeaI8-Ybn7rKsQ _V3Ju0O7ZEeaI8-Ybn7rKsQ">
+        <ownedEnd xmi:id="_V3POYe7ZEeaI8-Ybn7rKsQ" name="" type="_Wh18wO44EeaU89L7aVifXA" association="_V3POYO7ZEeaI8-Ybn7rKsQ"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_nVXKwO7cEeaI8-Ybn7rKsQ" name="" memberEnd="_nVXKwe7cEeaI8-Ybn7rKsQ _nVUHcO7cEeaI8-Ybn7rKsQ">
+        <ownedEnd xmi:id="_nVXKwe7cEeaI8-Ybn7rKsQ" name="" type="_Wh18wO44EeaU89L7aVifXA" association="_nVXKwO7cEeaI8-Ybn7rKsQ"/>
+      </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_WcVKoe44EeaU89L7aVifXA" name="view">
       <packagedElement xmi:type="uml:Class" xmi:id="_WhR8EO44EeaU89L7aVifXA" name="a">
@@ -2576,9 +2843,9 @@
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WnTrlu44EeaU89L7aVifXA" value="*"/>
           </ownedParameter>
           <language>java</language>
-          <body>//Model m = new Model();
-		Display d = new Display();
-
+          <body>Model m = new Model();&#xD;
+		//Display d = new Display();&#xD;
+&#xD;
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_WhSjIO44EeaU89L7aVifXA" name="main" isStatic="true" method="_WnTrlO44EeaU89L7aVifXA">
@@ -2865,69 +3132,71 @@
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
-          <body>createGUI();
+          <body>createGUI();&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnVgxu44EeaU89L7aVifXA" name="createGUI" specification="_Whq9oO44EeaU89L7aVifXA">
           <language>java</language>
-          <body>JFrame frame = new JFrame(&quot;Gizmo Ball&quot;);
-
-		cp = this.getContentPane();
-		addMenuBar();
-		build();
-		pack();
-		setSize(new Dimension(800, 700));
-
-		setLocationRelativeTo(null);
-		setVisible(true);
-
+          <body>JFrame frame = new JFrame(&quot;Gizmo Ball&quot;);&#xD;
+&#xD;
+		cp = this.getContentPane();&#xD;
+		addMenuBar();&#xD;
+		build();&#xD;
+		pack();&#xD;
+		setSize(new Dimension(800, 700));&#xD;
+&#xD;
+		setLocationRelativeTo(null);&#xD;
+		setVisible(true);&#xD;
+&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnVgx-44EeaU89L7aVifXA" name="build" specification="_WhsLwO44EeaU89L7aVifXA">
-          <ownedParameter xmi:id="_H4R5oO6sEeahn87eW_7N0g" type="_Whc7MO44EeaU89L7aVifXA" direction="return"/>
+          <ownedParameter xmi:id="_H4R5oO6sEeahn87eW_7N0g" type="_Whc7MO44EeaU89L7aVifXA" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
-          <body>Build b = new Build(this);
-		BuildBoard bb = new BuildBoard();
-		cp.add(b, BorderLayout.LINE_START);
-		cp.add(bb, BorderLayout.CENTER);
-		this.setTitle(&quot;BUILD MODE&quot;);
-		return b;
+          <body>Build b = new Build(this);&#xD;
+		BuildBoard bb = new BuildBoard();&#xD;
+		cp.add(b, BorderLayout.LINE_START);&#xD;
+		cp.add(bb, BorderLayout.CENTER);&#xD;
+		this.setTitle(&quot;BUILD MODE&quot;);&#xD;
+		return b;&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWH0O44EeaU89L7aVifXA" name="run" specification="_WhuoAO44EeaU89L7aVifXA">
           <language>java</language>
-          <body>Run r = new Run();
-		RunBoard rb = new RunBoard();
-		cp.add(r, BorderLayout.LINE_START);
-		cp.add(rb, BorderLayout.CENTER);
-		this.setTitle(&quot;RUN MODE&quot;);
+          <body>Run r = new Run();&#xD;
+		RunBoard rb = new RunBoard();&#xD;
+		cp.add(r, BorderLayout.LINE_START);&#xD;
+		cp.add(rb, BorderLayout.CENTER);&#xD;
+		this.setTitle(&quot;RUN MODE&quot;);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WnWH0e44EeaU89L7aVifXA" name="addMenuBar" specification="_WhvPEO44EeaU89L7aVifXA">
           <language>java</language>
-          <body>JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu(&quot;File&quot;);
-
-		JMenuItem newBoard = new JMenuItem(&quot;New&quot;);
-		// NewBoardListener
-		JMenuItem load = new JMenuItem(&quot;Load&quot;);
-		lL = new LoadListener(this, m);
-		load.addActionListener(lL);
-		JMenuItem save = new JMenuItem(&quot;Save&quot;);
-		sL = new SaveListener(this, m);
-		save.addActionListener(sL);
-
-		JMenuItem exit = new JMenuItem(&quot;Exit&quot;);
-		// ExitListener
-
-		menu.add(newBoard);
-		menu.add(load);
-		menu.add(save);
-		menu.addSeparator();
-		menu.add(exit);
-
-		menuBar.add(menu);
-		setJMenuBar(menuBar);
+          <body>JMenuBar menuBar = new JMenuBar();&#xD;
+		JMenu menu = new JMenu(&quot;File&quot;);&#xD;
+&#xD;
+		JMenuItem newBoard = new JMenuItem(&quot;New&quot;);&#xD;
+		// NewBoardListener&#xD;
+		JMenuItem load = new JMenuItem(&quot;Load&quot;);&#xD;
+		lL = new LoadListener(this, m);&#xD;
+		load.addActionListener(lL);&#xD;
+		JMenuItem save = new JMenuItem(&quot;Save&quot;);&#xD;
+		sL = new SaveListener(this, m);&#xD;
+		save.addActionListener(sL);&#xD;
+&#xD;
+		JMenuItem exit = new JMenuItem(&quot;Exit&quot;);&#xD;
+		// ExitListener&#xD;
+&#xD;
+		menu.add(newBoard);&#xD;
+		menu.add(load);&#xD;
+		menu.add(save);&#xD;
+		menu.addSeparator();&#xD;
+		menu.add(exit);&#xD;
+&#xD;
+		menuBar.add(menu);&#xD;
+		setJMenuBar(menuBar);&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwImcO5DEeattc1cqqUY1g" name="saveDialog" specification="_ksJeUO5DEeattc1cqqUY1g">
@@ -2935,10 +3204,10 @@
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
-          <body>String filePath = (String) JOptionPane.showInputDialog(new JFrame(), &quot;Enter name for save&quot;, &quot;Customized Dialog&quot;,
-				JOptionPane.PLAIN_MESSAGE);
-		return new File(filePath + &quot;.gizmo&quot;);
-
+          <body>String filePath = (String) JOptionPane.showInputDialog(new JFrame(), &quot;Enter name for save&quot;, &quot;Customized Dialog&quot;,&#xD;
+				JOptionPane.PLAIN_MESSAGE);&#xD;
+		return new File(filePath + &quot;.gizmo&quot;);&#xD;
+&#xD;
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kwJNgO5DEeattc1cqqUY1g" name="loadDialog" specification="_ksKFYO5DEeattc1cqqUY1g">
@@ -2946,18 +3215,18 @@
             <name xsi:nil="true"/>
           </ownedParameter>
           <language>java</language>
-          <body>JFileChooser fileChooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;GIZMO FILES&quot;, &quot;gizmo&quot;);
-		fileChooser.setApproveButtonText(&quot;Load&quot;);
-		fileChooser.setFileFilter(filter);
-		fileChooser.setCurrentDirectory(new File(System.getProperty(&quot;user.home&quot;)));
-		int folio = fileChooser.showOpenDialog(new JFrame());
-		if (folio == JFileChooser.APPROVE_OPTION) {
-			return fileChooser.getSelectedFile();
-		} else {
-			return null;
-		}
-
+          <body>JFileChooser fileChooser = new JFileChooser();&#xD;
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;GIZMO FILES&quot;, &quot;gizmo&quot;);&#xD;
+		fileChooser.setApproveButtonText(&quot;Load&quot;);&#xD;
+		fileChooser.setFileFilter(filter);&#xD;
+		fileChooser.setCurrentDirectory(new File(System.getProperty(&quot;user.home&quot;)));&#xD;
+		int folio = fileChooser.showOpenDialog(new JFrame());&#xD;
+		if (folio == JFileChooser.APPROVE_OPTION) {&#xD;
+			return fileChooser.getSelectedFile();&#xD;
+		} else {&#xD;
+			return null;&#xD;
+		}&#xD;
+&#xD;
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_WhqWkO44EeaU89L7aVifXA" name="Display" method="_WnVgxO44EeaU89L7aVifXA">
@@ -3545,7 +3814,6 @@
   <UMLLabProfile:LegacyStyledElement xmi:id="_Wmw5AO44EeaU89L7aVifXA" base_Element="_WmwR8-44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_WmxgEe44EeaU89L7aVifXA" base_Element="_WmxgEO44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_WmyHIO44EeaU89L7aVifXA" base_Element="_WmxgE-44EeaU89L7aVifXA"/>
-  <UMLLabProfile:LegacyStyledElement xmi:id="_WmyHI-44EeaU89L7aVifXA" base_Element="_WmyHIe44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_WmyuMe44EeaU89L7aVifXA" base_Element="_WmyHJO44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_WmzVQO44EeaU89L7aVifXA" base_Element="_WmyuMu44EeaU89L7aVifXA"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_Wm0jYO44EeaU89L7aVifXA" base_Element="_Wmz8UO44EeaU89L7aVifXA"/>
@@ -3608,7 +3876,6 @@
   <UMLLabProfile:Reference xmi:id="_WoGVwO44EeaU89L7aVifXA" base_Element="_WoFuse44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoGVw-44EeaU89L7aVifXA" base_Element="_WoGVwe44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoG80O44EeaU89L7aVifXA" base_Element="_WoGVxO44EeaU89L7aVifXA"/>
-  <UMLLabProfile:Reference xmi:id="_WoHj4O44EeaU89L7aVifXA" base_Element="_WoG80e44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoHj4-44EeaU89L7aVifXA" base_Element="_WoHj4e44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoIK8O44EeaU89L7aVifXA" base_Element="_WoHj5O44EeaU89L7aVifXA"/>
   <UMLLabProfile:Reference xmi:id="_WoIyAO44EeaU89L7aVifXA" base_Element="_WoIK8e44EeaU89L7aVifXA"/>
@@ -3663,4 +3930,21 @@
   <UMLLabProfile:Reference xmi:id="_PH5M4O6qEeahn87eW_7N0g" base_Element="_PH4l0e6qEeahn87eW_7N0g"/>
   <UMLLabProfile:Reference xmi:id="_PH7CEO6qEeahn87eW_7N0g" base_Element="_PH5M4e6qEeahn87eW_7N0g"/>
   <UMLLabProfile:Reference xmi:id="_PH7pIO6qEeahn87eW_7N0g" base_Element="_PH7CEe6qEeahn87eW_7N0g"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_Sjepge7XEeaI8-Ybn7rKsQ" base_Element="_SjeCcO7XEeaI8-Ybn7rKsQ"/>
+  <UMLLabProfile:Annotations xmi:id="_Sjepgu7XEeaI8-Ybn7rKsQ" base_Element="_SjeCcO7XEeaI8-Ybn7rKsQ">
+    <annotations xmi:id="_Sjepg-7XEeaI8-Ybn7rKsQ" name="Override"/>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:Reference xmi:id="_V3H5oO7ZEeaI8-Ybn7rKsQ" base_Element="_V3HSkO7ZEeaI8-Ybn7rKsQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_V3KV4O7ZEeaI8-Ybn7rKsQ" base_Element="_V3Ju0O7ZEeaI8-Ybn7rKsQ"/>
+  <UMLLabProfile:Reference xmi:id="_V3P1cO7ZEeaI8-Ybn7rKsQ" base_Element="_V3POYO7ZEeaI8-Ybn7rKsQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_nVUHce7cEeaI8-Ybn7rKsQ" base_Element="_nVUHcO7cEeaI8-Ybn7rKsQ"/>
+  <UMLLabProfile:Reference xmi:id="_nVXx0O7cEeaI8-Ybn7rKsQ" base_Element="_nVXKwO7cEeaI8-Ybn7rKsQ"/>
+  <UMLLabProfile:Annotations xmi:id="_9IdDoO7cEeaI8-Ybn7rKsQ" base_Element="_WiDYIu44EeaU89L7aVifXA">
+    <annotations xmi:id="_9IdDoe7cEeaI8-Ybn7rKsQ" name="SuppressWarnings">
+      <annotationParameters xmi:id="_9IhVEe7cEeaI8-Ybn7rKsQ" skipName="true" skipArray="true">
+        <valueSpecifications xmi:type="uml:LiteralString" xmi:id="_9Ik_cO7cEeaI8-Ybn7rKsQ" value="&quot;unused&quot;"/>
+      </annotationParameters>
+    </annotations>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_9IhVEO7cEeaI8-Ybn7rKsQ" base_Element="_WiDYIu44EeaU89L7aVifXA"/>
 </xmi:XMI>
