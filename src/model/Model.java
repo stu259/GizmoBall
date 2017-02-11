@@ -55,6 +55,8 @@ public class Model extends Observable implements IModel {
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
 		flippersToLines = new HashMap<IGizmo, List<LineSegment>>();
 		flippersToCircles = new HashMap<IGizmo, List<Circle>>();
+		
+		load(new File("test.gizmo"));
 	}
 
 	/**
@@ -516,9 +518,9 @@ public class Model extends Observable implements IModel {
 				return addGizmo(new CircleGizmo(x,y),key);
 			case "square":
 				return addGizmo(new SquareGizmo(x,y),key);
-			case "rightFlipper":
+			case "rightflipper":
 				return addGizmo(new RightFlipperGizmo(x,y),key);
-			case "leftFlipper":
+			case "leftflipper":
 				return addGizmo(new LeftFlipperGizmo(x,y),key);
 		}
 		return false;
@@ -729,7 +731,7 @@ public class Model extends Observable implements IModel {
 					if (splitCommand.length != 3)
 						return false;
 					else
-						gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
+						//gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
 					break;
 				case "friction":
 					if (splitCommand.length != 3)
@@ -742,6 +744,8 @@ public class Model extends Observable implements IModel {
 						return false;
 					else
 						setGravity(Double.parseDouble((splitCommand[1])));
+					break;
+				case "":
 					break;
 				default:
 					return false;
