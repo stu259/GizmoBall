@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -9,8 +11,7 @@ import javax.swing.JTextField;
 
 import controller.buildListeners.*;
 
-
-public class Build extends JPanel{
+public class Build extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private IDisplay d;
@@ -18,181 +19,200 @@ public class Build extends JPanel{
 	private OperationsListener operL;
 	private SetupListener setL;
 	private BackListener backL;
-	private JButton gizmosButton,operationsButton,setupButton,backButton;
+	private ModeListener mL;
+	private JButton gizmosButton, operationsButton, setupButton, backButton;
+	private JPanel main;
+	private JPanel gizmo;
+	private JPanel operation;
+	private JPanel setup;
 
 	public Build(IDisplay display) {
-		d= display;
+		setLayout(new CardLayout());
+		d = display;
 		addButtons();
+		gizmos();
+		operations();
+		setup();
+		add(main, "main");
+		add(gizmo, "gizmo");
+		add(operation, "operation");
+		add(setup, "setup");
 	}
 
-	
+	public void changeButtons(String b) {
+		CardLayout cardLayout = (CardLayout) getLayout();
+		cardLayout.show(this, b);
+	}
+
 	public void addButtons() {
-		setLayout(new GridLayout(4, 1));
-		
+		main = new JPanel(new GridLayout(4, 1));
+
 		gizmosButton = new JButton("Add Gizmos");
-		gizmosButton.setMaximumSize(new Dimension(100, 100));
-		agbL= new AddGizmoButtonListener(d); 
+		gizmosButton.setBackground(Color.LIGHT_GRAY);
+		gizmosButton.setForeground(Color.white);
+		agbL = new AddGizmoButtonListener(d);
 		gizmosButton.addActionListener(agbL);
-		add(gizmosButton);		
+		main.add(gizmosButton);
 
 		JButton operationsButton = new JButton("Operations");
-		operationsButton.setMaximumSize(new Dimension(100, 100));
-		operL= new OperationsListener(d);  
+		operationsButton.setBackground(Color.LIGHT_GRAY);
+		operationsButton.setForeground(Color.white);
+		operL = new OperationsListener(d);
 		operationsButton.addActionListener(operL);
-		add(operationsButton);
+		main.add(operationsButton);
 
 		JButton setupButton = new JButton("Setup");
-		setupButton.setMaximumSize(new Dimension(100, 100));
+		setupButton.setBackground(Color.LIGHT_GRAY);
+		setupButton.setForeground(Color.white);
 		setL = new SetupListener(d);
 		setupButton.addActionListener(setL);
-		add(setupButton);
-		
-		
+		main.add(setupButton);
+
 		JButton RunButton = new JButton("Run Mode");
-		RunButton.setMaximumSize(new Dimension(100, 100));
-		add(RunButton);
-		
+		RunButton.setBackground(Color.LIGHT_GRAY);
+		RunButton.setForeground(Color.white);
+		mL = new ModeListener(d,"run");
+		RunButton.addActionListener(mL);
+		main.add(RunButton);
+
 	}
 
 	public void gizmos() {
-		setLayout(new GridLayout(6, 1));
-		
-		removeAll();
-		
+		gizmo = new JPanel(new GridLayout(6, 1));
+
 		JButton squareButton = new JButton("Square");
-		squareButton.setMaximumSize(new Dimension(100, 100));
-		add(squareButton);
+		squareButton.setBackground(Color.LIGHT_GRAY);
+		squareButton.setForeground(Color.white);
+		gizmo.add(squareButton);
 
 		JButton circleButton = new JButton("Circle");
-		circleButton.setMaximumSize(new Dimension(100, 100));
-		add(circleButton);
+		circleButton.setBackground(Color.LIGHT_GRAY);
+		circleButton.setForeground(Color.white);
+		gizmo.add(circleButton);
 
 		JButton triangleButton = new JButton("Triangle");
-		triangleButton.setMaximumSize(new Dimension(100, 100));
-		add(triangleButton);
+		triangleButton.setBackground(Color.LIGHT_GRAY);
+		triangleButton.setForeground(Color.white);
+		gizmo.add(triangleButton);
 
 		JButton lFlipperButton = new JButton("Left Flipper");
-		lFlipperButton.setMaximumSize(new Dimension(100, 100));
-		add(lFlipperButton);
+		lFlipperButton.setBackground(Color.LIGHT_GRAY);
+		lFlipperButton.setForeground(Color.white);
+		gizmo.add(lFlipperButton);
 
 		JButton rFlipperButton = new JButton("Right Flipper");
-		rFlipperButton.setMaximumSize(new Dimension(100, 100));
-		add(rFlipperButton);
+		rFlipperButton.setBackground(Color.LIGHT_GRAY);
+		rFlipperButton.setForeground(Color.white);
+		gizmo.add(rFlipperButton);
 
 		JButton backButton = new JButton("Back");
-		backButton.setMaximumSize(new Dimension(100, 100));
-		add(backButton);
+		backButton.setBackground(Color.LIGHT_GRAY);
+		backButton.setForeground(Color.white);
+		gizmo.add(backButton);
 		backL = new BackListener(d);
 		backButton.addActionListener(backL);
-		
-		
-		repaint();
-		validate();
-		//this.revalidate();
-        //validate();
-        
-
-
 	}
 
 	public void operations() {
-		setLayout(new GridLayout(8, 1));
-		
-		removeAll();
-		
+		operation = new JPanel(new GridLayout(8, 1));
+
 		JButton rotateButton = new JButton("Rotate");
-		rotateButton.setMaximumSize(new Dimension(100, 100));
-		add(rotateButton);
+		rotateButton.setBackground(Color.LIGHT_GRAY);
+		rotateButton.setForeground(Color.white);
+		operation.add(rotateButton);
 
 		JButton deleteButton = new JButton("Delete");
-		deleteButton.setMaximumSize(new Dimension(100, 100));
-		add(deleteButton);
+		deleteButton.setBackground(Color.LIGHT_GRAY);
+		deleteButton.setForeground(Color.white);
+		operation.add(deleteButton);
 
 		JButton moveButton = new JButton("Move");
-		moveButton.setMaximumSize(new Dimension(100, 100));
-		add(moveButton);
+		moveButton.setBackground(Color.LIGHT_GRAY);
+		moveButton.setForeground(Color.white);
+		operation.add(moveButton);
 
 		JButton clearButton = new JButton("Clear");
-		clearButton.setMaximumSize(new Dimension(100, 100));
-		add(clearButton);
+		clearButton.setBackground(Color.LIGHT_GRAY);
+		clearButton.setForeground(Color.white);
+		operation.add(clearButton);
 
 		JButton connectButton = new JButton("Connect");
-		connectButton.setMaximumSize(new Dimension(100, 100));
-		add(connectButton);
+		connectButton.setBackground(Color.LIGHT_GRAY);
+		connectButton.setForeground(Color.white);
+		operation.add(connectButton);
 
 		JButton bindButton = new JButton("Bind Key");
-		bindButton.setMaximumSize(new Dimension(100, 100));
-		add(bindButton);
+		bindButton.setBackground(Color.LIGHT_GRAY);
+		bindButton.setForeground(Color.white);
+		operation.add(bindButton);
 
 		JButton disconnectButton = new JButton("Disconnect");
-		disconnectButton.setMaximumSize(new Dimension(100, 100));
-		add(disconnectButton);
+		disconnectButton.setBackground(Color.LIGHT_GRAY);
+		disconnectButton.setForeground(Color.white);
+		operation.add(disconnectButton);
 
 		JButton backButton = new JButton("Back");
-		backButton.setMaximumSize(new Dimension(100, 100));
-		add(backButton);
+		backButton.setBackground(Color.LIGHT_GRAY);
+		backButton.setForeground(Color.white);
+		operation.add(backButton);
 		backL = new BackListener(d);
 		backButton.addActionListener(backL);
-		
-		this.revalidate();
-        validate();
 	}
 
 	public void setup() {
-		setLayout(new GridLayout(5, 1));
-		
-		removeAll();
+		setup = new JPanel(new GridLayout(5, 1));
 
 		JPanel ballPanel = new JPanel();
 		ballPanel.setLayout(new GridLayout(1, 2));
 		JPanel ballInputPanel = new JPanel();
 		ballInputPanel.setLayout(new GridLayout(2, 1));
 		JButton ballButton = new JButton("Place Ball");
-		ballButton.setMaximumSize(new Dimension(100, 100));
+		ballButton.setBackground(Color.LIGHT_GRAY);
+		ballButton.setForeground(Color.white);
 		ballPanel.add(ballButton);
 		JTextField ballVInput1 = new JTextField();
 		ballInputPanel.add(ballVInput1);
 		JTextField ballVInput2 = new JTextField();
 		ballInputPanel.add(ballVInput2);
 		ballPanel.add(ballInputPanel);
-		add(ballPanel);
+		setup.add(ballPanel);
 
 		JButton absorberButton = new JButton("Place Absorber");
-		absorberButton.setMaximumSize(new Dimension(100, 100));
-		add(absorberButton);
+		absorberButton.setBackground(Color.LIGHT_GRAY);
+		absorberButton.setForeground(Color.white);
+		setup.add(absorberButton);
 
 		JPanel frictionPanel = new JPanel();
 		frictionPanel.setLayout(new GridLayout(1, 2));
 		JPanel frictionInputPanel = new JPanel();
 		frictionInputPanel.setLayout(new GridLayout(2, 1));
 		JButton frictionButton = new JButton("Friction");
-		frictionButton.setMaximumSize(new Dimension(100, 100));
+		frictionButton.setBackground(Color.LIGHT_GRAY);
+		frictionButton.setForeground(Color.white);
 		frictionPanel.add(frictionButton);
 		JTextField frictionInput1 = new JTextField();
 		frictionInputPanel.add(frictionInput1);
 		JTextField frictionInput2 = new JTextField();
 		frictionInputPanel.add(frictionInput2);
 		frictionPanel.add(frictionInputPanel);
-		add(frictionPanel);
+		setup.add(frictionPanel);
 
 		JPanel gravityPanel = new JPanel();
 		gravityPanel.setLayout(new GridLayout(1, 2));
 		JButton gravityButton = new JButton("Gravity");
-		gravityButton.setMaximumSize(new Dimension(100, 100));
+		gravityButton.setBackground(Color.LIGHT_GRAY);
+		gravityButton.setForeground(Color.white);
 		gravityPanel.add(gravityButton);
 		JTextField gravityInput = new JTextField();
 		gravityPanel.add(gravityInput);
-		add(gravityPanel);
+		setup.add(gravityPanel);
 
 		JButton backButton = new JButton("Back");
-		backButton.setMaximumSize(new Dimension(100, 100));
-		add(backButton);
+		backButton.setBackground(Color.LIGHT_GRAY);
+		backButton.setForeground(Color.white);
 		backL = new BackListener(d);
 		backButton.addActionListener(backL);
-	
-		this.revalidate();
-        validate();
-	}		
-	
+		setup.add(backButton);
+	}
 
 }

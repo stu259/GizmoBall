@@ -4,11 +4,15 @@ import java.io.File;
 
 public interface IDisplay {
 	public void build();
-	
+
 	public void run();
+
+	public void changeBuildButtons(String b);
 	
-	public File saveDialog() ;
-	
-	public File loadDialog() ;
+	public void changeMode(String m);
+
+	public File saveDialog();
+
+	public File loadDialog();
 
 }

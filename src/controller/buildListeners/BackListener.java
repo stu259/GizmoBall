@@ -13,6 +13,6 @@ private IDisplay display;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			display.build().addButtons();
+		display.changeBuildButtons("main");
 	}
 }

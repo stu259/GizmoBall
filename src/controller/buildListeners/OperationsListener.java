@@ -7,13 +7,13 @@ import view.IDisplay;
 
 public class OperationsListener implements ActionListener {
 
-private IDisplay display;
+	private IDisplay display;
 	
 	public OperationsListener(IDisplay display) {
 		this.display=display;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			display.build().operations();	
+		display.changeBuildButtons("operation");	
 	}
 }
