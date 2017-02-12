@@ -14,10 +14,10 @@ public class Run extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	Display d;
+	IDisplay d;
 	private ModeListener mL;
 
-	public Run(Display display) {
+	public Run(IDisplay display) {
 		d = display;
 		addButtons();
 	}
