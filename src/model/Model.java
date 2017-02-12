@@ -55,8 +55,6 @@ public class Model extends Observable implements IModel {
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
 		flippersToLines = new HashMap<IGizmo, List<LineSegment>>();
 		flippersToCircles = new HashMap<IGizmo, List<Circle>>();
-
-		load(new File("test.gizmo"));
 	}
 
 	/**

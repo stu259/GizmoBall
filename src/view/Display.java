@@ -20,8 +20,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import controller.LoadListener;
 import controller.SaveListener;
 import model.IModel;
+import model.Model;
 
-public class Display extends JFrame implements IDisplay {
+public class Display implements IDisplay {
 
 	/**
 	 * 
@@ -40,7 +41,8 @@ public class Display extends JFrame implements IDisplay {
 
 	Container cp;
 
-	public Display() {
+	public Display(Model model) {
+		m = model;
 		initialise();
 		addMenuBar();
 		tidy();
@@ -83,7 +85,7 @@ public class Display extends JFrame implements IDisplay {
 		menu.add(exit);
 
 		menuBar.add(menu);
-		setJMenuBar(menuBar);
+		frame.setJMenuBar(menuBar);
 	}
 
 	private void tidy() {
@@ -110,9 +112,9 @@ public class Display extends JFrame implements IDisplay {
 		cardLayout = (CardLayout) boards.getLayout();
 		cardLayout.show(boards, m);
 		if (m == "build") {
-			this.setTitle("BUILD MODE");
+			frame.setTitle("BUILD MODE");
 		} else {
-			this.setTitle("RUN MODE");
+			frame.setTitle("RUN MODE");
 		}
 	}
 
@@ -152,4 +154,7 @@ public class Display extends JFrame implements IDisplay {
 
 	}
 
+	public void errorPopup(String errorMessage) {
+		JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+	}
 }

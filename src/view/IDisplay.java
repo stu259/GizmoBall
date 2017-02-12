@@ -8,11 +8,13 @@ public interface IDisplay {
 	public void run();
 
 	public void changeBuildButtons(String b);
-	
+
 	public void changeMode(String m);
 
 	public File saveDialog();
 
 	public File loadDialog();
+
+	public void errorPopup(String errorMessage);
 
 }

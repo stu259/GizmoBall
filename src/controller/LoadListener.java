@@ -20,8 +20,13 @@ public class LoadListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		File f = d.loadDialog();
-		if (f != null)
-			m.load(f);
+		if (f != null) {
+			if (!m.load(f)) {
+				d.errorPopup("Invalid File Format");
+			}
+		} else {
+			d.errorPopup("No File Selected");
+		}
 	}
 
 }
