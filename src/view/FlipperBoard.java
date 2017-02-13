@@ -10,7 +10,10 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-
+import model.Ball;
+import model.Gizmo;
+import model.IGizmo;
+import model.Model;
 
 /**
  * @author Murray Wood Demonstration of MVC and MIT Physics Collisions 2014
@@ -21,14 +24,15 @@ public  class FlipperBoard extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	protected int width;
 	protected int height;
+	protected Model gm;
 
-	public FlipperBoard(int w, int h) {
-
+	public FlipperBoard(int w, int h, Model m) {
+		// Observe changes in Model
+		m.addObserver(this);
 		width = w;
 		height = h;
+		gm = m;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		
 	}
 
 	// Fix onscreen size
@@ -40,21 +44,16 @@ public  class FlipperBoard extends JPanel implements Observer {
 		super.paintComponent(g);
 
 		Graphics2D g2 = (Graphics2D) g;
+		IGizmo gizmo = new Gizmo (5,5);
+		gm.addGizmo("leftflipper",gizmo.getKey(),10,10);
+		g2.setColor(gizmo.getColor());
+		int x =  gizmo.getStartX();
+		int y =  gizmo.getStartY();
+		int width = 30;
+		System.out.println(width);
+		g2.fillRect(x, y, 2*width, width/2);
 		
-		int width = getSize().width;
-		int height = getSize().height ;
-		int gridsize = 20;
-		super.paintComponent(g);
-
-		int htOfRow = height / (gridsize);
-		for (int i = 1; i <= gridsize; i++) {
-			g.drawLine(0, i * htOfRow, width, i * htOfRow);
-		}
-
-		int wdOfRow = width / (gridsize);
-		for (int i = 1; i <= gridsize; i++) {
-			g.drawLine(i * wdOfRow, 0, i * wdOfRow, height);
-		}
+		
 	}
 
 	@Override

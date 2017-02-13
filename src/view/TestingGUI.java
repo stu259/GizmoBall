@@ -21,20 +21,21 @@ public class TestingGUI {
 
 	private JFrame frame;
 	private ActionListener listener;
-	private TestBoard board;
+	private FlipperBoard board;
+	private Model model;
 
-	public TestingGUI() {
+	public TestingGUI(Model m) {
+		model=m;
 		createAndShowGUI();
 	}
 
 	public void createAndShowGUI() {
-		System.out.println("here");
 
 		frame = new JFrame("Murray's MIT Ball and VerticalLine Collision Demo");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Board is passed the Model so it can act as Observer
-		board = new TestBoard(500, 500);
+		board = new FlipperBoard(500, 500, model);
 
 		Container cp = frame.getContentPane();
 
