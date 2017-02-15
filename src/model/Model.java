@@ -26,8 +26,6 @@ public class Model extends Observable implements IModel {
 	private double gravity = 25;
 	private double frictionMU = 0.025;
 	private double frictionMUTwo = 0.025;
-
-	// private Vect velocity;
 	private double time = 0.05;
 
 	// connections for triggering both redrawing of lines and
@@ -625,6 +623,7 @@ public class Model extends Observable implements IModel {
 	@Override
 	public void rotateGizmo(String key) {
 		gizmos.get(key).rotate();
+		
 		this.setChanged();
 		this.notifyObservers();
 	}
