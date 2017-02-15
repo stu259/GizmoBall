@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.buildListeners.FlipperListener;
 import model.Model;
 
 /**
@@ -27,11 +28,12 @@ public class TestingGUI {
 	public TestingGUI(Model m) {
 		model=m;
 		createAndShowGUI();
+		FlipperListener fl = new FlipperListener(m);
 	}
 
 	public void createAndShowGUI() {
 
-		frame = new JFrame("Murray's MIT Ball and VerticalLine Collision Demo");
+		frame = new JFrame("Flipper Prototype");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Board is passed the Model so it can act as Observer
