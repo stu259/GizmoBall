@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_pdzmIPOLEeanyK3wteWQ3w" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_pd1bUPOLEeanyK3wteWQ3w" source="codegen">
         <details xmi:id="_pd1bUfOLEeanyK3wteWQ3w" key="codegenDirectory" value="/js5/src"/>
-        <details xmi:id="_rNTN0POLEeanyK3wteWQ3w" key="AssociatedSourceCode" value="/js5/src/controller/BuildListener.java;2448748481/1;/js5/src/controller/IListener.java;2188095891/1;/js5/src/controller/LoadListener.java;358300605/1;/js5/src/controller/SaveListener.java;4244864299/1;/js5/src/controller/buildListeners/AbsorberListener.java;1643539944/1;/js5/src/controller/buildListeners/AddGizmosListener.java;2238157182/1;/js5/src/controller/buildListeners/BallListener.java;2130395406/1;/js5/src/controller/buildListeners/BindListener.java;1534529117/1;/js5/src/controller/buildListeners/ClearListener.java;2006514167/1;/js5/src/controller/buildListeners/ConnectListener.java;3782897681/1;/js5/src/controller/buildListeners/DeleteListener.java;517952022/1;/js5/src/controller/buildListeners/DisconnectListener.java;3019397297/1;/js5/src/controller/buildListeners/DoNothingKeyListener.java;3012898527/1;/js5/src/controller/buildListeners/FlipperListener.java;953459543/1;/js5/src/controller/buildListeners/FrictionListener.java;563782775/1;/js5/src/controller/buildListeners/GravityListener.java;97638001/1;/js5/src/controller/buildListeners/ModeListener.java;41469632/1;/js5/src/controller/buildListeners/MoveListener.java;3432614872/1;/js5/src/controller/buildListeners/RotateListener.java;2257485087/1;/js5/src/controller/runListeners/StartStopListener.java;675180548/1;/js5/src/model/AbsorberGizmo.java;3298340286/1;/js5/src/model/Ball.java;1811314041/1;/js5/src/model/CircleGizmo.java;3324841098/1;/js5/src/model/Gizmo.java;3443200372/1;/js5/src/model/IGizmo.java;4260950121/1;/js5/src/model/IModel.java;2975397578/1;/js5/src/model/LeftFlipperGizmo.java;2018380673/1;/js5/src/view/a.java;1199247767/1;/js5/src/model/RightFlipperGizmo.java;3431462076/1;/js5/src/model/SquareGizmo.java;3426461273/1;/js5/src/model/TriangleGizmo.java;2406715065/1;/js5/src/staffui/MagicKeyListener.java;1293245752/1;/js5/src/view/Build.java;404842819/1;/js5/src/view/BuildBoard.java;1100759428/1;/js5/src/view/Display.java;3234224663/1;/js5/src/view/FlipperBoard.java;3489217810/1;/js5/src/view/IDisplay.java;996023353/1;/js5/src/view/Run.java;906214216/1;/js5/src/view/RunBoard.java;2319777866/1;/js5/src/view/TestBoard.java;3181428877/1;/js5/src/view/TestDriver.java;3938266835/1;/js5/src/view/TestingGUI.java;1596508289/1;/js5/src/model/Model.java;2577915384/1;"/>
+        <details xmi:id="_rNTN0POLEeanyK3wteWQ3w" key="AssociatedSourceCode" value="/js5/src/controller/BuildListener.java;2448748481/1;/js5/src/controller/IListener.java;2188095891/1;/js5/src/controller/LoadListener.java;2925158299/1;/js5/src/controller/SaveListener.java;4244864299/1;/js5/src/controller/buildListeners/AbsorberListener.java;1643539944/1;/js5/src/controller/buildListeners/AddGizmosListener.java;2238157182/1;/js5/src/controller/buildListeners/BallListener.java;2130395406/1;/js5/src/controller/buildListeners/BindListener.java;1534529117/1;/js5/src/controller/buildListeners/ClearListener.java;2006514167/1;/js5/src/controller/buildListeners/ConnectListener.java;3782897681/1;/js5/src/controller/buildListeners/DeleteListener.java;517952022/1;/js5/src/controller/buildListeners/DisconnectListener.java;3019397297/1;/js5/src/controller/buildListeners/DoNothingKeyListener.java;3012898527/1;/js5/src/controller/buildListeners/FlipperListener.java;953459543/1;/js5/src/controller/buildListeners/FrictionListener.java;563782775/1;/js5/src/controller/buildListeners/GravityListener.java;97638001/1;/js5/src/controller/buildListeners/ModeListener.java;41469632/1;/js5/src/controller/buildListeners/MoveListener.java;3432614872/1;/js5/src/controller/buildListeners/RotateListener.java;2257485087/1;/js5/src/controller/runListeners/StartStopListener.java;675180548/1;/js5/src/model/AbsorberGizmo.java;3298340286/1;/js5/src/model/Ball.java;1811314041/1;/js5/src/model/CircleGizmo.java;3324841098/1;/js5/src/model/Gizmo.java;3443200372/1;/js5/src/model/IGizmo.java;4260950121/1;/js5/src/model/IModel.java;3067578314/1;/js5/src/model/LeftFlipperGizmo.java;2018380673/1;/js5/src/view/a.java;1199247767/1;/js5/src/model/RightFlipperGizmo.java;3431462076/1;/js5/src/model/SquareGizmo.java;3426461273/1;/js5/src/model/TriangleGizmo.java;2406715065/1;/js5/src/staffui/MagicKeyListener.java;1293245752/1;/js5/src/view/Build.java;404842819/1;/js5/src/view/BuildBoard.java;1100759428/1;/js5/src/view/Display.java;3702620566/1;/js5/src/view/FlipperBoard.java;3489217810/1;/js5/src/view/IDisplay.java;930294924/1;/js5/src/view/Run.java;906214216/1;/js5/src/view/RunBoard.java;2319777866/1;/js5/src/view/TestBoard.java;3181428877/1;/js5/src/view/TestDriver.java;3938266835/1;/js5/src/view/TestingGUI.java;4169951778/1;/js5/src/model/Model.java;1787491117/1;"/>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_qdJjQPOLEeanyK3wteWQ3w">
@@ -552,7 +552,9 @@
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q34XcPOLEeanyK3wteWQ3w" name="LoadListener" specification="_qvc0MPOLEeanyK3wteWQ3w">
           <ownedParameter xmi:id="_q34XcfOLEeanyK3wteWQ3w" name="display" type="_qnEUQPOLEeanyK3wteWQ3w"/>
           <ownedParameter xmi:id="_q34XcvOLEeanyK3wteWQ3w" name="model" type="_qlwFoPOLEeanyK3wteWQ3w"/>
-          <ownedParameter xmi:id="_q34Xc_OLEeanyK3wteWQ3w" type="_qjNH8POLEeanyK3wteWQ3w" direction="return"/>
+          <ownedParameter xmi:id="_q34Xc_OLEeanyK3wteWQ3w" type="_qjNH8POLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>d = display;
 		m = model;
@@ -565,6 +567,8 @@
 		if (f != null) {
 			if (!m.load(f)) {
 				d.errorPopup(&quot;Invalid File Format&quot;);
+			}else{
+				d.load(m.getGizmos());
 			}
 		} else {
 			d.errorPopup(&quot;No File Selected&quot;);
@@ -1412,6 +1416,11 @@
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Interface" xmi:id="_qlwFoPOLEeanyK3wteWQ3w" name="IModel">
+        <ownedAttribute xmi:id="_t74IYPOVEeanyK3wteWQ3w" name="gizmos" type="_qlm7sPOLEeanyK3wteWQ3w" association="_t78Z0POVEeanyK3wteWQ3w">
+          <qualifier xmi:id="_t76koPOVEeanyK3wteWQ3w">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </qualifier>
+        </ownedAttribute>
         <ownedOperation xmi:id="_qlxTwPOLEeanyK3wteWQ3w" name="addGizmo">
           <ownedParameter xmi:id="_qlxTwfOLEeanyK3wteWQ3w" name="gizmo">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -1723,7 +1732,7 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_qncuwPOLEeanyK3wteWQ3w" name="Model">
         <generalization xmi:id="_q1Ds8POLEeanyK3wteWQ3w" general="_qxCIkfOLEeanyK3wteWQ3w"/>
-        <ownedAttribute xmi:id="_q3R6gPOLEeanyK3wteWQ3w" name="gizmos" visibility="private" type="_qlm7sPOLEeanyK3wteWQ3w" association="_q6fmkfOLEeanyK3wteWQ3w">
+        <ownedAttribute xmi:id="_q3R6gPOLEeanyK3wteWQ3w" name="gizmos" visibility="public" type="_qlm7sPOLEeanyK3wteWQ3w" isReadOnly="true" association="_q6fmkfOLEeanyK3wteWQ3w">
           <qualifier xmi:id="_q3ShkfOLEeanyK3wteWQ3w">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </qualifier>
@@ -1754,16 +1763,16 @@
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_q3YBIfOLEeanyK3wteWQ3w" value="0.05"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_q3YoMfOLEeanyK3wteWQ3w" name="linesToAbsorber" visibility="private" type="_qlm7sPOLEeanyK3wteWQ3w" association="_q6jQ8fOLEeanyK3wteWQ3w">
-          <qualifier xmi:id="_q3bEcPOLEeanyK3wteWQ3w" type="_q3Z2UPOLEeanyK3wteWQ3w"/>
+          <qualifier xmi:id="_q3bEcPOLEeanyK3wteWQ3w" type="_q08YMPOLEeanyK3wteWQ3w"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_q3bEcfOLEeanyK3wteWQ3w" name="circlesToAbsorber" visibility="private" type="_qlm7sPOLEeanyK3wteWQ3w" association="_q6kfEfOLEeanyK3wteWQ3w">
-          <qualifier xmi:id="_q3c5ofOLEeanyK3wteWQ3w" type="_q3cSkPOLEeanyK3wteWQ3w"/>
+          <qualifier xmi:id="_q3c5ofOLEeanyK3wteWQ3w" type="_qwQsgPOLEeanyK3wteWQ3w"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_q3dgsPOLEeanyK3wteWQ3w" name="circlesToGizmos" visibility="private" type="_qlm7sPOLEeanyK3wteWQ3w" association="_q6lGIfOLEeanyK3wteWQ3w">
-          <qualifier xmi:id="_q3eu0POLEeanyK3wteWQ3w" type="_q3cSkPOLEeanyK3wteWQ3w"/>
+          <qualifier xmi:id="_q3eu0POLEeanyK3wteWQ3w" type="_qwQsgPOLEeanyK3wteWQ3w"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_q3eu0fOLEeanyK3wteWQ3w" name="linesToGizmos" visibility="private" type="_qlm7sPOLEeanyK3wteWQ3w" association="_q6mUQPOLEeanyK3wteWQ3w">
-          <qualifier xmi:id="_q3f88POLEeanyK3wteWQ3w" type="_q3Z2UPOLEeanyK3wteWQ3w"/>
+          <qualifier xmi:id="_q3f88POLEeanyK3wteWQ3w" type="_q08YMPOLEeanyK3wteWQ3w"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_q3gkAPOLEeanyK3wteWQ3w" name="flippersToLines" visibility="private" type="_qwTIwfOLEeanyK3wteWQ3w" association="_q6m7UfOLEeanyK3wteWQ3w">
           <qualifier xmi:id="_q3iZMPOLEeanyK3wteWQ3w" type="_qlm7sPOLEeanyK3wteWQ3w"/>
@@ -1782,7 +1791,9 @@
         </ownedAttribute>
         <interfaceRealization xmi:id="_qx6SUPOLEeanyK3wteWQ3w" client="_qncuwPOLEeanyK3wteWQ3w" supplier="_qlwFoPOLEeanyK3wteWQ3w" contract="_qlwFoPOLEeanyK3wteWQ3w"/>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4mJIPOLEeanyK3wteWQ3w" name="Model" specification="_qnfyEPOLEeanyK3wteWQ3w">
-          <ownedParameter xmi:id="_q4mJIfOLEeanyK3wteWQ3w" type="_qncuwPOLEeanyK3wteWQ3w" direction="return"/>
+          <ownedParameter xmi:id="_q4mJIfOLEeanyK3wteWQ3w" type="_qncuwPOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>modelSize = 2000; // this is 20x20*L; L=100
 		boardSize = 20;
@@ -2128,7 +2139,9 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4nXRPOLEeanyK3wteWQ3w" name="timeUntilCollision" specification="_qniOUPOLEeanyK3wteWQ3w">
-          <ownedParameter xmi:id="_q4nXRfOLEeanyK3wteWQ3w" type="_qnnG0fOLEeanyK3wteWQ3w" direction="return"/>
+          <ownedParameter xmi:id="_q4nXRfOLEeanyK3wteWQ3w" type="_qnnG0fOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>double lowestColTime = Double.MAX_VALUE;
 		Ball collidingBall = null;
@@ -2223,7 +2236,9 @@
           <ownedParameter xmi:id="_q4n-U_OLEeanyK3wteWQ3w" name="newTime">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_q4n-VPOLEeanyK3wteWQ3w" type="_qkux8POLEeanyK3wteWQ3w" direction="return"/>
+          <ownedParameter xmi:id="_q4n-VPOLEeanyK3wteWQ3w" type="_qkux8POLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>double vectX = ball.getVelocity().x();
 		double vectY = ball.getVelocity().y();
@@ -2261,6 +2276,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
           </ownedParameter>
           <ownedParameter xmi:id="_q4pzhfOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2291,6 +2307,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
           <ownedParameter xmi:id="_q4pzi_OLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2315,6 +2332,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
           <ownedParameter xmi:id="_q4qak_OLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2357,6 +2375,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
           </ownedParameter>
           <ownedParameter xmi:id="_q4qanPOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2390,6 +2409,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
           <ownedParameter xmi:id="_q4rBpvOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2418,6 +2438,7 @@
           <ownedParameter xmi:id="_q4rosfOLEeanyK3wteWQ3w" name="gizmo1" type="_qlm7sPOLEeanyK3wteWQ3w"/>
           <ownedParameter xmi:id="_q4rosvOLEeanyK3wteWQ3w" name="gizmo2" type="_qlm7sPOLEeanyK3wteWQ3w"/>
           <ownedParameter xmi:id="_q4ros_OLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2433,6 +2454,7 @@
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4rotPOLEeanyK3wteWQ3w" name="disconnectGizmo" specification="_qyKJ8POLEeanyK3wteWQ3w">
           <ownedParameter xmi:id="_q4rotfOLEeanyK3wteWQ3w" name="gizmo" type="_qlm7sPOLEeanyK3wteWQ3w"/>
           <ownedParameter xmi:id="_q4rotvOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2542,6 +2564,7 @@
           </ownedParameter>
           <ownedParameter xmi:id="_q4td6POLEeanyK3wteWQ3w" name="gizmo" type="_qlm7sPOLEeanyK3wteWQ3w"/>
           <ownedParameter xmi:id="_q4td6fOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2570,6 +2593,7 @@
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4uE8vOLEeanyK3wteWQ3w" name="load" specification="_q1Ce0POLEeanyK3wteWQ3w">
           <ownedParameter xmi:id="_q4uE8_OLEeanyK3wteWQ3w" name="f" type="_qvbmEfOLEeanyK3wteWQ3w"/>
           <ownedParameter xmi:id="_q4uE9POLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
           <language>java</language>
@@ -2903,7 +2927,9 @@
             <ownedParameter xmi:id="_q4olYvOLEeanyK3wteWQ3w" name="b" type="_qkux8POLEeanyK3wteWQ3w"/>
             <ownedParameter xmi:id="_q4olY_OLEeanyK3wteWQ3w" name="v" type="_qwKl4POLEeanyK3wteWQ3w"/>
             <ownedParameter xmi:id="_q4olZPOLEeanyK3wteWQ3w" name="a" type="_qkZawPOLEeanyK3wteWQ3w"/>
-            <ownedParameter xmi:id="_q4olZfOLEeanyK3wteWQ3w" type="_qnnG0fOLEeanyK3wteWQ3w" direction="return"/>
+            <ownedParameter xmi:id="_q4olZfOLEeanyK3wteWQ3w" type="_qnnG0fOLEeanyK3wteWQ3w" direction="return">
+              <name xsi:nil="true"/>
+            </ownedParameter>
             <language>java</language>
             <body>colTime = t;
 			collidingBall = b;
@@ -2913,6 +2939,7 @@
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4olZvOLEeanyK3wteWQ3w" name="getColTime" specification="_qnoU8POLEeanyK3wteWQ3w">
             <ownedParameter xmi:id="_q4olZ_OLEeanyK3wteWQ3w" direction="return">
+              <name xsi:nil="true"/>
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
             </ownedParameter>
             <language>java</language>
@@ -2920,19 +2947,25 @@
 		</body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4olaPOLEeanyK3wteWQ3w" name="getCollidingBall" specification="_qno8AfOLEeanyK3wteWQ3w">
-            <ownedParameter xmi:id="_q4olafOLEeanyK3wteWQ3w" type="_qkux8POLEeanyK3wteWQ3w" direction="return"/>
+            <ownedParameter xmi:id="_q4olafOLEeanyK3wteWQ3w" type="_qkux8POLEeanyK3wteWQ3w" direction="return">
+              <name xsi:nil="true"/>
+            </ownedParameter>
             <language>java</language>
             <body>return collidingBall;
 		</body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4pMcPOLEeanyK3wteWQ3w" name="getUpdatedVel" specification="_qnpjEPOLEeanyK3wteWQ3w">
-            <ownedParameter xmi:id="_q4pMcfOLEeanyK3wteWQ3w" type="_qwKl4POLEeanyK3wteWQ3w" direction="return"/>
+            <ownedParameter xmi:id="_q4pMcfOLEeanyK3wteWQ3w" type="_qwKl4POLEeanyK3wteWQ3w" direction="return">
+              <name xsi:nil="true"/>
+            </ownedParameter>
             <language>java</language>
             <body>return updatedVel;
 		</body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4pMcvOLEeanyK3wteWQ3w" name="getAbs" specification="_qnpjEfOLEeanyK3wteWQ3w">
-            <ownedParameter xmi:id="_q4pMc_OLEeanyK3wteWQ3w" type="_qkZawPOLEeanyK3wteWQ3w" direction="return"/>
+            <ownedParameter xmi:id="_q4pMc_OLEeanyK3wteWQ3w" type="_qkZawPOLEeanyK3wteWQ3w" direction="return">
+              <name xsi:nil="true"/>
+            </ownedParameter>
             <language>java</language>
             <body>return abs;
 		</body>
@@ -3035,6 +3068,9 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_q6qlsfOLEeanyK3wteWQ3w" name="" memberEnd="_q6qlsvOLEeanyK3wteWQ3w _q3pG4fOLEeanyK3wteWQ3w">
         <ownedEnd xmi:id="_q6qlsvOLEeanyK3wteWQ3w" name="" type="_qnnG0fOLEeanyK3wteWQ3w" association="_q6qlsfOLEeanyK3wteWQ3w"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_t78Z0POVEeanyK3wteWQ3w" name="" memberEnd="_t74IYPOVEeanyK3wteWQ3w _t79A4POVEeanyK3wteWQ3w">
+        <ownedEnd xmi:id="_t79A4POVEeanyK3wteWQ3w" name="" type="_qlwFoPOLEeanyK3wteWQ3w" association="_t78Z0POVEeanyK3wteWQ3w"/>
       </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_qdPC0POLEeanyK3wteWQ3w" name="view">
@@ -3398,7 +3434,9 @@
         <interfaceRealization xmi:id="_qxXfwfOLEeanyK3wteWQ3w" client="_qmyAYPOLEeanyK3wteWQ3w" supplier="_qnEUQPOLEeanyK3wteWQ3w" contract="_qnEUQPOLEeanyK3wteWQ3w"/>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4bxEPOLEeanyK3wteWQ3w" name="Display" specification="_qxYt4POLEeanyK3wteWQ3w">
           <ownedParameter xmi:id="_q4bxEfOLEeanyK3wteWQ3w" name="model" type="_qncuwPOLEeanyK3wteWQ3w"/>
-          <ownedParameter xmi:id="_q4bxEvOLEeanyK3wteWQ3w" type="_qmyAYPOLEeanyK3wteWQ3w" direction="return"/>
+          <ownedParameter xmi:id="_q4bxEvOLEeanyK3wteWQ3w" type="_qmyAYPOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>m = model;
 		initialise();
@@ -3503,7 +3541,9 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4c_NPOLEeanyK3wteWQ3w" name="saveDialog" specification="_qm244POLEeanyK3wteWQ3w">
-          <ownedParameter xmi:id="_q4c_NfOLEeanyK3wteWQ3w" type="_qvbmEfOLEeanyK3wteWQ3w" direction="return"/>
+          <ownedParameter xmi:id="_q4c_NfOLEeanyK3wteWQ3w" type="_qvbmEfOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>String filePath = (String) JOptionPane.showInputDialog(new JFrame(), &quot;Enter name for save&quot;, &quot;Customized Dialog&quot;,
 				JOptionPane.PLAIN_MESSAGE);
@@ -3512,7 +3552,9 @@
 	</body>
         </ownedBehavior>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4dmQPOLEeanyK3wteWQ3w" name="loadDialog" specification="_qm244fOLEeanyK3wteWQ3w">
-          <ownedParameter xmi:id="_q4dmQfOLEeanyK3wteWQ3w" type="_qvbmEfOLEeanyK3wteWQ3w" direction="return"/>
+          <ownedParameter xmi:id="_q4dmQfOLEeanyK3wteWQ3w" type="_qvbmEfOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;GIZMO FILES&quot;, &quot;gizmo&quot;);
@@ -3534,6 +3576,19 @@
           </ownedParameter>
           <language>java</language>
           <body>JOptionPane.showMessageDialog(new JFrame(), errorMessage, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);
+	</body>
+        </ownedBehavior>
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_VykmEPOVEeanyK3wteWQ3w" name="load" specification="_VyefcPOVEeanyK3wteWQ3w">
+          <ownedParameter xmi:id="_VylNIPOVEeanyK3wteWQ3w" name="gizmos" type="_qxxvcPOLEeanyK3wteWQ3w"/>
+          <language>java</language>
+          <body>LoadBoard l = new LoadBoard(gizmos, 500, 500);
+		boards.add(l, &quot;load&quot;);
+		CardLayout cardLayout = (CardLayout) buttons.getLayout();
+		cardLayout.show(buttons, &quot;run&quot;);
+		cardLayout = (CardLayout) boards.getLayout();
+		cardLayout.show(boards, &quot;load&quot;);
+		frame.setTitle(&quot;RUN MODE&quot;);
+
 	</body>
         </ownedBehavior>
         <ownedOperation xmi:id="_qmz1kPOLEeanyK3wteWQ3w" name="initialise" visibility="private" method="_q4bxE_OLEeanyK3wteWQ3w"/>
@@ -3569,6 +3624,9 @@
           </eAnnotations>
           <ownedParameter xmi:id="_qxZU8POLEeanyK3wteWQ3w" name="model" type="_qncuwPOLEeanyK3wteWQ3w"/>
           <ownedParameter xmi:id="_qxZU8_OLEeanyK3wteWQ3w" type="_qmyAYPOLEeanyK3wteWQ3w" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_VyefcPOVEeanyK3wteWQ3w" name="load" method="_VykmEPOVEeanyK3wteWQ3w">
+          <ownedParameter xmi:id="_VyfGgPOVEeanyK3wteWQ3w" name="gizmos" type="_qxxvcPOLEeanyK3wteWQ3w"/>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_qm9mkPOLEeanyK3wteWQ3w" name="FlipperBoard">
@@ -3720,6 +3778,9 @@
           <ownedParameter xmi:id="_qnHXkfOLEeanyK3wteWQ3w" name="errorMessage">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="_zmlocPOVEeanyK3wteWQ3w" name="load">
+          <ownedParameter xmi:id="_zmlocfOVEeanyK3wteWQ3w" name="gizmos" type="_qxxvcPOLEeanyK3wteWQ3w"/>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_qnH-oPOLEeanyK3wteWQ3w" name="Run">
@@ -3956,11 +4017,12 @@
         <ownedAttribute xmi:id="_q3QsYfOLEeanyK3wteWQ3w" name="model" visibility="private" type="_qncuwPOLEeanyK3wteWQ3w" association="_q6e_gfOLEeanyK3wteWQ3w"/>
         <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_q4k7APOLEeanyK3wteWQ3w" name="TestingGUI" specification="_qxv6QPOLEeanyK3wteWQ3w">
           <ownedParameter xmi:id="_q4k7AfOLEeanyK3wteWQ3w" name="m" type="_qncuwPOLEeanyK3wteWQ3w"/>
-          <ownedParameter xmi:id="_q4k7AvOLEeanyK3wteWQ3w" type="_qnXPMPOLEeanyK3wteWQ3w" direction="return"/>
+          <ownedParameter xmi:id="_q4k7AvOLEeanyK3wteWQ3w" type="_qnXPMPOLEeanyK3wteWQ3w" direction="return">
+            <name xsi:nil="true"/>
+          </ownedParameter>
           <language>java</language>
           <body>model=m;
 		createAndShowGUI();
-		fl = new FlipperListener(m);
 		
 	</body>
         </ownedBehavior>
@@ -3974,7 +4036,7 @@
 		
 		Container cp = frame.getContentPane();
 		frame.setFocusable(true);
-		frame.addKeyListener(fl);
+		frame.addKeyListener(new FlipperListener(model));
 		frame.add(board, BorderLayout.CENTER);					
 
 		frame.pack();
@@ -4916,7 +4978,6 @@ CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   <UMLLabProfile:LegacyStyledElement xmi:id="_q3PeQfOLEeanyK3wteWQ3w" base_Element="_q3PeQPOLEeanyK3wteWQ3w"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_q3QsYPOLEeanyK3wteWQ3w" base_Element="_q3QFUPOLEeanyK3wteWQ3w"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_q3RTcPOLEeanyK3wteWQ3w" base_Element="_q3QsYfOLEeanyK3wteWQ3w"/>
-  <UMLLabProfile:LegacyStyledElement xmi:id="_q3ShkPOLEeanyK3wteWQ3w" base_Element="_q3R6gPOLEeanyK3wteWQ3w"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_q3TvsPOLEeanyK3wteWQ3w" base_Element="_q3TIoPOLEeanyK3wteWQ3w"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_q3UWwPOLEeanyK3wteWQ3w" base_Element="_q3TvsfOLEeanyK3wteWQ3w"/>
   <UMLLabProfile:LegacyStyledElement xmi:id="_q3U90fOLEeanyK3wteWQ3w" base_Element="_q3UWwfOLEeanyK3wteWQ3w"/>
@@ -5044,4 +5105,6 @@ CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   <UMLLabProfile:LegacyStyledElement xmi:id="_PerVMPOMEeanyK3wteWQ3w" base_Element="_PequIfOMEeanyK3wteWQ3w"/>
   <UMLLabProfile:Reference xmi:id="_PewNsPOMEeanyK3wteWQ3w" base_Element="_Peu_kPOMEeanyK3wteWQ3w"/>
   <UMLLabProfile:Reference xmi:id="_uaz2MPOMEeanyK3wteWQ3w" base_Element="_uawy4POMEeanyK3wteWQ3w"/>
+  <UMLLabProfile:Generics xmi:id="_VyftkPOVEeanyK3wteWQ3w" genericsValue="String, IGizmo" base_Element="_VyfGgPOVEeanyK3wteWQ3w"/>
+  <UMLLabProfile:Generics xmi:id="_zmmPgPOVEeanyK3wteWQ3w" genericsValue="String, IGizmo" base_Element="_zmlocfOVEeanyK3wteWQ3w"/>
 </xmi:XMI>
