@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.buildListeners.FlipperListener;
@@ -27,7 +28,7 @@ public  class FlipperBoard extends JPanel implements Observer {
 	protected int width;
 	protected int height;
 	protected Model gm;
-	private FlipperListener lisener;
+	
 
 	public FlipperBoard(int w, int h, Model m) {
 		// Observe changes in Model
@@ -35,8 +36,7 @@ public  class FlipperBoard extends JPanel implements Observer {
 		width = w;
 		height = h;
 		gm = m;
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		FlipperListener fl = new FlipperListener(m);
+		this.setBorder(BorderFactory.createLineBorder(Color.black));	
 	}
 
 	// Fix onscreen size
@@ -46,51 +46,52 @@ public  class FlipperBoard extends JPanel implements Observer {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		Graphics2D g2 = (Graphics2D) g;
-		IGizmo gizmo = new Gizmo (350,350);
+		IGizmo gizmo = new Gizmo (220,220);
 		int x =  gizmo.getStartX();
 		int y =  gizmo.getStartY();
 		gm.addGizmo("leftflipper",gizmo.getKey(),x,y);
 		g2.setColor(gizmo.getColor());
 		int width = 30;
 		g2.fillRect(x, y, 2*width, width/2);
-		int x1 = 250;
-		int y1 = 250;
-		int vx = (int) ((Math.random() * 10.0) + 10.0);
-		int vy = (int) ((Math.random() * 10.0) + 10.0);
-		int radius = 6;
-		Ball ball = new Ball(x1,y1,vx,vy);
-		gm.addBall(ball);
 		
-        vx += (int) ((Math.random() * 10.0) - 5.0);
-        vx = -vx;
-        vy += (int) ((Math.random() * 10.0) - 5.0);
-        vy = -vy;
-		
-        x += vx;
-        if (x <= radius) {
-            x = radius;
-            vx = -vx;
-        }
-        if (x >= 500 - radius) {
-            x = 500 - radius;
-            vx = -vx;
-        }
-
-        y += vy;
-        if (y <= radius) {
-            y = radius;
-            vy = -vy;
-        }
-        if (y >= 500 - radius) {
-            y = 500 - radius;
-            vy = -vy;
-        }
-		g2.setColor(ball.getColor());
-
-		int width1 = 10;
-		g2.fillOval(x1-radius, y1-radius, radius+radius, radius+radius);
+		//stuff for the ball
+//		int x1 = 250;
+//		int y1 = 250;
+//		int vx = (int) ((Math.random() * 10.0) + 10.0);
+//		int vy = (int) ((Math.random() * 10.0) + 10.0);
+//		int radius = 6;
+//		Ball ball = new Ball(x1,y1,vx,vy);
+//		gm.addBall(ball);
+//		
+//        vx += (int) ((Math.random() * 10.0) - 5.0);
+//        vx = -vx;
+//        vy += (int) ((Math.random() * 10.0) - 5.0);
+//        vy = -vy;
+//		
+//        x += vx;
+//        if (x <= radius) {
+//            x = radius;
+//            vx = -vx;
+//        }
+//        if (x >= 500 - radius) {
+//            x = 500 - radius;
+//            vx = -vx;
+//        }
+//
+//        y += vy;
+//        if (y <= radius) {
+//            y = radius;
+//            vy = -vy;
+//        }
+//        if (y >= 500 - radius) {
+//            y = 500 - radius;
+//            vy = -vy;
+//        }
+//		g2.setColor(ball.getColor());
+//
+//		int width1 = 10;
+//		g2.fillOval(x1-radius, y1-radius, radius+radius, radius+radius);
 		
 		
 	}
