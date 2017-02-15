@@ -78,7 +78,7 @@ public class FlipperBoard extends JPanel implements Observer {
 
 			} else if (gizmo instanceof TriangleGizmo) {
 				g2.setColor(gizmo.getColor());
-				
+
 				switch (gizmo.getRotation()) {
 				case 0:
 					g2.fillPolygon(new int[] { x1, x2, x1 }, new int[] { y2, y1, y1 }, 3);
@@ -95,11 +95,10 @@ public class FlipperBoard extends JPanel implements Observer {
 				}
 
 			} else if (gizmo instanceof RightFlipperGizmo) {
-				// make right flipper (MAKE SURE TO LOOK AT SPEC FOR EXACT LOOK
-				// PLEASE)
+				g2.fillRoundRect(x1, y1, x2 - x1, (y2 - y1) / 4, (y2 - y1) / 4, (y2 - y1) / 4);
 
 			} else if (gizmo instanceof LeftFlipperGizmo) {
-				// SAME HERE
+				g2.fillRoundRect(x1, y1, x2 - x1, (y2 - y1) / 4, (y2 - y1) / 4, (y2 - y1) / 4);
 			}
 		}
 
