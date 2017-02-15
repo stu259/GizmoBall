@@ -95,10 +95,14 @@ public class FlipperBoard extends JPanel implements Observer {
 				}
 
 			} else if (gizmo instanceof RightFlipperGizmo) {
-				g2.fillRoundRect(x1, y1, x2 - x1, (y2 - y1) / 4, (y2 - y1) / 4, (y2 - y1) / 4);
+				g2.fillRoundRect(x1+2*scale-((x2 - x1)/4), y1, (x2 - x1)/4, (y2 - y1) , (y2 - y1) / 4, (y2 - y1) / 4);
+				//when flipped
+				//g2.fillRoundRect(x1, y1, x2 - x1, (y2 - y1) / 4, (y2 - y1) / 4, (y2 - y1) / 4);
 
 			} else if (gizmo instanceof LeftFlipperGizmo) {
-				g2.fillRoundRect(x1, y1, x2 - x1, (y2 - y1) / 4, (y2 - y1) / 4, (y2 - y1) / 4);
+				g2.fillRoundRect(x1, y1, (x2 - x1)/4, (y2 - y1) , (y2 - y1) / 4, (y2 - y1) / 4);
+				//when flipped
+				//g2.fillRoundRect(x1, y1, x2 - x1, (y2 - y1) / 4, (y2 - y1) / 4, (y2 - y1) / 4);
 			}
 		}
 
