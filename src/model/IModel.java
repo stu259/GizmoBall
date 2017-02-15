@@ -24,7 +24,7 @@ public interface IModel {
 	 * Rotates the given Gizmo by rotating its line segments
 	 * and corners in the model
 	 */
-	public void rotateGizmo(IGizmo gizmo);
+	public void rotateGizmo(String key);
 	
 	/*
 	 * Connects gizmos to trigger on another
