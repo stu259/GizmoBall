@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.MagicKeyListener;
 import controller.buildListeners.FlipperListener;
 import model.Model;
 
@@ -38,7 +39,7 @@ public class TestingGUI {
 		
 		Container cp = frame.getContentPane();
 		frame.setFocusable(true);
-		frame.addKeyListener(new FlipperListener(model));
+		frame.addKeyListener(new MagicKeyListener(new FlipperListener(model)));
 		frame.add(board, BorderLayout.CENTER);					
 
 		frame.pack();
