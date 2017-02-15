@@ -21,8 +21,9 @@ public class a {
 		}
 
 		
-		m.addGizmo("triangle", "t1", 19, 0);
+		m.addGizmo("triangle", "t1", 10, 0);
 		m.rotateGizmo("t1");
+		
 		
 		//m.addAbsorber("abs1", 0, 19, 20, 20);
 		
