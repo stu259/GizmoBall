@@ -27,7 +27,7 @@ public class Model extends Observable implements IModel {
 	private double frictionMU = 0.025;
 	private double frictionMUTwo = 0.025;
 
-	//private Vect velocity;
+	// private Vect velocity;
 	private double time = 0.05;
 
 	// connections for triggering both redrawing of lines and
@@ -412,7 +412,7 @@ public class Model extends Observable implements IModel {
 					absorber = null;
 				}
 			}
-			for (LineSegment line: linesToAbsorber.keySet()){
+			for (LineSegment line : linesToAbsorber.keySet()) {
 				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
@@ -421,7 +421,7 @@ public class Model extends Observable implements IModel {
 					updatedVel = absorber.getExitVeloicty();
 				}
 			}
-			for (Circle circle : circlesToAbsorber.keySet()){
+			for (Circle circle : circlesToAbsorber.keySet()) {
 				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
@@ -441,35 +441,33 @@ public class Model extends Observable implements IModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
-		if(colTime > time){
+		if (colTime > time) {
 			balls.remove(colBall);
-			if(colInfo.getAbs() != null){
+			if (colInfo.getAbs() != null) {
 				AbsorberGizmo absorber = colInfo.getAbs();
 				colBall.setX(absorber.getEndX());
 				colBall.setY(absorber.getStartY());
 				colBall.setVelocity(colInfo.getUpdatedVel());
-			}
-			else{
+			} else {
 				colBall = calculateBallMove(colBall, colTime);
 				colBall.setVelocity(colInfo.getUpdatedVel());
 				applyFriction(colBall, colTime);
 				applyGravity(colBall, colTime);
 			}
-			for(Ball ball : balls){
+			for (Ball ball : balls) {
 				ball = calculateBallMove(ball, colTime);
 				applyFriction(ball, colTime);
 				applyGravity(ball, colTime);
 			}
 			balls.add(colBall);
-		}
-		else{
-			for(Ball ball : balls){
+		} else {
+			for (Ball ball : balls) {
 				ball = calculateBallMove(ball, time);
 				applyFriction(ball, time);
 				applyGravity(ball, time);
 			}
 		}
-		
+
 		this.setChanged();
 		this.notifyObservers(); // update board both in gui and model
 	}
@@ -526,8 +524,7 @@ public class Model extends Observable implements IModel {
 		public AbsorberGizmo getAbs() {
 			return abs;
 		}
-		
-		
+
 	}
 
 	/**
@@ -537,8 +534,7 @@ public class Model extends Observable implements IModel {
 	 * 
 	 * 
 	 */
-	
-	
+
 	// check if object can be added (check outside board, position, size, then
 	// scale)
 	// Params: startx, starty, endx, endy
@@ -585,8 +581,8 @@ public class Model extends Observable implements IModel {
 		gizmos.put(key, gizmo);
 
 		this.setChanged();
-		this.notifyObservers(); //call the observer to redraw the added gizmo
-		
+		this.notifyObservers(); // call the observer to redraw the added gizmo
+
 		return true;
 	}
 
@@ -718,13 +714,13 @@ public class Model extends Observable implements IModel {
 
 	@Override
 	public boolean moveGizmo(int x, int y, IGizmo gizmo) {
-		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize())){
+		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize())) {
 			gizmo.newPosition(x, y);
 			this.setChanged();
 			this.notifyObservers();
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -748,17 +744,9 @@ public class Model extends Observable implements IModel {
 				String[] splitCommand = line.toLowerCase().split(" ");
 				switch (splitCommand[0]) {
 				case "circle":
-					
-					
 				case "triangle":
-					
-					
 				case "square":
-					
-					
 				case "leftflipper":
-					
-					
 				case "rightflipper":
 					if (splitCommand.length != 4)
 						return false;
@@ -766,14 +754,14 @@ public class Model extends Observable implements IModel {
 							(Integer.parseInt(splitCommand[3]))))
 						return false;
 					break;
-					
-					
 				case "absorber":
 					if (splitCommand.length != 6)
 						return false;
+					else
+						addAbsorber(splitCommand[1], Integer.parseInt(splitCommand[2]),
+								Integer.parseInt(splitCommand[3]), Integer.parseInt(splitCommand[4]),
+								Integer.parseInt(splitCommand[5]));
 					break;
-					
-					
 				case "ball":
 					if (splitCommand.length != 6)
 						return false;
@@ -782,24 +770,18 @@ public class Model extends Observable implements IModel {
 								Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
 								Double.parseDouble(splitCommand[5]));
 					break;
-					
-					
 				case "rotate":
 					if (splitCommand.length != 2)
 						return false;
 					else
 						gizmos.get(splitCommand[1]).rotate();
 					break;
-					
-					
 				case "delete":
 					if (splitCommand.length != 2)
 						return false;
 					else
 						deleteGizmo(splitCommand[1]);
 					break;
-					
-					
 				case "move":
 					if (splitCommand.length != 4)
 						return false;
@@ -807,8 +789,6 @@ public class Model extends Observable implements IModel {
 						gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
 								Integer.parseInt(splitCommand[3]));
 					break;
-					
-					
 				case "keyconnect":
 					if (splitCommand.length != 5)
 						return false;
@@ -818,57 +798,45 @@ public class Model extends Observable implements IModel {
 								+ splitCommand[3] + " " + splitCommand[4]);
 					}
 					break;
-					
-					
 				case "connect":
 					if (splitCommand.length != 3)
 						return false;
 					else
-					System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
-						// gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
-						break;
-						
-						
+						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
+					// gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
+					break;
 				case "friction":
 					if (splitCommand.length != 3)
 						return false;
-					else
+					else {
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
-						// setFriction(Double.parseDouble((splitCommand[1])),Double.parseDouble((splitCommand[2])));
-						break;
-						
-						
+						setFriction(Double.parseDouble((splitCommand[1])), Double.parseDouble((splitCommand[2])));
+					}
+					break;
 				case "gravity":
 					if (splitCommand.length != 3)
 						return false;
-					else{
+					else {
 						setGravity(Double.parseDouble((splitCommand[1])));
 						System.out.println(splitCommand[0] + " " + splitCommand[1]);
 					}
 					break;
-					
-					
 				case "":
 					break;
-					
-					
 				default:
 					return false;
-
 				}
-
 			}
 			reader.close();
-
 		} catch (FileNotFoundException e) {
-
+			return false;
 		} catch (IOException e) {
 			System.out.println("IO Exception");
 		}
-		
+
 		this.setChanged();
 		this.notifyObservers();
-		
+
 		return true;
 	}
 
