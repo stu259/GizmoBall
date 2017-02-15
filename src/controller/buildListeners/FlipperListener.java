@@ -11,7 +11,6 @@ import view.IDisplay;
 
 public class FlipperListener implements KeyListener {
 private Model m;
-private char ch= 'd';
 	
 	public FlipperListener(Model m) {
 		this.m = m;
@@ -19,8 +18,10 @@ private char ch= 'd';
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		ch=e.getKeyChar();
-		System.out.println(ch);
+		System.out.println("hi");
+		if (e.getKeyCode() == KeyEvent.VK_SPACE){
+			System.out.println("I pressed space");
+		}
 	}
 
 	@Override

@@ -69,7 +69,7 @@ public interface IModel {
     /*
      * Moves gizmo 
      */
-    public void moveGizmo(int x, int y, IGizmo gizmo);
+    public boolean moveGizmo(int x, int y, IGizmo gizmo);
     
     /*
      * Calls methods when switched to run mode

@@ -537,6 +537,8 @@ public class Model extends Observable implements IModel {
 	 * 
 	 * 
 	 */
+	
+	
 	// check if object can be added (check outside board, position, size, then
 	// scale)
 	// Params: startx, starty, endx, endy
@@ -582,11 +584,16 @@ public class Model extends Observable implements IModel {
 		// add gizmo to gizmo list
 		gizmos.put(key, gizmo);
 
+		this.setChanged();
+		this.notifyObservers(); //call the observer to redraw the added gizmo
+		
 		return true;
 	}
 
 	// Adds param ball to the list of balls on the board
 	public void addBall(Ball ball) {
+		this.setChanged();
+		this.notifyObservers();
 		balls.add(ball);
 	}
 
@@ -599,6 +606,8 @@ public class Model extends Observable implements IModel {
 			return false;
 
 		balls.add(ball);
+		this.setChanged();
+		this.notifyObservers();
 		return true;
 	}
 
@@ -611,12 +620,16 @@ public class Model extends Observable implements IModel {
 
 		// draw absorber
 
+		this.setChanged();
+		this.notifyObservers();
 		return true;
 	}
 
 	@Override
 	public void rotateGizmo(IGizmo gizmo) {
 		gizmo.rotate();
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	@Override
@@ -662,6 +675,8 @@ public class Model extends Observable implements IModel {
 	@Override
 	public void deleteGizmo(String key) {
 		gizmos.remove(key);
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	@Override
@@ -702,9 +717,15 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public void moveGizmo(int x, int y, IGizmo gizmo) {
-		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize()))
+	public boolean moveGizmo(int x, int y, IGizmo gizmo) {
+		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize())){
 			gizmo.newPosition(x, y);
+			this.setChanged();
+			this.notifyObservers();
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
@@ -727,9 +748,17 @@ public class Model extends Observable implements IModel {
 				String[] splitCommand = line.toLowerCase().split(" ");
 				switch (splitCommand[0]) {
 				case "circle":
+					
+					
 				case "triangle":
+					
+					
 				case "square":
+					
+					
 				case "leftflipper":
+					
+					
 				case "rightflipper":
 					if (splitCommand.length != 4)
 						return false;
@@ -737,10 +766,14 @@ public class Model extends Observable implements IModel {
 							(Integer.parseInt(splitCommand[3]))))
 						return false;
 					break;
+					
+					
 				case "absorber":
 					if (splitCommand.length != 6)
 						return false;
 					break;
+					
+					
 				case "ball":
 					if (splitCommand.length != 6)
 						return false;
@@ -749,18 +782,24 @@ public class Model extends Observable implements IModel {
 								Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
 								Double.parseDouble(splitCommand[5]));
 					break;
+					
+					
 				case "rotate":
 					if (splitCommand.length != 2)
 						return false;
 					else
 						gizmos.get(splitCommand[1]).rotate();
 					break;
+					
+					
 				case "delete":
 					if (splitCommand.length != 2)
 						return false;
 					else
 						deleteGizmo(splitCommand[1]);
 					break;
+					
+					
 				case "move":
 					if (splitCommand.length != 4)
 						return false;
@@ -768,6 +807,8 @@ public class Model extends Observable implements IModel {
 						gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
 								Integer.parseInt(splitCommand[3]));
 					break;
+					
+					
 				case "keyconnect":
 					if (splitCommand.length != 5)
 						return false;
@@ -777,6 +818,8 @@ public class Model extends Observable implements IModel {
 								+ splitCommand[3] + " " + splitCommand[4]);
 					}
 					break;
+					
+					
 				case "connect":
 					if (splitCommand.length != 3)
 						return false;
@@ -784,6 +827,8 @@ public class Model extends Observable implements IModel {
 					System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						// gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
 						break;
+						
+						
 				case "friction":
 					if (splitCommand.length != 3)
 						return false;
@@ -791,6 +836,8 @@ public class Model extends Observable implements IModel {
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						// setFriction(Double.parseDouble((splitCommand[1])),Double.parseDouble((splitCommand[2])));
 						break;
+						
+						
 				case "gravity":
 					if (splitCommand.length != 3)
 						return false;
@@ -799,8 +846,12 @@ public class Model extends Observable implements IModel {
 						System.out.println(splitCommand[0] + " " + splitCommand[1]);
 					}
 					break;
+					
+					
 				case "":
 					break;
+					
+					
 				default:
 					return false;
 
@@ -814,6 +865,10 @@ public class Model extends Observable implements IModel {
 		} catch (IOException e) {
 			System.out.println("IO Exception");
 		}
+		
+		this.setChanged();
+		this.notifyObservers();
+		
 		return true;
 	}
 
