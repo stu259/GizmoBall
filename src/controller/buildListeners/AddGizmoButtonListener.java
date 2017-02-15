@@ -14,7 +14,7 @@ public class AddGizmoButtonListener implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			display.build().gizmos();	
+			display.changeBuildButtons("gizmo");
 	}
 
 }

@@ -1,8 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -11,56 +14,51 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.LoadListener;
 import controller.SaveListener;
 import model.IModel;
+import model.Model;
 
-public class Display extends JFrame implements IDisplay {
+public class Display implements IDisplay {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
 	private SaveListener sL;
 	private LoadListener lL;
 	private IModel m;
+	private JFrame frame;
+	private JPanel buttons;
+	private Build build;
+	private Run run;
+	private JPanel boards;
+	private BuildBoard bB;
+	private RunBoard rB;
 
 	Container cp;
 
-	public Display() {
-		createGUI();
-	}
-
-	private void createGUI() {
-
-		JFrame frame = new JFrame("Gizmo Ball");
-
-		cp = this.getContentPane();
+	public Display(Model model) {
+		m = model;
+		initialise();
 		addMenuBar();
+		tidy();
+	}
+
+	private void initialise() {
+		frame = new JFrame("Gizmo Ball");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cp = frame.getContentPane();
+		buttons = new JPanel(new CardLayout());
+		boards = new JPanel(new CardLayout());
 		build();
-		pack();
-		setSize(new Dimension(800, 700));
-
-		setLocationRelativeTo(null);
-		setVisible(true);
-
-	}
-
-	public Build build() {
-		Build b = new Build(this);
-		BuildBoard bb = new BuildBoard();
-		cp.add(b, BorderLayout.LINE_START);
-		cp.add(bb, BorderLayout.CENTER);
-		this.setTitle("BUILD MODE");
-		return b;
-	}
-
-	public void run() {
-		Run r = new Run();
-		RunBoard rb = new RunBoard();
-		cp.add(r, BorderLayout.LINE_START);
-		cp.add(rb, BorderLayout.CENTER);
-		this.setTitle("RUN MODE");
+		run();
+		cp.add(buttons, BorderLayout.LINE_START);
+		cp.add(boards, BorderLayout.CENTER);
+		changeMode("build");
 	}
 
 	private void addMenuBar() {
@@ -87,7 +85,51 @@ public class Display extends JFrame implements IDisplay {
 		menu.add(exit);
 
 		menuBar.add(menu);
-		setJMenuBar(menuBar);
+		frame.setJMenuBar(menuBar);
+	}
+
+	private void tidy() {
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		frame.setVisible(true);
+	}
+
+	public void createAndShowGUI() {
+
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+
+	public void changeBuildButtons(String b) {
+		build.changeButtons(b);
+	}
+
+	public void changeMode(String m) {
+		CardLayout cardLayout = (CardLayout) buttons.getLayout();
+		cardLayout.show(buttons, m);
+		cardLayout = (CardLayout) boards.getLayout();
+		cardLayout.show(boards, m);
+		if (m == "build") {
+			frame.setTitle("BUILD MODE");
+		} else {
+			frame.setTitle("RUN MODE");
+		}
+	}
+
+	public void build() {
+		build = new Build(this);
+		bB = new BuildBoard(500, 500);
+		buttons.add(build, "build");
+		boards.add(bB, "build");
+	}
+
+	public void run() {
+		run = new Run(this);
+		rB = new RunBoard(500, 500);
+		buttons.add(run, "run");
+		boards.add(rB, "run");
 	}
 
 	public File saveDialog() {
@@ -112,4 +154,7 @@ public class Display extends JFrame implements IDisplay {
 
 	}
 
+	public void errorPopup(String errorMessage) {
+		JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+	}
 }
