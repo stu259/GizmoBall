@@ -24,9 +24,10 @@ public class Model extends Observable implements IModel {
 	private List<Circle> circles;
 
 	private double gravity = 25;
-	private double friction = 0.025;
+	private double frictionMU = 0.025;
+	private double frictionMUTwo = 0.025;
 
-	private Vect velocity;
+	//private Vect velocity;
 	private double time = 0.05;
 
 	// connections for triggering both redrawing of lines and
@@ -386,6 +387,7 @@ public class Model extends Observable implements IModel {
 		double lowestColTime = Double.MAX_VALUE;
 		Ball collidingBall = null;
 		Vect updatedVel = new Vect(0, 0);
+		AbsorberGizmo absorber = null;
 
 		for (Ball ball : balls) {
 			Circle circ = ball.getCircle();
@@ -397,6 +399,7 @@ public class Model extends Observable implements IModel {
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
+					absorber = null;
 				}
 			}
 			for (Circle circle : circles) {
@@ -406,11 +409,30 @@ public class Model extends Observable implements IModel {
 					collidingBall = ball;
 					updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
 							circlesToGizmos.get(circle).getCof());
+					absorber = null;
+				}
+			}
+			for (LineSegment line: linesToAbsorber.keySet()){
+				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
+				if (nextTime < lowestColTime) {
+					lowestColTime = nextTime;
+					collidingBall = ball;
+					absorber = (AbsorberGizmo) linesToAbsorber.get(line);
+					updatedVel = absorber.getExitVeloicty();
+				}
+			}
+			for (Circle circle : circlesToAbsorber.keySet()){
+				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);
+				if (nextTime < lowestColTime) {
+					lowestColTime = nextTime;
+					collidingBall = ball;
+					absorber = (AbsorberGizmo) circlesToAbsorber.get(circle);
+					updatedVel = absorber.getExitVeloicty();
 				}
 			}
 
 		}
-		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel));
+		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, absorber));
 
 	}
 
@@ -418,17 +440,36 @@ public class Model extends Observable implements IModel {
 	public void moveBalls() {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
-		for (Ball ball : balls) {
-			if (!ball.isPaused() && ball != null) {
-				if (colTime > time) {// nein Kollision
-					ball = calculateBallMove(ball, time);
-				} else {
-					ball = calculateBallMove(ball, colTime);
-					ball.setVelocity(colInfo.getUpdatedVel());
-				}
+		Ball colBall = colInfo.getCollidingBall();
+		if(colTime > time){
+			balls.remove(colBall);
+			if(colInfo.getAbs() != null){
+				AbsorberGizmo absorber = colInfo.getAbs();
+				colBall.setX(absorber.getEndX());
+				colBall.setY(absorber.getStartY());
+				colBall.setVelocity(colInfo.getUpdatedVel());
+			}
+			else{
+				colBall = calculateBallMove(colBall, colTime);
+				colBall.setVelocity(colInfo.getUpdatedVel());
+				applyFriction(colBall, colTime);
+				applyGravity(colBall, colTime);
+			}
+			for(Ball ball : balls){
+				ball = calculateBallMove(ball, colTime);
+				applyFriction(ball, colTime);
+				applyGravity(ball, colTime);
+			}
+			balls.add(colBall);
+		}
+		else{
+			for(Ball ball : balls){
+				ball = calculateBallMove(ball, time);
+				applyFriction(ball, time);
+				applyGravity(ball, time);
 			}
 		}
-
+		
 		this.setChanged();
 		this.notifyObservers(); // update board both in gui and model
 	}
@@ -461,18 +502,19 @@ public class Model extends Observable implements IModel {
 		double colTime;
 		Ball collidingBall;
 		Vect updatedVel;
+		AbsorberGizmo abs;
 
-		public CollisionInfo(double t, Ball b, Vect v) {
+		public CollisionInfo(double t, Ball b, Vect v, AbsorberGizmo a) {
 			colTime = t;
 			collidingBall = b;
 			updatedVel = v;
+			abs = a;
 		}
 
 		public double getColTime() {
 			return colTime;
 		}
 
-		@SuppressWarnings("unused")
 		public Ball getCollidingBall() {
 			return collidingBall;
 		}
@@ -480,6 +522,12 @@ public class Model extends Observable implements IModel {
 		public Vect getUpdatedVel() {
 			return updatedVel;
 		}
+
+		public AbsorberGizmo getAbs() {
+			return abs;
+		}
+		
+		
 	}
 
 	/**
@@ -623,13 +671,14 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public void setFriction(double f) {
-		friction = f;
+	public void setFriction(double f, double fTwo) {
+		frictionMU = f;
+		frictionMUTwo = fTwo;
 	}
 
 	public void applyFriction(Ball ball, double time) {
-		double mu = friction;
-		double mu2 = friction;
+		double mu = frictionMU;
+		double mu2 = frictionMUTwo;
 
 		double xVel = ball.getVelocity().x();
 		double yVel = ball.getVelocity().y();

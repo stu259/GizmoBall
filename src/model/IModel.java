@@ -59,7 +59,7 @@ public interface IModel {
     /*
      * Sets friction
      */
-    public void setFriction(double f);
+    public void setFriction(double f, double fTwo);
     
     /*
      * Sets the gravity
