@@ -16,5 +16,7 @@ public interface IDisplay {
 	public File loadDialog();
 
 	public void errorPopup(String errorMessage);
+	
+	public void load();
 
 }

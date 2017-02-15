@@ -30,7 +30,7 @@ public class Display implements IDisplay {
 	private static final long serialVersionUID = 1L;
 	private SaveListener sL;
 	private LoadListener lL;
-	private IModel m;
+	private Model m;
 	private JFrame frame;
 	private JPanel buttons;
 	private Build build;
@@ -156,5 +156,16 @@ public class Display implements IDisplay {
 
 	public void errorPopup(String errorMessage) {
 		JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void load(){
+		buttons.add(new JPanel(), "blank");
+		FlipperBoard bb = new FlipperBoard(500, 500, m);
+		boards.add(bb, "load");
+		CardLayout cardLayout = (CardLayout) buttons.getLayout();
+		cardLayout.show(buttons, "blank");
+		cardLayout = (CardLayout) boards.getLayout();
+		cardLayout.show(boards, "load");
+		
 	}
 }

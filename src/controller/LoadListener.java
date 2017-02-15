@@ -23,6 +23,8 @@ public class LoadListener implements ActionListener {
 		if (f != null) {
 			if (!m.load(f)) {
 				d.errorPopup("Invalid File Format");
+			}else{
+				d.load();
 			}
 		} else {
 			d.errorPopup("No File Selected");
