@@ -15,10 +15,7 @@ public class Build extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private IDisplay d;
-	private AddGizmoButtonListener agbL;
-	private OperationsListener operL;
-	private SetupListener setL;
-	private BackListener backL;
+	private ChangeButtonListener cBL;
 	private ModeListener mL;
 	private JButton gizmosButton, operationsButton, setupButton, backButton;
 	private JPanel main;
@@ -50,22 +47,22 @@ public class Build extends JPanel {
 		gizmosButton = new JButton("Add Gizmos");
 		gizmosButton.setBackground(Color.LIGHT_GRAY);
 		gizmosButton.setForeground(Color.white);
-		agbL = new AddGizmoButtonListener(d);
-		gizmosButton.addActionListener(agbL);
+		cBL = new ChangeButtonListener(d,"gizmo");
+		gizmosButton.addActionListener(cBL);
 		main.add(gizmosButton);
 
 		JButton operationsButton = new JButton("Operations");
 		operationsButton.setBackground(Color.LIGHT_GRAY);
 		operationsButton.setForeground(Color.white);
-		operL = new OperationsListener(d);
-		operationsButton.addActionListener(operL);
+		cBL = new ChangeButtonListener(d,"operation");
+		operationsButton.addActionListener(cBL);
 		main.add(operationsButton);
 
 		JButton setupButton = new JButton("Setup");
 		setupButton.setBackground(Color.LIGHT_GRAY);
 		setupButton.setForeground(Color.white);
-		setL = new SetupListener(d);
-		setupButton.addActionListener(setL);
+		cBL = new ChangeButtonListener(d,"setup");
+		setupButton.addActionListener(cBL);
 		main.add(setupButton);
 
 		JButton RunButton = new JButton("Run Mode");
@@ -109,8 +106,8 @@ public class Build extends JPanel {
 		backButton.setBackground(Color.LIGHT_GRAY);
 		backButton.setForeground(Color.white);
 		gizmo.add(backButton);
-		backL = new BackListener(d);
-		backButton.addActionListener(backL);
+		cBL = new ChangeButtonListener(d,"main");;
+		backButton.addActionListener(cBL);
 	}
 
 	public void operations() {
@@ -154,9 +151,9 @@ public class Build extends JPanel {
 		JButton backButton = new JButton("Back");
 		backButton.setBackground(Color.LIGHT_GRAY);
 		backButton.setForeground(Color.white);
+		cBL = new ChangeButtonListener(d,"main");;
+		backButton.addActionListener(cBL);
 		operation.add(backButton);
-		backL = new BackListener(d);
-		backButton.addActionListener(backL);
 	}
 
 	public void setup() {
@@ -210,8 +207,8 @@ public class Build extends JPanel {
 		JButton backButton = new JButton("Back");
 		backButton.setBackground(Color.LIGHT_GRAY);
 		backButton.setForeground(Color.white);
-		backL = new BackListener(d);
-		backButton.addActionListener(backL);
+		cBL = new ChangeButtonListener(d,"main");;
+		backButton.addActionListener(cBL);
 		setup.add(backButton);
 	}
 
