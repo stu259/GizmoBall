@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+
 import physics.Vect;
 
 public class AbsorberGizmo extends Gizmo{
@@ -12,8 +14,11 @@ public class AbsorberGizmo extends Gizmo{
 		this.ex = ex;
 		this.ey = ey;
 		velo = new Vect(0,-50);
+		color = Color.ORANGE;
 	}
 
+	
+	
 	/**
 	 * 
 	 * @return exit velocity of the ball if touched

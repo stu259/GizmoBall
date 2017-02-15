@@ -396,7 +396,10 @@ public class Model extends Observable implements IModel {
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
+					if(linesToGizmos.get(line) == null)
+						updatedVel = Geometry.reflectWall(line, vel, 1);
+					else
+						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
 					absorber = null;
 				}
 			}
@@ -838,4 +841,16 @@ public class Model extends Observable implements IModel {
 		return true;
 	}
 
+	public List<Ball> getBalls(){
+		return balls;
+	}
+	
+	public List<IGizmo> getGizmos(){
+		List<IGizmo> gizmosList = new ArrayList<IGizmo>();
+		for(IGizmo gizmo : gizmos.values()){
+			gizmosList.add(gizmo);
+		}
+		
+		return gizmosList;
+	}
 }

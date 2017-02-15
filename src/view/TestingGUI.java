@@ -34,7 +34,7 @@ public class TestingGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Board is passed the Model so it can act as Observer
-		board = new FlipperBoard(500, 500, model);
+		board = new FlipperBoard(800, 800, model);
 		
 		Container cp = frame.getContentPane();
 		frame.setFocusable(true);

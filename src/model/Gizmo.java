@@ -82,7 +82,7 @@ public class Gizmo implements IGizmo{
 	
 	@Override
 	public Gizmo copy(){
-		return this.copy();
+		return this;
 	}
 	
 	@Override
