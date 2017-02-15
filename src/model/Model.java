@@ -38,12 +38,10 @@ public class Model extends Observable implements IModel {
 	private Map<IGizmo, List<LineSegment>> flippersToLines;
 	private Map<IGizmo, List<Circle>> flippersToCircles;
 
-	private int modelSize, boardScale, boardSize;
+	private int boardSize;
 
 	public Model() {
-		modelSize = 2000; // this is 20x20*L; L=100
 		boardSize = 20;
-		boardScale = modelSize / boardSize; // = 100
 
 		gizmos = new HashMap<String, IGizmo>();
 		balls = new ArrayList<Ball>();
@@ -82,7 +80,7 @@ public class Model extends Observable implements IModel {
 		flippersToLines.clear();
 		flippersToCircles.clear();
 
-		makeWalls(modelSize);
+		makeWalls(boardSize);
 
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
@@ -109,10 +107,10 @@ public class Model extends Observable implements IModel {
 
 	private void makeAbsorberGizmo(IGizmo gizmo) {
 		// get x and y coordinates of starting and ending points of the gizmo
-		int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
+		int x1 = gizmo.getStartX();
+		int x2 = gizmo.getEndX();
+		int y1 = gizmo.getStartY();
+		int y2 = gizmo.getEndY();
 
 		// create lines and corners
 		LineSegment left = new LineSegment(x1, y1, x1, y2);
@@ -137,24 +135,24 @@ public class Model extends Observable implements IModel {
 	}
 
 	private void makeLeftFlipper(IGizmo gizmo) {
-		int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
+		int x1 = gizmo.getStartX();
+		int x2 = gizmo.getEndX();
+		int y1 = gizmo.getStartY();
+		int y2 = gizmo.getEndY();
 		double radius = 0.25;
 
 		// drawing circles .25 radius
-		Circle topCircle = new Circle(x1 + (radius * boardScale), y1 + (radius * boardScale), radius);
-		Circle botCircle = new Circle(x1 + (radius * boardScale), y2 - (radius * boardScale), radius);
+		Circle topCircle = new Circle(x1 + (radius), y1 + (radius), radius);
+		Circle botCircle = new Circle(x1 + (radius), y2 - (radius), radius);
 		List<Circle> tempCirc = new ArrayList<Circle>();
 		tempCirc.add(topCircle);
 		tempCirc.add(botCircle);
 		circles.addAll(tempCirc);
 
 		// drawing lines
-		LineSegment right = new LineSegment(x1 + (2 * radius * boardScale), y1 + (radius * boardScale),
-				x1 + (2 * radius * boardScale), y2 - (radius * boardScale));
-		LineSegment left = new LineSegment(x1, y1 + (radius * boardScale), x1, y2 - (radius * boardScale));
+		LineSegment right = new LineSegment(x1 + (2 * radius), y1 + (radius),
+				x1 + (2 * radius), y2 - (radius));
+		LineSegment left = new LineSegment(x1, y1 + (radius), x1, y2 - (radius));
 		List<LineSegment> tempLines = new ArrayList<LineSegment>();
 		tempLines.add(right);
 		tempLines.add(left);
@@ -172,24 +170,24 @@ public class Model extends Observable implements IModel {
 	}
 
 	private void makeRightFlipper(IGizmo gizmo) {
-		int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
+		int x1 = gizmo.getStartX();
+		int x2 = gizmo.getEndX();
+		int y1 = gizmo.getStartY();
+		int y2 = gizmo.getEndY();
 		double radius = 0.25;
 
 		// drawing circles .25 radius
-		Circle topCircle = new Circle(x2 - (radius * boardScale), y1 + (radius * boardScale), radius);
-		Circle botCircle = new Circle(x2 - (radius * boardScale), y2 - (radius * boardScale), radius);
+		Circle topCircle = new Circle(x2 - (radius), y1 + (radius), radius);
+		Circle botCircle = new Circle(x2 - (radius), y2 - (radius), radius);
 		List<Circle> tempCirc = new ArrayList<Circle>();
 		tempCirc.add(topCircle);
 		tempCirc.add(botCircle);
 		circles.addAll(tempCirc);
 
 		// drawing lines
-		LineSegment right = new LineSegment(x2, y1 + (radius * boardScale), x2, y2 - (radius * boardScale));
-		LineSegment left = new LineSegment(x2 - (2 * radius * boardScale), y1 + (radius * boardScale),
-				x2 - (2 * radius * boardScale), y2 - (radius * boardScale));
+		LineSegment right = new LineSegment(x2, y1 + (radius), x2, y2 - (radius));
+		LineSegment left = new LineSegment(x2 - (2 * radius), y1 + (radius),
+				x2 - (2 * radius), y2 - (radius));
 		List<LineSegment> tempLines = new ArrayList<LineSegment>();
 		tempLines.add(right);
 		tempLines.add(left);
@@ -207,10 +205,10 @@ public class Model extends Observable implements IModel {
 	}
 
 	private void makeCircleGizmo(IGizmo gizmo) {
-		int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
+		int x1 = gizmo.getStartX();
+		int x2 = gizmo.getEndX();
+		int y1 = gizmo.getStartY();
+		int y2 = gizmo.getEndY();
 
 		double radius = gizmo.getSize() / 2;
 		// get midpoints
@@ -222,10 +220,10 @@ public class Model extends Observable implements IModel {
 	private void makeTriangleGizmo(IGizmo gizmo) {
 		// the right angled corner should be in the top-left position by default
 		// THIS IS A MUST!!!! DO NOT CHANGE
-		int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
+		int x1 = gizmo.getStartX();
+		int x2 = gizmo.getEndX();
+		int y1 = gizmo.getStartY();
+		int y2 = gizmo.getEndY();
 		int direction = gizmo.getRotation();
 
 		// keeps track of the triangle rotation for edge and corner placement
@@ -335,10 +333,10 @@ public class Model extends Observable implements IModel {
 
 	private void makeSquareGizmo(IGizmo gizmo) {
 		// get x and y coordinates of starting and ending points of the gizmo
-		int x1 = gizmo.getStartX() * boardScale;
-		int x2 = gizmo.getEndX() * boardScale;
-		int y1 = gizmo.getStartY() * boardScale;
-		int y2 = gizmo.getEndY() * boardScale;
+		int x1 = gizmo.getStartX();
+		int x2 = gizmo.getEndX();
+		int y1 = gizmo.getStartY();
+		int y2 = gizmo.getEndY();
 
 		// create lines and corners
 		LineSegment left = new LineSegment(x1, y1, x1, y2);
