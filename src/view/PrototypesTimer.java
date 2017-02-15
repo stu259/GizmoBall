@@ -13,18 +13,11 @@ public class PrototypesTimer implements ActionListener {
 	public PrototypesTimer(Model m) {
 		model = m;
 		timer = new Timer(50, this);
-//		this.moveBalls();
 	}
 
 	@Override
 	public final void actionPerformed(final ActionEvent e) {
 		timer.start();
-		System.out.println("Moving the big hairy balls! c==3");
 		model.moveBalls();
 	}
-//	
-//	public void moveBalls(){
-//		System.out.println("Moving the big hairy balls! c==3");
-//		model.moveBalls();
-//	}
 }

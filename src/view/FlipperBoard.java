@@ -74,7 +74,7 @@ public  class FlipperBoard extends JPanel implements Observer {
 				
 			}else if (gizmo instanceof AbsorberGizmo){
 				g2.setColor(gizmo.getColor());
-				g2.fillRect(x1, x2, x2-x1, y2-y1);
+				g2.fillRect(x1, y1, x2-x1, y2-y1);
 				
 			}else if (gizmo instanceof TriangleGizmo){
 

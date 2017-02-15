@@ -12,17 +12,19 @@ public class a {
 		m.addBall("ball2", 7, 7, 5, 5);
 		
 		m.addGizmo("square", "s1", 0, 0);
-		m.addGizmo("square", "s2", 4, 7);
-//		m.addGizmo("square", "s3", 19, 0);
-//		m.addGizmo("square", "s4", 19, 0);
-//		m.addGizmo("square", "s5", 19, 0);
-//		m.addGizmo("square", "s6", 19, 0);
-//		m.addGizmo("square", "s7", 19, 0);
+		m.addGizmo("square", "s2", 0, 1);
+		
+		
+		for(Integer i = 3; i < 20; i++){
+			String key = "s" + i.toString();
+			m.addGizmo("square", key, 0, i-1);
+		}
+
 		
 		m.addGizmo("triangle", "t1", 19, 0);
 		m.rotateGizmo("t1");
 		
-		m.addAbsorber("abs1", 0, 18, 20, 19);
+		//m.addAbsorber("abs1", 0, 19, 20, 20);
 		
 		
 		TestingGUI tg = new TestingGUI(m);
