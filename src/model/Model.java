@@ -442,12 +442,12 @@ public class Model extends Observable implements IModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
-		if (colTime > time) {
+		if (colTime < time) {  //collision detected
 			balls.remove(colBall);
 			if (colInfo.getAbs() != null) {
 				AbsorberGizmo absorber = colInfo.getAbs();
-				colBall.setX(absorber.getEndX());
-				colBall.setY(absorber.getStartY());
+				colBall.setX(absorber.getEndX() - colBall.getRadius());
+				colBall.setY(absorber.getStartY() - colBall.getRadius());
 				colBall.setVelocity(colInfo.getUpdatedVel());
 			} else {
 				colBall = calculateBallMove(colBall, colTime);
@@ -623,8 +623,8 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public void rotateGizmo(IGizmo gizmo) {
-		gizmo.rotate();
+	public void rotateGizmo(String key) {
+		gizmos.get(key).rotate();
 		this.setChanged();
 		this.notifyObservers();
 	}
