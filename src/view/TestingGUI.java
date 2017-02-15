@@ -25,7 +25,6 @@ public class TestingGUI {
 	public TestingGUI(Model m) {
 		model=m;
 		createAndShowGUI();
-		fl = new FlipperListener(m);
 		
 	}
 
@@ -39,7 +38,7 @@ public class TestingGUI {
 		
 		Container cp = frame.getContentPane();
 		frame.setFocusable(true);
-		frame.addKeyListener(fl);
+		frame.addKeyListener(new FlipperListener(model));
 		frame.add(board, BorderLayout.CENTER);					
 
 		frame.pack();
