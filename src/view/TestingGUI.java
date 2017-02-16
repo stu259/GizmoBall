@@ -31,7 +31,7 @@ public class TestingGUI {
 
 	public void createAndShowGUI() {
 
-		frame = new JFrame("Flipper Prototype");
+		frame = new JFrame("Prototype Board");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Board is passed the Model so it can act as Observer
@@ -39,13 +39,16 @@ public class TestingGUI {
 		
 		Container cp = frame.getContentPane();
 		frame.setFocusable(true);
-		frame.addKeyListener(new MagicKeyListener(new FlipperListener(model)));
+		frame.addKeyListener(new MagicKeyListener(new FlipperListener(model,board)));
 		frame.add(board, BorderLayout.CENTER);					
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
 		frame.setVisible(true);
+	}
+	public FlipperBoard getBoard(){
+		return board;
 	}
 
 }

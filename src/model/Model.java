@@ -852,4 +852,14 @@ public class Model extends Observable implements IModel {
 		
 		return gizmosList;
 	}
+	public void moveFlipper(IGizmo gizmo){
+		if (gizmo instanceof LeftFlipperGizmo){	
+			
+		}
+		if (gizmo instanceof RightFlipperGizmo){
+			
+		}
+		this.setChanged();
+		this.notifyObservers();
+	}
 }
