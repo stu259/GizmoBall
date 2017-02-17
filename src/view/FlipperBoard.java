@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,14 +29,14 @@ import model.RightFlipperGizmo;
 import model.SquareGizmo;
 import model.TriangleGizmo;
 
-
 public class FlipperBoard extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 	protected int width;
 	protected int height, scale;
 	protected Model gm;
-    public boolean upright, diagonal,initial;
+	public boolean triggered;
+
 	public FlipperBoard(int w, int h, Model m) {
 		// Observe changes in Model
 		m.addObserver(this);
@@ -41,7 +45,7 @@ public class FlipperBoard extends JPanel implements Observer {
 		scale = w / 20;
 		gm = m;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		setBackground(Color.gray);	
+		setBackground(Color.gray);
 	}
 
 	// Fix onscreen size
@@ -93,24 +97,29 @@ public class FlipperBoard extends JPanel implements Observer {
 				}
 
 			} else if (gizmo instanceof RightFlipperGizmo) {
-				g2.setColor(gizmo.getColor());
-				if (diagonal){
-					g2.fillRoundRect((x1+2*scale-((x2 - x1)/4)+x1)/2, y1, (x2 - x1)/4, (y2 - y1),(y2 - y1) / 4, (y2 - y1) / 4);
-				}else if (initial){
-					g2.fillRoundRect(x1+2*scale-((x2 - x1)/4), y1, (x2 - x1)/4, (y2 - y1) , (y2 - y1) / 4, (y2 - y1) / 4);
-				}else{
-					g2.fillRoundRect(x1, y1, x2 - x1, (y2 - y1) / 4, (y2 - y1) / 4, (y2 - y1) / 4);
+				RoundRectangle2D rf = new RoundRectangle2D.Double(x1 + 2 * scale - ((x2 - x1) / 4), y1, (x2 - x1) / 4,
+						(y2 - y1), (y2 - y1) / 4, (y2 - y1) / 4);
+				if (!triggered) {
+					g2.fill(rf);
+
+				} else {
+					AffineTransform transform = new AffineTransform();
+					transform.rotate(Math.toRadians(90), rf.getX() + 6, rf.getY() + 6);
+					Shape transformed = transform.createTransformedShape(rf);
+					g2.fill(transformed);
 				}
 			} else if (gizmo instanceof LeftFlipperGizmo) {
-				g2.setColor(gizmo.getColor());
-				if (diagonal){
-					//needs fix
-					g2.fillRoundRect(x1, y1, (((x2 - x1)/4)+(x2 - x1))/2 ,((y2 - y1)+((y2 - y1) / 4))/2 ,(y2 - y1) / 4, (y2 - y1) / 4);
-				}else if (initial){
-					g2.fillRoundRect(x1, y1, (x2 - x1)/4, (y2 - y1) , (y2 - y1) / 4, (y2 - y1) / 4);
-				}else{
-					//when flipped
-					g2.fillRoundRect(x1, y1, x2 - x1, (y2 - y1) / 4, (y2 - y1) / 4, (y2 - y1) / 4);
+				RoundRectangle2D rf = new RoundRectangle2D.Double(x1, y1, (x2 - x1) / 4, (y2 - y1), (y2 - y1) / 4,
+						(y2 - y1) / 4);
+				if (!triggered) {
+					g2.fill(rf);
+
+				} else {
+
+					AffineTransform transform = new AffineTransform();
+					transform.rotate(Math.toRadians(-90), rf.getX() + 6, rf.getY() + 6);
+					Shape transformed = transform.createTransformedShape(rf);
+					g2.fill(transformed);
 				}
 			}
 		}

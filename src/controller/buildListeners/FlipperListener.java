@@ -24,16 +24,14 @@ private FlipperBoard b;
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		b.initial=true;
+		b.triggered=false;
 		if (e.getKeyCode() == KeyEvent.VK_SPACE){
 			System.out.println("Key Pressed");
 			List <IGizmo> gizmos = m.getGizmos();
 			for (IGizmo gizmo:gizmos){
 				if (gizmo instanceof LeftFlipperGizmo || gizmo instanceof RightFlipperGizmo){
 					//m.moveFlipper(gizmo);
-					b.initial=false;
-					b.diagonal=true;
-					b.upright=true;
+					b.triggered=true;
 					b.repaint();
 				}
 			}
@@ -43,9 +41,7 @@ private FlipperBoard b;
 	@Override
 	public void keyReleased(KeyEvent e) {
 		System.out.println("Key Released");
-		b.upright=false;
-		b.diagonal=true;
-		b.initial=true;
+		b.triggered=false;
 	}
 
 	@Override

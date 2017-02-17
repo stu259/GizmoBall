@@ -8,7 +8,8 @@ public class a {
 		Model m = new Model();
 
 		m.addGizmo("leftflipper", "lf", 0, 0);
-		m.addGizmo("rightflipper", "rf", 3, 0);
+		m.addGizmo("rightflipper", "rf", 2, 0);
+//		m.addGizmo("square", "s1", 5, 0);
 //
 //
 //		m.addBall("ball1", 4, 4, 5, 5);
