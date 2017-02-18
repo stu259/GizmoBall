@@ -92,18 +92,9 @@ public class Display implements IDisplay {
 	private void tidy() {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-
 		frame.setVisible(true);
-		
-		while (frame.getWidth() > 900) {
-	        frame.pack();
-	    }
-	}
-
-	public void createAndShowGUI() {
 		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+
 	}
 
 	public void changeBuildButtons(String b) {
@@ -131,7 +122,7 @@ public class Display implements IDisplay {
 
 	public void run() {
 		run = new Run(this);
-		fB = new FlipperBoard(800, 800, m);
+		fB = new FlipperBoard(700, 700, m);
 		buttons.add(run, "run");
 		boards.add(fB, "run");
 	}
@@ -161,8 +152,8 @@ public class Display implements IDisplay {
 	public void errorPopup(String errorMessage) {
 		JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 	}
-	
-	public void load(){
+
+	public void load() {
 		buttons.add(new JPanel(), "blank");
 		FlipperBoard bb = new FlipperBoard(500, 500, m);
 		boards.add(bb, "load");
@@ -170,10 +161,10 @@ public class Display implements IDisplay {
 		cardLayout.show(buttons, "blank");
 		cardLayout = (CardLayout) boards.getLayout();
 		cardLayout.show(boards, "load");
-		
+
 	}
-	
-	public IModel getModel(){
+
+	public IModel getModel() {
 		return this.m;
 	}
 }
