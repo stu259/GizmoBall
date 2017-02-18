@@ -14,7 +14,7 @@ public class StartStopListener implements ActionListener {
 	
 	public StartStopListener(IModel model) {
 		this.model = model;
-		timer = new Timer(25, this);
+		timer = new Timer(50, this);
 	}
 	
 	@Override
