@@ -6,7 +6,7 @@ public class Ball {
 	private Vect vel;
 	private double minSpeed, maxSpeed, radius, x, y;
 	private Color color;
-	private boolean paused;
+	private boolean paused, absorbed;
 	
 	/*
 	 * Direction must be in radians
@@ -20,8 +20,9 @@ public class Ball {
 		color = Color.CYAN;
 		radius = 0.25;
 		paused = false;
+		absorbed = false;
 	}
-	
+
 	/*
 	 * Return the X coordinate of the ball
 	 */
@@ -37,19 +38,19 @@ public class Ball {
 	}
 
 	/*
-	 * Return whether or not the ball is paused
+	 * Returns whether or not the ball is absorbed
 	 */
-	public boolean isPaused() {
-		return paused;
+	public boolean isAbsorbed() {
+		return absorbed;
 	}
 
 	/*
-	 * set whether or not the ball is paused
+	 * Sets whether or not the ball is absorbed
 	 */
-	public void setPaused(boolean paused) {
-		this.paused = paused;
+	public void setAbsorbed(boolean absorbed) {
+		this.absorbed = absorbed;
 	}
-
+	
 	/*
 	 * Returns the velocity of the ball
 	 */

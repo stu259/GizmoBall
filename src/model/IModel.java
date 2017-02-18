@@ -82,15 +82,6 @@ public interface IModel {
 	 */
 	public void moveBalls();
 	
-	/*
-	 * Resumes all balls from paused state
-	 */
-	public void resume();
-	
-	/*
-	 * Puts all balls into paused state
-	 */
-	public void pause();
 	
 	/**
 	 * Saves current game state

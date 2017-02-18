@@ -38,6 +38,7 @@ public class Display implements IDisplay {
 	private JPanel boards;
 	private BuildBoard bB;
 	private RunBoard rB;
+	private FlipperBoard fB;
 
 	Container cp;
 
@@ -91,12 +92,15 @@ public class Display implements IDisplay {
 	private void tidy() {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
+
 		frame.setVisible(true);
+		
+		while (frame.getWidth() > 900) {
+	        frame.pack();
+	    }
 	}
 
 	public void createAndShowGUI() {
-
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
@@ -127,9 +131,9 @@ public class Display implements IDisplay {
 
 	public void run() {
 		run = new Run(this);
-		rB = new RunBoard(500, 500);
+		fB = new FlipperBoard(800, 800, m);
 		buttons.add(run, "run");
-		boards.add(rB, "run");
+		boards.add(fB, "run");
 	}
 
 	public File saveDialog() {
@@ -167,5 +171,9 @@ public class Display implements IDisplay {
 		cardLayout = (CardLayout) boards.getLayout();
 		cardLayout.show(boards, "load");
 		
+	}
+	
+	public IModel getModel(){
+		return this.m;
 	}
 }

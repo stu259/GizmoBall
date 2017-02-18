@@ -22,6 +22,8 @@ public class RunBoard extends JPanel implements Observer {
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		setBackground(Color.gray);
 	}
+	
+	
 
 	// Fix onscreen size
 	public Dimension getPreferredSize() {

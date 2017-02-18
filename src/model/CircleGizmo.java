@@ -15,7 +15,7 @@ public class CircleGizmo extends Gizmo{
 	}
 	
 	public double getRadius(){
-		return size/2;
+		return (double) size/2;
 	}
 	
 	@Override

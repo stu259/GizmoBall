@@ -204,13 +204,11 @@ public class Model extends Observable implements IModel {
 
 	private void makeCircleGizmo(IGizmo gizmo) {
 		int x1 = gizmo.getStartX();
-		int x2 = gizmo.getEndX();
 		int y1 = gizmo.getStartY();
-		int y2 = gizmo.getEndY();
-
-		double radius = gizmo.getSize() / 2;
+		
+		double radius = (double) gizmo.getSize() / 2;
 		// get midpoints
-		Circle circle = new Circle((x1 + x2) / 2, (y1 + y2) / 2, radius);
+		Circle circle = new Circle((x1 + radius), (y1 + radius), radius);
 		circlesToGizmos.put(circle, gizmo);
 		circles.add(circle);
 	}
@@ -369,6 +367,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	private void makeWalls(int boardSize) {
+		System.out.println("Drawing walls!");
 		LineSegment topWall = new LineSegment(0, 0, boardSize, 0);
 		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);
 		LineSegment bottomWall = new LineSegment(0, boardSize, boardSize, boardSize);
@@ -431,6 +430,17 @@ public class Model extends Observable implements IModel {
 			}
 
 		}
+		
+		if(absorber != null && lowestColTime < time){
+//			System.out.println(collidingBall.isAbsorbed());
+			collidingBall.setAbsorbed(!collidingBall.isAbsorbed());
+			System.out.println(collidingBall.isAbsorbed());
+			System.out.println(lowestColTime);
+			if(lowestColTime == 0.0){
+				collidingBall.setAbsorbed(false);
+			}
+		}
+		
 		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, absorber));
 
 	}
@@ -443,10 +453,16 @@ public class Model extends Observable implements IModel {
 		if (colTime < time) {  //collision detected
 			balls.remove(colBall);
 			if (colInfo.getAbs() != null) {
-				AbsorberGizmo absorber = colInfo.getAbs();
-				colBall.setX(absorber.getEndX() - colBall.getRadius());
-				colBall.setY(absorber.getStartY() - colBall.getRadius());
-				colBall.setVelocity(colInfo.getUpdatedVel());
+				if(colBall.isAbsorbed()){
+					AbsorberGizmo absorber = colInfo.getAbs();
+					colBall.setX(absorber.getEndX() - colBall.getRadius());
+					colBall.setY(absorber.getEndY() - colBall.getRadius());
+					colBall.setVelocity(colInfo.getUpdatedVel());
+				}else{
+					colBall = calculateBallMove(colBall, colTime);
+					applyFriction(colBall, colTime);
+					applyGravity(colBall, colTime);
+				}
 			} else {
 				colBall = calculateBallMove(colBall, colTime);
 				colBall.setVelocity(colInfo.getUpdatedVel());
@@ -480,19 +496,6 @@ public class Model extends Observable implements IModel {
 		ball.setY(y);
 
 		return ball;
-	}
-
-	@Override
-	public void resume() {
-		for (Ball ball : balls)
-			ball.setPaused(false);
-	}
-
-	@Override
-	// pauses all the balls and therefore pauses the game
-	public void pause() {
-		for (Ball ball : balls)
-			ball.setPaused(true);
 	}
 
 	private class CollisionInfo {

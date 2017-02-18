@@ -13,7 +13,7 @@ public class PrototypesTimer implements ActionListener {
 	public PrototypesTimer(Model m,FlipperBoard b) {
 		board=b;
 		model = m;
-		timer = new Timer(50, this);
+		timer = new Timer(100, this);
 	}
 
 	@Override

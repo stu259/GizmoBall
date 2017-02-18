@@ -48,7 +48,7 @@ public class FlipperBoard extends JPanel implements Observer {
 		scale = w / 20;
 		gm = m;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		setBackground(Color.WHITE);
+		//setBackground(Color.WHITE);
 	}
 
 	// Fix onscreen size
@@ -81,7 +81,7 @@ public class FlipperBoard extends JPanel implements Observer {
 				g2.fillOval(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("absorber")) {
-				g2.setColor(color);
+				g2.setColor(Color.ORANGE);
 				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("triangle")) {
@@ -133,6 +133,8 @@ public class FlipperBoard extends JPanel implements Observer {
 		for (IDrawableBall ball : ballDrawables) {
 			double radius = ball.getRadius();
 
+			g2.setColor(Color.BLUE);
+			
 			int x1 = (int) ((ball.getX() - radius) * scale);
 			int y1 = (int) ((ball.getY() - radius) * scale);
 			// int x2 = (int) (ball.getX() + radius) * scale;
