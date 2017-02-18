@@ -18,37 +18,37 @@ import model.Model;
 
 
 public class TestingGUI {
-	private FlipperListener fl;
-	private JFrame frame;
-	private FlipperBoard board;
-	private Model model;
+    private FlipperListener fl;
+    private JFrame frame;
+    private FlipperBoard board;
+    private Model model;
 
-	public TestingGUI(Model m) {
-		model=m;
-		createAndShowGUI();
-		
-	}
+    public TestingGUI(Model m) {
+        model=m;
+        createAndShowGUI();
 
-	public void createAndShowGUI() {
+    }
 
-		frame = new JFrame("Prototype Board");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void createAndShowGUI() {
 
-		// Board is passed the Model so it can act as Observer
-		board = new FlipperBoard(800, 800, model);
-		
-		Container cp = frame.getContentPane();
-		frame.setFocusable(true);
-		frame.addKeyListener(new MagicKeyListener(new FlipperListener(model,board)));
-		frame.add(board, BorderLayout.CENTER);					
+        frame = new JFrame("Prototype Board");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-		frame.setVisible(true);
-	}
-	public FlipperBoard getBoard(){
-		return board;
-	}
+        // Board is passed the Model so it can act as Observer
+        board = new FlipperBoard(500, 500, model);
+
+        Container cp = frame.getContentPane();
+        frame.setFocusable(true);
+        frame.addKeyListener(new MagicKeyListener(new FlipperListener(model,board)));
+        frame.add(board, BorderLayout.CENTER);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+    }
+    public FlipperBoard getBoard(){
+        return board;
+    }
 
 }

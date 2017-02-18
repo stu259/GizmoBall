@@ -7,8 +7,8 @@ public class FlipperPrototype {
 	public static void main(String[] args) {
 		Model m = new Model();
 
-		m.addGizmo("leftflipper", "lf", 9, 10);
-		m.addGizmo("rightflipper", "rf", 11, 10);
+		m.addGizmo("leftflipper", "lf", 8, 10);
+		m.addGizmo("rightflipper", "rf", 10, 10);
 
 		TestingGUI tg = new TestingGUI(m);
 
