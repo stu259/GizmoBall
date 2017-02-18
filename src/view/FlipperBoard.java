@@ -59,8 +59,6 @@ public class FlipperBoard extends JPanel implements Observer {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-
-		List<Ball> balls = gm.getBalls();
 		
 		List<IDrawableGizmo> gizmoDrawables = gm.drawableGizmo();
 		List<IDrawableBall> ballDrawables = gm.drawableBall();
