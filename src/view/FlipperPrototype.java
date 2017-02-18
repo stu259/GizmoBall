@@ -10,7 +10,7 @@ public class FlipperPrototype {
 		m.addGizmo("leftflipper", "lf", 8, 10);
 		m.addGizmo("rightflipper", "rf", 10, 10);
 
-		m.addBall("ball", 5, 5, 5, 5);
+//		m.addBall("ball", 5, 5, 5, 5);
 		
 		TestingGUI tg = new TestingGUI(m);
 

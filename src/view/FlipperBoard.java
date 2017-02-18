@@ -48,7 +48,7 @@ public class FlipperBoard extends JPanel implements Observer {
 		scale = w / 20;
 		gm = m;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		//setBackground(Color.WHITE);
+		setBackground(Color.BLACK);
 	}
 
 	// Fix onscreen size
@@ -73,19 +73,19 @@ public class FlipperBoard extends JPanel implements Observer {
 			Color color = Color.BLUE;
 			
 			if (gizmo.getGizmoType().toLowerCase().equals("square")) {
-				g2.setColor(color);
+				g2.setColor(color.red);
 				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("circle")) {
-				g2.setColor(color);
+				g2.setColor(color.GREEN);
 				g2.fillOval(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("absorber")) {
-				g2.setColor(Color.ORANGE);
+				g2.setColor(Color.PINK);
 				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("triangle")) {
-				g2.setColor(color);
+				g2.setColor(color.BLUE);
 
 				switch (gizmo.getRotation()) {
 				case 0:
@@ -103,6 +103,7 @@ public class FlipperBoard extends JPanel implements Observer {
 				}
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("rightflipper")) {
+				g2.setColor(color.YELLOW);
 				RoundRectangle2D rf = new RoundRectangle2D.Double(x1 + 2 * scale - ((x2 - x1) / 4), y1, (x2 - x1) / 4,
 						(y2 - y1), (y2 - y1) / 4, (y2 - y1) / 4);
 				if (!triggered) {
@@ -115,16 +116,17 @@ public class FlipperBoard extends JPanel implements Observer {
 					g2.fill(transformed);
 				}
 			} else if (gizmo.getGizmoType().toLowerCase().equals("leftflipper")) {
-				RoundRectangle2D rf = new RoundRectangle2D.Double(x1, y1, (x2 - x1) / 4, (y2 - y1), (y2 - y1) / 4,
+				g2.setColor(color.YELLOW);
+				RoundRectangle2D lf = new RoundRectangle2D.Double(x1, y1, (x2 - x1) / 4, (y2 - y1), (y2 - y1) / 4,
 						(y2 - y1) / 4);
 				if (!triggered) {
-					g2.fill(rf);
+					g2.fill(lf);
 
 				} else {
 
 					AffineTransform transform = new AffineTransform();
-					transform.rotate(Math.toRadians(-90), rf.getX() + 6, rf.getY() + 6);
-					Shape transformed = transform.createTransformedShape(rf);
+					transform.rotate(Math.toRadians(-90), lf.getX() + 6, lf.getY() + 6);
+					Shape transformed = transform.createTransformedShape(lf);
 					g2.fill(transformed);
 				}
 			}

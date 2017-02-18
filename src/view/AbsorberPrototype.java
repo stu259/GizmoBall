@@ -9,6 +9,8 @@ public class AbsorberPrototype {
 
 		m.addBall("ball", 5, 5, 5, 5);
 		m.addAbsorber("a1", 0, 19, 20, 20);
+		m.addGizmo("triangle","t1",19,0);
+		m.rotateGizmo("t1");
 		
 		TestingGUI tg = new TestingGUI(m);
 

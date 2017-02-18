@@ -432,11 +432,9 @@ public class Model extends Observable implements IModel {
 		}
 		
 		if(absorber != null && lowestColTime < time){
-//			System.out.println(collidingBall.isAbsorbed());
 			collidingBall.setAbsorbed(!collidingBall.isAbsorbed());
-			System.out.println(collidingBall.isAbsorbed());
-			System.out.println(lowestColTime);
 			if(lowestColTime == 0.0){
+				lowestColTime = 0.02;
 				collidingBall.setAbsorbed(false);
 			}
 		}
@@ -713,11 +711,8 @@ public class Model extends Observable implements IModel {
 		double xVel = ball.getVelocity().x();
 		double yVel = ball.getVelocity().y();
 
-		double newX = xVel * (1 - (mu * time) - (mu2 * xVel) * time);
-		double newY = yVel * (1 - (mu * time) - (mu2 * yVel) * time);
-
-		Vect newV = new Vect(newX, newY);
-		ball.setVelocity(newV);
+		double fValue = (1 - mu * time - ball.getVelocity().length() * mu2 * time);
+		ball.setVelocity(ball.getVelocity().times(fValue));
 	}
 
 	@Override
