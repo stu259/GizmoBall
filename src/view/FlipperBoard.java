@@ -32,7 +32,7 @@ import model.RightFlipperGizmo;
 import model.SquareGizmo;
 import model.TriangleGizmo;
 
-public class FlipperPrototype extends JPanel implements Observer {
+public class FlipperBoard extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 	protected int width;
@@ -40,7 +40,7 @@ public class FlipperPrototype extends JPanel implements Observer {
 	protected Model gm;
 	public boolean triggered;
 
-	public FlipperPrototype(int w, int h, Model m) {
+	public FlipperBoard(int w, int h, Model m) {
 		// Observe changes in Model
 		m.addObserver(this);
 		width = w;

@@ -11,13 +11,13 @@ import model.IGizmo;
 import model.LeftFlipperGizmo;
 import model.Model;
 import model.RightFlipperGizmo;
-import view.FlipperPrototype;
+import view.FlipperBoard;
 import view.IDisplay;
 
 public class FlipperListener implements KeyListener {
 private Model m;
-private FlipperPrototype b;	
-	public FlipperListener(Model m, FlipperPrototype b) {
+private FlipperBoard b;	
+	public FlipperListener(Model m, FlipperBoard b) {
 		this.b=b;
 		this.m = m;
 	}

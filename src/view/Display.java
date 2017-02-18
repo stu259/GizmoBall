@@ -160,7 +160,7 @@ public class Display implements IDisplay {
 	
 	public void load(){
 		buttons.add(new JPanel(), "blank");
-		FlipperPrototype bb = new FlipperPrototype(500, 500, m);
+		FlipperBoard bb = new FlipperBoard(500, 500, m);
 		boards.add(bb, "load");
 		CardLayout cardLayout = (CardLayout) buttons.getLayout();
 		cardLayout.show(buttons, "blank");

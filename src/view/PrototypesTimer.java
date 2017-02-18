@@ -6,11 +6,11 @@ import javax.swing.Timer;
 import model.Model;
 
 public class PrototypesTimer implements ActionListener {
-	private FlipperPrototype board;
+	private FlipperBoard board;
 	private Timer timer;
 	private Model model;
 
-	public PrototypesTimer(Model m,FlipperPrototype b) {
+	public PrototypesTimer(Model m,FlipperBoard b) {
 		board=b;
 		model = m;
 		timer = new Timer(50, this);

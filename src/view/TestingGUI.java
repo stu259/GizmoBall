@@ -20,7 +20,7 @@ import model.Model;
 public class TestingGUI {
 	private FlipperListener fl;
 	private JFrame frame;
-	private FlipperPrototype board;
+	private FlipperBoard board;
 	private Model model;
 
 	public TestingGUI(Model m) {
@@ -35,7 +35,7 @@ public class TestingGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Board is passed the Model so it can act as Observer
-		board = new FlipperPrototype(800, 800, model);
+		board = new FlipperBoard(800, 800, model);
 		
 		Container cp = frame.getContentPane();
 		frame.setFocusable(true);
@@ -47,7 +47,7 @@ public class TestingGUI {
 		frame.setResizable(false);
 		frame.setVisible(true);
 	}
-	public FlipperPrototype getBoard(){
+	public FlipperBoard getBoard(){
 		return board;
 	}
 
