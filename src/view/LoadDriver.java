@@ -8,7 +8,6 @@ public class LoadDriver {
 		Model m = new Model();
 		Display d = new Display(m);
 		d.load();
-
 	}
 
 }

@@ -543,9 +543,8 @@ public class Model extends Observable implements IModel {
 			return false;
 
 		// check if given coordinates overlaps with any other gizmo position
-		for (String key : gizmos.keySet()) {
-			IGizmo gizmo = gizmos.get(key);
-			if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getEndY())
+		for (IGizmo gizmo : gizmos.values()){
+			if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
 				return false;
 		}
 		return true;
@@ -556,16 +555,38 @@ public class Model extends Observable implements IModel {
 	public boolean addGizmo(String gizmo, String key, int x, int y) {
 		switch (gizmo.toLowerCase()) {
 		case "triangle":
-			return addGizmo(new TriangleGizmo(x, y), key);
+			if (addGizmo(new TriangleGizmo(x, y), key)){
+				System.out.println("Adding triangle at ("+x+","+y+")");
+				return true;
+			}
+			break;
 		case "circle":
-			return addGizmo(new CircleGizmo(x, y), key);
+			if (addGizmo(new CircleGizmo(x, y), key)){
+				System.out.println("Adding circle at ("+x+","+y+")");
+				return true;
+			}
+			break;
 		case "square":
-			return addGizmo(new SquareGizmo(x, y), key);
+			if (addGizmo(new SquareGizmo(x, y), key)){
+				System.out.println("Adding square at ("+x+","+y+")");
+				return true;
+			}
+			break;
 		case "rightflipper":
-			return addGizmo(new RightFlipperGizmo(x, y), key);
+			if (addGizmo(new RightFlipperGizmo(x, y), key)){
+				System.out.println("Adding right flipper at ("+x+","+y+")");
+				return true;
+			}
+			break;
 		case "leftflipper":
-			return addGizmo(new LeftFlipperGizmo(x, y), key);
+			if (addGizmo(new LeftFlipperGizmo(x, y), key)){
+				System.out.println("Adding left flipper at ("+x+","+y+")");
+				return true;
+			}
+			break;
 		}
+		
+		System.out.println("Cannot add gizmo at ("+x+","+y+")");
 		return false;
 	}
 
@@ -599,8 +620,6 @@ public class Model extends Observable implements IModel {
 			return false;
 
 		balls.add(ball);
-		this.setChanged();
-		this.notifyObservers();
 		return true;
 	}
 
