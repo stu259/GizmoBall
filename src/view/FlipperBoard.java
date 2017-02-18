@@ -110,7 +110,7 @@ public class FlipperBoard extends JPanel implements Observer {
 
 				} else {
 					AffineTransform transform = new AffineTransform();
-					transform.rotate(Math.toRadians(90), rf.getX() + 6, rf.getY() + 6);
+					transform.rotate(Math.toRadians(90), rf.getX() + 10, rf.getY() + 10);
 					Shape transformed = transform.createTransformedShape(rf);
 					g2.fill(transformed);
 				}
@@ -123,7 +123,7 @@ public class FlipperBoard extends JPanel implements Observer {
 				} else {
 
 					AffineTransform transform = new AffineTransform();
-					transform.rotate(Math.toRadians(-90), rf.getX() + 6, rf.getY() + 6);
+					transform.rotate(Math.toRadians(-90), rf.getX()+10 , rf.getY()+10);
 					Shape transformed = transform.createTransformedShape(rf);
 					g2.fill(transformed);
 				}
