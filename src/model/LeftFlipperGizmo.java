@@ -19,4 +19,9 @@ public class LeftFlipperGizmo extends Gizmo{
 	public int getAngularVel(){
 		return angularVel;
 	}
+	
+	@Override
+	public String gizmoType() {
+		return "leftflipper";
+	}
 }

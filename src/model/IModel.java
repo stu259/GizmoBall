@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.util.List;
 
 public interface IModel {
 	/*
@@ -103,5 +104,15 @@ public interface IModel {
 	 */
 	public boolean load(File f);
 
+	/**
+	 * Creates a Drawable object so that the view
+	 * can obtain information of the gizmo to draw
+	 * without direct coupling/possible manipulation
+	 * of the Gizmo object itself in the Model.
+	 * @param gizmo
+	 * @return Drawable Object
+	 */
+	public List<IDrawableGizmo> drawableGizmo();
 	
+	public List<IDrawableBall> drawableBall();
 }

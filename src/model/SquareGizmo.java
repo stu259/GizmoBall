@@ -8,4 +8,9 @@ public class SquareGizmo extends Gizmo{
 		size = 1; //sqaure has predefined size of 1
 		coef = 1.0;
 	}
+	
+	@Override
+	public String gizmoType() {
+		return "square";
+	}
 }

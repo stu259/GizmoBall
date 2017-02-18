@@ -73,6 +73,8 @@ public interface IGizmo {
 	 * gets the key
 	 */
 	public String getKey();
+	
+	public String gizmoType();
 
 	public IGizmo getConnectedGizmo();
 

@@ -48,4 +48,9 @@ public class AbsorberGizmo extends Gizmo{
 	public void rotate(){
 		return;
 	}
+	
+	@Override
+	public String gizmoType() {
+		return "absorber";
+	}
 }

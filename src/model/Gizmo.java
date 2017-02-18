@@ -124,4 +124,9 @@ public class Gizmo implements IGizmo{
 	public void removeGizmoConnected(IGizmo gizmo){
 		gizmosConnected.remove(gizmo);
 	}
+
+	@Override
+	public String gizmoType() {
+		return "gizmo";
+	}
 }

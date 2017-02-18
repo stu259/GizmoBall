@@ -574,8 +574,6 @@ public class Model extends Observable implements IModel {
 		if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
 			return false;
 
-		// TODO CHECK FOR ABSORBER OVERLAPPING AS WELL
-
 		// add gizmo to gizmo list
 		gizmos.put(key, gizmo);
 
@@ -667,7 +665,6 @@ public class Model extends Observable implements IModel {
 		gizmo.setKey("");
 	}
 
-	/* TODO REWRITE TO REMOVE FROM THE MAPS AND LISTS */
 	@Override
 	public void deleteGizmo(String key) {
 		gizmos.remove(key);
@@ -852,6 +849,7 @@ public class Model extends Observable implements IModel {
 		
 		return gizmosList;
 	}
+	
 	public void moveFlipper(IGizmo gizmo){
 		if (gizmo instanceof LeftFlipperGizmo){	
 			
@@ -861,5 +859,27 @@ public class Model extends Observable implements IModel {
 		}
 		this.setChanged();
 		this.notifyObservers();
+	}
+
+	public List<IDrawableGizmo> drawableGizmo(){
+		List<IDrawableGizmo> drawables = new ArrayList<IDrawableGizmo>();
+		List<IGizmo> tempGizmo = this.getGizmos();
+		
+		for(IGizmo gizmo : tempGizmo){
+			drawables.add(new DrawableGizmo(gizmo));
+		}
+		
+		return drawables;
+	}
+
+	public List<IDrawableBall> drawableBall(){
+		List<IDrawableBall> drawables = new ArrayList<IDrawableBall>();
+		List<Ball> tempBall = this.getBalls();
+		
+		for(Ball ball : tempBall){
+			drawables.add(new DrawableBall(ball));
+		}
+		
+		return drawables;
 	}
 }

@@ -8,4 +8,9 @@ public class TriangleGizmo extends Gizmo{
 		coef = 1.0;
 		size = 1; //triangle has predefined size of 1
 	}
+	
+	@Override
+	public String gizmoType() {
+		return "triangle";
+	}
 }
