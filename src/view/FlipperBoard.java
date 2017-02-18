@@ -48,7 +48,7 @@ public class FlipperBoard extends JPanel implements Observer {
 		scale = w / 20;
 		gm = m;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		setBackground(Color.gray);
+		setBackground(Color.WHITE);
 	}
 
 	// Fix onscreen size
