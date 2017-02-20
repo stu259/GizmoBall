@@ -148,8 +148,7 @@ public class Model extends Observable implements IModel {
 		circles.addAll(tempCirc);
 
 		// drawing lines
-		LineSegment right = new LineSegment(x1 + (2 * radius), y1 + (radius),
-				x1 + (2 * radius), y2 - (radius));
+		LineSegment right = new LineSegment(x1 + (2 * radius), y1 + (radius), x1 + (2 * radius), y2 - (radius));
 		LineSegment left = new LineSegment(x1, y1 + (radius), x1, y2 - (radius));
 		List<LineSegment> tempLines = new ArrayList<LineSegment>();
 		tempLines.add(right);
@@ -184,8 +183,7 @@ public class Model extends Observable implements IModel {
 
 		// drawing lines
 		LineSegment right = new LineSegment(x2, y1 + (radius), x2, y2 - (radius));
-		LineSegment left = new LineSegment(x2 - (2 * radius), y1 + (radius),
-				x2 - (2 * radius), y2 - (radius));
+		LineSegment left = new LineSegment(x2 - (2 * radius), y1 + (radius), x2 - (2 * radius), y2 - (radius));
 		List<LineSegment> tempLines = new ArrayList<LineSegment>();
 		tempLines.add(right);
 		tempLines.add(left);
@@ -205,7 +203,7 @@ public class Model extends Observable implements IModel {
 	private void makeCircleGizmo(IGizmo gizmo) {
 		int x1 = gizmo.getStartX();
 		int y1 = gizmo.getStartY();
-		
+
 		double radius = (double) gizmo.getSize() / 2;
 		// get midpoints
 		Circle circle = new Circle((x1 + radius), (y1 + radius), radius);
@@ -393,7 +391,7 @@ public class Model extends Observable implements IModel {
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					if(linesToGizmos.get(line) == null)
+					if (linesToGizmos.get(line) == null)
 						updatedVel = Geometry.reflectWall(line, vel, 1);
 					else
 						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
@@ -430,17 +428,26 @@ public class Model extends Observable implements IModel {
 			}
 
 		}
-		
-		if(absorber != null && lowestColTime < time){
+
+		if (absorber != null && lowestColTime < time) {
 			collidingBall.setAbsorbed(!collidingBall.isAbsorbed());
-			if(lowestColTime == 0.0){
+			if (lowestColTime == 0.0) {
 				lowestColTime = 0.02;
 				collidingBall.setAbsorbed(false);
 			}
 		}
-		
+
 		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, absorber));
 
+	}
+
+	public void triggerAbsorber() {
+		CollisionInfo colInfo = timeUntilCollision();
+		for (Ball ball : balls) {
+			if (ball.isAbsorbed()) {
+				ball.setVelocity(colInfo.getUpdatedVel());
+			}
+		}
 	}
 
 	@Override
@@ -448,15 +455,16 @@ public class Model extends Observable implements IModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
-		if (colTime < time) {  //collision detected
+		if (colTime < time) { // collision detected
 			balls.remove(colBall);
 			if (colInfo.getAbs() != null) {
-				if(colBall.isAbsorbed()){
+				if (colBall.isAbsorbed()) {
 					AbsorberGizmo absorber = colInfo.getAbs();
 					colBall.setX(absorber.getEndX() - colBall.getRadius());
 					colBall.setY(absorber.getEndY() - colBall.getRadius());
 					colBall.setVelocity(colInfo.getUpdatedVel());
-				}else{
+					colBall.setVelocity(0, 0);
+				} else {
 					colBall = calculateBallMove(colBall, colTime);
 					applyFriction(colBall, colTime);
 					applyGravity(colBall, colTime);
@@ -475,9 +483,11 @@ public class Model extends Observable implements IModel {
 			balls.add(colBall);
 		} else {
 			for (Ball ball : balls) {
-				ball = calculateBallMove(ball, time);
-				applyFriction(ball, time);
-				applyGravity(ball, time);
+				if (!ball.isAbsorbed()) {
+					ball = calculateBallMove(ball, time);
+					applyFriction(ball, time);
+					applyGravity(ball, time);
+				}
 			}
 		}
 
@@ -544,7 +554,7 @@ public class Model extends Observable implements IModel {
 			return false;
 
 		// check if given coordinates overlaps with any other gizmo position
-		for (IGizmo gizmo : gizmos.values()){
+		for (IGizmo gizmo : gizmos.values()) {
 			if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
 				return false;
 		}
@@ -556,38 +566,38 @@ public class Model extends Observable implements IModel {
 	public boolean addGizmo(String gizmo, String key, int x, int y) {
 		switch (gizmo.toLowerCase()) {
 		case "triangle":
-			if (addGizmo(new TriangleGizmo(x, y), key)){
-				System.out.println("Adding triangle at ("+x+","+y+")");
+			if (addGizmo(new TriangleGizmo(x, y), key)) {
+				System.out.println("Adding triangle at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
 		case "circle":
-			if (addGizmo(new CircleGizmo(x, y), key)){
-				System.out.println("Adding circle at ("+x+","+y+")");
+			if (addGizmo(new CircleGizmo(x, y), key)) {
+				System.out.println("Adding circle at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
 		case "square":
-			if (addGizmo(new SquareGizmo(x, y), key)){
-				System.out.println("Adding square at ("+x+","+y+")");
+			if (addGizmo(new SquareGizmo(x, y), key)) {
+				System.out.println("Adding square at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
 		case "rightflipper":
-			if (addGizmo(new RightFlipperGizmo(x, y), key)){
-				System.out.println("Adding right flipper at ("+x+","+y+")");
+			if (addGizmo(new RightFlipperGizmo(x, y), key)) {
+				System.out.println("Adding right flipper at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
 		case "leftflipper":
-			if (addGizmo(new LeftFlipperGizmo(x, y), key)){
-				System.out.println("Adding left flipper at ("+x+","+y+")");
+			if (addGizmo(new LeftFlipperGizmo(x, y), key)) {
+				System.out.println("Adding left flipper at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
 		}
-		
-		System.out.println("Cannot add gizmo at ("+x+","+y+")");
+
+		System.out.println("Cannot add gizmo at (" + x + "," + y + ")");
 		return false;
 	}
 
@@ -641,7 +651,7 @@ public class Model extends Observable implements IModel {
 	@Override
 	public void rotateGizmo(String key) {
 		gizmos.get(key).rotate();
-		
+
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -854,49 +864,49 @@ public class Model extends Observable implements IModel {
 		return true;
 	}
 
-	public List<Ball> getBalls(){
+	public List<Ball> getBalls() {
 		return balls;
 	}
-	
-	public List<IGizmo> getGizmos(){
+
+	public List<IGizmo> getGizmos() {
 		List<IGizmo> gizmosList = new ArrayList<IGizmo>();
-		for(IGizmo gizmo : gizmos.values()){
+		for (IGizmo gizmo : gizmos.values()) {
 			gizmosList.add(gizmo);
 		}
-		
+
 		return gizmosList;
 	}
-	
-	public void moveFlipper(IGizmo gizmo){
-		if (gizmo instanceof LeftFlipperGizmo){	
-			
+
+	public void moveFlipper(IGizmo gizmo) {
+		if (gizmo instanceof LeftFlipperGizmo) {
+
 		}
-		if (gizmo instanceof RightFlipperGizmo){
-			
+		if (gizmo instanceof RightFlipperGizmo) {
+
 		}
 		this.setChanged();
 		this.notifyObservers();
 	}
 
-	public List<IDrawableGizmo> drawableGizmo(){
+	public List<IDrawableGizmo> drawableGizmo() {
 		List<IDrawableGizmo> drawables = new ArrayList<IDrawableGizmo>();
 		List<IGizmo> tempGizmo = this.getGizmos();
-		
-		for(IGizmo gizmo : tempGizmo){
+
+		for (IGizmo gizmo : tempGizmo) {
 			drawables.add(new DrawableGizmo(gizmo));
 		}
-		
+
 		return drawables;
 	}
 
-	public List<IDrawableBall> drawableBall(){
+	public List<IDrawableBall> drawableBall() {
 		List<IDrawableBall> drawables = new ArrayList<IDrawableBall>();
 		List<Ball> tempBall = this.getBalls();
-		
-		for(Ball ball : tempBall){
+
+		for (Ball ball : tempBall) {
 			drawables.add(new DrawableBall(ball));
 		}
-		
+
 		return drawables;
 	}
 }
