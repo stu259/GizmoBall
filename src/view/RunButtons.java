@@ -13,7 +13,7 @@ import controller.buildListeners.ModeListener;
 import controller.runListeners.StartStopListener;
 import controller.runListeners.TickListener;
 
-public class Run extends JPanel {
+public class RunButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class Run extends JPanel {
 	private ModeListener mL;
 	private ActionListener tickListener, startStopListener;
 
-	public Run(IDisplay display) {
+	public RunButtons(IDisplay display) {
 		d = display;
 		tickListener = new TickListener(display.getModel());
 		startStopListener = new StartStopListener(display.getModel());

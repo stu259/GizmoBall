@@ -106,4 +106,6 @@ public interface IModel {
 	public List<IDrawableGizmo> drawableGizmo();
 	
 	public List<IDrawableBall> drawableBall();
+	
+	public void triggerAbsorber() ;
 }

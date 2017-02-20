@@ -7,8 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import controller.MagicKeyListener;
-import controller.buildListeners.AbsorberListener;
-import controller.buildListeners.FlipperListener;
+import controller.runListeners.AbsorberListener;
+import controller.runListeners.FlipperListener;
 import model.Model;
 import prototypes.FlipperBoard;
 

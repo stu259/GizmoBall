@@ -20,8 +20,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import controller.LoadListener;
 import controller.MagicKeyListener;
 import controller.SaveListener;
-import controller.buildListeners.AbsorberListener;
-import controller.buildListeners.FlipperListener;
+import controller.runListeners.AbsorberListener;
+import controller.runListeners.FlipperListener;
 import model.IModel;
 import model.Model;
 import prototypes.FlipperBoard;
@@ -37,8 +37,8 @@ public class Display implements IDisplay {
 	private Model m;
 	private JFrame frame;
 	private JPanel buttons;
-	private Build build;
-	private Run run;
+	private BuildButtons build;
+	private RunButtons run;
 	private JPanel boards;
 	private BuildBoard bB;
 	private RunBoard rB;
@@ -118,14 +118,14 @@ public class Display implements IDisplay {
 	}
 
 	public void build() {
-		build = new Build(this);
+		build = new BuildButtons(this);
 		bB = new BuildBoard(500, 500);
 		buttons.add(build, "build");
 		boards.add(bB, "build");
 	}
 
 	public void run() {
-		run = new Run(this);
+		run = new RunButtons(this);
 		fB = new FlipperBoard(700, 700, m);
 		buttons.add(run, "run");
 		boards.add(fB, "run");

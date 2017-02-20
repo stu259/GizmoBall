@@ -17,7 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import controller.buildListeners.FlipperListener;
+import controller.runListeners.FlipperListener;
 import model.AbsorberGizmo;
 import model.Ball;
 import model.CircleGizmo;
