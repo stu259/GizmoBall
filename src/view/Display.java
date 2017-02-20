@@ -18,9 +18,13 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.LoadListener;
+import controller.MagicKeyListener;
 import controller.SaveListener;
+import controller.buildListeners.AbsorberListener;
+import controller.buildListeners.FlipperListener;
 import model.IModel;
 import model.Model;
+import prototypes.FlipperBoard;
 
 public class Display implements IDisplay {
 
@@ -59,7 +63,7 @@ public class Display implements IDisplay {
 		run();
 		cp.add(buttons, BorderLayout.LINE_START);
 		cp.add(boards, BorderLayout.CENTER);
-		changeMode("build");
+		changeMode("run");
 	}
 
 	private void addMenuBar() {
@@ -155,7 +159,7 @@ public class Display implements IDisplay {
 
 	public void load() {
 		buttons.add(new JPanel(), "blank");
-		FlipperBoard bb = new FlipperBoard(500, 500, m);
+		FlipperBoard bb = new FlipperBoard(700, 700, m);
 		boards.add(bb, "load");
 		CardLayout cardLayout = (CardLayout) buttons.getLayout();
 		cardLayout.show(buttons, "blank");

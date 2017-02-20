@@ -1,29 +1,24 @@
-package view;
+package prototypes.absorber;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import controller.MagicKeyListener;
 import controller.buildListeners.AbsorberListener;
 import controller.buildListeners.FlipperListener;
 import model.Model;
+import prototypes.FlipperBoard;
 
-public class TestingGUI {
+public class AbsorberGui {
 	private JFrame frame;
 	private JButton button;
 	private FlipperBoard board;
 	private Model model;
 
-	public TestingGUI(Model m) {
+	public AbsorberGui(Model m) {
 		model = m;
 		createAndShowGUI();
 
@@ -39,7 +34,6 @@ public class TestingGUI {
 
 		Container cp = frame.getContentPane();
 		frame.setFocusable(true);
-		frame.addKeyListener(new MagicKeyListener(new FlipperListener(model, board)));
 		frame.addKeyListener(new MagicKeyListener(new AbsorberListener(model, board)));
 		frame.add(board, BorderLayout.CENTER);
 
@@ -52,5 +46,4 @@ public class TestingGUI {
 	public FlipperBoard getBoard() {
 		return board;
 	}
-
 }

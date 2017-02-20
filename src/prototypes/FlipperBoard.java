@@ -1,4 +1,4 @@
-package view;
+package prototypes;
 
 import java.awt.Color;
 import java.awt.Dimension;

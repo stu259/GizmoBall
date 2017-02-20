@@ -1,8 +1,9 @@
-package view;
+package prototypes.collisions;
 
 import java.io.File;
 
 import model.Model;
+import view.Display;
 
 public class CollisionsPrototype {
 	

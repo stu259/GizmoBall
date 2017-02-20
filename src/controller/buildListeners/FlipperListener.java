@@ -11,7 +11,7 @@ import model.IGizmo;
 import model.LeftFlipperGizmo;
 import model.Model;
 import model.RightFlipperGizmo;
-import view.FlipperBoard;
+import prototypes.FlipperBoard;
 import view.IDisplay;
 
 public class FlipperListener implements KeyListener {

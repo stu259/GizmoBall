@@ -817,7 +817,7 @@ public class Model extends Observable implements IModel {
 					if (splitCommand.length != 5)
 						return false;
 					else {
-						gizmos.get(splitCommand[4]);// connect
+//						gizmos.get(splitCommand[4]);// connect
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2] + " "
 								+ splitCommand[3] + " " + splitCommand[4]);
 					}

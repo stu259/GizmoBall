@@ -1,6 +1,7 @@
-package view;
+package prototypes.absorber;
 
 import model.Model;
+import prototypes.PrototypesTimer;
 
 public class AbsorberPrototype {
 
@@ -12,11 +13,11 @@ public class AbsorberPrototype {
 		m.addGizmo("triangle","t1",19,0);
 		m.rotateGizmo("t1");
 		
-		TestingGUI tg = new TestingGUI(m);
+		AbsorberGui ag = new AbsorberGui(m);
 
 		m.runMode();
 		
-		PrototypesTimer pt = new PrototypesTimer(m,tg.getBoard());
+		PrototypesTimer pt = new PrototypesTimer(m,ag.getBoard());
 		pt.actionPerformed(null);
 	}
 

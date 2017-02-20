@@ -13,7 +13,7 @@ import model.IGizmo;
 import model.LeftFlipperGizmo;
 import model.Model;
 import model.RightFlipperGizmo;
-import view.FlipperBoard;
+import prototypes.FlipperBoard;
 
 public class AbsorberListener implements KeyListener {
 	private Model m;

@@ -1,6 +1,7 @@
-package view;
+package prototypes.flipper;
 
 import model.Model;
+import prototypes.PrototypesTimer;
 
 public class FlipperPrototype {
 
@@ -12,11 +13,11 @@ public class FlipperPrototype {
 
 //		m.addBall("ball", 5, 5, 5, 5);
 		
-		TestingGUI tg = new TestingGUI(m);
+		FlipperGui fg = new FlipperGui(m);
 
 		m.runMode();
 		
-		PrototypesTimer pt = new PrototypesTimer(m,tg.getBoard());
+		PrototypesTimer pt = new PrototypesTimer(m,fg.getBoard());
 		pt.actionPerformed(null);
 	}
 

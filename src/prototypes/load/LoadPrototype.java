@@ -1,6 +1,7 @@
-package view;
+package prototypes.load;
 
 import model.Model;
+import view.Display;
 
 public class LoadPrototype {
 
