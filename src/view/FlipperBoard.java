@@ -95,7 +95,7 @@ public class FlipperBoard extends JPanel implements Observer {
 			} else if (gizmo instanceof RightFlipperGizmo) {
 				g2.setColor(gizmo.getColor());
 				if (diagonal){
-					g2.fillRoundRect((x1+2*scale-((x2 - x1)/4)+x1)/2, y1, (x2 - x1)/4, (y2 - y1),(y2 - y1) / 4, (y2 - y1) / 4);
+					//g2.fillRoundRect((x1+2*scale-((x2 - x1)/4)+x1)/2, y1, (x2 - x1)/4, (y2 - y1),(y2 - y1) / 4, (y2 - y1) / 4);
 				}else if (initial){
 					g2.fillRoundRect(x1+2*scale-((x2 - x1)/4), y1, (x2 - x1)/4, (y2 - y1) , (y2 - y1) / 4, (y2 - y1) / 4);
 				}else{
@@ -105,7 +105,7 @@ public class FlipperBoard extends JPanel implements Observer {
 				g2.setColor(gizmo.getColor());
 				if (diagonal){
 					//needs fix
-					g2.fillRoundRect(x1, y1, (((x2 - x1)/4)+(x2 - x1))/2 ,((y2 - y1)+((y2 - y1) / 4))/2 ,(y2 - y1) / 4, (y2 - y1) / 4);
+					//g2.fillRoundRect(x1, y1, (((x2 - x1)/4)+(x2 - x1))/2 ,((y2 - y1)+((y2 - y1) / 4))/2 ,(y2 - y1) / 4, (y2 - y1) / 4);
 				}else if (initial){
 					g2.fillRoundRect(x1, y1, (x2 - x1)/4, (y2 - y1) , (y2 - y1) / 4, (y2 - y1) / 4);
 				}else{
