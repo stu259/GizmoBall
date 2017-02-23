@@ -1,4 +1,4 @@
-package view;
+package prototypes.flipper;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -13,20 +13,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.MagicKeyListener;
-import controller.buildListeners.FlipperListener;
+import controller.runListeners.AbsorberListener;
+import controller.runListeners.FlipperListener;
 import model.Model;
+import prototypes.FlipperBoard;
 
-
-public class TestingGUI {
-	private FlipperListener fl;
+public class FlipperGui {
 	private JFrame frame;
+	private JButton button;
 	private FlipperBoard board;
 	private Model model;
 
-	public TestingGUI(Model m) {
-		model=m;
+	public FlipperGui(Model m) {
+		model = m;
 		createAndShowGUI();
-		
+
 	}
 
 	public void createAndShowGUI() {
@@ -35,19 +36,21 @@ public class TestingGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Board is passed the Model so it can act as Observer
-		board = new FlipperBoard(500, 500, model);
-		
+		board = new FlipperBoard(800, 800, model);
+
 		Container cp = frame.getContentPane();
 		frame.setFocusable(true);
-		frame.addKeyListener(new MagicKeyListener(new FlipperListener(model,board)));
-		frame.add(board, BorderLayout.CENTER);					
+		frame.addKeyListener(new MagicKeyListener(new FlipperListener(model, board)));
+		//frame.addKeyListener(new MagicKeyListener(new AbsorberListener(model, board)));
+		frame.add(board, BorderLayout.CENTER);
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
+		// frame.setResizable(false);
 		frame.setVisible(true);
 	}
-	public FlipperBoard getBoard(){
+
+	public FlipperBoard getBoard() {
 		return board;
 	}
 

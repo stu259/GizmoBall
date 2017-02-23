@@ -2,6 +2,8 @@ package view;
 
 import java.io.File;
 
+import model.IModel;
+
 public interface IDisplay {
 	public void build();
 
@@ -19,4 +21,5 @@ public interface IDisplay {
 	
 	public void load();
 
+	public IModel getModel();
 }

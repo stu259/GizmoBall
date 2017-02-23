@@ -18,9 +18,13 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.LoadListener;
+import controller.MagicKeyListener;
 import controller.SaveListener;
+import controller.runListeners.AbsorberListener;
+import controller.runListeners.FlipperListener;
 import model.IModel;
 import model.Model;
+import prototypes.FlipperBoard;
 
 public class Display implements IDisplay {
 
@@ -33,11 +37,12 @@ public class Display implements IDisplay {
 	private Model m;
 	private JFrame frame;
 	private JPanel buttons;
-	private Build build;
-	private Run run;
+	private BuildButtons build;
+	private RunButtons run;
 	private JPanel boards;
 	private BuildBoard bB;
 	private RunBoard rB;
+	private FlipperBoard fB;
 
 	Container cp;
 
@@ -58,7 +63,7 @@ public class Display implements IDisplay {
 		run();
 		cp.add(buttons, BorderLayout.LINE_START);
 		cp.add(boards, BorderLayout.CENTER);
-		changeMode("build");
+		changeMode("run");
 	}
 
 	private void addMenuBar() {
@@ -91,15 +96,9 @@ public class Display implements IDisplay {
 	private void tidy() {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
 		frame.setVisible(true);
-	}
-
-	public void createAndShowGUI() {
-
 		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+
 	}
 
 	public void changeBuildButtons(String b) {
@@ -119,17 +118,17 @@ public class Display implements IDisplay {
 	}
 
 	public void build() {
-		build = new Build(this);
+		build = new BuildButtons(this);
 		bB = new BuildBoard(500, 500);
 		buttons.add(build, "build");
 		boards.add(bB, "build");
 	}
 
 	public void run() {
-		run = new Run(this);
-		rB = new RunBoard(500, 500);
+		run = new RunButtons(this);
+		fB = new FlipperBoard(700, 700, m);
 		buttons.add(run, "run");
-		boards.add(rB, "run");
+		boards.add(fB, "run");
 	}
 
 	public File saveDialog() {
@@ -157,15 +156,19 @@ public class Display implements IDisplay {
 	public void errorPopup(String errorMessage) {
 		JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 	}
-	
-	public void load(){
+
+	public void load() {
 		buttons.add(new JPanel(), "blank");
-		FlipperBoard bb = new FlipperBoard(500, 500, m);
+		FlipperBoard bb = new FlipperBoard(700, 700, m);
 		boards.add(bb, "load");
 		CardLayout cardLayout = (CardLayout) buttons.getLayout();
 		cardLayout.show(buttons, "blank");
 		cardLayout = (CardLayout) boards.getLayout();
 		cardLayout.show(boards, "load");
-		
+
+	}
+
+	public IModel getModel() {
+		return this.m;
 	}
 }

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.util.List;
 
 public interface IModel {
 	/*
@@ -81,15 +82,6 @@ public interface IModel {
 	 */
 	public void moveBalls();
 	
-	/*
-	 * Resumes all balls from paused state
-	 */
-	public void resume();
-	
-	/*
-	 * Puts all balls into paused state
-	 */
-	public void pause();
 	
 	/**
 	 * Saves current game state
@@ -103,5 +95,17 @@ public interface IModel {
 	 */
 	public boolean load(File f);
 
+	/**
+	 * Creates a Drawable object so that the view
+	 * can obtain information of the gizmo to draw
+	 * without direct coupling/possible manipulation
+	 * of the Gizmo object itself in the Model.
+	 * @param gizmo
+	 * @return Drawable Object
+	 */
+	public List<IDrawableGizmo> drawableGizmo();
 	
+	public List<IDrawableBall> drawableBall();
+	
+	public void triggerAbsorber() ;
 }

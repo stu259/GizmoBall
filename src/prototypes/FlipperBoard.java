@@ -1,24 +1,38 @@
-package view;
+package prototypes;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.runListeners.FlipperListener;
+import model.AbsorberGizmo;
+import model.Ball;
+import model.CircleGizmo;
+import model.Gizmo;
 import model.IDrawableBall;
 import model.IDrawableGizmo;
+import model.DrawableGizmo;
+import model.IGizmo;
+import model.LeftFlipperGizmo;
 import model.Model;
+import model.RightFlipperGizmo;
+import model.SquareGizmo;
+import model.TriangleGizmo;
 
-public class RunBoard extends JPanel implements Observer {
+public class FlipperBoard extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 	protected int width;
@@ -26,7 +40,7 @@ public class RunBoard extends JPanel implements Observer {
 	protected Model gm;
 	public boolean triggered;
 
-	public RunBoard(int w, int h, Model m) {
+	public FlipperBoard(int w, int h, Model m) {
 		// Observe changes in Model
 		m.addObserver(this);
 		width = w;
@@ -138,4 +152,5 @@ public class RunBoard extends JPanel implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		repaint();
 	}
+
 }

@@ -13,7 +13,7 @@ public class AbsorberGizmo extends Gizmo{
 		super(x, y);
 		this.ex = ex;
 		this.ey = ey;
-		velo = new Vect(0,-25);
+		velo = new Vect(0,-50);
 		color = Color.ORANGE;
 	}
 
@@ -47,5 +47,10 @@ public class AbsorberGizmo extends Gizmo{
 	@Override
 	public void rotate(){
 		return;
+	}
+	
+	@Override
+	public String gizmoType() {
+		return "absorber";
 	}
 }

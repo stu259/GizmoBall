@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 import controller.buildListeners.*;
 
-public class Build extends JPanel {
+public class BuildButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private IDisplay d;
@@ -23,7 +23,7 @@ public class Build extends JPanel {
 	private JPanel operation;
 	private JPanel setup;
 
-	public Build(IDisplay display) {
+	public BuildButtons(IDisplay display) {
 		setLayout(new CardLayout());
 		d = display;
 		addButtons();

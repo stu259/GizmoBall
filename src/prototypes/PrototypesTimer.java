@@ -1,4 +1,4 @@
-package view;
+package prototypes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,15 +19,6 @@ public class PrototypesTimer implements ActionListener {
 	@Override
 	public final void actionPerformed(final ActionEvent e) {
 		timer.start();
-		if (board.initial==false && board.diagonal==true)
-		{
-			board.diagonal=false;
-			board.upright=true;
-		}
-		if (board.upright==false && board.diagonal==true){
-			board.diagonal=false;
-			board.initial=true;
-		}
 		model.moveBalls();
 	}
 }
