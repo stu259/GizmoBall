@@ -10,6 +10,8 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import controller.BuildListener;
+
 public class BuildBoard extends JPanel implements Observer{
 
 	/**

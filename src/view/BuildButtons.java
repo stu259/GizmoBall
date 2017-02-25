@@ -4,36 +4,40 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.MouseInputListener;
 
+import controller.BuildListener;
+import controller.MouseL;
 import controller.buildListeners.*;
+import model.IModel;
 
 public class BuildButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private IDisplay d;
-	private ChangeButtonListener cBL;
-	private ModeListener mL;
-	private JButton gizmosButton, operationsButton, setupButton, backButton;
-	private JPanel main;
-	private JPanel gizmo;
-	private JPanel operation;
-	private JPanel setup;
+	private IDisplay display;
+	private JPanel main, gizmo, operation, setup;
+	private IModel model;
+	private BuildListener buildListener;
+	private BuildBoard buildBoard;
 
-	public BuildButtons(IDisplay display) {
+	public BuildButtons(IDisplay d, IModel m, BuildBoard bb) {
+
+		buildListener = new BuildListener(m, display);
+		buildBoard = bb;
+		buildBoard.addMouseListener(buildListener);
 		setLayout(new CardLayout());
-		d = display;
+		display = d;
+		model = m;
 		addButtons();
 		gizmos();
 		operations();
 		setup();
-		add(main, "main");
-		add(gizmo, "gizmo");
-		add(operation, "operation");
-		add(setup, "setup");
 	}
 
 	public void changeButtons(String b) {
@@ -41,175 +45,148 @@ public class BuildButtons extends JPanel {
 		cardLayout.show(this, b);
 	}
 
-	public void addButtons() {
+	private void addButtons() {
 		main = new JPanel(new GridLayout(4, 1));
 
-		gizmosButton = new JButton("Add Gizmos");
-		gizmosButton.setBackground(Color.LIGHT_GRAY);
-		gizmosButton.setForeground(Color.white);
-		cBL = new ChangeButtonListener(d,"gizmo");
-		gizmosButton.addActionListener(cBL);
+		JButton gizmosButton = new JButton("Add Gizmos");
+		buttonSetup(gizmosButton);
+		gizmosButton.addActionListener(new ChangeButtonListener(display, "gizmo"));
 		main.add(gizmosButton);
 
 		JButton operationsButton = new JButton("Operations");
-		operationsButton.setBackground(Color.LIGHT_GRAY);
-		operationsButton.setForeground(Color.white);
-		cBL = new ChangeButtonListener(d,"operation");
-		operationsButton.addActionListener(cBL);
+		buttonSetup(operationsButton);
+		operationsButton.addActionListener(new ChangeButtonListener(display, "operations"));
 		main.add(operationsButton);
 
 		JButton setupButton = new JButton("Setup");
-		setupButton.setBackground(Color.LIGHT_GRAY);
-		setupButton.setForeground(Color.white);
-		cBL = new ChangeButtonListener(d,"setup");
-		setupButton.addActionListener(cBL);
+		buttonSetup(setupButton);
+		setupButton.addActionListener(new ChangeButtonListener(display, "setup"));
 		main.add(setupButton);
 
 		JButton RunButton = new JButton("Run Mode");
-		RunButton.setBackground(Color.LIGHT_GRAY);
-		RunButton.setForeground(Color.white);
-		mL = new ModeListener(d,"run");
-		RunButton.addActionListener(mL);
+		buttonSetup(RunButton);
+		RunButton.addActionListener(new ModeListener(display, "run"));
 		main.add(RunButton);
-
+		add(main, "main");
 	}
 
-	public void gizmos() {
+	private void gizmos() {
 		gizmo = new JPanel(new GridLayout(6, 1));
 
 		JButton squareButton = new JButton("Square");
-		squareButton.setBackground(Color.LIGHT_GRAY);
-		squareButton.setForeground(Color.white);
+		buttonSetup(squareButton);
+		squareButton.addActionListener(new AddGizmosListener(model, "square", buildListener));
 		gizmo.add(squareButton);
 
 		JButton circleButton = new JButton("Circle");
-		circleButton.setBackground(Color.LIGHT_GRAY);
-		circleButton.setForeground(Color.white);
+		buttonSetup(circleButton);
+		circleButton.addActionListener(new AddGizmosListener(model, "circle", buildListener));
 		gizmo.add(circleButton);
 
 		JButton triangleButton = new JButton("Triangle");
-		triangleButton.setBackground(Color.LIGHT_GRAY);
-		triangleButton.setForeground(Color.white);
+		buttonSetup(triangleButton);
+		triangleButton.addActionListener(new AddGizmosListener(model, "triangle", buildListener));
 		gizmo.add(triangleButton);
 
 		JButton lFlipperButton = new JButton("Left Flipper");
-		lFlipperButton.setBackground(Color.LIGHT_GRAY);
-		lFlipperButton.setForeground(Color.white);
+		buttonSetup(lFlipperButton);
+		lFlipperButton.addActionListener(new AddGizmosListener(model, "lFlipper", buildListener));
 		gizmo.add(lFlipperButton);
 
 		JButton rFlipperButton = new JButton("Right Flipper");
-		rFlipperButton.setBackground(Color.LIGHT_GRAY);
-		rFlipperButton.setForeground(Color.white);
+		buttonSetup(rFlipperButton);
+		rFlipperButton.addActionListener(new AddGizmosListener(model, "rFlipper", buildListener));
 		gizmo.add(rFlipperButton);
 
 		JButton backButton = new JButton("Back");
-		backButton.setBackground(Color.LIGHT_GRAY);
-		backButton.setForeground(Color.white);
+		buttonSetup(backButton);
+		backButton.addActionListener(new ChangeButtonListener(display, "main"));
 		gizmo.add(backButton);
-		cBL = new ChangeButtonListener(d,"main");;
-		backButton.addActionListener(cBL);
+
+		add(gizmo, "gizmo");
 	}
 
-	public void operations() {
+	private void operations() {
 		operation = new JPanel(new GridLayout(8, 1));
 
 		JButton rotateButton = new JButton("Rotate");
-		rotateButton.setBackground(Color.LIGHT_GRAY);
-		rotateButton.setForeground(Color.white);
+		buttonSetup(rotateButton);
+		rotateButton.addActionListener(new RotateListener(model, buildListener));
 		operation.add(rotateButton);
 
 		JButton deleteButton = new JButton("Delete");
-		deleteButton.setBackground(Color.LIGHT_GRAY);
-		deleteButton.setForeground(Color.white);
+		buttonSetup(deleteButton);
+		deleteButton.addActionListener(new DeleteListener(model, buildListener));
 		operation.add(deleteButton);
 
 		JButton moveButton = new JButton("Move");
-		moveButton.setBackground(Color.LIGHT_GRAY);
-		moveButton.setForeground(Color.white);
+		buttonSetup(moveButton);
+		moveButton.addActionListener(new MoveListener(model, buildListener));
 		operation.add(moveButton);
 
 		JButton clearButton = new JButton("Clear");
-		clearButton.setBackground(Color.LIGHT_GRAY);
-		clearButton.setForeground(Color.white);
+		buttonSetup(clearButton);
+		clearButton.addActionListener(new ClearListener(model));
 		operation.add(clearButton);
 
 		JButton connectButton = new JButton("Connect");
-		connectButton.setBackground(Color.LIGHT_GRAY);
-		connectButton.setForeground(Color.white);
+		buttonSetup(connectButton);
+		connectButton.addActionListener(new ConnectListener(model, buildListener));
 		operation.add(connectButton);
 
 		JButton bindButton = new JButton("Bind Key");
-		bindButton.setBackground(Color.LIGHT_GRAY);
-		bindButton.setForeground(Color.white);
+		buttonSetup(bindButton);
+		bindButton.addActionListener(new BindListener(model, buildListener));
 		operation.add(bindButton);
 
 		JButton disconnectButton = new JButton("Disconnect");
-		disconnectButton.setBackground(Color.LIGHT_GRAY);
-		disconnectButton.setForeground(Color.white);
+		buttonSetup(disconnectButton);
+		disconnectButton.addActionListener(new DisconnectListener(model, buildListener));
 		operation.add(disconnectButton);
 
 		JButton backButton = new JButton("Back");
-		backButton.setBackground(Color.LIGHT_GRAY);
-		backButton.setForeground(Color.white);
-		cBL = new ChangeButtonListener(d,"main");;
-		backButton.addActionListener(cBL);
+		buttonSetup(backButton);
+		backButton.addActionListener(new ChangeButtonListener(display, "main"));
 		operation.add(backButton);
+
+		add(operation, "operations");
 	}
 
-	public void setup() {
+	private void setup() {
+
 		setup = new JPanel(new GridLayout(5, 1));
 
-		JPanel ballPanel = new JPanel();
-		ballPanel.setLayout(new GridLayout(1, 2));
-		JPanel ballInputPanel = new JPanel();
-		ballInputPanel.setLayout(new GridLayout(2, 1));
 		JButton ballButton = new JButton("Place Ball");
-		ballButton.setBackground(Color.LIGHT_GRAY);
-		ballButton.setForeground(Color.white);
-		ballPanel.add(ballButton);
-		JTextField ballVInput1 = new JTextField();
-		ballInputPanel.add(ballVInput1);
-		JTextField ballVInput2 = new JTextField();
-		ballInputPanel.add(ballVInput2);
-		ballPanel.add(ballInputPanel);
-		setup.add(ballPanel);
+		buttonSetup(ballButton);
+		ballButton.addActionListener(new AddBallListener(model, buildListener, display));
+		setup.add(ballButton);
 
 		JButton absorberButton = new JButton("Place Absorber");
-		absorberButton.setBackground(Color.LIGHT_GRAY);
-		absorberButton.setForeground(Color.white);
+		buttonSetup(absorberButton);
+		absorberButton.addActionListener(new AddAbsorberListener(model, buildListener));
 		setup.add(absorberButton);
 
-		JPanel frictionPanel = new JPanel();
-		frictionPanel.setLayout(new GridLayout(1, 2));
-		JPanel frictionInputPanel = new JPanel();
-		frictionInputPanel.setLayout(new GridLayout(2, 1));
 		JButton frictionButton = new JButton("Friction");
-		frictionButton.setBackground(Color.LIGHT_GRAY);
-		frictionButton.setForeground(Color.white);
-		frictionPanel.add(frictionButton);
-		JTextField frictionInput1 = new JTextField();
-		frictionInputPanel.add(frictionInput1);
-		JTextField frictionInput2 = new JTextField();
-		frictionInputPanel.add(frictionInput2);
-		frictionPanel.add(frictionInputPanel);
-		setup.add(frictionPanel);
+		buttonSetup(frictionButton);
+		frictionButton.addActionListener(new FrictionListener(model, display));
+		setup.add(frictionButton);
 
-		JPanel gravityPanel = new JPanel();
-		gravityPanel.setLayout(new GridLayout(1, 2));
 		JButton gravityButton = new JButton("Gravity");
-		gravityButton.setBackground(Color.LIGHT_GRAY);
-		gravityButton.setForeground(Color.white);
-		gravityPanel.add(gravityButton);
-		JTextField gravityInput = new JTextField();
-		gravityPanel.add(gravityInput);
-		setup.add(gravityPanel);
+		buttonSetup(gravityButton);
+		gravityButton.addActionListener(new GravityListener(model, display));
+		setup.add(gravityButton);
 
 		JButton backButton = new JButton("Back");
-		backButton.setBackground(Color.LIGHT_GRAY);
-		backButton.setForeground(Color.white);
-		cBL = new ChangeButtonListener(d,"main");;
-		backButton.addActionListener(cBL);
+		buttonSetup(backButton);
+		backButton.addActionListener(new ChangeButtonListener(display, "main"));
 		setup.add(backButton);
+
+		add(setup, "setup");
+	}
+
+	private void buttonSetup(JButton button) {
+		button.setBackground(Color.LIGHT_GRAY);
+		button.setForeground(Color.white);
 	}
 
 }

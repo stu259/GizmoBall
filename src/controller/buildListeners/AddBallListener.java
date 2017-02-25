@@ -1,5 +1,6 @@
 package controller.buildListeners;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -8,49 +9,49 @@ import javax.swing.event.MouseInputListener;
 
 import controller.BuildListener;
 import model.IModel;
+import view.IDisplay;
 
-public class MoveListener implements ActionListener, MouseInputListener {
-
+public class AddBallListener implements ActionListener, MouseInputListener {
+	
 	private IModel model;
+	private IDisplay display;
 	private BuildListener buildListener;
-	private int x;
-	private int y;
-
-	public MoveListener(IModel m, BuildListener bL) {
+	private int[] velocity;
+	
+	public AddBallListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
+		display =d;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		buildListener.setMouseListener(this);
+		String[] message = new String[2];
+		message[0]="Velocity x";
+		message[1]="Velocity y";
+		velocity = display.inputPopup(message);
+		buildListener.setMouseListener(this);		
 	}
-
-	public void mousePressed(MouseEvent e) {
-		if (e.getClickCount() == 1) {
-			x = e.getX();
-			y = e.getY();
-		} else {
-			//model.moveGizmo(x, y, e.getX(),e.getY());
-		}
+	
+	public void mousePressed(MouseEvent e) {		
+		//model.addBall(e.getX(),e.getY(),velocity[0],velocity[1]);
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (e.getClickCount() > 1) {
-			buildListener.setMouseListener(null);
-		}		
+		buildListener.setMouseListener(null);
 	}
+		
 
 	public void mouseEntered(MouseEvent e) {
-
+		
 	}
 
 	public void mouseExited(MouseEvent e) {
-
+		
 	}
 
 	public void mouseClicked(MouseEvent e) {
-
+		
 	}
 
 	@Override
@@ -60,5 +61,6 @@ public class MoveListener implements ActionListener, MouseInputListener {
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 	}
+
 
 }

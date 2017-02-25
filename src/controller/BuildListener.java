@@ -16,21 +16,27 @@ import view.IDisplay;
 public class BuildListener implements IListener {
 
 	private IModel model;
-	private String gizmo;
+	private IDisplay view;
 	private MouseInputListener mouseListener;
 	private KeyListener keyListener;
 
-	public BuildListener(IModel m, String g) {
+	public BuildListener(IModel m, IDisplay d) {
 		model = m;
-		gizmo = g;
-		mouseListener = new AddGizmosListener(model, gizmo);
-		keyListener = new DoNothingKeyListener(model);
+		view = d;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void setKeyListener(KeyListener k) {
+		keyListener = k;
+	}
+
+	public void setMouseListener(MouseInputListener m) {
+		mouseListener = m;
 	}
 
 	@Override
@@ -77,13 +83,12 @@ public class BuildListener implements IListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		keyListener.keyPressed(e);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		keyListener.keyReleased(e);
 
 	}
 
@@ -113,20 +118,20 @@ public class BuildListener implements IListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		if (mouseListener != null) {
+			mouseListener.mousePressed(e);
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		if (mouseListener != null) {
+			mouseListener.mouseReleased(e);
+		}
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

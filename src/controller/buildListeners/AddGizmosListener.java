@@ -6,63 +6,54 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
-import model.IGizmo;
+import controller.BuildListener;
 import model.IModel;
 import view.IDisplay;
 
 public class AddGizmosListener implements ActionListener, MouseInputListener {
 	
 	private IModel model;
+	private String gizmo;
+	private BuildListener buildListener;
+
+	public AddGizmosListener(IModel m, String g, BuildListener bL) {
+		model = m;
+		gizmo = g;
+		buildListener = bL;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		buildListener.setMouseListener(this);		
+	}
 	
-	public AddGizmosListener(IModel model, String gizmo) {
-		this.model=model;
+	public void mousePressed(MouseEvent e) {		
+		//model.addGizmo(gizmo, e.getX(), e.getY());
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-			
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		buildListener.setMouseListener(null);
+	}
+		
+
+	public void mouseEntered(MouseEvent e) {
+		
+	}
+
+	public void mouseExited(MouseEvent e) {
+		
+	}
+
+	public void mouseClicked(MouseEvent e) {
 		
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseDragged(MouseEvent arg0) {
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseMoved(MouseEvent arg0) {
 	}
 
 }

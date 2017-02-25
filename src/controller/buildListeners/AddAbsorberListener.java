@@ -6,59 +6,58 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
+import controller.BuildListener;
 import model.IModel;
 
 public class AddAbsorberListener implements ActionListener, MouseInputListener {
+
 	private IModel model;
+	private BuildListener buildListener;
+	private int x;
+	private int y;
 
-	public AddAbsorberListener(IModel model, String gizmo) {
-		this.model = model;
+	public AddAbsorberListener(IModel m, BuildListener bL) {
+		model = m;
+		buildListener = bL;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-
+	public void actionPerformed(ActionEvent e) {
+		buildListener.setMouseListener(this);
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		if (e.getClickCount() == 1) {
+			x = e.getX();
+			y = e.getY();
+		} else {
+			//model.addAbsorber(x, y, e.getX(), e.getY());
+		}
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getClickCount() > 1) {
+			buildListener.setMouseListener(null);
+		}		
+	}
+
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+	public void mouseClicked(MouseEvent e) {
 
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void mouseDragged(MouseEvent arg0) {
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void mouseMoved(MouseEvent arg0) {
 	}
 }
