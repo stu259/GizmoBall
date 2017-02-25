@@ -26,15 +26,11 @@ public class BuildListener implements IListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void setKeyListener(KeyListener k) {
 		keyListener = k;
 	}
 
+	@Override
 	public void setMouseListener(MouseInputListener m) {
 		mouseListener = m;
 	}
@@ -53,8 +49,7 @@ public class BuildListener implements IListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-
+		System.exit(0);
 	}
 
 	@Override

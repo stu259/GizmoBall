@@ -3,6 +3,8 @@ package model;
 import java.io.File;
 import java.util.List;
 
+import gizmoException.InvalidGizmoException;
+
 public interface IModel {
 	/*
 	 * checks if there is room for that gizmo.
@@ -92,8 +94,9 @@ public interface IModel {
 	 * Load in Game
 	 * @param f 
 	 * @return 
+	 * @throws InvalidGizmoException 
 	 */
-	public boolean load(File f);
+	public boolean load(File f) throws InvalidGizmoException;
 
 	/**
 	 * Creates a Drawable object so that the view

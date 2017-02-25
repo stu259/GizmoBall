@@ -4,6 +4,9 @@ import physics.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+
+import gizmoException.InvalidGizmoException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -760,11 +763,14 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public boolean load(File f) {
+	public boolean load(File f) throws InvalidGizmoException {
+		clear();
+		int lineNumber = 0;
 		String line;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(f));
 			while ((line = reader.readLine()) != null) {
+				lineNumber++;
 				String[] splitCommand = line.toLowerCase().split(" ");
 				switch (splitCommand[0]) {
 				case "circle":
@@ -773,65 +779,78 @@ public class Model extends Observable implements IModel {
 				case "leftflipper":
 				case "rightflipper":
 					if (splitCommand.length != 4)
-						return false;
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
 					else if (!addGizmo(splitCommand[0], splitCommand[1], (Integer.parseInt(splitCommand[2])),
 							(Integer.parseInt(splitCommand[3]))))
-						return false;
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "absorber":
 					if (splitCommand.length != 6)
-						return false;
-					else
-						addAbsorber(splitCommand[1], Integer.parseInt(splitCommand[2]),
-								Integer.parseInt(splitCommand[3]), Integer.parseInt(splitCommand[4]),
-								Integer.parseInt(splitCommand[5]));
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid absorber instruction");
+					else if (!addAbsorber(splitCommand[1], Integer.parseInt(splitCommand[2]),
+							Integer.parseInt(splitCommand[3]), Integer.parseInt(splitCommand[4]),
+							Integer.parseInt(splitCommand[5])))
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "ball":
 					if (splitCommand.length != 6)
-						return false;
-					else
-						addBall(splitCommand[1], Double.parseDouble(splitCommand[2]),
-								Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
-								Double.parseDouble(splitCommand[5]));
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid ball instruction");
+					else if (!addBall(splitCommand[1], Double.parseDouble(splitCommand[2]),
+							Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
+							Double.parseDouble(splitCommand[5])))
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " overlapping ball");
 					break;
 				case "rotate":
 					if (splitCommand.length != 2)
-						return false;
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid rotate instruction");
 					else
-						gizmos.get(splitCommand[1]).rotate();
+						rotateGizmo(splitCommand[1]);
 					break;
 				case "delete":
 					if (splitCommand.length != 2)
-						return false;
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid delete instruction");
 					else
 						deleteGizmo(splitCommand[1]);
 					break;
 				case "move":
 					if (splitCommand.length != 4)
-						return false;
-					else
-						gizmos.get(splitCommand[1]).newPosition(Integer.parseInt(splitCommand[2]),
-								Integer.parseInt(splitCommand[3]));
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid move instruction");
+					else if (!moveGizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]),
+							gizmos.get(splitCommand[1])))
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid move location");
 					break;
 				case "keyconnect":
 					if (splitCommand.length != 5)
-						return false;
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
-//						gizmos.get(splitCommand[4]);// connect
+						// gizmos.get(splitCommand[4]);// connect
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2] + " "
 								+ splitCommand[3] + " " + splitCommand[4]);
 					}
 					break;
 				case "connect":
 					if (splitCommand.length != 3)
-						return false;
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid connect instruction");
 					else
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 					// gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
 					break;
 				case "friction":
 					if (splitCommand.length != 3)
-						return false;
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid friction instruction");
 					else {
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						setFriction(Double.parseDouble((splitCommand[1])), Double.parseDouble((splitCommand[2])));
@@ -839,7 +858,8 @@ public class Model extends Observable implements IModel {
 					break;
 				case "gravity":
 					if (splitCommand.length != 3)
-						return false;
+						throw new InvalidGizmoException(
+								"Skipping instruction at line " + lineNumber + " invalid gravity instruction");
 					else {
 						setGravity(Double.parseDouble((splitCommand[1])));
 						System.out.println(splitCommand[0] + " " + splitCommand[1]);

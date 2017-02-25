@@ -2,6 +2,7 @@ package prototypes.collisions;
 
 import java.io.File;
 
+import gizmoException.InvalidGizmoException;
 import model.Model;
 import view.Display;
 
@@ -23,7 +24,12 @@ public class CollisionsPrototype {
 //		
 //		m.addBall("b1", 5, 5, 5, 5);
 		
-		m.load(new File("fileformat.txt"));
+		try {
+			m.load(new File("fileformat.txt"));
+		} catch (InvalidGizmoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Display d = new Display(m);
 		
