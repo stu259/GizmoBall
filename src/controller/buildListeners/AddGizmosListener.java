@@ -13,13 +13,15 @@ import view.IDisplay;
 public class AddGizmosListener implements ActionListener, MouseInputListener {
 	
 	private IModel model;
+	private IDisplay display;
 	private String gizmo;
 	private BuildListener buildListener;
 
-	public AddGizmosListener(IModel m, String g, BuildListener bL) {
+	public AddGizmosListener(IModel m, String g, BuildListener bL, IDisplay d) {
 		model = m;
 		gizmo = g;
 		buildListener = bL;
+		display=d;
 	}
 
 	@Override
@@ -27,8 +29,8 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 		buildListener.setMouseListener(this);		
 	}
 	
-	public void mousePressed(MouseEvent e) {		
-		//model.addGizmo(gizmo, e.getX(), e.getY());
+	public void mousePressed(MouseEvent e) {	
+		model.addGizmo(gizmo, e.getX()/display.getScale(), e.getY()/display.getScale());
 	}
 
 	public void mouseReleased(MouseEvent e) {

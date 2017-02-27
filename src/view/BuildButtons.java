@@ -71,27 +71,27 @@ public class BuildButtons extends JPanel {
 
 		JButton squareButton = new JButton("Square");
 		buttonSetup(squareButton);
-		squareButton.addActionListener(new AddGizmosListener(model, "square", buildListener));
+		squareButton.addActionListener(new AddGizmosListener(model, "square", buildListener, display));
 		gizmo.add(squareButton);
 
 		JButton circleButton = new JButton("Circle");
 		buttonSetup(circleButton);
-		circleButton.addActionListener(new AddGizmosListener(model, "circle", buildListener));
+		circleButton.addActionListener(new AddGizmosListener(model, "circle", buildListener, display));
 		gizmo.add(circleButton);
 
 		JButton triangleButton = new JButton("Triangle");
 		buttonSetup(triangleButton);
-		triangleButton.addActionListener(new AddGizmosListener(model, "triangle", buildListener));
+		triangleButton.addActionListener(new AddGizmosListener(model, "triangle", buildListener, display));
 		gizmo.add(triangleButton);
 
 		JButton lFlipperButton = new JButton("Left Flipper");
 		buttonSetup(lFlipperButton);
-		lFlipperButton.addActionListener(new AddGizmosListener(model, "lFlipper", buildListener));
+		lFlipperButton.addActionListener(new AddGizmosListener(model, "lFlipper", buildListener, display));
 		gizmo.add(lFlipperButton);
 
 		JButton rFlipperButton = new JButton("Right Flipper");
 		buttonSetup(rFlipperButton);
-		rFlipperButton.addActionListener(new AddGizmosListener(model, "rFlipper", buildListener));
+		rFlipperButton.addActionListener(new AddGizmosListener(model, "rFlipper", buildListener, display));
 		gizmo.add(rFlipperButton);
 
 		JButton backButton = new JButton("Back");
@@ -107,7 +107,7 @@ public class BuildButtons extends JPanel {
 
 		JButton rotateButton = new JButton("Rotate");
 		buttonSetup(rotateButton);
-		rotateButton.addActionListener(new RotateListener(model, buildListener));
+		rotateButton.addActionListener(new RotateListener(model, buildListener, display));
 		operation.add(rotateButton);
 
 		JButton deleteButton = new JButton("Delete");

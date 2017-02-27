@@ -8,41 +8,43 @@ import javax.swing.event.MouseInputListener;
 
 import controller.BuildListener;
 import model.IModel;
+import view.IDisplay;
 
 public class RotateListener implements ActionListener, MouseInputListener {
 
 	private IModel model;
 	private BuildListener buildListener;
+	private IDisplay display;
 
-	public RotateListener(IModel m, BuildListener bL) {
+	public RotateListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
+		display = d;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		buildListener.setMouseListener(this);		
+		buildListener.setMouseListener(this);
 	}
-	
-	public void mousePressed(MouseEvent e) {		
-		//model.rotateGizmo(e.getX(),e.getY());
+
+	public void mousePressed(MouseEvent e) {
+		model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale());
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		buildListener.setMouseListener(null);
 	}
-		
 
 	public void mouseEntered(MouseEvent e) {
-		
+
 	}
 
 	public void mouseExited(MouseEvent e) {
-		
+
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		
+
 	}
 
 	@Override

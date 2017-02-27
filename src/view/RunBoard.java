@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 
 import model.IDrawableBall;
 import model.IDrawableGizmo;
+import model.IModel;
 import model.Model;
 
 public class RunBoard extends JPanel implements Observer {
@@ -72,21 +74,12 @@ public class RunBoard extends JPanel implements Observer {
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("triangle")) {
 				g2.setColor(color.BLUE);
-
-				switch (gizmo.getRotation()) {
-				case 0:
-					g2.fillPolygon(new int[] { x1, x2, x1 }, new int[] { y2, y1, y1 }, 3);
-					break;
-				case 90:
-					g2.fillPolygon(new int[] { x2, x2, x1 }, new int[] { y2, y1, y1 }, 3);
-					break;
-				case 180:
-					g2.fillPolygon(new int[] { x2, x1, x2 }, new int[] { y1, y2, y2 }, 3);
-					break;
-				case 270:
-					g2.fillPolygon(new int[] { x1, x1, x2 }, new int[] { y1, y2, y2 }, 3);
-					break;
-				}
+				Polygon p = new Polygon(new int[] { x1, x2, x1 }, new int[] { y2, y1, y1 }, 3);
+				AffineTransform transform = new AffineTransform();
+				transform.rotate(Math.toRadians(gizmo.getRotation()), p.getBounds().getCenterX(),
+						p.getBounds().getCenterY());
+				Shape transformed = transform.createTransformedShape(p);
+				g2.fill(transformed);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("rightflipper")) {
 				g2.setColor(color.YELLOW);
@@ -98,6 +91,7 @@ public class RunBoard extends JPanel implements Observer {
 				} else {
 					AffineTransform transform = new AffineTransform();
 					transform.rotate(Math.toRadians(90), rf.getX() + 10, rf.getY() + 10);
+					
 					Shape transformed = transform.createTransformedShape(rf);
 					g2.fill(transformed);
 				}

@@ -122,7 +122,7 @@ public class Display implements IDisplay {
 	}
 
 	public void build() {
-		bB = new BuildBoard(500, 500);
+		bB = new BuildBoard(700, 700, m);
 		build = new BuildButtons(this, m, bB);
 		buttons.add(build, "build");
 		boards.add(bB, "build");
@@ -209,5 +209,10 @@ public class Display implements IDisplay {
 
 	public IModel getModel() {
 		return this.m;
+	}
+
+	@Override
+	public int getScale() {
+		return bB.getScale();
 	}
 }

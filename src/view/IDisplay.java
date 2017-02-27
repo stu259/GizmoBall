@@ -24,4 +24,6 @@ public interface IDisplay {
 	public IModel getModel();
 	
 	public int[] inputPopup(String[] message) ;
+	
+	public int getScale();
 }
