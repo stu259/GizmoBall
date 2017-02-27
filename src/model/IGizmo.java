@@ -75,16 +75,22 @@ public interface IGizmo {
 	public String getKey();
 	
 	public String gizmoType();
+	
+	public void clearIncomingConnections();
 
-	public IGizmo getConnectedGizmo();
+	public void clearOutgoingConnection();
+	
+	public void removeIncomingConnection(IGizmo gizmo);
 
-	public void setConnectedGizmo(IGizmo connectedGizmo);
+	void addIncomingConnection(IGizmo gizmoConnected);
 
-	public List<IGizmo> getGizmosConnected();
+	List<IGizmo> getIncomingConnections();
 
-	public void addGizmoConnected(IGizmo gizmoConnected);
+	void setOutgoingConnection(IGizmo connectedGizmo);
 
-	public void clearGizmoConnected();
+	IGizmo getOutgoingConnection();
 
-	public void removeGizmoConnected(IGizmo gizmo);
+	void setKeyboardPress(String k);
+
+	String getKeyboardPress();
 }

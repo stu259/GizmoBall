@@ -7,6 +7,7 @@ public class Ball {
 	private double minSpeed, maxSpeed, radius, x, y;
 	private Color color;
 	private boolean paused, absorbed;
+	private String key;
 	
 	/*
 	 * Direction must be in radians
@@ -21,6 +22,7 @@ public class Ball {
 		radius = 0.25;
 		paused = false;
 		absorbed = false;
+		key = null;
 	}
 
 	/*
@@ -37,6 +39,20 @@ public class Ball {
 		return y;
 	}
 
+	/*
+	 * Return assigned key
+	 */
+	public String getKey(){
+		return key;
+	}
+	
+	/*
+	 * Set the key
+	 */
+	public void setKey(String key){
+		this.key = key;
+	}
+	
 	/*
 	 * Returns whether or not the ball is absorbed
 	 */

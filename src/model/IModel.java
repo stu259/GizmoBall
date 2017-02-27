@@ -14,14 +14,29 @@ public interface IModel {
 	public boolean addGizmo(String gizmo, String key, int x, int y);
 	
 	/*
-	 * adds one ball to board
+	 * Generates a random key if only given gizmo type and coordinates
 	 */
-	public void addBall(Ball ball);
+	public boolean addGizmo(String gizmo, int x, int y);
+	
+//	/*
+//	 * adds one ball to board
+//	 */
+//	public void addBall(Ball ball);
+	
+	/*
+	 * Adds a ball to the board, given a key and coordinates
+	 */
+	public boolean addBall(String key, double x, double y, double velx, double vely);
 	
 	/*
 	 * adds an absorber to the 
 	 */
 	public boolean addAbsorber(String key, int x, int y, int ex, int ey);
+	
+	/*
+	 * Rotates the gizmo at the given x and y coordinates
+	 */
+	public boolean rotateGizmo(int x, int y);
 	
 	/*
 	 * Rotates the given Gizmo by rotating its line segments
@@ -32,12 +47,12 @@ public interface IModel {
 	/*
 	 * Connects gizmos to trigger on another
 	 */
-	public boolean connectGizmo(IGizmo gizmo1, IGizmo gizmo2);
+	public void connectGizmo(IGizmo gizmo1, IGizmo gizmo2);
 	
 	/*
 	 * Disconnects connected gizmos
 	 */
-	public boolean disconnectGizmo(IGizmo gizmo);
+	public void disconnectGizmo(IGizmo gizmo);
 	
 	/*
 	 * Connects key actions to given gizmo
@@ -45,14 +60,14 @@ public interface IModel {
 	public void keyConnectGizmo(IGizmo gizmo, String key);
 	
 	/*
-	 * Disconnects key actions bound to the given gizmo
-	 */
-	public void removeKey(IGizmo gizmo);
-	
-	/*
 	 * Removes a given gizmo from the board
 	 */
     public void deleteGizmo(String key);
+    
+    /*
+     * Removes a gizmo at the given coordinate
+     */
+	public void deleteGizmo(int x, int y);
     
     /*
      * Removes all gizmos from the board
@@ -72,7 +87,7 @@ public interface IModel {
     /*
      * Moves gizmo 
      */
-    public boolean moveGizmo(int x, int y, IGizmo gizmo);
+    public boolean moveGizmo(int gizmoX, int gizmoY, int newX, int newY);
     
     /*
      * Calls methods when switched to run mode
@@ -111,4 +126,10 @@ public interface IModel {
 	public List<IDrawableBall> drawableBall();
 	
 	public void triggerAbsorber() ;
+	
+	/*
+	 * Disconnects key actions bound to the given gizmo
+	 */
+	void removeKeyPress(IGizmo gizmo);
+
 }

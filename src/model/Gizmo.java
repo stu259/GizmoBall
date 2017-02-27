@@ -9,17 +9,19 @@ public class Gizmo implements IGizmo{
 	protected int x, y, angle, size;
 	protected double coef;
 	protected Color color;
-	protected String key;
-	protected IGizmo connectedGizmo;//gizmo to trigger when this gizmo is hit by the ball
-	protected List<IGizmo> gizmosConnected;//list of gizmos which can trigger this gizmo
+	protected String key, keyboardPress;
+	protected IGizmo outgoingConnection;//gizmo to trigger when this gizmo is hit by the ball
+	protected List<IGizmo> incomingConnections;//list of gizmos which can trigger this gizmo
 
 	public Gizmo(int x, int y){
 		this.x = x;
 		this.y= y;
 		this.color = Color.BLUE;
 		angle = 0;  //default angle facing upward
-		connectedGizmo = null;
-		gizmosConnected = new ArrayList<IGizmo>();
+		outgoingConnection = null;
+		incomingConnections = new ArrayList<IGizmo>();
+		key = null;
+		keyboardPress = null;
 	}
 	
 	@Override
@@ -86,6 +88,16 @@ public class Gizmo implements IGizmo{
 	}
 	
 	@Override
+	public void setKeyboardPress(String k){
+		this.keyboardPress = k;
+	}
+	
+	@Override
+	public String getKeyboardPress(){
+		return keyboardPress;
+	}
+	
+	@Override
 	public void setKey(String k){
 		key = k;
 	}
@@ -96,37 +108,43 @@ public class Gizmo implements IGizmo{
 	}
 	
 	@Override
-	public IGizmo getConnectedGizmo() {
-		return connectedGizmo;
+	public IGizmo getOutgoingConnection() {
+		return outgoingConnection;
 	}
 	
 	@Override
-	public void setConnectedGizmo(IGizmo connectedGizmo) {
-		this.connectedGizmo = connectedGizmo;
+	public void setOutgoingConnection(IGizmo connectedGizmo) {
+		this.outgoingConnection = connectedGizmo;
 	}
 	
 	@Override
-	public List<IGizmo> getGizmosConnected() {
-		return gizmosConnected;
+	public List<IGizmo> getIncomingConnections() {
+		return incomingConnections;
 	}
 
 	@Override
-	public void addGizmoConnected(IGizmo gizmoConnected) {
-		gizmosConnected.add(gizmoConnected);
+	public void addIncomingConnection(IGizmo gizmoConnected) {
+		incomingConnections.add(gizmoConnected);
 	}
 	
 	@Override
-	public void clearGizmoConnected(){
-		gizmosConnected.clear();
+	public void clearIncomingConnections(){
+		incomingConnections.clear();
 	}
 	
 	@Override
-	public void removeGizmoConnected(IGizmo gizmo){
-		gizmosConnected.remove(gizmo);
+	public void removeIncomingConnection(IGizmo gizmo){
+		incomingConnections.remove(gizmo);
 	}
 
+	@Override
+	public void clearOutgoingConnection(){
+		outgoingConnection = null;
+	}
+	
 	@Override
 	public String gizmoType() {
 		return "gizmo";
 	}
+
 }

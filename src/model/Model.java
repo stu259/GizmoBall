@@ -4,6 +4,7 @@ import physics.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.UUID;
 
 import gizmoException.InvalidGizmoException;
 
@@ -22,7 +23,6 @@ public class Model extends Observable implements IModel {
 	// flippers -> lines/circles
 
 	private Map<String, IGizmo> gizmos;
-	private List<Ball> balls;
 	private List<LineSegment> lines;
 	private List<Circle> circles;
 
@@ -38,6 +38,7 @@ public class Model extends Observable implements IModel {
 	private Map<LineSegment, IGizmo> linesToGizmos;
 	private Map<IGizmo, List<LineSegment>> flippersToLines;
 	private Map<IGizmo, List<Circle>> flippersToCircles;
+	private Map<String, Ball> balls;
 
 	private int boardSize;
 
@@ -45,7 +46,7 @@ public class Model extends Observable implements IModel {
 		boardSize = 20;
 
 		gizmos = new HashMap<String, IGizmo>();
-		balls = new ArrayList<Ball>();
+		balls = new HashMap<String, Ball>();
 		lines = new ArrayList<LineSegment>();
 		circles = new ArrayList<Circle>();
 
@@ -385,7 +386,7 @@ public class Model extends Observable implements IModel {
 		Vect updatedVel = new Vect(0, 0);
 		AbsorberGizmo absorber = null;
 
-		for (Ball ball : balls) {
+		for (Ball ball : balls.values()) {
 			Circle circ = ball.getCircle();
 			Vect vel = ball.getVelocity();
 			double nextTime = 0;
@@ -446,7 +447,7 @@ public class Model extends Observable implements IModel {
 
 	public void triggerAbsorber() {
 		CollisionInfo colInfo = timeUntilCollision();
-		for (Ball ball : balls) {
+		for (Ball ball : balls.values()) {
 			if (ball.isAbsorbed()) {
 				ball.setVelocity(colInfo.getUpdatedVel());
 			}
@@ -458,8 +459,10 @@ public class Model extends Observable implements IModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
+		
 		if (colTime < time) { // collision detected
-			balls.remove(colBall);
+			String key = colBall.getKey();
+			balls.remove(key);
 			if (colInfo.getAbs() != null) {
 				if (colBall.isAbsorbed()) {
 					AbsorberGizmo absorber = colInfo.getAbs();
@@ -478,14 +481,14 @@ public class Model extends Observable implements IModel {
 				applyFriction(colBall, colTime);
 				applyGravity(colBall, colTime);
 			}
-			for (Ball ball : balls) {
+			for (Ball ball : balls.values()) {
 				ball = calculateBallMove(ball, colTime);
 				applyFriction(ball, colTime);
 				applyGravity(ball, colTime);
 			}
-			balls.add(colBall);
+			balls.put(key, colBall);
 		} else {
-			for (Ball ball : balls) {
+			for (Ball ball : balls.values()) {
 				if (!ball.isAbsorbed()) {
 					ball = calculateBallMove(ball, time);
 					applyFriction(ball, time);
@@ -564,6 +567,13 @@ public class Model extends Observable implements IModel {
 		return true;
 	}
 
+	@Override
+	public boolean addGizmo(String gizmo, int x, int y){
+		String type = String.valueOf(gizmo.charAt(0));
+		String uniqueKey = type + String.valueOf(x) + String.valueOf(y);
+		return addGizmo(gizmo, uniqueKey, x, y);
+	}
+	
 	// adds a gizmo given the type of gizmo, a key and coords.
 	@Override
 	public boolean addGizmo(String gizmo, String key, int x, int y) {
@@ -608,21 +618,17 @@ public class Model extends Observable implements IModel {
 	public boolean addGizmo(IGizmo gizmo, String key) {
 		if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
 			return false;
-
+		
+		gizmo.setKey(key);
+		
 		// add gizmo to gizmo list
 		gizmos.put(key, gizmo);
-
+		
+		
 		this.setChanged();
 		this.notifyObservers(); // call the observer to redraw the added gizmo
 
 		return true;
-	}
-
-	// Adds param ball to the list of balls on the board
-	public void addBall(Ball ball) {
-		this.setChanged();
-		this.notifyObservers();
-		balls.add(ball);
 	}
 
 	public boolean addBall(String key, double x, double y, double velx, double vely) {
@@ -633,7 +639,12 @@ public class Model extends Observable implements IModel {
 		if (!validatePosition(x - r, y - r, x + r, y + r))
 			return false;
 
-		balls.add(ball);
+		ball.setKey(key);
+		
+		balls.put(key, ball);
+		
+		this.setChanged();
+		this.notifyObservers();
 		return true;
 	}
 
@@ -651,6 +662,29 @@ public class Model extends Observable implements IModel {
 		return true;
 	}
 
+	private String findGizmo(int x, int y){
+		int ex = x+1;
+		int ey = y+1;
+		
+		for (String key : gizmos.keySet()) {
+			if (x < gizmos.get(key).getEndX() && ex > gizmos.get(key).getStartX() && y < gizmos.get(key).getEndY() && ey > gizmos.get(key).getStartY())
+				return key;
+		}
+		
+		return null;
+	}
+	
+	@Override
+	public boolean rotateGizmo(int x, int y){
+		String key = findGizmo(x, y);
+		
+		if(key==null)
+			return false;
+		
+		rotateGizmo(key);
+		return true;
+	}
+	
 	@Override
 	public void rotateGizmo(String key) {
 		gizmos.get(key).rotate();
@@ -660,42 +694,46 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public boolean connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
-		if (gizmo2.getConnectedGizmo() != null) {
-			gizmo1.setConnectedGizmo(gizmo2);
-			gizmo2.setConnectedGizmo(null);
-			gizmo2.addGizmoConnected(gizmo1);
-			return true;
+	public void connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
+		if(gizmo2.getOutgoingConnection() != null){
+			gizmo2.getOutgoingConnection().removeIncomingConnection(gizmo2);
+			gizmo2.clearOutgoingConnection();
 		}
-		return false;
+		
+		if(!gizmo1.getIncomingConnections().isEmpty()){
+			for(IGizmo incomingCon : gizmo1.getIncomingConnections()){
+				incomingCon.clearOutgoingConnection();
+			}
+			gizmo1.clearIncomingConnections();
+		}
+		
+		gizmo1.setOutgoingConnection(gizmo2);
+		gizmo2.addIncomingConnection(gizmo1);
 	}
 
 	@Override
-	public boolean disconnectGizmo(IGizmo gizmo) {
-		boolean removed = false;
-		if (gizmo.getConnectedGizmo() != null) {
-			gizmo.getConnectedGizmo().removeGizmoConnected(gizmo);
-			gizmo.setConnectedGizmo(null);
-			removed = true;
+	public void disconnectGizmo(IGizmo gizmo) {
+		if(gizmo.getOutgoingConnection() != null){
+			gizmo.getOutgoingConnection().removeIncomingConnection(gizmo);
+			gizmo.clearOutgoingConnection();
 		}
-		if (gizmo.getGizmosConnected().size() > 0) {
-			for (IGizmo giz : gizmo.getGizmosConnected()) {
-				giz.setConnectedGizmo(null);
+		
+		if(!gizmo.getIncomingConnections().isEmpty()){
+			for(IGizmo incomingCon : gizmo.getIncomingConnections()){
+				incomingCon.clearOutgoingConnection();
 			}
-			gizmo.clearGizmoConnected();
-			removed = true;
+			gizmo.clearIncomingConnections();
 		}
-		return removed;
 	}
 
 	@Override
 	public void keyConnectGizmo(IGizmo gizmo, String k) {
-		gizmo.setKey(k);
+		gizmo.setKeyboardPress(k);
 	}
 
 	@Override
-	public void removeKey(IGizmo gizmo) {
-		gizmo.setKey("");
+	public void removeKeyPress(IGizmo gizmo) {
+		gizmo.setKeyboardPress(null);
 	}
 
 	@Override
@@ -703,6 +741,14 @@ public class Model extends Observable implements IModel {
 		gizmos.remove(key);
 		this.setChanged();
 		this.notifyObservers();
+	}
+	
+	@Override
+	public void deleteGizmo(int x, int y){
+		String gizmoKey = findGizmo(x, y);
+		
+		if(gizmoKey != null)
+			deleteGizmo(gizmoKey);
 	}
 
 	@Override
@@ -739,8 +785,7 @@ public class Model extends Observable implements IModel {
 		ball.setVelocity(velGravity);
 	}
 
-	@Override
-	public boolean moveGizmo(int x, int y, IGizmo gizmo) {
+	private boolean moveGizmo(int x, int y, IGizmo gizmo){
 		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize())) {
 			gizmo.newPosition(x, y);
 			this.setChanged();
@@ -750,12 +795,76 @@ public class Model extends Observable implements IModel {
 
 		return false;
 	}
+	
+	@Override
+	public boolean moveGizmo(int gizmoX, int gizmoY, int newX, int newY) {
+		String gizmoKey = findGizmo(gizmoX, gizmoY);
+		IGizmo gizmo;
+		
+		if(gizmoKey == null)
+			return false;
+		else
+			gizmo = gizmos.get(gizmoKey);
+
+		return moveGizmo(newX, newY, gizmo);
+	}
 
 	@Override
 	public void save(File f) {
 		FileWriter writer;
+		
 		try {
 			writer = new FileWriter(f);
+			
+			for(String key : gizmos.keySet()){
+				IGizmo gizmo = gizmos.get(key);
+				
+				//Gizmo
+				//capitalises first letter
+				String type = gizmo.gizmoType().substring(0, 1).toUpperCase() 
+						+ gizmo.gizmoType().substring(1).toLowerCase();
+				String x = String.valueOf(gizmo.getStartX());
+				String y = String.valueOf(gizmo.getStartY());
+				String gizmoString = type + " " + key + " " + x + " " + y + "\n"; 
+				writer.write(gizmoString);
+				
+				//Rotate
+				int rot = gizmo.getRotation() / 90;
+				for(int i=0; i<rot; i++){
+					String rotation = "Rotate " + key + "\n";
+					writer.write(rotation);
+				}
+				
+				//KeyConnect keyword
+				//DOUBLE CHECK THIS, MIGHT NOT BE CORRECT
+				if(gizmo.getKeyboardPress() != null){
+					String keyConnection = "KeyConnect key " + gizmo.getKey() + " " + key + "\n";
+					writer.write(keyConnection);
+				}
+				
+				//Connect keyword
+				if(gizmo.getOutgoingConnection() != null){
+					String connect = "Connect " + key + " " + gizmo.getOutgoingConnection().getKey() + "\n";
+					writer.write(connect);
+				}
+			}
+			
+			//Ball
+			for(Ball ball : balls.values()){
+				String ballString = "Ball " + ball.getKey() + " " + String.valueOf(ball.getX()) + " " +
+														String.valueOf(ball.getY()) + " " +
+														String.valueOf(ball.getVelocity().x()) + " " +
+														String.valueOf(ball.getVelocity().y()) + "\n";
+				writer.write(ballString);
+			}
+			
+			//Gravity
+			String grav = "Gravity " + String.valueOf(gravity) + "\n";
+			writer.write(grav);
+			//Friction
+			String fric = "Friction " + String.valueOf(frictionMU) + " " + String.valueOf(frictionMUTwo) + "\n";
+			writer.write(fric);
+			
 			writer.close();
 		} catch (IOException e) {
 			System.out.println("IO Exception");
@@ -805,6 +914,7 @@ public class Model extends Observable implements IModel {
 							Double.parseDouble(splitCommand[5])))
 						throw new InvalidGizmoException(
 								"Skipping instruction at line " + lineNumber + " overlapping ball");
+					
 					break;
 				case "rotate":
 					if (splitCommand.length != 2)
@@ -885,7 +995,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	public List<Ball> getBalls() {
-		return balls;
+		return new ArrayList<Ball>(balls.values());
 	}
 
 	public List<IGizmo> getGizmos() {
@@ -929,4 +1039,7 @@ public class Model extends Observable implements IModel {
 
 		return drawables;
 	}
+
+
+
 }
