@@ -34,7 +34,7 @@ public class AddBallListener implements ActionListener, MouseInputListener {
 	}
 	
 	public void mousePressed(MouseEvent e) {		
-		//model.addBall(e.getX(),e.getY(),velocity[0],velocity[1]);
+		model.addBall("ball", e.getX()/display.getScale(),e.getY()/display.getScale(),velocity[0],velocity[1]);
 	}
 
 	public void mouseReleased(MouseEvent e) {

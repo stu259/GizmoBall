@@ -8,17 +8,20 @@ import javax.swing.event.MouseInputListener;
 
 import controller.BuildListener;
 import model.IModel;
+import view.IDisplay;
 
 public class AddAbsorberListener implements ActionListener, MouseInputListener {
 
 	private IModel model;
 	private BuildListener buildListener;
+	private IDisplay display;
 	private int x;
 	private int y;
 
-	public AddAbsorberListener(IModel m, BuildListener bL) {
+	public AddAbsorberListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
+		display = d;
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 			x = e.getX();
 			y = e.getY();
 		} else {
-			//model.addAbsorber(x, y, e.getX(), e.getY());
+			model.addAbsorber("absorber", x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
 		}
 	}
 

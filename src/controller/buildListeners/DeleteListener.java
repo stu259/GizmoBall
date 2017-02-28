@@ -4,6 +4,7 @@ import javax.swing.event.MouseInputListener;
 
 import controller.BuildListener;
 import model.IModel;
+import view.IDisplay;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,10 +14,12 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 
 	private IModel model;
 	private BuildListener buildListener;
+	private IDisplay display;
 
-	public DeleteListener(IModel m,  BuildListener bL) {
+	public DeleteListener(IModel m,  BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
+		display = d;
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		//model.deleteGizmo(e.getX(),e.getY());
+		model.deleteGizmo(e.getX()/display.getScale(),e.getY()/display.getScale());
 	}
 
 	public void mouseReleased(MouseEvent e) {

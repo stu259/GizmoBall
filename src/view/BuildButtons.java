@@ -86,12 +86,12 @@ public class BuildButtons extends JPanel {
 
 		JButton lFlipperButton = new JButton("Left Flipper");
 		buttonSetup(lFlipperButton);
-		lFlipperButton.addActionListener(new AddGizmosListener(model, "lFlipper", buildListener, display));
+		lFlipperButton.addActionListener(new AddGizmosListener(model, "leftflipper", buildListener, display));
 		gizmo.add(lFlipperButton);
 
 		JButton rFlipperButton = new JButton("Right Flipper");
 		buttonSetup(rFlipperButton);
-		rFlipperButton.addActionListener(new AddGizmosListener(model, "rFlipper", buildListener, display));
+		rFlipperButton.addActionListener(new AddGizmosListener(model, "rightflipper", buildListener, display));
 		gizmo.add(rFlipperButton);
 
 		JButton backButton = new JButton("Back");
@@ -112,17 +112,17 @@ public class BuildButtons extends JPanel {
 
 		JButton deleteButton = new JButton("Delete");
 		buttonSetup(deleteButton);
-		deleteButton.addActionListener(new DeleteListener(model, buildListener));
+		deleteButton.addActionListener(new DeleteListener(model, buildListener, display));
 		operation.add(deleteButton);
 
 		JButton moveButton = new JButton("Move");
 		buttonSetup(moveButton);
-		moveButton.addActionListener(new MoveListener(model, buildListener));
+		moveButton.addActionListener(new MoveListener(model, buildListener, display));
 		operation.add(moveButton);
 
 		JButton clearButton = new JButton("Clear");
 		buttonSetup(clearButton);
-		clearButton.addActionListener(new ClearListener(model));
+		clearButton.addActionListener(new ClearListener(model, buildBoard));
 		operation.add(clearButton);
 
 		JButton connectButton = new JButton("Connect");
@@ -159,7 +159,7 @@ public class BuildButtons extends JPanel {
 
 		JButton absorberButton = new JButton("Place Absorber");
 		buttonSetup(absorberButton);
-		absorberButton.addActionListener(new AddAbsorberListener(model, buildListener));
+		absorberButton.addActionListener(new AddAbsorberListener(model, buildListener, display));
 		setup.add(absorberButton);
 
 		JButton frictionButton = new JButton("Friction");
