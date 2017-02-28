@@ -17,11 +17,14 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	private IDisplay display;
 	private int x;
 	private int y;
+	private boolean isClicked;
+
 
 	public AddAbsorberListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
 		display = d;
+		isClicked=false;
 	}
 
 	@Override
@@ -30,11 +33,15 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (e.getClickCount() == 1) {
-			x = e.getX();
-			y = e.getY();
-		} else {
-			//model.addAbsorber("absorber", x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
+		if (isClicked ==false) {
+			x = e.getX()/display.getScale();
+			y = e.getY()/display.getScale();
+			isClicked= true;
+		} 
+		else if (isClicked == true){
+			model.addAbsorber("absorber", x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
+			//checked the values passing are correct.
+			isClicked = false;
 		}
 	}
 
@@ -43,7 +50,10 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 			buildListener.setMouseListener(null);
 		}		
 	}
-
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+	}
 	public void mouseEntered(MouseEvent e) {
 
 	}
@@ -55,11 +65,6 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	public void mouseClicked(MouseEvent e) {
 
 	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-	}
-
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 	}

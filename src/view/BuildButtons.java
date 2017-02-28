@@ -126,7 +126,7 @@ public class BuildButtons extends JPanel {
 
 		JButton connectButton = new JButton("Connect");
 		buttonSetup(connectButton);
-		connectButton.addActionListener(new ConnectListener(model, buildListener));
+		connectButton.addActionListener(new ConnectListener(model, buildListener, display));
 		operation.add(connectButton);
 
 		JButton bindButton = new JButton("Bind Key");
