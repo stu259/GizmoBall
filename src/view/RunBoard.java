@@ -90,10 +90,10 @@ public class RunBoard extends JPanel implements Observer {
 
 				} else {
 					AffineTransform transform = new AffineTransform();
-					transform.rotate(Math.toRadians(90), rf.getX() + 10, rf.getY() + 10);
-					
+					transform.rotate(Math.toRadians(90), rf.getX()+rf.getWidth()/2, rf.getY()+rf.getWidth()/2);
 					Shape transformed = transform.createTransformedShape(rf);
 					g2.fill(transformed);
+
 				}
 			} else if (gizmo.getGizmoType().toLowerCase().equals("leftflipper")) {
 				g2.setColor(color.YELLOW);
@@ -105,7 +105,7 @@ public class RunBoard extends JPanel implements Observer {
 				} else {
 
 					AffineTransform transform = new AffineTransform();
-					transform.rotate(Math.toRadians(-90), lf.getX() + 10, lf.getY() + 10);
+					transform.rotate(Math.toRadians(270), lf.getX() +lf.getWidth()/2, lf.getY() +lf.getWidth()/2);
 					Shape transformed = transform.createTransformedShape(lf);
 					g2.fill(transformed);
 				}

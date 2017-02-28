@@ -107,7 +107,9 @@ public class BuildListener implements IListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (mouseListener != null) {
+			mouseListener.mouseExited(e);
+		}
 
 	}
 

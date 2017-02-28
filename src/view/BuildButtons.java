@@ -20,13 +20,11 @@ public class BuildButtons extends JPanel {
 	private JPanel main, gizmo, operation, setup;
 	private IModel model;
 	private BuildListener buildListener;
-	private BuildBoard buildBoard;
 
 	public BuildButtons(IDisplay d, IModel m, BuildBoard bb) {
 
 		buildListener = new BuildListener(m, display);
-		buildBoard = bb;
-		buildBoard.addMouseListener(buildListener);
+		bb.addMouseListener(buildListener);
 		setLayout(new CardLayout());
 		display = d;
 		model = m;

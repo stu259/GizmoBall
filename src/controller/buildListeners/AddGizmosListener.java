@@ -11,7 +11,7 @@ import model.IModel;
 import view.IDisplay;
 
 public class AddGizmosListener implements ActionListener, MouseInputListener {
-	
+
 	private IModel model;
 	private IDisplay display;
 	private String gizmo;
@@ -21,41 +21,50 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 		model = m;
 		gizmo = g;
 		buildListener = bL;
-		display=d;
+		display = d;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		buildListener.setMouseListener(this);		
+		buildListener.setMouseListener(this);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		model.addGizmo(gizmo, e.getX() / display.getScale(), e.getY() / display.getScale());
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		buildListener.setMouseListener(null);;
 	}
 	
-	public void mousePressed(MouseEvent e) {	
-		model.addGizmo(gizmo, e.getX()/display.getScale(), e.getY()/display.getScale());
-	}
-
+	@Override
 	public void mouseReleased(MouseEvent e) {
-		buildListener.setMouseListener(null);
-	}
-		
-
-	public void mouseEntered(MouseEvent e) {
-		
-	}
-
-	public void mouseExited(MouseEvent e) {
-		
-	}
-
-	public void mouseClicked(MouseEvent e) {
 		
 	}
 
 	@Override
+	public void mouseClicked(MouseEvent e) {
+
+
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	
+	}
+
+
+	@Override
 	public void mouseDragged(MouseEvent arg0) {
+
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

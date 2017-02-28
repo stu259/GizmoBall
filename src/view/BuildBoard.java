@@ -101,14 +101,21 @@ public class BuildBoard extends JPanel implements Observer {
 				g2.setColor(color.YELLOW);
 				RoundRectangle2D rf = new RoundRectangle2D.Double(x1 + 2 * scale - ((x2 - x1) / 4), y1, (x2 - x1) / 4,
 						(y2 - y1), (y2 - y1) / 4, (y2 - y1) / 4);
-				g2.rotate(Math.toRadians(gizmo.getRotation()));
-				g2.fill(rf);
+				AffineTransform transform = new AffineTransform();
+				transform.rotate(Math.toRadians(gizmo.getRotation()), rf.getX() + rf.getWidth() / 2,
+						rf.getY() + rf.getWidth() / 2);
+				Shape transformed = transform.createTransformedShape(rf);
+				g2.fill(transformed);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("leftflipper")) {
 				g2.setColor(color.YELLOW);
 				RoundRectangle2D lf = new RoundRectangle2D.Double(x1, y1, (x2 - x1) / 4, (y2 - y1), (y2 - y1) / 4,
 						(y2 - y1) / 4);
-				g2.fill(lf);
+
+				AffineTransform transform = new AffineTransform();
+				transform.rotate(Math.toRadians(gizmo.getRotation()), lf.getX() + lf.getWidth() / 2, lf.getY() + lf.getWidth() / 2);
+				Shape transformed = transform.createTransformedShape(lf);
+				g2.fill(transformed);
 
 			}
 		}
