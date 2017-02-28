@@ -11,7 +11,7 @@ public class FrictionListener implements ActionListener {
 	
 	private IModel model;
 	private IDisplay display;
-	private int[] friction;
+	private double[] friction;
 
 	public FrictionListener(IModel m,  IDisplay d) {
 		model = m;

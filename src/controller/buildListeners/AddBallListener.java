@@ -15,7 +15,7 @@ public class AddBallListener implements ActionListener, MouseInputListener {
 	private IModel model;
 	private IDisplay display;
 	private BuildListener buildListener;
-	private int[] velocity;
+	private double[] velocity;
 
 	public AddBallListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
@@ -33,8 +33,7 @@ public class AddBallListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		System.out.println(e.getX() / display.getScale() + " " + e.getY() / display.getScale());
-		model.addBall(e.getX() / display.getScale(), e.getY() / display.getScale(), velocity[0], velocity[1]);
+		model.addBall((double)e.getX() / (double)display.getScale(), (double)e.getY() / (double)display.getScale(), velocity[0], velocity[1]);
 	}
 
 	public void mouseReleased(MouseEvent e) {

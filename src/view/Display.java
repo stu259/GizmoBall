@@ -176,10 +176,10 @@ public class Display implements IDisplay {
 		cardLayout.show(boards, "load");
 	}
 
-	public int[] inputPopup(String[] message) {
+	public double[] inputPopup(String[] message) {
 		JTextField[] textField = new JTextField[message.length];
 		JPanel inputPopup = new JPanel(new BorderLayout());
-		int[] output = new int[message.length];
+		double[] output = new double[message.length];
 
 		JPanel labels = new JPanel(new GridLayout(message.length, 1));
 		for (int i = 0; i < message.length; i++) {
