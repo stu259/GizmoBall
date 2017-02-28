@@ -34,7 +34,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 			x = e.getX();
 			y = e.getY();
 		} else {
-			model.addAbsorber("absorber", x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
+			//model.addAbsorber("absorber", x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
 		}
 	}
 

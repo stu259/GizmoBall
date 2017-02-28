@@ -20,6 +20,7 @@ public class BuildButtons extends JPanel {
 	private JPanel main, gizmo, operation, setup;
 	private IModel model;
 	private BuildListener buildListener;
+	private BuildBoard bb;
 
 	public BuildButtons(IDisplay d, IModel m, BuildBoard bb) {
 
@@ -120,7 +121,7 @@ public class BuildButtons extends JPanel {
 
 		JButton clearButton = new JButton("Clear");
 		buttonSetup(clearButton);
-		clearButton.addActionListener(new ClearListener(model, buildBoard));
+		clearButton.addActionListener(new ClearListener(model, bb));
 		operation.add(clearButton);
 
 		JButton connectButton = new JButton("Connect");
