@@ -24,16 +24,9 @@ public class LoadListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		File f = d.loadDialog();
 		if (f != null) {
-			try {
-				if (!m.load(f)) {
-					d.errorPopup("Invalid File Format");
-				}else{
-					d.load();
-				}
-			} catch (InvalidGizmoException e1) {
-				System.out.println(e1.getMessage());
-				d.errorPopup(e1.getMessage());
-			}
+			if (!m.load(f)) {
+				d.errorPopup("Invalid File Format");
+			} 
 		} else {
 			d.errorPopup("No File Selected");
 		}

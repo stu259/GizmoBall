@@ -24,12 +24,9 @@ public class CollisionsPrototype {
 //		
 //		m.addBall("b1", 5, 5, 5, 5);
 		
-		try {
+
 			m.load(new File("fileformat.txt"));
-		} catch (InvalidGizmoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		Display d = new Display(m);
 		

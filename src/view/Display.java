@@ -166,16 +166,6 @@ public class Display implements IDisplay {
 		JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
-	public void load() {
-		buttons.add(new JPanel(), "blank");
-		FlipperBoard bb = new FlipperBoard(700, 700, m);
-		boards.add(bb, "load");
-		CardLayout cardLayout = (CardLayout) buttons.getLayout();
-		cardLayout.show(buttons, "blank");
-		cardLayout = (CardLayout) boards.getLayout();
-		cardLayout.show(boards, "load");
-	}
-
 	public double[] inputPopup(String[] message) {
 		JTextField[] textField = new JTextField[message.length];
 		JPanel inputPopup = new JPanel(new BorderLayout());

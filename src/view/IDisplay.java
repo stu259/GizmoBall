@@ -19,8 +19,6 @@ public interface IDisplay {
 
 	public void errorPopup(String errorMessage);
 	
-	public void load();
-
 	public IModel getModel();
 	
 	public double[] inputPopup(String[] message) ;

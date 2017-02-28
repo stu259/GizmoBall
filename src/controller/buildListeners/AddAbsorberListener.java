@@ -39,7 +39,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 			isClicked= true;
 		} 
 		else if (isClicked == true){
-			model.addAbsorber("absorber", x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
+			model.addAbsorber(x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
 			//checked the values passing are correct.
 			isClicked = false;
 		}

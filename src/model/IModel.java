@@ -113,7 +113,7 @@ public interface IModel {
 	 * @return 
 	 * @throws InvalidGizmoException 
 	 */
-	public boolean load(File f) throws InvalidGizmoException;
+	public boolean load(File f);
 
 	/**
 	 * Creates a Drawable object so that the view
@@ -133,5 +133,6 @@ public interface IModel {
 	 * Disconnects key actions bound to the given gizmo
 	 */
 	void removeKeyPress(IGizmo gizmo);
+	boolean addAbsorber(int x, int y, int ex, int ey);
 
 }

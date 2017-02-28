@@ -682,6 +682,19 @@ public class Model extends Observable implements IModel {
 		return true;
 	}
 
+	public boolean addAbsorber(int x, int y, int ex, int ey) {
+		String xCoord = String.valueOf(x);
+		String yCoord = String.valueOf(y);
+
+		if (x < 10)
+			xCoord = "0" + xCoord;
+		if (y < 10)
+			yCoord = "0" + yCoord;
+
+		String uniqueKey = "absorber" + xCoord + yCoord;
+		return addAbsorber(uniqueKey, x, y, ex, ey);
+	}
+
 	private String findGizmo(int x, int y) {
 		int ex = x + 1;
 		int ey = y + 1;
@@ -730,9 +743,9 @@ public class Model extends Observable implements IModel {
 
 		gizmo1.setOutgoingConnection(gizmo2);
 		gizmo2.addIncomingConnection(gizmo1);
-//		System.out.println("connection done");
-//		System.out.println(gizmo1.getKey());
-//		System.out.println(gizmo2.getKey());
+		// System.out.println("connection done");
+		// System.out.println(gizmo1.getKey());
+		// System.out.println(gizmo2.getKey());
 
 	}
 
@@ -898,7 +911,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public boolean load(File f) throws InvalidGizmoException {
+	public boolean load(File f) {
 		clear();
 		int lineNumber = 0;
 		String line;
@@ -914,14 +927,16 @@ public class Model extends Observable implements IModel {
 				case "leftflipper":
 				case "rightflipper":
 					if (splitCommand.length != 4)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
+						System.out
+								.println("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
 					else if (!addGizmo(splitCommand[0], splitCommand[1], (Integer.parseInt(splitCommand[2])),
 							(Integer.parseInt(splitCommand[3]))))
 						System.out.println("Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "absorber":
 					if (splitCommand.length != 6)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid absorber instruction");
+						System.out.println(
+								"Skipping instruction at line " + lineNumber + " invalid absorber instruction");
 					else if (!addAbsorber(splitCommand[1], Integer.parseInt(splitCommand[2]),
 							Integer.parseInt(splitCommand[3]), Integer.parseInt(splitCommand[4]),
 							Integer.parseInt(splitCommand[5])))
@@ -938,13 +953,15 @@ public class Model extends Observable implements IModel {
 					break;
 				case "rotate":
 					if (splitCommand.length != 2)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
+						System.out
+								.println("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
 					else
 						rotateGizmo(splitCommand[1]);
 					break;
 				case "delete":
 					if (splitCommand.length != 2)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid delete instruction");
+						System.out
+								.println("Skipping instruction at line " + lineNumber + " invalid delete instruction");
 					else
 						deleteGizmo(splitCommand[1]);
 					break;
@@ -957,23 +974,23 @@ public class Model extends Observable implements IModel {
 					break;
 				case "keyconnect":
 					if (splitCommand.length != 5)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid key connect instruction");
+						System.out.println(
+								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
-						// gizmos.get(splitCommand[4]);// connect
-						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2] + " "
-								+ splitCommand[3] + " " + splitCommand[4]);
-					}
+						keyConnectGizmo(gizmos.get(splitCommand[4]),splitCommand[2]);// connect
+											}
 					break;
 				case "connect":
 					if (splitCommand.length != 3)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid connect instruction");
+						System.out
+								.println("Skipping instruction at line " + lineNumber + " invalid connect instruction");
 					else
-						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
-					// gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
+						connectGizmo(gizmos.get(splitCommand[1]), gizmos.get(splitCommand[2]));
 					break;
 				case "friction":
 					if (splitCommand.length != 3)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid friction instruction");
+						System.out.println(
+								"Skipping instruction at line " + lineNumber + " invalid friction instruction");
 					else {
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						setFriction(Double.parseDouble((splitCommand[1])), Double.parseDouble((splitCommand[2])));
@@ -981,7 +998,8 @@ public class Model extends Observable implements IModel {
 					break;
 				case "gravity":
 					if (splitCommand.length != 2) {
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
+						System.out
+								.println("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
 					} else {
 						setGravity(Double.parseDouble((splitCommand[1])));
 						System.out.println(splitCommand[0] + " " + splitCommand[1]);
