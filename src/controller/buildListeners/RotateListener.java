@@ -31,18 +31,19 @@ public class RotateListener implements ActionListener, MouseInputListener {
 		model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale());
 	}
 
-	public void mouseReleased(MouseEvent e) {
+
+	public void mouseExited(MouseEvent e) {
 		buildListener.setMouseListener(null);
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		
 	}
 
 	public void mouseEntered(MouseEvent e) {
 
 	}
-
-	public void mouseExited(MouseEvent e) {
-
-	}
-
+	
 	public void mouseClicked(MouseEvent e) {
 
 	}

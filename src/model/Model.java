@@ -755,6 +755,8 @@ public class Model extends Observable implements IModel {
 	public void clear() {
 		gizmos.clear();
 		balls.clear();
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	@Override
