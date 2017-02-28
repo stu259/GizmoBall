@@ -23,7 +23,7 @@ public class MoveListener implements ActionListener, MouseInputListener {
 		model = m;
 		buildListener = bL;
 		display = d;
-		boolean isClicked=false;
+		isClicked=false;
 	}
 
 	@Override
@@ -32,12 +32,12 @@ public class MoveListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (e.getClickCount() == 1 && isClicked ==false) {
+		if (isClicked ==false) {
 			x = e.getX()/display.getScale();
 			y = e.getY()/display.getScale();
 			isClicked= true;
 		} 
-		else if (e.getClickCount() == 1 && isClicked == true){
+		else if (isClicked == true){
 			model.moveGizmo(x, y, e.getX()/display.getScale(),e.getY()/display.getScale());
 			isClicked = false;
 		}
@@ -45,9 +45,9 @@ public class MoveListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (e.getClickCount() > 1) {
+		if (isClicked ==false) {
 			buildListener.setMouseListener(null);
-		}		
+		}	
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -55,7 +55,7 @@ public class MoveListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mouseExited(MouseEvent e) {
-
+	
 	}
 
 	public void mouseClicked(MouseEvent e) {

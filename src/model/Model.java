@@ -653,6 +653,17 @@ public class Model extends Observable implements IModel {
 		this.notifyObservers();
 		return true;
 	}
+	
+	public boolean addBall(double x, double y, double velx, double vely) {
+		String xCoord = String.valueOf(x);
+		String yCoord = String.valueOf(y);
+		
+		if(x<10)	xCoord = "0" + xCoord;
+		if(y<10) 	yCoord = "0" + yCoord;			
+		
+		String uniqueKey = "ball" + xCoord + yCoord;
+		return addBall(uniqueKey, x, y, velx, vely);
+	}
 
 	public boolean addAbsorber(String key, int x, int y, int ex, int ey) {
 		if (!validatePosition(x, y, ex, ey))

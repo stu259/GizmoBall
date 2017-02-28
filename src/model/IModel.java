@@ -28,6 +28,8 @@ public interface IModel {
 	 */
 	public boolean addBall(String key, double x, double y, double velx, double vely);
 	
+	public boolean addBall(double x, double y, double velx, double vely);
+	
 	/*
 	 * adds an absorber to the 
 	 */
