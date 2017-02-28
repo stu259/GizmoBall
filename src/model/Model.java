@@ -570,7 +570,13 @@ public class Model extends Observable implements IModel {
 	@Override
 	public boolean addGizmo(String gizmo, int x, int y){
 		String type = String.valueOf(gizmo.charAt(0));
-		String uniqueKey = type + String.valueOf(x) + String.valueOf(y);
+		String xCoord = String.valueOf(x);
+		String yCoord = String.valueOf(y);
+		
+		if(x<10)	xCoord = "0" + xCoord;
+		if(y<10) 	yCoord = "0" + yCoord;			
+		
+		String uniqueKey = type + xCoord + yCoord;
 		return addGizmo(gizmo, uniqueKey, x, y);
 	}
 	
