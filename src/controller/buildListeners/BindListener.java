@@ -19,10 +19,13 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 	private IModel model;
 	private BuildListener buildListener;
 	private int x,y;
+	private IDisplay display;
 
-	public BindListener(IModel m, BuildListener bl) {
+
+	public BindListener(IModel m, BuildListener bl, IDisplay d) {
 		model=m;
 		buildListener=bl;
+		display =d;
 	}
 
 	@Override
@@ -32,10 +35,13 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		x=e.getX();
-		y=e.getY();
-		buildListener.setKeyListener(this);
-		
+		x=e.getX()/display.getScale();
+		y=e.getY()/display.getScale();
+		buildListener.setKeyListener(this);	
+	}
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		//model.keyConnectGizmo(x,y, arg0.getKeyCode());	
 	}
 
 	@Override
@@ -44,11 +50,7 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 		
 	}
 	
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		//model.keyConnectGizmo(x,y, arg0.getKeyCode());
-		
-	}
+	
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {

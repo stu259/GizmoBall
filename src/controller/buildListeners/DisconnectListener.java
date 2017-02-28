@@ -8,15 +8,18 @@ import javax.swing.event.MouseInputListener;
 
 import controller.BuildListener;
 import model.IModel;
+import view.IDisplay;
 
 public class DisconnectListener implements ActionListener, MouseInputListener {
 
 	private IModel model;
 	private BuildListener buildListener;
+	private IDisplay display;
 
-	public DisconnectListener(IModel m, BuildListener bL) {
+	public DisconnectListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
+		display =d;
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class DisconnectListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		//model.disconnectGizmo(e.getX(),e.getY());
+		//model.disconnectGizmo(e.getX()/display.getScale(),e.getY()/display.getScale());
 	}
 
 	public void mouseReleased(MouseEvent e) {
