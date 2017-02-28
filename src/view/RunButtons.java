@@ -58,7 +58,7 @@ public class RunButtons extends JPanel {
 		BuildButton.setBackground(Color.LIGHT_GRAY);
 		BuildButton.setForeground(Color.white);
 		BuildButton.setMaximumSize(new Dimension(100, 100));
-		mL = new ModeListener(d,"build");
+		mL = new ModeListener(d,"build", null);
 		BuildButton.addActionListener(mL);
 		add(BuildButton);
 

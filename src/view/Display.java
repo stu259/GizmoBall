@@ -138,7 +138,7 @@ public class Display implements IDisplay {
 	public File saveDialog() {
 		String filePath = (String) JOptionPane.showInputDialog(new JFrame(), "Enter name for save", "Save Dialog",
 				JOptionPane.PLAIN_MESSAGE);
-		if (filePath.length()>0) {
+		if (filePath!=null) {
 			return new File(filePath + ".txt");
 		} else {
 			errorPopup("Invalid File Name");

@@ -459,7 +459,7 @@ public class Model extends Observable implements IModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
-		
+
 		if (colTime < time) { // collision detected
 			String key = colBall.getKey();
 			balls.remove(key);
@@ -568,18 +568,20 @@ public class Model extends Observable implements IModel {
 	}
 
 	@Override
-	public boolean addGizmo(String gizmo, int x, int y){
+	public boolean addGizmo(String gizmo, int x, int y) {
 		String type = String.valueOf(gizmo.charAt(0));
 		String xCoord = String.valueOf(x);
 		String yCoord = String.valueOf(y);
-		
-		if(x<10)	xCoord = "0" + xCoord;
-		if(y<10) 	yCoord = "0" + yCoord;			
-		
+
+		if (x < 10)
+			xCoord = "0" + xCoord;
+		if (y < 10)
+			yCoord = "0" + yCoord;
+
 		String uniqueKey = type + xCoord + yCoord;
 		return addGizmo(gizmo, uniqueKey, x, y);
 	}
-	
+
 	// adds a gizmo given the type of gizmo, a key and coords.
 	@Override
 	public boolean addGizmo(String gizmo, String key, int x, int y) {
@@ -624,13 +626,12 @@ public class Model extends Observable implements IModel {
 	public boolean addGizmo(IGizmo gizmo, String key) {
 		if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
 			return false;
-		
+
 		gizmo.setKey(key);
-		
+
 		// add gizmo to gizmo list
 		gizmos.put(key, gizmo);
-		
-		
+
 		this.setChanged();
 		this.notifyObservers(); // call the observer to redraw the added gizmo
 
@@ -646,21 +647,23 @@ public class Model extends Observable implements IModel {
 			return false;
 
 		ball.setKey(key);
-		
+
 		balls.put(key, ball);
-		
+
 		this.setChanged();
 		this.notifyObservers();
 		return true;
 	}
-	
+
 	public boolean addBall(double x, double y, double velx, double vely) {
 		String xCoord = String.valueOf(x);
 		String yCoord = String.valueOf(y);
-		
-		if(x<10)	xCoord = "0" + xCoord;
-		if(y<10) 	yCoord = "0" + yCoord;			
-		
+
+		if (x < 10)
+			xCoord = "0" + xCoord;
+		if (y < 10)
+			yCoord = "0" + yCoord;
+
 		String uniqueKey = "ball" + xCoord + yCoord;
 		return addBall(uniqueKey, x, y, velx, vely);
 	}
@@ -679,29 +682,30 @@ public class Model extends Observable implements IModel {
 		return true;
 	}
 
-	private String findGizmo(int x, int y){
-		int ex = x+1;
-		int ey = y+1;
-		
+	private String findGizmo(int x, int y) {
+		int ex = x + 1;
+		int ey = y + 1;
+
 		for (String key : gizmos.keySet()) {
-			if (x < gizmos.get(key).getEndX() && ex > gizmos.get(key).getStartX() && y < gizmos.get(key).getEndY() && ey > gizmos.get(key).getStartY())
+			if (x < gizmos.get(key).getEndX() && ex > gizmos.get(key).getStartX() && y < gizmos.get(key).getEndY()
+					&& ey > gizmos.get(key).getStartY())
 				return key;
 		}
-		
+
 		return null;
 	}
-	
+
 	@Override
-	public boolean rotateGizmo(int x, int y){
+	public boolean rotateGizmo(int x, int y) {
 		String key = findGizmo(x, y);
-		
-		if(key==null)
+
+		if (key == null)
 			return false;
-		
+
 		rotateGizmo(key);
 		return true;
 	}
-	
+
 	@Override
 	public void rotateGizmo(String key) {
 		gizmos.get(key).rotate();
@@ -712,31 +716,31 @@ public class Model extends Observable implements IModel {
 
 	@Override
 	public void connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
-		if(gizmo2.getOutgoingConnection() != null){
+		if (gizmo2.getOutgoingConnection() != null) {
 			gizmo2.getOutgoingConnection().removeIncomingConnection(gizmo2);
 			gizmo2.clearOutgoingConnection();
 		}
-		
-		if(!gizmo1.getIncomingConnections().isEmpty()){
-			for(IGizmo incomingCon : gizmo1.getIncomingConnections()){
+
+		if (!gizmo1.getIncomingConnections().isEmpty()) {
+			for (IGizmo incomingCon : gizmo1.getIncomingConnections()) {
 				incomingCon.clearOutgoingConnection();
 			}
 			gizmo1.clearIncomingConnections();
 		}
-		
+
 		gizmo1.setOutgoingConnection(gizmo2);
 		gizmo2.addIncomingConnection(gizmo1);
 	}
 
 	@Override
 	public void disconnectGizmo(IGizmo gizmo) {
-		if(gizmo.getOutgoingConnection() != null){
+		if (gizmo.getOutgoingConnection() != null) {
 			gizmo.getOutgoingConnection().removeIncomingConnection(gizmo);
 			gizmo.clearOutgoingConnection();
 		}
-		
-		if(!gizmo.getIncomingConnections().isEmpty()){
-			for(IGizmo incomingCon : gizmo.getIncomingConnections()){
+
+		if (!gizmo.getIncomingConnections().isEmpty()) {
+			for (IGizmo incomingCon : gizmo.getIncomingConnections()) {
 				incomingCon.clearOutgoingConnection();
 			}
 			gizmo.clearIncomingConnections();
@@ -759,12 +763,12 @@ public class Model extends Observable implements IModel {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	@Override
-	public void deleteGizmo(int x, int y){
+	public void deleteGizmo(int x, int y) {
 		String gizmoKey = findGizmo(x, y);
-		
-		if(gizmoKey != null)
+
+		if (gizmoKey != null)
 			deleteGizmo(gizmoKey);
 	}
 
@@ -804,7 +808,7 @@ public class Model extends Observable implements IModel {
 		ball.setVelocity(velGravity);
 	}
 
-	private boolean moveGizmo(int x, int y, IGizmo gizmo){
+	private boolean moveGizmo(int x, int y, IGizmo gizmo) {
 		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize())) {
 			gizmo.newPosition(x, y);
 			this.setChanged();
@@ -814,13 +818,13 @@ public class Model extends Observable implements IModel {
 
 		return false;
 	}
-	
+
 	@Override
 	public boolean moveGizmo(int gizmoX, int gizmoY, int newX, int newY) {
 		String gizmoKey = findGizmo(gizmoX, gizmoY);
 		IGizmo gizmo;
-		
-		if(gizmoKey == null)
+
+		if (gizmoKey == null)
 			return false;
 		else
 			gizmo = gizmos.get(gizmoKey);
@@ -831,59 +835,58 @@ public class Model extends Observable implements IModel {
 	@Override
 	public void save(File f) {
 		FileWriter writer;
-		
+
 		try {
 			writer = new FileWriter(f);
-			
-			for(String key : gizmos.keySet()){
+
+			for (String key : gizmos.keySet()) {
 				IGizmo gizmo = gizmos.get(key);
-				
-				//Gizmo
-				//capitalises first letter
-				String type = gizmo.gizmoType().substring(0, 1).toUpperCase() 
+
+				// Gizmo
+				// capitalises first letter
+				String type = gizmo.gizmoType().substring(0, 1).toUpperCase()
 						+ gizmo.gizmoType().substring(1).toLowerCase();
 				String x = String.valueOf(gizmo.getStartX());
 				String y = String.valueOf(gizmo.getStartY());
-				String gizmoString = type + " " + key + " " + x + " " + y + "\n"; 
+				String gizmoString = type + " " + key + " " + x + " " + y + "\n";
 				writer.write(gizmoString);
-				
-				//Rotate
+
+				// Rotate
 				int rot = gizmo.getRotation() / 90;
-				for(int i=0; i<rot; i++){
+				for (int i = 0; i < rot; i++) {
 					String rotation = "Rotate " + key + "\n";
 					writer.write(rotation);
 				}
-				
-				//KeyConnect keyword
-				//DOUBLE CHECK THIS, MIGHT NOT BE CORRECT
-				if(gizmo.getKeyboardPress() != null){
+
+				// KeyConnect keyword
+				// DOUBLE CHECK THIS, MIGHT NOT BE CORRECT
+				if (gizmo.getKeyboardPress() != null) {
 					String keyConnection = "KeyConnect key " + gizmo.getKey() + " " + key + "\n";
 					writer.write(keyConnection);
 				}
-				
-				//Connect keyword
-				if(gizmo.getOutgoingConnection() != null){
+
+				// Connect keyword
+				if (gizmo.getOutgoingConnection() != null) {
 					String connect = "Connect " + key + " " + gizmo.getOutgoingConnection().getKey() + "\n";
 					writer.write(connect);
 				}
 			}
-			
-			//Ball
-			for(Ball ball : balls.values()){
-				String ballString = "Ball " + ball.getKey() + " " + String.valueOf(ball.getX()) + " " +
-														String.valueOf(ball.getY()) + " " +
-														String.valueOf(ball.getVelocity().x()) + " " +
-														String.valueOf(ball.getVelocity().y()) + "\n";
+
+			// Ball
+			for (Ball ball : balls.values()) {
+				String ballString = "Ball " + ball.getKey() + " " + String.valueOf(ball.getX()) + " "
+						+ String.valueOf(ball.getY()) + " " + String.valueOf(ball.getVelocity().x()) + " "
+						+ String.valueOf(ball.getVelocity().y()) + "\n";
 				writer.write(ballString);
 			}
-			
-			//Gravity
+
+			// Gravity
 			String grav = "Gravity " + String.valueOf(gravity) + "\n";
 			writer.write(grav);
-			//Friction
+			// Friction
 			String fric = "Friction " + String.valueOf(frictionMU) + " " + String.valueOf(frictionMUTwo) + "\n";
 			writer.write(fric);
-			
+
 			writer.close();
 		} catch (IOException e) {
 			System.out.println("IO Exception");
@@ -907,61 +910,50 @@ public class Model extends Observable implements IModel {
 				case "leftflipper":
 				case "rightflipper":
 					if (splitCommand.length != 4)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
 					else if (!addGizmo(splitCommand[0], splitCommand[1], (Integer.parseInt(splitCommand[2])),
 							(Integer.parseInt(splitCommand[3]))))
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " overlapping gizmo");
+						System.out.println("Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "absorber":
 					if (splitCommand.length != 6)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid absorber instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid absorber instruction");
 					else if (!addAbsorber(splitCommand[1], Integer.parseInt(splitCommand[2]),
 							Integer.parseInt(splitCommand[3]), Integer.parseInt(splitCommand[4]),
 							Integer.parseInt(splitCommand[5])))
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " overlapping gizmo");
+						System.out.println("Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "ball":
 					if (splitCommand.length != 6)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid ball instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid ball instruction");
 					else if (!addBall(splitCommand[1], Double.parseDouble(splitCommand[2]),
 							Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
 							Double.parseDouble(splitCommand[5])))
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " overlapping ball");
-					
+						System.out.println("Skipping instruction at line " + lineNumber + " overlapping ball");
+
 					break;
 				case "rotate":
 					if (splitCommand.length != 2)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid rotate instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
 					else
 						rotateGizmo(splitCommand[1]);
 					break;
 				case "delete":
 					if (splitCommand.length != 2)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid delete instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid delete instruction");
 					else
 						deleteGizmo(splitCommand[1]);
 					break;
 				case "move":
 					if (splitCommand.length != 4)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid move instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid move instruction");
 					else if (!moveGizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]),
 							gizmos.get(splitCommand[1])))
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid move location");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid move location");
 					break;
 				case "keyconnect":
 					if (splitCommand.length != 5)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
 						// gizmos.get(splitCommand[4]);// connect
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2] + " "
@@ -970,26 +962,23 @@ public class Model extends Observable implements IModel {
 					break;
 				case "connect":
 					if (splitCommand.length != 3)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid connect instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid connect instruction");
 					else
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 					// gizmos.get(splitCommand[1]).addGizmoConnected(gizmos.get(splitCommand[2]));
 					break;
 				case "friction":
 					if (splitCommand.length != 3)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid friction instruction");
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid friction instruction");
 					else {
 						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						setFriction(Double.parseDouble((splitCommand[1])), Double.parseDouble((splitCommand[2])));
 					}
 					break;
 				case "gravity":
-					if (splitCommand.length != 3)
-						throw new InvalidGizmoException(
-								"Skipping instruction at line " + lineNumber + " invalid gravity instruction");
-					else {
+					if (splitCommand.length != 2) {
+						System.out.println("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
+					} else {
 						setGravity(Double.parseDouble((splitCommand[1])));
 						System.out.println(splitCommand[0] + " " + splitCommand[1]);
 					}
@@ -1058,7 +1047,5 @@ public class Model extends Observable implements IModel {
 
 		return drawables;
 	}
-
-
 
 }

@@ -31,6 +31,7 @@ public class LoadListener implements ActionListener {
 					d.load();
 				}
 			} catch (InvalidGizmoException e1) {
+				System.out.println(e1.getMessage());
 				d.errorPopup(e1.getMessage());
 			}
 		} else {

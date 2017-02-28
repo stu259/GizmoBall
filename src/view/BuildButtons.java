@@ -60,7 +60,7 @@ public class BuildButtons extends JPanel {
 
 		JButton RunButton = new JButton("Run Mode");
 		buttonSetup(RunButton);
-		RunButton.addActionListener(new ModeListener(display, "run"));
+		RunButton.addActionListener(new ModeListener(display, "run", model));
 		main.add(RunButton);
 		add(main, "main");
 	}
