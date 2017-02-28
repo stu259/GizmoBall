@@ -8,17 +8,22 @@ import javax.swing.event.MouseInputListener;
 
 import controller.BuildListener;
 import model.IModel;
+import view.IDisplay;
 
 public class ConnectListener implements ActionListener, MouseInputListener {
 
 	private IModel model;
+	private IDisplay display;
 	private BuildListener buildListener;
 	private int x;
 	private int y;
+	private boolean isClicked;
 
-	public ConnectListener(IModel m, BuildListener bL) {
+	public ConnectListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
+		display = d;
+		isClicked=false;
 	}
 
 	@Override
@@ -27,14 +32,19 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (e.getClickCount() == 1) {
-			x = e.getX();
-			y = e.getY();
-		} else {
-			//model.connectGizmo(x,y,e.getX(),e.getY()))
+		if (isClicked ==false) {
+			x = e.getX()/display.getScale();
+			y = e.getY()/display.getScale();
+			isClicked= true;
+			
+		} 
+		else if (isClicked == true){
+			//model.connectGizmo(x,y,e.getX()/display.getScale(),e.getY()/display.getScale());
+			isClicked = false;
 		}
+		
 	}
-
+	
 	public void mouseReleased(MouseEvent e) {
 		if (e.getClickCount() > 1) {
 			buildListener.setMouseListener(null);

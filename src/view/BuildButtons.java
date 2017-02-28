@@ -126,17 +126,17 @@ public class BuildButtons extends JPanel {
 
 		JButton connectButton = new JButton("Connect");
 		buttonSetup(connectButton);
-		connectButton.addActionListener(new ConnectListener(model, buildListener));
+		connectButton.addActionListener(new ConnectListener(model, buildListener, display));
 		operation.add(connectButton);
 
 		JButton bindButton = new JButton("Bind Key");
 		buttonSetup(bindButton);
-		bindButton.addActionListener(new BindListener(model, buildListener));
+		bindButton.addActionListener(new BindListener(model, buildListener, display));
 		operation.add(bindButton);
 
 		JButton disconnectButton = new JButton("Disconnect");
 		buttonSetup(disconnectButton);
-		disconnectButton.addActionListener(new DisconnectListener(model, buildListener));
+		disconnectButton.addActionListener(new DisconnectListener(model, buildListener, display));
 		operation.add(disconnectButton);
 
 		JButton backButton = new JButton("Back");

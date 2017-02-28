@@ -730,6 +730,10 @@ public class Model extends Observable implements IModel {
 
 		gizmo1.setOutgoingConnection(gizmo2);
 		gizmo2.addIncomingConnection(gizmo1);
+//		System.out.println("connection done");
+//		System.out.println(gizmo1.getKey());
+//		System.out.println(gizmo2.getKey());
+
 	}
 
 	@Override
