@@ -4,7 +4,7 @@ import physics.*;
 
 public class Ball {
 	private Vect vel;
-	private double minSpeed, maxSpeed, radius, x, y;
+	private double minSpeed, maxSpeed, radius, x, y, mass;
 	private Color color;
 	private boolean paused, absorbed;
 	private String key;
@@ -23,8 +23,14 @@ public class Ball {
 		paused = false;
 		absorbed = false;
 		key = null;
+		mass = 1;
 	}
 
+	public double getMass(){
+		return mass;
+	}
+	
+	
 	/*
 	 * Return the X coordinate of the ball
 	 */

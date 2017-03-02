@@ -1,6 +1,8 @@
 package model;
 
 import physics.*;
+import physics.Geometry.VectPair;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -383,7 +385,9 @@ public class Model extends Observable implements IModel {
 	private CollisionInfo timeUntilCollision() {
 		double lowestColTime = Double.MAX_VALUE;
 		Ball collidingBall = null;
+		Ball collidingBall2 = null; //this is hard code method, change later plz tyvm xo
 		Vect updatedVel = new Vect(0, 0);
+		Vect updatedVel2 = null; //only used for ball-to-ball collisions
 		AbsorberGizmo absorber = null;
 
 		for (Ball ball : balls.values()) {
@@ -430,6 +434,23 @@ public class Model extends Observable implements IModel {
 					updatedVel = absorber.getExitVeloicty();
 				}
 			}
+			for(Ball ball2 : balls.values()){
+				if(ball2.equals(ball))
+					continue;
+				
+				nextTime = Geometry.timeUntilBallBallCollision(ball.getCircle(), ball.getVelocity(), ball2.getCircle(), ball2.getVelocity());
+				if (nextTime < lowestColTime) {
+					VectPair vectPair = null;
+					lowestColTime = nextTime;
+					collidingBall = ball;
+					collidingBall2 = ball2;
+					vectPair = Geometry.reflectBalls(ball.getCenter(), ball.getMass(), ball.getVelocity(),
+										  ball2.getCenter(), ball2.getMass(), ball2.getVelocity());
+					absorber = null;
+					updatedVel = vectPair.v1;
+					updatedVel2 = vectPair.v2;
+				}
+			}
 
 		}
 
@@ -441,7 +462,7 @@ public class Model extends Observable implements IModel {
 			}
 		}
 
-		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, absorber));
+		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, collidingBall2, updatedVel2, absorber));
 
 	}
 
@@ -459,11 +480,30 @@ public class Model extends Observable implements IModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
+		Ball colBall2 = null;
+		boolean colbal2check = false;
 
 		if (colTime < time) { // collision detected
 			String key = colBall.getKey();
+			String key2 = null;
 			balls.remove(key);
-			if (colInfo.getAbs() != null) {
+			
+			if(colInfo.getCollidingBall2() != null){
+				colBall2 = colInfo.getCollidingBall2();
+				key2 = colBall2.getKey();
+				balls.remove(key2);
+				colbal2check = true;
+				
+				colBall = calculateBallMove(colBall, colTime);
+				colBall.setVelocity(colInfo.getUpdatedVel());
+				colBall2 = calculateBallMove(colBall2, colTime);
+				colBall2.setVelocity(colInfo.getUpdatedVel2());
+				
+				applyFriction(colBall, colTime);
+				applyGravity(colBall, colTime);
+				applyFriction(colBall2, colTime);
+				applyGravity(colBall2, colTime);
+			} else if (colInfo.getAbs() != null) {
 				if (colBall.isAbsorbed()) {
 					AbsorberGizmo absorber = colInfo.getAbs();
 					colBall.setX(absorber.getEndX() - colBall.getRadius());
@@ -481,12 +521,15 @@ public class Model extends Observable implements IModel {
 				applyFriction(colBall, colTime);
 				applyGravity(colBall, colTime);
 			}
+			
 			for (Ball ball : balls.values()) {
 				ball = calculateBallMove(ball, colTime);
 				applyFriction(ball, colTime);
 				applyGravity(ball, colTime);
 			}
 			balls.put(key, colBall);
+			if(colbal2check)
+				balls.put(key2, colBall2);
 		} else {
 			for (Ball ball : balls.values()) {
 				if (!ball.isAbsorbed()) {
@@ -514,14 +557,16 @@ public class Model extends Observable implements IModel {
 
 	private class CollisionInfo {
 		double colTime;
-		Ball collidingBall;
-		Vect updatedVel;
+		Ball collidingBall, collidingBall2;
+		Vect updatedVel, updatedVel2;
 		AbsorberGizmo abs;
 
-		public CollisionInfo(double t, Ball b, Vect v, AbsorberGizmo a) {
+		public CollisionInfo(double t, Ball b, Vect v, Ball b2, Vect v2, AbsorberGizmo a) {
 			colTime = t;
 			collidingBall = b;
+			collidingBall2 = b2;
 			updatedVel = v;
+			updatedVel2 = v2;
 			abs = a;
 		}
 
@@ -533,10 +578,18 @@ public class Model extends Observable implements IModel {
 			return collidingBall;
 		}
 
+		public Ball getCollidingBall2(){
+			return collidingBall2;
+		}
+		
 		public Vect getUpdatedVel() {
 			return updatedVel;
 		}
 
+		public Vect getUpdatedVel2(){
+			return updatedVel2;
+		}
+		
 		public AbsorberGizmo getAbs() {
 			return abs;
 		}
@@ -695,6 +748,7 @@ public class Model extends Observable implements IModel {
 		return addAbsorber(uniqueKey, x, y, ex, ey);
 	}
 
+	//return key for gizmo at (x,y)
 	private String findGizmo(int x, int y) {
 		int ex = x + 1;
 		int ey = y + 1;
@@ -749,6 +803,15 @@ public class Model extends Observable implements IModel {
 
 	}
 
+//	@Override
+//	public void connectGizmo(int x1, int y1, int x2, int y2){
+//		String gizmo1 = findGizmo(x1, y1);
+//		Stirng gizmo2 = findGizmo(x2, y2);
+//		if(gizmo1!=null && gizmo2!=null){
+//			 connectGizmo( gizmos.get(gizmo1) , gizmos.get(gizmo2) );
+//		}
+//	}
+	
 	@Override
 	public void disconnectGizmo(IGizmo gizmo) {
 		if (gizmo.getOutgoingConnection() != null) {
