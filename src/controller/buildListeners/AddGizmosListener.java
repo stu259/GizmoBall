@@ -17,9 +17,8 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 	private String gizmo;
 	private BuildListener buildListener;
 
-	public AddGizmosListener(IModel m, String g, BuildListener bL, IDisplay d) {
+	public AddGizmosListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
-		gizmo = g;
 		buildListener = bL;
 		display = d;
 	}
@@ -27,6 +26,7 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
+		gizmo = e.getActionCommand();
 	}
 
 	@Override

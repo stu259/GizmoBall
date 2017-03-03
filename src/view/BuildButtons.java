@@ -3,32 +3,38 @@ package view;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
 import controller.BuildListener;
+import controller.TimerListener;
 import controller.buildListeners.*;
 import model.IModel;
 
 public class BuildButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private IDisplay display;
 	private JPanel main, gizmo, operation, setup;
-	private IModel model;
 	private BuildListener buildListener;
 	private BuildBoard bb;
+	private ActionListener aGL, cBL, mL;
+	IDisplay display;
+	IModel model;
 
 	public BuildButtons(IDisplay d, IModel m, BuildBoard bb) {
-
-		buildListener = new BuildListener(m, display);
-		bb.addMouseListener(buildListener);
-		setLayout(new CardLayout());
 		display = d;
 		model = m;
+		buildListener = new BuildListener(m, d);
+		bb.addMouseListener(buildListener);
+		setLayout(new CardLayout());
+		aGL = new AddGizmosListener(m, buildListener, d);
+		cBL = new ChangeButtonListener(d);
+		mL = new ModeListener(display);
+
+
 		addButtons();
 		gizmos();
 		operations();
@@ -45,22 +51,26 @@ public class BuildButtons extends JPanel {
 
 		JButton gizmosButton = new JButton("Add Gizmos");
 		buttonSetup(gizmosButton);
-		gizmosButton.addActionListener(new ChangeButtonListener(display, "gizmo"));
+		gizmosButton.setActionCommand("gizmo");
+		gizmosButton.addActionListener(cBL);
 		main.add(gizmosButton);
 
 		JButton operationsButton = new JButton("Operations");
 		buttonSetup(operationsButton);
-		operationsButton.addActionListener(new ChangeButtonListener(display, "operations"));
+		operationsButton.setActionCommand("operations");
+		operationsButton.addActionListener(cBL);
 		main.add(operationsButton);
 
 		JButton setupButton = new JButton("Setup");
 		buttonSetup(setupButton);
-		setupButton.addActionListener(new ChangeButtonListener(display, "setup"));
+		setupButton.setActionCommand("setup");
+		setupButton.addActionListener(cBL);
 		main.add(setupButton);
 
 		JButton RunButton = new JButton("Run Mode");
 		buttonSetup(RunButton);
-		RunButton.addActionListener(new ModeListener(display, "run", model));
+		RunButton.setActionCommand("run");
+		RunButton.addActionListener(mL);
 		main.add(RunButton);
 		add(main, "main");
 	}
@@ -70,32 +80,35 @@ public class BuildButtons extends JPanel {
 
 		JButton squareButton = new JButton("Square");
 		buttonSetup(squareButton);
-		squareButton.addActionListener(new AddGizmosListener(model, "square", buildListener, display));
+		squareButton.addActionListener(aGL);
 		gizmo.add(squareButton);
 
 		JButton circleButton = new JButton("Circle");
 		buttonSetup(circleButton);
-		circleButton.addActionListener(new AddGizmosListener(model, "circle", buildListener, display));
+		circleButton.addActionListener(aGL);
 		gizmo.add(circleButton);
 
 		JButton triangleButton = new JButton("Triangle");
 		buttonSetup(triangleButton);
-		triangleButton.addActionListener(new AddGizmosListener(model, "triangle", buildListener, display));
+		triangleButton.addActionListener(aGL);
 		gizmo.add(triangleButton);
 
 		JButton lFlipperButton = new JButton("Left Flipper");
 		buttonSetup(lFlipperButton);
-		lFlipperButton.addActionListener(new AddGizmosListener(model, "leftflipper", buildListener, display));
+		lFlipperButton.setActionCommand("leftflipper");
+		lFlipperButton.addActionListener(aGL);
 		gizmo.add(lFlipperButton);
 
 		JButton rFlipperButton = new JButton("Right Flipper");
 		buttonSetup(rFlipperButton);
-		rFlipperButton.addActionListener(new AddGizmosListener(model, "rightflipper", buildListener, display));
+		rFlipperButton.setActionCommand("rightflipper");
+		rFlipperButton.addActionListener(aGL);
 		gizmo.add(rFlipperButton);
 
 		JButton backButton = new JButton("Back");
 		buttonSetup(backButton);
-		backButton.addActionListener(new ChangeButtonListener(display, "main"));
+		backButton.setActionCommand("main");
+		backButton.addActionListener(cBL);
 		gizmo.add(backButton);
 
 		add(gizmo, "gizmo");
@@ -141,7 +154,8 @@ public class BuildButtons extends JPanel {
 
 		JButton backButton = new JButton("Back");
 		buttonSetup(backButton);
-		backButton.addActionListener(new ChangeButtonListener(display, "main"));
+		backButton.setActionCommand("main");
+		backButton.addActionListener(cBL);
 		operation.add(backButton);
 
 		add(operation, "operations");
@@ -173,7 +187,8 @@ public class BuildButtons extends JPanel {
 
 		JButton backButton = new JButton("Back");
 		buttonSetup(backButton);
-		backButton.addActionListener(new ChangeButtonListener(display, "main"));
+		backButton.setActionCommand("main");
+		backButton.addActionListener(cBL);
 		setup.add(backButton);
 
 		add(setup, "setup");

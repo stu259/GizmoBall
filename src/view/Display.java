@@ -25,6 +25,7 @@ import controller.BuildListener;
 import controller.LoadListener;
 import controller.MagicKeyListener;
 import controller.SaveListener;
+import controller.TimerListener;
 import controller.runListeners.AbsorberListener;
 import controller.runListeners.FlipperListener;
 import model.IModel;
@@ -47,11 +48,13 @@ public class Display implements IDisplay {
 	private JPanel boards;
 	private BuildBoard bB;
 	private RunBoard rB;
+	private TimerListener timer;
 
 	Container cp;
 
 	public Display(Model model) {
 		m = model;
+		timer= new TimerListener(model);
 		initialise();
 		addMenuBar();
 		tidy();
@@ -129,7 +132,7 @@ public class Display implements IDisplay {
 	}
 
 	public void run() {
-		run = new RunButtons(this);
+		run = new RunButtons(this, m, timer);
 		rB = new RunBoard(700, 700, m);
 		buttons.add(run, "run");
 		boards.add(rB, "run");

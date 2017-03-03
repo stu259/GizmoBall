@@ -3,6 +3,7 @@ package controller.buildListeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import controller.TimerListener;
 import controller.runListeners.StartStopListener;
 import model.IModel;
 import view.IDisplay;
@@ -10,21 +11,21 @@ import view.IDisplay;
 public class ModeListener implements ActionListener{
 	
 	private IDisplay display;
-	private String mode;
-	private IModel model;
+	private TimerListener timer;
 
-	public ModeListener(IDisplay display, String m, IModel iM) {
-		this.display=display;
-		mode=m;
-		model = iM;
+	public ModeListener(IDisplay d) {
+		display=d;
+	}
+	public ModeListener(IDisplay d, TimerListener t) {
+		display =d;
+		timer=t;
 	}
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		display.changeMode(mode);
-		if(mode == "run")
-			model.runMode();
-		
-		
+	public void actionPerformed(ActionEvent e) {
+		display.changeMode(e.getActionCommand());
+		if(e.getActionCommand()=="build"){
+			timer.stopTimer();
+		}
 	}
 	
 
