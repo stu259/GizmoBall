@@ -3,8 +3,6 @@ package model;
 import java.io.File;
 import java.util.List;
 
-import gizmoException.InvalidGizmoException;
-
 public interface IModel {
 	/*
 	 * checks if there is room for that gizmo.

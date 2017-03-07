@@ -4,9 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import com.sun.xml.internal.messaging.saaj.soap.ver1_1.Envelope1_1Impl;
-
-import gizmoException.InvalidGizmoException;
 import model.IModel;
 import view.IDisplay;
 

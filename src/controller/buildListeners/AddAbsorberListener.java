@@ -30,6 +30,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
+		display.changeText("Select Absorber Top Left Location");
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -37,6 +38,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 			x = e.getX()/display.getScale();
 			y = e.getY()/display.getScale();
 			isClicked= true;
+			display.changeText("Select Absorber Bottom Right Location");
 		} 
 		else if (isClicked == true){
 			model.addAbsorber(x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
@@ -48,6 +50,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	public void mouseReleased(MouseEvent e) {
 		if (e.getClickCount() > 1) {
 			buildListener.setMouseListener(null);
+			display.changeText("Select Button");
 		}		
 	}
 	@Override

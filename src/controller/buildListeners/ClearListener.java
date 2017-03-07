@@ -9,11 +9,9 @@ import java.awt.event.ActionListener;
 public class ClearListener implements ActionListener{
 
 	private IModel model;
-	private BuildBoard buildBoard;
 	
-	public ClearListener(IModel m, BuildBoard bB) {
-		model=m;	
-		buildBoard=bB;
+	public ClearListener(IModel m) {
+		model=m;
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

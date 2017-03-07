@@ -31,6 +31,7 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		buildListener.setMouseListener(this);	
+		display.changeText("Select Gizmo to Bind");
 	}
 
 	@Override
@@ -38,6 +39,7 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 		x=e.getX()/display.getScale();
 		y=e.getY()/display.getScale();
 		buildListener.setKeyListener(this);	
+		display.changeText("Press Key to Bind");
 	}
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -55,6 +57,7 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		buildListener.setKeyListener(null);
+		display.changeText("Select Button");
 		
 	}
 

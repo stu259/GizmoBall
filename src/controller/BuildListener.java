@@ -9,7 +9,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.event.MouseInputListener;
 
 import controller.buildListeners.AddGizmosListener;
-import controller.buildListeners.DoNothingKeyListener;
 import model.IModel;
 import view.IDisplay;
 

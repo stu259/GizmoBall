@@ -3,10 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -18,28 +15,18 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import controller.BuildListener;
+import controller.ExitActionListener;
 import controller.LoadListener;
-import controller.MagicKeyListener;
+import controller.NewBoardActionListener;
 import controller.SaveListener;
 import controller.TimerListener;
-import controller.runListeners.AbsorberListener;
-import controller.runListeners.FlipperListener;
 import model.IModel;
 import model.Model;
-import prototypes.FlipperBoard;
 
 public class Display implements IDisplay {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private SaveListener sL;
-	private LoadListener lL;
 	private Model m;
 	private JFrame frame;
 	private JPanel buttons;
@@ -49,6 +36,7 @@ public class Display implements IDisplay {
 	private BuildBoard bB;
 	private RunBoard rB;
 	private TimerListener timer;
+	private JTextField output;
 
 	Container cp;
 
@@ -70,6 +58,8 @@ public class Display implements IDisplay {
 		run();
 		cp.add(buttons, BorderLayout.LINE_START);
 		cp.add(boards, BorderLayout.CENTER);
+		output = new JTextField("Select Button");
+		cp.add(output, BorderLayout.PAGE_END);
 		changeMode("build");
 	}
 
@@ -79,16 +69,13 @@ public class Display implements IDisplay {
 		JMenu menu = new JMenu("File");
 
 		JMenuItem newBoard = new JMenuItem("New");
-		// NewBoardListener
+		newBoard.addActionListener(new NewBoardActionListener(this,m));
 		JMenuItem load = new JMenuItem("Load");
-		lL = new LoadListener(this, m);
-		load.addActionListener(lL);
+		load.addActionListener(new LoadListener(this, m));
 		JMenuItem save = new JMenuItem("Save");
-		sL = new SaveListener(this, m);
-		save.addActionListener(sL);
-
+		save.addActionListener(new SaveListener(this, m));
 		JMenuItem exit = new JMenuItem("Exit");
-		// ExitListener
+		exit.addActionListener(new ExitActionListener());
 
 		menu.add(newBoard);
 		menu.add(load);
@@ -108,10 +95,6 @@ public class Display implements IDisplay {
 
 	}
 
-	public void changeBuildButtons(String b) {
-		build.changeButtons(b);
-	}
-
 	public void changeMode(String m) {
 		CardLayout cardLayout = (CardLayout) buttons.getLayout();
 		cardLayout.show(buttons, m);
@@ -122,6 +105,10 @@ public class Display implements IDisplay {
 		} else {
 			frame.setTitle("RUN MODE");
 		}
+	}
+	
+	public void changeText(String m){
+		output.setText(m);
 	}
 
 	public void build() {

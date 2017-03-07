@@ -6,9 +6,6 @@ import physics.Geometry.VectPair;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
-import java.util.UUID;
-
-import gizmoException.InvalidGizmoException;
 
 import java.io.BufferedReader;
 import java.io.File;

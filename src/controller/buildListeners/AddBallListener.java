@@ -25,11 +25,13 @@ public class AddBallListener implements ActionListener, MouseInputListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		display.changeText("Enter Ball Velocity");
 		String[] message = new String[2];
 		message[0] = "Velocity x";
 		message[1] = "Velocity y";
 		velocity = display.inputPopup(message);
 		buildListener.setMouseListener(this);
+		display.changeText("Select Ball Location");
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -38,6 +40,7 @@ public class AddBallListener implements ActionListener, MouseInputListener {
 
 	public void mouseReleased(MouseEvent e) {
 		buildListener.setMouseListener(null);
+		display.changeText("Select Button");
 	}
 
 	public void mouseEntered(MouseEvent e) {

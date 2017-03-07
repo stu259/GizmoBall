@@ -2,7 +2,6 @@ package prototypes.collisions;
 
 import java.io.File;
 
-import gizmoException.InvalidGizmoException;
 import model.Model;
 import view.Display;
 

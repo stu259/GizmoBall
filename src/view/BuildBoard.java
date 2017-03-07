@@ -15,7 +15,6 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import controller.BuildListener;
 import model.IDrawableBall;
 import model.IDrawableGizmo;
 import model.IModel;
@@ -86,7 +85,7 @@ public class BuildBoard extends JPanel implements Observer {
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("absorber")) {
 				g2.setColor(Color.PINK);
-				g2.fillRect(x1, y1, x2 - x1+1*scale, y2 - y1+1*scale);
+				g2.fillRect(x1, y1, x2 - x1 + 1 * scale, y2 - y1 + 1 * scale);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("triangle")) {
 				g2.setColor(color.BLUE);
@@ -102,8 +101,8 @@ public class BuildBoard extends JPanel implements Observer {
 				RoundRectangle2D rf = new RoundRectangle2D.Double(x1 + 2 * scale - ((x2 - x1) / 4), y1, (x2 - x1) / 4,
 						(y2 - y1), (y2 - y1) / 4, (y2 - y1) / 4);
 				AffineTransform transform = new AffineTransform();
-				transform.rotate(Math.toRadians(gizmo.getRotation()), rf.getX() + rf.getWidth() / 2,
-						rf.getY() + rf.getWidth() / 2);
+				transform.rotate(Math.toRadians(gizmo.getRotation()), x1+1*scale,
+						y1+1*scale);
 				Shape transformed = transform.createTransformedShape(rf);
 				g2.fill(transformed);
 
@@ -113,7 +112,8 @@ public class BuildBoard extends JPanel implements Observer {
 						(y2 - y1) / 4);
 
 				AffineTransform transform = new AffineTransform();
-				transform.rotate(Math.toRadians(gizmo.getRotation()), lf.getX() + lf.getWidth() / 2, lf.getY() + lf.getWidth() / 2);
+				transform.rotate(Math.toRadians(gizmo.getRotation()), x1+1*scale,
+						y1+1*scale);
 				Shape transformed = transform.createTransformedShape(lf);
 				g2.fill(transformed);
 

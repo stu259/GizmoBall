@@ -27,6 +27,7 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
 		gizmo = e.getActionCommand();
+		display.changeText("Select Gizmo Location");
 	}
 
 	@Override
@@ -36,7 +37,8 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		buildListener.setMouseListener(null);;
+		buildListener.setMouseListener(null);
+		display.changeText("Select Button");
 	}
 	
 	@Override

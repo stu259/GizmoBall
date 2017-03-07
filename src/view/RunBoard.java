@@ -85,11 +85,14 @@ public class RunBoard extends JPanel implements Observer {
 				g2.setColor(color.YELLOW);
 				RoundRectangle2D rf = new RoundRectangle2D.Double(x1 + 2 * scale - ((x2 - x1) / 4), y1, (x2 - x1) / 4,
 						(y2 - y1), (y2 - y1) / 4, (y2 - y1) / 4);
+				AffineTransform transform = new AffineTransform();
+				transform.rotate(Math.toRadians(gizmo.getRotation()), x1+1*scale,
+						y1+1*scale);
 				if (!triggered) {
 					g2.fill(rf);
 
 				} else {
-					AffineTransform transform = new AffineTransform();
+					
 					transform.rotate(Math.toRadians(90), rf.getX()+rf.getWidth()/2, rf.getY()+rf.getWidth()/2);
 					Shape transformed = transform.createTransformedShape(rf);
 					g2.fill(transformed);
@@ -99,12 +102,13 @@ public class RunBoard extends JPanel implements Observer {
 				g2.setColor(color.YELLOW);
 				RoundRectangle2D lf = new RoundRectangle2D.Double(x1, y1, (x2 - x1) / 4, (y2 - y1), (y2 - y1) / 4,
 						(y2 - y1) / 4);
+				AffineTransform transform = new AffineTransform();
+				transform.rotate(Math.toRadians(gizmo.getRotation()), x1+1*scale,
+						y1+1*scale);
 				if (!triggered) {
 					g2.fill(lf);
 
 				} else {
-
-					AffineTransform transform = new AffineTransform();
 					transform.rotate(Math.toRadians(270), lf.getX() +lf.getWidth()/2, lf.getY() +lf.getWidth()/2);
 					Shape transformed = transform.createTransformedShape(lf);
 					g2.fill(transformed);

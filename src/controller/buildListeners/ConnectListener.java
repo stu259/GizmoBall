@@ -29,6 +29,7 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
+		display.changeText("Select Gizmo 1");
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -36,6 +37,7 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 			x = e.getX()/display.getScale();
 			y = e.getY()/display.getScale();
 			isClicked= true;
+			display.changeText("Select Gizmo 2");
 			
 		} 
 		else if (isClicked == true){
@@ -48,6 +50,7 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 	public void mouseReleased(MouseEvent e) {
 		if (e.getClickCount() > 1) {
 			buildListener.setMouseListener(null);
+			display.changeText("Select Button");
 		}		
 	}
 

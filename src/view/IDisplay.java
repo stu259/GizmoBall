@@ -9,8 +9,6 @@ public interface IDisplay {
 
 	public void run();
 
-	public void changeBuildButtons(String b);
-
 	public void changeMode(String m);
 
 	public File saveDialog();
@@ -24,4 +22,6 @@ public interface IDisplay {
 	public double[] inputPopup(String[] message) ;
 	
 	public int getScale();
+	
+	public void changeText(String m);
 }

@@ -25,6 +25,7 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
+		display.changeText("Select Gizmo to Delete");
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -33,6 +34,7 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 
 	public void mouseReleased(MouseEvent e) {
 			buildListener.setMouseListener(null);
+			display.changeText("Select Button");
 	}
 
 	public void mouseEntered(MouseEvent e) {

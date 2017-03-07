@@ -3,15 +3,16 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.ModeListener;
 import controller.TimerListener;
-import controller.buildListeners.ModeListener;
-import controller.runListeners.StartStopListener;
 import controller.runListeners.TickListener;
 import model.IModel;
 
@@ -21,13 +22,12 @@ public class RunButtons extends JPanel {
 
 	private ActionListener mL, tL;
 	private TimerListener timer;
-	
 
 	public RunButtons(IDisplay d, IModel m, TimerListener t) {
-		timer=t;
-		mL = new ModeListener(d,timer);
+		timer = t;
+		mL = new ModeListener(d, timer);
 		tL = new TickListener(m);
-		addButtons();		
+		addButtons();
 		m.runMode();
 	}
 
@@ -35,34 +35,31 @@ public class RunButtons extends JPanel {
 		setLayout(new GridLayout(4, 1));
 
 		JButton startButton = new JButton("Start");
-		startButton.setBackground(Color.LIGHT_GRAY);
-		startButton.setForeground(Color.white);
 		startButton.addActionListener(timer);
-		startButton.setMaximumSize(new Dimension(100, 100));
+		buttonSetup(startButton);
 		add(startButton);
 
 		JButton stopButton = new JButton("Stop");
-		stopButton.setBackground(Color.LIGHT_GRAY);
-		stopButton.setForeground(Color.white);
 		stopButton.addActionListener(timer);
-		stopButton.setMaximumSize(new Dimension(100, 100));
+		buttonSetup(stopButton);
 		add(stopButton);
 
 		JButton tickButton = new JButton("Tick");
-		tickButton.setBackground(Color.LIGHT_GRAY);
-		tickButton.setForeground(Color.white);
 		tickButton.addActionListener(tL);
-		tickButton.setMaximumSize(new Dimension(100, 100));
+		buttonSetup(tickButton);
 		add(tickButton);
 
-		JButton BuildButton = new JButton("Build Mode");
-		BuildButton.setBackground(Color.LIGHT_GRAY);
-		BuildButton.setForeground(Color.white);
-		BuildButton.setMaximumSize(new Dimension(100, 100));
-		BuildButton.setActionCommand("build");
-		BuildButton.addActionListener(mL);
-		add(BuildButton);
+		JButton buildButton = new JButton("Build Mode");
+		buildButton.setActionCommand("build");
+		buildButton.addActionListener(mL);
+		buttonSetup(buildButton);
+		add(buildButton);
 
+	}
+
+	private void buttonSetup(JButton button) {
+		button.setBackground(Color.LIGHT_GRAY);
+		button.setPreferredSize(new Dimension(100, 40));
 	}
 
 }

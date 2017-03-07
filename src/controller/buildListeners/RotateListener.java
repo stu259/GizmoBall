@@ -25,6 +25,7 @@ public class RotateListener implements ActionListener, MouseInputListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
+		display.changeText("Select Gizmo");
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -34,6 +35,7 @@ public class RotateListener implements ActionListener, MouseInputListener {
 
 	public void mouseExited(MouseEvent e) {
 		buildListener.setMouseListener(null);
+		display.changeText("Select Button");
 	}
 
 	public void mouseReleased(MouseEvent e) {
