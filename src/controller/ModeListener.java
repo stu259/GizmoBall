@@ -10,9 +10,11 @@ public class ModeListener implements ActionListener{
 	
 	private IDisplay display;
 	private TimerListener timer;
+	private IModel model;
 
-	public ModeListener(IDisplay d) {
+	public ModeListener(IDisplay d, IModel m) {
 		display=d;
+		model =m;
 	}
 	public ModeListener(IDisplay d, TimerListener t) {
 		display =d;
@@ -23,6 +25,8 @@ public class ModeListener implements ActionListener{
 		display.changeMode(e.getActionCommand());
 		if(e.getActionCommand()=="build"){
 			timer.stopTimer();
+		}else if(e.getActionCommand()=="run"){
+			model.runMode();
 		}
 	}
 	

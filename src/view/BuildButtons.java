@@ -33,7 +33,7 @@ public class BuildButtons extends JPanel {
 		bb.addKeyListener(new MagicKeyListener(buildListener));		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		aGL = new AddGizmosListener(m, buildListener, d);
-		mL = new ModeListener(display);
+		mL = new ModeListener(display, model);
 
 		gizmos();
 		operations();
