@@ -10,7 +10,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.event.MouseInputListener;
 
-import controller.BuildListener;
 import model.IModel;
 import view.IDisplay;
 
@@ -42,8 +41,8 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 		display.changeText("Press Key to Bind");
 	}
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		//model.keyConnectGizmo(x,y, arg0.getKeyCode());	
+	public void keyPressed(KeyEvent e) {
+		model.keyConnectGizmo(x,y, Character.toString(e.getKeyChar()));	
 	}
 
 	@Override

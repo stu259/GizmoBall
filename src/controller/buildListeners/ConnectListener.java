@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
-import controller.BuildListener;
 import model.IModel;
 import view.IDisplay;
 
@@ -41,7 +40,7 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 			
 		} 
 		else if (isClicked == true){
-			//model.connectGizmo(x,y,e.getX()/display.getScale(),e.getY()/display.getScale());
+			model.connectGizmo(x,y,e.getX()/display.getScale(),e.getY()/display.getScale());
 			isClicked = false;
 		}
 		

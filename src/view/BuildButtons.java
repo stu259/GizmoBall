@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,7 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import controller.BuildListener;
+import controller.MagicKeyListener;
 import controller.ModeListener;
 import controller.buildListeners.*;
 import model.IModel;
@@ -20,16 +21,16 @@ public class BuildButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private BuildListener buildListener;
-	private BuildBoard bb;
 	private ActionListener aGL, mL;
 	private IDisplay display;
 	private IModel model;
 
-	public BuildButtons(IDisplay d, IModel m, BuildBoard bb) {
+	public BuildButtons(IDisplay d, IModel m, BuildBoard bb, Frame f) {
 		display = d;
 		model = m;
-		buildListener = new BuildListener(m, d);
+		buildListener = new BuildListener();
 		bb.addMouseListener(buildListener);
+		bb.addKeyListener(new MagicKeyListener(buildListener));		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		aGL = new AddGizmosListener(m, buildListener, d);
 		mL = new ModeListener(display);
@@ -144,6 +145,7 @@ public class BuildButtons extends JPanel {
 
 		JButton bindButton = new JButton("Bind Key");
 		bindButton.addActionListener(new BindListener(model, buildListener, display));
+		bindButton.addKeyListener(buildListener);
 		c.gridx = 2;
 		c.gridy = 1;
 		buttonSetup(bindButton);

@@ -800,14 +800,14 @@ public class Model extends Observable implements IModel {
 
 	}
 
-//	@Override
-//	public void connectGizmo(int x1, int y1, int x2, int y2){
-//		String gizmo1 = findGizmo(x1, y1);
-//		Stirng gizmo2 = findGizmo(x2, y2);
-//		if(gizmo1!=null && gizmo2!=null){
-//			 connectGizmo( gizmos.get(gizmo1) , gizmos.get(gizmo2) );
-//		}
-//	}
+	@Override
+	public void connectGizmo(int x1, int y1, int x2, int y2){
+		String gizmo1 = findGizmo(x1, y1);
+		String gizmo2 = findGizmo(x2, y2);
+		if(gizmo1!=null && gizmo2!=null){
+			 connectGizmo( gizmos.get(gizmo1) , gizmos.get(gizmo2) );
+		}
+	}
 	
 	@Override
 	public void disconnectGizmo(IGizmo gizmo) {
@@ -823,17 +823,34 @@ public class Model extends Observable implements IModel {
 			gizmo.clearIncomingConnections();
 		}
 	}
+	
+	@Override
+	public void disconnectGizmo(int x, int y){
+		String gizmo= findGizmo(x, y);
+		if(gizmo!=null){
+			disconnectGizmo( gizmos.get(gizmo));
+		}
+	}
+	
 
 	@Override
 	public void keyConnectGizmo(IGizmo gizmo, String k) {
 		gizmo.setKeyboardPress(k);
+	}
+	
+	@Override
+	public void keyConnectGizmo(int x, int y, String k){
+		String gizmo= findGizmo(x, y);
+		if(gizmo!=null){
+			keyConnectGizmo( gizmos.get(gizmo),k);
+		}
 	}
 
 	@Override
 	public void removeKeyPress(IGizmo gizmo) {
 		gizmo.setKeyboardPress(null);
 	}
-
+	
 	@Override
 	public void deleteGizmo(String key) {
 		gizmos.remove(key);

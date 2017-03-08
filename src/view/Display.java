@@ -113,7 +113,7 @@ public class Display implements IDisplay {
 
 	public void build() {
 		bB = new BuildBoard(700, 700, m);
-		build = new BuildButtons(this, m, bB);
+		build = new BuildButtons(this, m, bB, frame);
 		buttons.add(build, "build");
 		boards.add(bB, "build");
 	}

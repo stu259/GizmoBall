@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import controller.ModeListener;
 import controller.TimerListener;
+import controller.runListeners.RunListener;
 import controller.runListeners.TickListener;
 import model.IModel;
 
@@ -22,9 +23,11 @@ public class RunButtons extends JPanel {
 
 	private ActionListener mL, tL;
 	private TimerListener timer;
+	private RunListener runListener;
 
 	public RunButtons(IDisplay d, IModel m, TimerListener t) {
 		timer = t;
+		runListener=new RunListener(m);
 		mL = new ModeListener(d, timer);
 		tL = new TickListener(m);
 		addButtons();
@@ -36,6 +39,7 @@ public class RunButtons extends JPanel {
 
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(timer);
+		startButton.addKeyListener(runListener);
 		buttonSetup(startButton);
 		add(startButton);
 

@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
-import controller.BuildListener;
 import model.IModel;
 import view.IDisplay;
 
@@ -55,7 +54,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
+
 	}
 	public void mouseEntered(MouseEvent e) {
 

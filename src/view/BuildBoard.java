@@ -36,6 +36,8 @@ public class BuildBoard extends JPanel implements Observer {
 		scale = w / 20;
 		gm = m;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setFocusable(true);
+		this.requestFocus();
 	}
 
 	// Fix onscreen size
@@ -101,8 +103,7 @@ public class BuildBoard extends JPanel implements Observer {
 				RoundRectangle2D rf = new RoundRectangle2D.Double(x1 + 2 * scale - ((x2 - x1) / 4), y1, (x2 - x1) / 4,
 						(y2 - y1), (y2 - y1) / 4, (y2 - y1) / 4);
 				AffineTransform transform = new AffineTransform();
-				transform.rotate(Math.toRadians(gizmo.getRotation()), x1+1*scale,
-						y1+1*scale);
+				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
 				Shape transformed = transform.createTransformedShape(rf);
 				g2.fill(transformed);
 
@@ -112,8 +113,7 @@ public class BuildBoard extends JPanel implements Observer {
 						(y2 - y1) / 4);
 
 				AffineTransform transform = new AffineTransform();
-				transform.rotate(Math.toRadians(gizmo.getRotation()), x1+1*scale,
-						y1+1*scale);
+				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
 				Shape transformed = transform.createTransformedShape(lf);
 				g2.fill(transformed);
 
