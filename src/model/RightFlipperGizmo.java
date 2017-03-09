@@ -20,7 +20,7 @@ public class RightFlipperGizmo extends Gizmo{
 	}
 	
 	private void makeRightFlipper(){
-		double radius = size/8;
+		double radius = (double) size/8;
 		int y2 = this.getEndY();
 		int x2 = this.getEndX();
 		

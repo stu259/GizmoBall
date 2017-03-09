@@ -615,7 +615,6 @@ public class Model extends Observable implements IModel {
 		}
 	}
 	
-
 	@Override
 	public void keyConnectGizmo(IGizmo gizmo, String k) {
 		gizmo.setKeyboardPress(k);
