@@ -3,6 +3,10 @@ package model;
 import java.awt.Color;
 import java.util.List;
 
+import physics.Circle;
+import physics.LineSegment;
+import physics.Vect;
+
 public interface IGizmo {
 	/*
 	 * The initialised position of the gizmo
@@ -40,16 +44,6 @@ public interface IGizmo {
 	public int getSize();
 	
 	/*
-	 * Changes the colour of the gizmo
-	 */
-	public void changeColor(Color color);
-	
-	/*
-	 * Returns the color of the gizmo
-	 */
-	public Color getColor();
-	
-	/*
 	 * Returns the coefficient of reflection
 	 */
 	public double getCof();
@@ -74,6 +68,10 @@ public interface IGizmo {
 	 */
 	public String getKey();
 	
+	public void trigger();
+	
+	public boolean triggered();
+	
 	public String gizmoType();
 	
 	public void clearIncomingConnections();
@@ -93,4 +91,10 @@ public interface IGizmo {
 	void setKeyboardPress(String k);
 
 	String getKeyboardPress();
+
+	Vect getCenter();
+
+	List<LineSegment> getLines();
+
+	List<Circle> getCorners();
 }

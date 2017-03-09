@@ -17,13 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Model extends Observable implements IModel {
-	// (triggers)
-	// lines/circles -> gizmos (color change, connections)
-	// flippers -> lines/circles
-
 	private Map<String, IGizmo> gizmos;
-	private List<LineSegment> lines;
-	private List<Circle> circles;
 
 	private double gravity = 25;
 	private double frictionMU = 0.025;
@@ -35,10 +29,10 @@ public class Model extends Observable implements IModel {
 	private Map<Circle, IGizmo> circlesToAbsorber;
 	private Map<Circle, IGizmo> circlesToGizmos;
 	private Map<LineSegment, IGizmo> linesToGizmos;
-	private Map<IGizmo, List<LineSegment>> flippersToLines;
-	private Map<IGizmo, List<Circle>> flippersToCircles;
 	private Map<String, Ball> balls;
 
+	private List<LineSegment> walls;
+	
 	private int boardSize;
 
 	public Model() {
@@ -46,15 +40,14 @@ public class Model extends Observable implements IModel {
 
 		gizmos = new HashMap<String, IGizmo>();
 		balls = new HashMap<String, Ball>();
-		lines = new ArrayList<LineSegment>();
-		circles = new ArrayList<Circle>();
-
+		
 		linesToAbsorber = new HashMap<LineSegment, IGizmo>();
 		circlesToAbsorber = new HashMap<Circle, IGizmo>();
 		linesToGizmos = new HashMap<LineSegment, IGizmo>();
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
-		flippersToLines = new HashMap<IGizmo, List<LineSegment>>();
-		flippersToCircles = new HashMap<IGizmo, List<Circle>>();
+		
+		walls = new ArrayList<LineSegment>();
+		makeWalls(boardSize);
 	}
 
 	/**
@@ -74,297 +67,43 @@ public class Model extends Observable implements IModel {
 	public void runMode() {
 
 		// clear dataStructures
-		lines.clear();
-		circles.clear();
 		linesToGizmos.clear();
 		circlesToGizmos.clear();
-		flippersToLines.clear();
-		flippersToCircles.clear();
-
-		makeWalls(boardSize);
 
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
+			String gizmoType = gizmo.gizmoType().toLowerCase();
+			
 			// add method to draw gizmo
-			if (gizmo instanceof SquareGizmo)
-				makeSquareGizmo(gizmo.copy());
-
-			else if (gizmo instanceof TriangleGizmo)
-				makeTriangleGizmo(gizmo.copy());
-
-			else if (gizmo instanceof RightFlipperGizmo)
-				makeRightFlipper(gizmo.copy());
-
-			else if (gizmo instanceof LeftFlipperGizmo)
-				makeLeftFlipper(gizmo.copy());
-
-			else if (gizmo instanceof CircleGizmo)
-				makeCircleGizmo(gizmo.copy());
-
-			else if (gizmo instanceof AbsorberGizmo)
+			if (gizmoType.equals("absorber"))
 				makeAbsorberGizmo(gizmo.copy());
+			else
+				drawGizmos(gizmo);
 		}
 	}
 
+	private void drawGizmos(IGizmo gizmo){
+		List<LineSegment> lines = gizmo.getLines();
+		List<Circle> corners = gizmo.getCorners();
+		
+		for(LineSegment line : lines){ // create connections for the lines -> absorber
+			linesToGizmos.put(line, gizmo);
+		}
+		for(Circle corner : corners){  // create connections for the circles -> absorber
+			System.out.println("Adding a corner");
+			circlesToGizmos.put(corner, gizmo);
+		}
+	}
+	
 	private void makeAbsorberGizmo(IGizmo gizmo) {
-		// get x and y coordinates of starting and ending points of the gizmo
-		int x1 = gizmo.getStartX();
-		int x2 = gizmo.getEndX();
-		int y1 = gizmo.getStartY();
-		int y2 = gizmo.getEndY();
-
-		// create lines and corners
-		LineSegment left = new LineSegment(x1, y1, x1, y2);
-		LineSegment bottom = new LineSegment(x1, y2, x2, y2);
-		LineSegment right = new LineSegment(x2, y2, x2, y1);
-		LineSegment top = new LineSegment(x2, y1, x1, y1);
-		Circle topLeft = new Circle(x1, y1, 0);
-		Circle bottomLeft = new Circle(x1, y2, 0);
-		Circle topRight = new Circle(x2, y1, 0);
-		Circle bottomRight = new Circle(x2, y2, 0);
-
-		// create connections for the lines -> absorber
-		linesToAbsorber.put(left, gizmo);
-		linesToAbsorber.put(bottom, gizmo);
-		linesToAbsorber.put(right, gizmo);
-		linesToAbsorber.put(top, gizmo);
-		// create connections for the circles -> absorber
-		circlesToAbsorber.put(topLeft, gizmo);
-		circlesToAbsorber.put(bottomLeft, gizmo);
-		circlesToAbsorber.put(topRight, gizmo);
-		circlesToAbsorber.put(bottomRight, gizmo);
-	}
-
-	private void makeLeftFlipper(IGizmo gizmo) {
-		int x1 = gizmo.getStartX();
-		int x2 = gizmo.getEndX();
-		int y1 = gizmo.getStartY();
-		int y2 = gizmo.getEndY();
-		double radius = 0.25;
-
-		// drawing circles .25 radius
-		Circle topCircle = new Circle(x1 + (radius), y1 + (radius), radius);
-		Circle botCircle = new Circle(x1 + (radius), y2 - (radius), radius);
-		List<Circle> tempCirc = new ArrayList<Circle>();
-		tempCirc.add(topCircle);
-		tempCirc.add(botCircle);
-		circles.addAll(tempCirc);
-
-		// drawing lines
-		LineSegment right = new LineSegment(x1 + (2 * radius), y1 + (radius), x1 + (2 * radius), y2 - (radius));
-		LineSegment left = new LineSegment(x1, y1 + (radius), x1, y2 - (radius));
-		List<LineSegment> tempLines = new ArrayList<LineSegment>();
-		tempLines.add(right);
-		tempLines.add(left);
-		lines.addAll(tempLines);
-
-		// connect lines/corners to flipper gizmo
-		linesToGizmos.put(right, gizmo);
-		linesToGizmos.put(left, gizmo);
-		circlesToGizmos.put(topCircle, gizmo);
-		circlesToGizmos.put(botCircle, gizmo);
-
-		// connect flipper to lines and circle (used for rotation)
-		flippersToLines.put(gizmo, tempLines);
-		flippersToCircles.put(gizmo, tempCirc);
-	}
-
-	private void makeRightFlipper(IGizmo gizmo) {
-		int x1 = gizmo.getStartX();
-		int x2 = gizmo.getEndX();
-		int y1 = gizmo.getStartY();
-		int y2 = gizmo.getEndY();
-		double radius = 0.25;
-
-		// drawing circles .25 radius
-		Circle topCircle = new Circle(x2 - (radius), y1 + (radius), radius);
-		Circle botCircle = new Circle(x2 - (radius), y2 - (radius), radius);
-		List<Circle> tempCirc = new ArrayList<Circle>();
-		tempCirc.add(topCircle);
-		tempCirc.add(botCircle);
-		circles.addAll(tempCirc);
-
-		// drawing lines
-		LineSegment right = new LineSegment(x2, y1 + (radius), x2, y2 - (radius));
-		LineSegment left = new LineSegment(x2 - (2 * radius), y1 + (radius), x2 - (2 * radius), y2 - (radius));
-		List<LineSegment> tempLines = new ArrayList<LineSegment>();
-		tempLines.add(right);
-		tempLines.add(left);
-		lines.addAll(tempLines);
-
-		// connect lines/corners to flipper gizmo
-		linesToGizmos.put(right, gizmo);
-		linesToGizmos.put(left, gizmo);
-		circlesToGizmos.put(topCircle, gizmo);
-		circlesToGizmos.put(botCircle, gizmo);
-
-		// connect flipper to lines and circle (used for rotation)
-		flippersToLines.put(gizmo, tempLines);
-		flippersToCircles.put(gizmo, tempCirc);
-	}
-
-	private void makeCircleGizmo(IGizmo gizmo) {
-		int x1 = gizmo.getStartX();
-		int y1 = gizmo.getStartY();
-
-		double radius = (double) gizmo.getSize() / 2;
-		// get midpoints
-		Circle circle = new Circle((x1 + radius), (y1 + radius), radius);
-		circlesToGizmos.put(circle, gizmo);
-		circles.add(circle);
-	}
-
-	private void makeTriangleGizmo(IGizmo gizmo) {
-		// the right angled corner should be in the top-left position by default
-		// THIS IS A MUST!!!! DO NOT CHANGE
-		int x1 = gizmo.getStartX();
-		int x2 = gizmo.getEndX();
-		int y1 = gizmo.getStartY();
-		int y2 = gizmo.getEndY();
-		int direction = gizmo.getRotation();
-
-		// keeps track of the triangle rotation for edge and corner placement
-		switch (direction) {
-		case 0: // right-angle is top-left (this is by default)
-			LineSegment line1 = new LineSegment(x1, y1, x1, y2); // left edge
-			LineSegment line2 = new LineSegment(x1, y2, x2, y1); // hypotenuse
-																	// edge
-			LineSegment line3 = new LineSegment(x2, y1, x1, y1); // top edge
-			Circle circle1 = new Circle(x1, y1, 0);
-			Circle circle2 = new Circle(x2, y1, 0);
-			Circle circle3 = new Circle(x1, y2, 0);
-			// add lines to line list
-			lines.add(line1);
-			lines.add(line2);
-			lines.add(line3);
-			// add lines to hashmap
-			linesToGizmos.put(line1, gizmo);
-			linesToGizmos.put(line2, gizmo);
-			linesToGizmos.put(line3, gizmo);
-			// add circles to circle list
-			circles.add(circle1);
-			circles.add(circle2);
-			circles.add(circle3);
-			// add circles to hashmap
-			circlesToGizmos.put(circle1, gizmo);
-			circlesToGizmos.put(circle2, gizmo);
-			circlesToGizmos.put(circle3, gizmo);
-			break;
-		case 90: // right-angle is top right
-			LineSegment line4 = new LineSegment(x2, y1, x1, y1); // top edge
-			LineSegment line5 = new LineSegment(x1, y1, x2, y2); // hypotenuse
-																	// edge
-			LineSegment line6 = new LineSegment(x2, y2, x2, y1); // right edge
-			Circle circle4 = new Circle(x1, y1, 0);
-			Circle circle5 = new Circle(x2, y1, 0);
-			Circle circle6 = new Circle(x2, y2, 0);
-			// add lines to line list
-			lines.add(line4);
-			lines.add(line5);
-			lines.add(line6);
-			// add lines to hashmap
-			linesToGizmos.put(line4, gizmo);
-			linesToGizmos.put(line5, gizmo);
-			linesToGizmos.put(line6, gizmo);
-			// add circles to circle list
-			circles.add(circle4);
-			circles.add(circle5);
-			circles.add(circle6);
-			// add circles to hashmap
-			circlesToGizmos.put(circle4, gizmo);
-			circlesToGizmos.put(circle5, gizmo);
-			circlesToGizmos.put(circle6, gizmo);
-			break;
-		case 180: // right-angle is bottom right
-			LineSegment line7 = new LineSegment(x2, y2, x1, y2); // bottom edge
-			LineSegment line8 = new LineSegment(x1, y2, x2, y1); // hypotenuse
-																	// edge
-			LineSegment line9 = new LineSegment(x2, y1, x2, y2); // right edge
-			Circle circle7 = new Circle(x2, y2, 0);
-			Circle circle8 = new Circle(x2, y1, 0);
-			Circle circle9 = new Circle(x1, y2, 0);
-			// add lines to line list
-			lines.add(line7);
-			lines.add(line8);
-			lines.add(line9);
-			// add lines to hashmap
-			linesToGizmos.put(line7, gizmo);
-			linesToGizmos.put(line8, gizmo);
-			linesToGizmos.put(line9, gizmo);
-			// add circles to circle list
-			circles.add(circle7);
-			circles.add(circle8);
-			circles.add(circle9);
-			// add circles to hashmap
-			circlesToGizmos.put(circle7, gizmo);
-			circlesToGizmos.put(circle8, gizmo);
-			circlesToGizmos.put(circle9, gizmo);
-			break;
-		case 270: // right-angle is bottom left
-			LineSegment line10 = new LineSegment(x1, y2, x2, y2); // bottom edge
-			LineSegment line11 = new LineSegment(x1, y1, x2, y2); // hypotenuse
-																	// edge
-			LineSegment line12 = new LineSegment(x1, y1, x1, y2); // left edge
-			Circle circle10 = new Circle(x1, y1, 0);
-			Circle circle11 = new Circle(x1, y2, 0);
-			Circle circle12 = new Circle(x2, y2, 0);
-			// add lines to line list
-			lines.add(line10);
-			lines.add(line11);
-			lines.add(line12);
-			// add lines to hashmap
-			linesToGizmos.put(line10, gizmo);
-			linesToGizmos.put(line11, gizmo);
-			linesToGizmos.put(line12, gizmo);
-			// add circles to circle list
-			circles.add(circle10);
-			circles.add(circle11);
-			circles.add(circle12);
-			// add circles to hashmap
-			circlesToGizmos.put(circle10, gizmo);
-			circlesToGizmos.put(circle11, gizmo);
-			circlesToGizmos.put(circle12, gizmo);
-			break;
+		List<LineSegment> gizLines = gizmo.getLines();
+		List<Circle> gizCorners = gizmo.getCorners();
+		
+		for(LineSegment line : gizLines){ // create connections for the lines -> absorber
+			linesToAbsorber.put(line, gizmo);
 		}
-	}
-
-	private void makeSquareGizmo(IGizmo gizmo) {
-		// get x and y coordinates of starting and ending points of the gizmo
-		int x1 = gizmo.getStartX();
-		int x2 = gizmo.getEndX();
-		int y1 = gizmo.getStartY();
-		int y2 = gizmo.getEndY();
-
-		// create lines and corners
-		LineSegment left = new LineSegment(x1, y1, x1, y2);
-		LineSegment bottom = new LineSegment(x1, y2, x2, y2);
-		LineSegment right = new LineSegment(x2, y2, x2, y1);
-		LineSegment top = new LineSegment(x2, y1, x1, y1);
-		Circle topLeft = new Circle(x1, y1, 0);
-		Circle bottomLeft = new Circle(x1, y2, 0);
-		Circle topRight = new Circle(x2, y1, 0);
-		Circle bottomRight = new Circle(x2, y2, 0);
-
-		// create connections for the lines -> gizmo
-		linesToGizmos.put(left, gizmo);
-		linesToGizmos.put(bottom, gizmo);
-		linesToGizmos.put(right, gizmo);
-		linesToGizmos.put(top, gizmo);
-		// create connections for the circles -> gizmo
-		circlesToGizmos.put(topLeft, gizmo);
-		circlesToGizmos.put(bottomLeft, gizmo);
-		circlesToGizmos.put(topRight, gizmo);
-		circlesToGizmos.put(bottomRight, gizmo);
-		// add lines to list of alllines
-		lines.add(left);
-		lines.add(bottom);
-		lines.add(right);
-		lines.add(top);
-		// adds little circles to ensure that corners have collision
-		circles.add(topLeft);
-		circles.add(bottomLeft);
-		circles.add(topRight);
-		circles.add(bottomRight);
+		for(Circle corner : gizCorners)  // create connections for the circles -> absorber
+			circlesToAbsorber.put(corner, gizmo);
 	}
 
 	private void makeWalls(int boardSize) {
@@ -373,10 +112,10 @@ public class Model extends Observable implements IModel {
 		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);
 		LineSegment bottomWall = new LineSegment(0, boardSize, boardSize, boardSize);
 		LineSegment leftWall = new LineSegment(0, 0, 0, boardSize);
-		lines.add(topWall);
-		lines.add(rightWall);
-		lines.add(bottomWall);
-		lines.add(leftWall);
+		walls.add(topWall);
+		walls.add(rightWall);
+		walls.add(bottomWall);
+		walls.add(leftWall);
 	}
 
 	private CollisionInfo timeUntilCollision() {
@@ -391,19 +130,25 @@ public class Model extends Observable implements IModel {
 			Circle circ = ball.getCircle();
 			Vect vel = ball.getVelocity();
 			double nextTime = 0;
-			for (LineSegment line : lines) {
+			for (LineSegment line : walls) {
 				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					if (linesToGizmos.get(line) == null)
-						updatedVel = Geometry.reflectWall(line, vel, 1);
-					else
-						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
+					updatedVel = Geometry.reflectWall(line, vel, 1);
 					absorber = null;
 				}
 			}
-			for (Circle circle : circles) {
+			for (LineSegment line : linesToGizmos.keySet()) {
+				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
+				if (nextTime < lowestColTime) {
+					lowestColTime = nextTime;
+					collidingBall = ball;
+					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
+					absorber = null;
+				}
+			}
+			for (Circle circle : circlesToGizmos.keySet()) {
 				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
@@ -472,6 +217,37 @@ public class Model extends Observable implements IModel {
 		}
 	}
 
+	//DO NOT TOUCH PLEB
+//	private void rotateFlipper(IGizmo flipper, boolean rotate){
+//		IGizmo
+//		if(flipper.gizmoType().toLowerCase().equals("leftflipper")){
+//			LeftFlipperGizmo f = (LeftFlipperGizmo) flipper;
+//		}else if(flipper.gizmoType().toLowerCase().equals("rightflipper")){
+//			RightFlipperGizmo f = (RightFlipperGizmo) flipper;
+//		}
+//		
+//		if(rotate){
+//			List<Circle> circles = flippersToCircles.get(flipper); 
+//			List<LineSegment> lines = flippersToLines.get(flipper);
+//			f.
+//			//the pivot is always index 0 (from make*Flipper methods)
+//			Vect pivot = circles.get(0).getCenter();
+//			
+//			
+//		}else{
+//			
+//		}
+//	}
+//	
+//	public void triggerFlipper() {
+//		for(IGizmo flipper : flippersToLines.keySet()){
+//			if(flipper.triggered())
+//				rotateFlipper(flipper, true);
+//			else
+//				rotateFlipper(flipper, false);
+//		}
+//	}
+	
 	@Override
 	public void moveBalls() {
 		CollisionInfo colInfo = timeUntilCollision();

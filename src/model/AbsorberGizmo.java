@@ -2,6 +2,8 @@ package model;
 
 import java.awt.Color;
 
+import physics.Circle;
+import physics.LineSegment;
 import physics.Vect;
 
 public class AbsorberGizmo extends Gizmo{
@@ -14,10 +16,19 @@ public class AbsorberGizmo extends Gizmo{
 		this.ex = ex;
 		this.ey = ey;
 		velo = new Vect(0,-50);
-		color = Color.ORANGE;
+		makeAbsorber();
 	}
 
-	
+	private void makeAbsorber(){
+		lines.add(new LineSegment(x, y, x, ey));
+		lines.add(new LineSegment(x, ey, ex, ey));
+		lines.add(new LineSegment(ex, ey, ex, y));
+		lines.add(new LineSegment(ex, y, x, y));
+		corners.add(new Circle(x, y, 0));
+		corners.add(new Circle(x, ey, 0));
+		corners.add(new Circle(ex, y, 0));
+		corners.add(new Circle(ex, ey, 0));
+	}
 	
 	/**
 	 * 
