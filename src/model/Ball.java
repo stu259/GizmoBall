@@ -30,6 +30,17 @@ public class Ball {
 		return mass;
 	}
 	
+	public void pause(){
+		paused = true;
+	}
+	
+	public void resume(){
+		paused = false;
+	}
+	
+	public boolean paused(){
+		return paused;
+	}
 	
 	/*
 	 * Return the X coordinate of the ball

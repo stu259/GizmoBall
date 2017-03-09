@@ -69,6 +69,8 @@ public class Model extends Observable implements IModel {
 		// clear dataStructures
 		linesToGizmos.clear();
 		circlesToGizmos.clear();
+		linesToAbsorber.clear();
+		circlesToAbsorber.clear();
 
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
@@ -127,6 +129,10 @@ public class Model extends Observable implements IModel {
 		AbsorberGizmo absorber = null;
 
 		for (Ball ball : balls.values()) {
+			
+			if(ball.paused())
+				continue;
+			
 			Circle circ = ball.getCircle();
 			Vect vel = ball.getVelocity();
 			double nextTime = 0;
@@ -212,6 +218,7 @@ public class Model extends Observable implements IModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		for (Ball ball : balls.values()) {
 			if (ball.isAbsorbed()) {
+				ball.resume();
 				ball.setVelocity(colInfo.getUpdatedVel());
 			}
 		}
@@ -255,7 +262,7 @@ public class Model extends Observable implements IModel {
 		Ball colBall = colInfo.getCollidingBall();
 		Ball colBall2 = null;
 		boolean colbal2check = false;
-
+		
 		if (colTime < time) { // collision detected
 			String key = colBall.getKey();
 			String key2 = null;
@@ -281,8 +288,8 @@ public class Model extends Observable implements IModel {
 					AbsorberGizmo absorber = colInfo.getAbs();
 					colBall.setX(absorber.getEndX() - colBall.getRadius());
 					colBall.setY(absorber.getEndY() - colBall.getRadius());
+					colBall.pause();
 					colBall.setVelocity(colInfo.getUpdatedVel());
-					colBall.setVelocity(0, 0);
 				} else {
 					colBall = calculateBallMove(colBall, colTime);
 					applyFriction(colBall, colTime);
@@ -305,7 +312,7 @@ public class Model extends Observable implements IModel {
 				balls.put(key2, colBall2);
 		} else {
 			for (Ball ball : balls.values()) {
-				if (!ball.isAbsorbed()) {
+				if(!ball.paused() && !ball.isAbsorbed()){
 					ball = calculateBallMove(ball, time);
 					applyFriction(ball, time);
 					applyGravity(ball, time);
@@ -432,7 +439,7 @@ public class Model extends Observable implements IModel {
 			break;
 		case "rightflipper":
 			if (addGizmo(new RightFlipperGizmo(x, y), key)) {
-				System.out.println("Adding right flipper at (" + x + "," + y + ")");
+				System.out.println("Adding right flipper , 19, 20, 20at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
