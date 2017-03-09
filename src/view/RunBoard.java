@@ -89,7 +89,8 @@ public class RunBoard extends JPanel implements Observer {
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1+1*scale,
 						y1+1*scale);
 				if (!triggered) {
-					g2.fill(rf);
+					Shape transformed = transform.createTransformedShape(rf);
+					g2.fill(transformed);
 
 				} else {
 					
@@ -106,7 +107,8 @@ public class RunBoard extends JPanel implements Observer {
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1+1*scale,
 						y1+1*scale);
 				if (!triggered) {
-					g2.fill(lf);
+					Shape transformed = transform.createTransformedShape(lf);
+					g2.fill(transformed);
 
 				} else {
 					transform.rotate(Math.toRadians(270), lf.getX() +lf.getWidth()/2, lf.getY() +lf.getWidth()/2);
