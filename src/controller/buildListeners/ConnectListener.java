@@ -41,6 +41,8 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 		} 
 		else if (isClicked == true){
 			model.connectGizmo(x,y,e.getX()/display.getScale(),e.getY()/display.getScale());
+			System.out.println(x + " " + y);
+			System.out.println(e.getX()/display.getScale() + " " + e.getY()/display.getScale());
 			isClicked = false;
 		}
 		

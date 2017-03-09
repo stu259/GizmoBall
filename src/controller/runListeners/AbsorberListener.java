@@ -1,22 +1,32 @@
 package controller.runListeners;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import model.Model;
-import prototypes.FlipperBoard;
+import model.IModel;
+import view.IDisplay;
 
-public class AbsorberListener implements KeyListener {
-	private Model m;
-	private FlipperBoard b;	
-		public AbsorberListener(Model m, FlipperBoard b) {
-			this.b=b;
+public class AbsorberListener implements ActionListener,KeyListener {
+	private IModel m;
+	private RunListener runListener;
+	private IDisplay d;
+	
+		public AbsorberListener(IModel m, RunListener rL, IDisplay d) {
 			this.m = m;
+			this.d= d; 
+		    runListener = rL;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			runListener.setKeyListener(this);	
+			d.changeText("Absorber Fired");
 		}
 
 		@Override
-		public void keyPressed(KeyEvent e) {
-			b.triggered=false;
+		public void keyPressed(KeyEvent e) {	
 			if (e.getKeyCode() == KeyEvent.VK_UP){
 				System.out.println("Key Pressed");
 				m.triggerAbsorber();
@@ -25,8 +35,8 @@ public class AbsorberListener implements KeyListener {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+			runListener.setKeyListener(null);
 			System.out.println("Key Released");
-			b.triggered=false;
 		}
 
 		@Override

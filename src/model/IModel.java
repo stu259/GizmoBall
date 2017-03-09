@@ -140,4 +140,6 @@ public interface IModel {
 
 	void keyConnectGizmo(int x, int y, String k);
 
+	public List<IGizmo> getGizmos();
+
 }

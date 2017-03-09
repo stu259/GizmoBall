@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.util.List;
 
 import model.IGizmo;
+import model.IModel;
 import model.LeftFlipperGizmo;
 import model.Model;
 import model.RightFlipperGizmo;
@@ -15,9 +16,9 @@ import prototypes.FlipperBoard;
 import view.IDisplay;
 
 public class FlipperListener implements KeyListener {
-private Model m;
+private IModel m;
 private FlipperBoard b;	
-	public FlipperListener(Model m, FlipperBoard b) {
+	public FlipperListener(IModel m, FlipperBoard b) {
 		this.b=b;
 		this.m = m;
 	}
