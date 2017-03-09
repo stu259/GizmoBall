@@ -27,7 +27,7 @@ public class RunButtons extends JPanel {
 
 	public RunButtons(IDisplay d, IModel m, TimerListener t) {
 		timer = t;
-		runListener=new RunListener(m);
+		runListener=new RunListener();
 		mL = new ModeListener(d, timer);
 		tL = new TickListener(m);
 		addButtons();
