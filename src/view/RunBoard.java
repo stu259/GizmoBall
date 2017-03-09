@@ -70,7 +70,7 @@ public class RunBoard extends JPanel implements Observer {
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("absorber")) {
 				g2.setColor(Color.PINK);
-				g2.fillRect(x1, y1, x2 - x1+1*scale, y2 - y1+1*scale);
+				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("triangle")) {
 				g2.setColor(color.BLUE);

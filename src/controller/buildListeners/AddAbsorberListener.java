@@ -40,7 +40,8 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 			display.changeText("Select Absorber Bottom Right Location");
 		} 
 		else if (isClicked == true){
-			model.addAbsorber(x, y, e.getX()/display.getScale(), e.getY()/display.getScale());
+			System.out.println(e.getY()/display.getScale());
+			model.addAbsorber(x, y, e.getX()/display.getScale()+1, e.getY()/display.getScale()+1);
 			//checked the values passing are correct.
 			isClicked = false;
 		}
