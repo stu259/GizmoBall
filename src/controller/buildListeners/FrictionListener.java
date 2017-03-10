@@ -20,9 +20,18 @@ public class FrictionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String[] message = new String[2];
+		int[] max = new int[2];
+		int[] min = new int[2];
+		int[] init = new int[2];
 		message[0]="Friction mu";
 		message[1]="Friction mu2";
-		friction = display.inputPopup(message);
+		max[0]=10;
+		max[1]=10;
+		min[0]=-10;
+		min[1]=-10;
+		init[0]=(int)model.getFriction()[0];
+		init[1]=(int)model.getFriction()[1];
+		friction = display.inputPopup(message,min,max,init);
 		model.setFriction(friction[0], friction[1]);		
 	}
 

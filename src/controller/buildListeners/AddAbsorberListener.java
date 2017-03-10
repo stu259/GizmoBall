@@ -18,12 +18,11 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	private int y;
 	private boolean isClicked;
 
-
 	public AddAbsorberListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
 		display = d;
-		isClicked=false;
+		isClicked = false;
 	}
 
 	@Override
@@ -33,30 +32,30 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (isClicked ==false) {
-			x = e.getX()/display.getScale();
-			y = e.getY()/display.getScale();
-			isClicked= true;
+		if (isClicked == false) {
+			x = e.getX() / display.getScale();
+			y = e.getY() / display.getScale();
+			isClicked = true;
 			display.changeText("Select Absorber Bottom Right Location");
-		} 
-		else if (isClicked == true){
-			System.out.println(e.getY()/display.getScale());
-			model.addAbsorber(x, y, e.getX()/display.getScale()+1, e.getY()/display.getScale()+1);
-			//checked the values passing are correct.
+		} else if (isClicked == true) {
+			System.out.println(e.getY() / display.getScale());
+			model.addAbsorber(x, y, e.getX() / display.getScale() + 1, e.getY() / display.getScale() + 1);
+			// checked the values passing are correct.
 			isClicked = false;
 		}
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (e.getClickCount() > 1) {
-			buildListener.setMouseListener(null);
-			display.changeText("Select Button");
-		}		
+		if (isClicked == true) {
+			display.changeText("Select Absorber Top Left Location");
+		}
 	}
+
 	@Override
 	public void mouseDragged(MouseEvent e) {
 
 	}
+
 	public void mouseEntered(MouseEvent e) {
 
 	}
@@ -68,6 +67,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
 	public void mouseClicked(MouseEvent e) {
 
 	}
+
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 	}

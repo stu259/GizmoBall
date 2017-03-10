@@ -22,7 +22,7 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 		model = m;
 		buildListener = bL;
 		display = d;
-		isClicked=false;
+		isClicked = false;
 	}
 
 	@Override
@@ -32,27 +32,25 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (isClicked ==false) {
-			x = e.getX()/display.getScale();
-			y = e.getY()/display.getScale();
-			isClicked= true;
+		if (isClicked == false) {
+			x = e.getX() / display.getScale();
+			y = e.getY() / display.getScale();
+			isClicked = true;
 			display.changeText("Select Gizmo 2");
-			
-		} 
-		else if (isClicked == true){
-			model.connectGizmo(x,y,e.getX()/display.getScale(),e.getY()/display.getScale());
+
+		} else if (isClicked == true) {
+			model.connectGizmo(x, y, e.getX() / display.getScale(), e.getY() / display.getScale());
 			System.out.println(x + " " + y);
-			System.out.println(e.getX()/display.getScale() + " " + e.getY()/display.getScale());
+			System.out.println(e.getX() / display.getScale() + " " + e.getY() / display.getScale());
 			isClicked = false;
 		}
-		
+
 	}
-	
+
 	public void mouseReleased(MouseEvent e) {
-		if (e.getClickCount() > 1) {
-			buildListener.setMouseListener(null);
-			display.changeText("Select Button");
-		}		
+		if (isClicked == false) {
+			display.changeText("Select Gizmo 1");
+		}
 	}
 
 	public void mouseEntered(MouseEvent e) {

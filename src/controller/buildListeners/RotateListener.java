@@ -33,8 +33,7 @@ public class RotateListener implements ActionListener, MouseInputListener {
 
 
 	public void mouseExited(MouseEvent e) {
-		buildListener.setMouseListener(null);
-		display.changeText("Select Button");
+		display.changeText("Select Gizmo");
 	}
 
 	public void mouseReleased(MouseEvent e) {

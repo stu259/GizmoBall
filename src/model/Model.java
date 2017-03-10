@@ -384,6 +384,17 @@ public class Model extends Observable implements IModel {
 	 * 
 	 */
 
+	public double[] getFriction(){
+		double[] friction= new double[2];
+		friction[0]=frictionMU;
+		friction[0]=frictionMUTwo;
+		return 	friction;
+	}
+	
+	public double getGravity(){
+		return 	gravity;
+	}
+	
 	// check if object can be added (check outside board, position, size, then
 	// scale)
 	// Params: startx, starty, endx, endy

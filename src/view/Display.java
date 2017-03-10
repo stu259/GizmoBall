@@ -14,6 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -42,7 +43,7 @@ public class Display implements IDisplay {
 
 	public Display(Model model) {
 		m = model;
-		timer= new TimerListener(model);
+		timer = new TimerListener(model);
 		initialise();
 		addMenuBar();
 		tidy();
@@ -69,7 +70,7 @@ public class Display implements IDisplay {
 		JMenu menu = new JMenu("File");
 
 		JMenuItem newBoard = new JMenuItem("New");
-		newBoard.addActionListener(new NewBoardActionListener(this,m));
+		newBoard.addActionListener(new NewBoardActionListener(this, m));
 		JMenuItem load = new JMenuItem("Load");
 		load.addActionListener(new LoadListener(this, m));
 		JMenuItem save = new JMenuItem("Save");
@@ -106,8 +107,8 @@ public class Display implements IDisplay {
 			frame.setTitle("RUN MODE");
 		}
 	}
-	
-	public void changeText(String m){
+
+	public void changeText(String m) {
 		output.setText(m);
 	}
 
@@ -128,7 +129,7 @@ public class Display implements IDisplay {
 	public File saveDialog() {
 		String filePath = (String) JOptionPane.showInputDialog(new JFrame(), "Enter name for save", "Save Dialog",
 				JOptionPane.PLAIN_MESSAGE);
-		if (filePath!=null) {
+		if (filePath != null) {
 			return new File(filePath + ".txt");
 		} else {
 			errorPopup("Invalid File Name");
@@ -156,8 +157,8 @@ public class Display implements IDisplay {
 		JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
-	public double[] inputPopup(String[] message) {
-		JTextField[] textField = new JTextField[message.length];
+	public double[] inputPopup(String[] message, int[] min, int[] max, int[] init) {
+		JSlider[] slider = new JSlider[message.length];
 		JPanel inputPopup = new JPanel(new BorderLayout());
 		double[] output = new double[message.length];
 
@@ -169,19 +170,20 @@ public class Display implements IDisplay {
 
 		JPanel input = new JPanel(new GridLayout(message.length, 1));
 		for (int i = 0; i < message.length; i++) {
-			textField[i] = new JTextField();
-			input.add(textField[i]);
+			System.out.println(init[i]);
+			slider[i] = new JSlider(JSlider.HORIZONTAL, min[i], max[i], init[i]);
+			slider[i].setMajorTickSpacing(max[i] / 5);
+			slider[i].setMinorTickSpacing(max[i] / 10);
+			slider[i].setPaintTicks(true);
+			slider[i].setPaintLabels(true);
+			input.add(slider[i]);
 		}
 		inputPopup.add(input, BorderLayout.CENTER);
 
 		JOptionPane.showMessageDialog(frame, inputPopup, "Input", JOptionPane.PLAIN_MESSAGE);
 
-		try {
-			for (int i = 0; i < message.length; i++) {
-				output[i] = Integer.parseInt(textField[i].getText());
-			}
-		} catch (java.lang.NumberFormatException e) {
-			return null;
+		for (int i = 0; i < message.length; i++) {
+			output[i] = slider[i].getValue();
 		}
 
 		return output;

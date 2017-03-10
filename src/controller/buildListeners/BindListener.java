@@ -47,7 +47,7 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		buildListener.setMouseListener(null);
+		display.changeText("Select Gizmo to Bind");
 		
 	}
 	

@@ -31,34 +31,35 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		model.addGizmo(gizmo, e.getX() / display.getScale(), e.getY() / display.getScale());
+		int x = e.getX() / display.getScale();
+		if (gizmo == "rightflipper") {
+			x--;
+		}
+		model.addGizmo(gizmo, x, e.getY() / display.getScale());
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		buildListener.setMouseListener(null);
-		display.changeText("Select Button");
+		display.changeText("Select Gizmo Location");
 	}
-	
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
+
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-
 	}
+
 	@Override
 	public void mouseEntered(MouseEvent e) {
-	
-	}
 
+	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-
 
 	}
 

@@ -16,12 +16,12 @@ public interface IDisplay {
 	public File loadDialog();
 
 	public void errorPopup(String errorMessage);
-	
+
 	public IModel getModel();
-	
-	public double[] inputPopup(String[] message) ;
-	
+
+	public double[] inputPopup(String[] message, int[] max, int[] min, int[] init);
+
 	public int getScale();
-	
+
 	public void changeText(String m);
 }

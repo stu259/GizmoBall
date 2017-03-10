@@ -15,7 +15,7 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 	private BuildListener buildListener;
 	private IDisplay display;
 
-	public DeleteListener(IModel m,  BuildListener bL, IDisplay d) {
+	public DeleteListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
 		display = d;
@@ -28,12 +28,11 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		model.deleteGizmo(e.getX()/display.getScale(),e.getY()/display.getScale());
+		model.deleteGizmo(e.getX() / display.getScale(), e.getY() / display.getScale());
 	}
 
 	public void mouseReleased(MouseEvent e) {
-			buildListener.setMouseListener(null);
-			display.changeText("Select Button");
+		display.changeText("Select Gizmo to Delete");
 	}
 
 	public void mouseEntered(MouseEvent e) {
