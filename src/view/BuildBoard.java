@@ -26,14 +26,13 @@ public class BuildBoard extends JPanel implements Observer {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected int width, height, scale;
+	protected int size, scale;
 	protected Model gm;
 
-	public BuildBoard(int w, int h, Model model) {
+	public BuildBoard(int s, Model model) {
 		model.addObserver(this);
-		width = w;
-		height = h;
-		scale = w / 20;
+		size=s;
+		scale = size / 20;
 		gm = model;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setFocusable(true);
@@ -42,7 +41,7 @@ public class BuildBoard extends JPanel implements Observer {
 
 	// Fix onscreen size
 	public Dimension getPreferredSize() {
-		return new Dimension(width, height);
+		return new Dimension(size, size);
 	}
 
 	public void paintComponent(Graphics g) {

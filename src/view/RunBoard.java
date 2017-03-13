@@ -23,17 +23,15 @@ import model.Model;
 public class RunBoard extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
-	protected int width;
-	protected int height, scale;
+	protected int size, scale;
 	protected Model gm;
 	public boolean triggered;
 
-	public RunBoard(int w, int h, Model model) {
+	public RunBoard(int s, Model model) {
 		// Observe changes in Model
 		model.addObserver(this);
-		width = w;
-		height = h;
-		scale = w / 20;
+		size=s;
+		scale = size / 20;
 		gm = model;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		setBackground(Color.BLACK);
@@ -41,7 +39,7 @@ public class RunBoard extends JPanel implements Observer {
 
 	// Fix onscreen size
 	public Dimension getPreferredSize() {
-		return new Dimension(width, height);
+		return new Dimension(size, size);
 	}
 
 	public void paintComponent(Graphics g) {

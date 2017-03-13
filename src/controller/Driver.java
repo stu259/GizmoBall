@@ -41,7 +41,7 @@ public class Driver {
 
 	private static void createControllers(IModel m, IDisplay d) {
 		buildL = new BuildListener();
-		runL = new RunListener();
+		runL = new RunListener(m);
 		listeners = new HashMap<>();
 		listeners.put("aAL", new AddAbsorberListener(m, buildL, d));
 		listeners.put("aBL", new AddBallListener(m, buildL, d));

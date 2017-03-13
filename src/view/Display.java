@@ -3,7 +3,9 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.io.File;
@@ -48,6 +50,7 @@ public class Display implements IDisplay {
 	private BuildListener bL;
 	private RunListener rL;
 	private Container cp;
+	private int boardSize;
 
 	public Display(Model m) {
 		model =m;
@@ -69,6 +72,10 @@ public class Display implements IDisplay {
 	}
 	
 	private void initialise() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int size = (int)(screenSize.getHeight()-100)/100;
+		size=size*100;
+		boardSize=(int)size;
 		frame = new JFrame("Gizmo Ball");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		cp = frame.getContentPane();
@@ -108,11 +115,9 @@ public class Display implements IDisplay {
 	}
 
 	private void tidy() {
-		frame.pack();
-		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.pack();
-
+		frame.setLocationRelativeTo(null);
 	}
 
 	public void changeMode(String m) {
@@ -132,7 +137,7 @@ public class Display implements IDisplay {
 	}
 
 	public void build() {
-		bB = new BuildBoard(700, 700, model);
+		bB = new BuildBoard(boardSize, model);
 		build = new BuildButtons(listeners, bL, bB);
 		buttons.add(build, "build");
 		boards.add(bB, "build");
@@ -140,7 +145,7 @@ public class Display implements IDisplay {
 
 	public void run() {
 		run = new RunButtons(listeners, rL);
-		rB = new RunBoard(700, 700, model);
+		rB = new RunBoard(boardSize, model);
 		buttons.add(run, "run");
 		boards.add(rB, "run");
 	}

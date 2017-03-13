@@ -6,29 +6,24 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
+import model.IModel;
 
-public class RunListener implements KeyListener, MouseInputListener{
+public class RunListener implements KeyListener {
 
-	private MouseInputListener mouseListener;
-	private KeyListener keyListener;	
+	private IModel model;
 
-	public void setKeyListener(KeyListener k) {
-		keyListener = k;
-	}
-
-	public void setMouseListener(MouseInputListener m) {
-		mouseListener = m;
+	public RunListener(IModel m) {
+		model = m;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println(e.getKeyCode());
-		keyListener.keyPressed(e);
+		// trigger
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		keyListener.keyReleased(e);
 
 	}
 
@@ -37,50 +32,5 @@ public class RunListener implements KeyListener, MouseInputListener{
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		if (mouseListener != null) {
-			mouseListener.mouseExited(e);
-		}
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		if (mouseListener != null) {
-			mouseListener.mousePressed(e);
-		}
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		if (mouseListener != null) {
-			mouseListener.mouseReleased(e);
-		}
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-	
 
 }

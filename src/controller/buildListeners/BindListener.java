@@ -19,12 +19,14 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 	private BuildListener buildListener;
 	private int x,y;
 	private IDisplay display;
+	private boolean keyPressed;
 
 
 	public BindListener(IModel m, BuildListener bl, IDisplay d) {
 		model=m;
 		buildListener=bl;
 		display =d;
+		keyPressed=false;
 	}
 
 	@Override
@@ -47,8 +49,7 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		display.changeText("Select Gizmo to Bind");
-		
+		display.changeText("Press key to bind");	
 	}
 	
 	
