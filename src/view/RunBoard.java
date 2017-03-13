@@ -48,8 +48,8 @@ public class RunBoard extends JPanel implements Observer {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
-		List<IDrawableGizmo> gizmoDrawables = gm.drawableGizmo();
-		List<IDrawableBall> ballDrawables = gm.drawableBall();
+		List<IDrawableGizmo> gizmoDrawables = gm.drawableGizmos();
+		List<IDrawableBall> ballDrawables = gm.drawableBalls();
 		
 		for (IDrawableGizmo gizmo : gizmoDrawables) {
 			

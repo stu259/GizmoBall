@@ -918,7 +918,7 @@ public class Model extends Observable implements IModel {
 		this.notifyObservers();
 	}
 
-	public List<IDrawableGizmo> drawableGizmo() {
+	public List<IDrawableGizmo> drawableGizmos() {
 		List<IDrawableGizmo> drawables = new ArrayList<IDrawableGizmo>();
 		List<IGizmo> tempGizmo = this.getGizmos();
 
@@ -929,7 +929,7 @@ public class Model extends Observable implements IModel {
 		return drawables;
 	}
 
-	public List<IDrawableBall> drawableBall() {
+	public List<IDrawableBall> drawableBalls() {
 		List<IDrawableBall> drawables = new ArrayList<IDrawableBall>();
 		List<Ball> tempBall = this.getBalls();
 

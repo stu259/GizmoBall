@@ -65,8 +65,8 @@ public class BuildBoard extends JPanel implements Observer {
 			g.drawLine(i * wdOfRow, 0, i * wdOfRow, height);
 		}
 
-		List<IDrawableGizmo> gizmoDrawables = gm.drawableGizmo();
-		List<IDrawableBall> ballDrawables = gm.drawableBall();
+		List<IDrawableGizmo> gizmoDrawables = gm.drawableGizmos();
+		List<IDrawableBall> ballDrawables = gm.drawableBalls();
 
 		for (IDrawableGizmo gizmo : gizmoDrawables) {
 

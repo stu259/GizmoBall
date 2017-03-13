@@ -121,9 +121,9 @@ public interface IModel {
 	 * @param gizmo
 	 * @return Drawable Object
 	 */
-	public List<IDrawableGizmo> drawableGizmo();
+	public List<IDrawableGizmo> drawableGizmos();
 
-	public List<IDrawableBall> drawableBall();
+	public List<IDrawableBall> drawableBalls();
 
 	public void triggerAbsorber();
 

@@ -7,4 +7,5 @@ public interface IDrawableGizmo {
 	public int getEndY();
 	public int getRotation();
 	public String getGizmoType();
+	public boolean isTriggered();
 }

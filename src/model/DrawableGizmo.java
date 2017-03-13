@@ -28,6 +28,7 @@ public class DrawableGizmo implements IDrawableGizmo {
 		return gizmo.getEndY();
 	}
 	
+	@Override
 	public String getGizmoType() {
 		return gizmo.gizmoType();
 	}
@@ -35,5 +36,10 @@ public class DrawableGizmo implements IDrawableGizmo {
 	@Override
 	public int getRotation() {
 		return gizmo.getRotation();
+	}
+	
+	@Override
+	public boolean isTriggered(){
+		return gizmo.triggered();
 	}
 }
