@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,26 +16,22 @@ import javax.swing.JPanel;
 import controller.MagicKeyListener;
 import controller.ModeListener;
 import controller.buildListeners.*;
+import controller.runListeners.RunListener;
 import model.IModel;
 
 public class BuildButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private BuildListener buildListener;
-	private ActionListener aGL, mL;
-	private IDisplay display;
-	private IModel model;
 
-	public BuildButtons(IDisplay d, IModel m, BuildBoard bb, Frame f) {
-		display = d;
-		model = m;
-		buildListener = new BuildListener();
-		bb.addMouseListener(buildListener);
+	private Map<String, ActionListener> listeners;
+	private BuildListener buildListener;
+
+	public BuildButtons(Map<String, ActionListener> l, BuildListener bL, BuildBoard bb) {
+		buildListener = bL;
+		listeners = l;	
+		bb.addMouseListener(buildListener); 		
 		bb.addKeyListener(new MagicKeyListener(buildListener));		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		aGL = new AddGizmosListener(m, buildListener, d);
-		mL = new ModeListener(display, model);
-
 		gizmos();
 		operations();
 		setup();
@@ -48,21 +45,21 @@ public class BuildButtons extends JPanel {
 		c.weightx = 0.5;
 
 		JButton squareButton = new JButton("Square");
-		squareButton.addActionListener(aGL);
+		squareButton.addActionListener(listeners.get("aGL"));
 		c.gridx = 0;
 		c.gridy = 0;
 		buttonSetup(squareButton);
 		gizmo.add(squareButton, c);
 
 		JButton circleButton = new JButton("Circle");
-		circleButton.addActionListener(aGL);
+		circleButton.addActionListener(listeners.get("aGL"));
 		c.gridx = 1;
 		c.gridy = 0;
 		buttonSetup(circleButton);
 		gizmo.add(circleButton, c);
 
 		JButton triangleButton = new JButton("Triangle");
-		triangleButton.addActionListener(aGL);
+		triangleButton.addActionListener(listeners.get("aGL"));
 		c.gridx = 2;
 		c.gridy = 0;
 		buttonSetup(triangleButton);
@@ -70,7 +67,7 @@ public class BuildButtons extends JPanel {
 
 		JButton lFlipperButton = new JButton("Left Flipper");
 		lFlipperButton.setActionCommand("leftflipper");
-		lFlipperButton.addActionListener(aGL);
+		lFlipperButton.addActionListener(listeners.get("aGL"));
 		c.gridx = 0;
 		c.gridy = 1;
 		buttonSetup(lFlipperButton);
@@ -78,21 +75,21 @@ public class BuildButtons extends JPanel {
 
 		JButton rFlipperButton = new JButton("Right Flipper");
 		rFlipperButton.setActionCommand("rightflipper");
-		rFlipperButton.addActionListener(aGL);
+		rFlipperButton.addActionListener(listeners.get("aGL"));
 		c.gridx = 1;
 		c.gridy = 1;
 		buttonSetup(rFlipperButton);
 		gizmo.add(rFlipperButton, c);
 
 		JButton absorberButton = new JButton("Absorber");
-		absorberButton.addActionListener(new AddAbsorberListener(model, buildListener, display));
+		absorberButton.addActionListener(listeners.get("aAL"));
 		c.gridx = 2;
 		c.gridy = 1;
 		buttonSetup(absorberButton);
 		gizmo.add(absorberButton, c);
 
 		JButton ballButton = new JButton("Ball");
-		ballButton.addActionListener(new AddBallListener(model, buildListener, display));
+		ballButton.addActionListener(listeners.get("aBL"));
 		c.gridx = 1;
 		c.gridy = 2;
 		buttonSetup(ballButton);
@@ -109,42 +106,42 @@ public class BuildButtons extends JPanel {
 		c.weightx = 0.5;
 
 		JButton rotateButton = new JButton("Rotate");
-		rotateButton.addActionListener(new RotateListener(model, buildListener, display));
+		rotateButton.addActionListener(listeners.get("rL"));
 		c.gridx = 0;
 		c.gridy = 0;
 		buttonSetup(rotateButton);
 		operation.add(rotateButton, c);
 
 		JButton deleteButton = new JButton("Delete");
-		deleteButton.addActionListener(new DeleteListener(model, buildListener, display));
+		deleteButton.addActionListener(listeners.get("dL"));
 		c.gridx = 1;
 		c.gridy = 0;
 		buttonSetup(deleteButton);
 		operation.add(deleteButton, c);
 
 		JButton moveButton = new JButton("Move");
-		moveButton.addActionListener(new MoveListener(model, buildListener, display));
+		moveButton.addActionListener(listeners.get("mL"));
 		c.gridx = 2;
 		c.gridy = 0;
 		buttonSetup(moveButton);
 		operation.add(moveButton, c);
 
 		JButton clearButton = new JButton("Clear");
-		clearButton.addActionListener(new ClearListener(model));
+		clearButton.addActionListener(listeners.get("cL"));
 		c.gridx = 0;
 		c.gridy = 1;
 		buttonSetup(clearButton);
 		operation.add(clearButton, c);
 
 		JButton connectButton = new JButton("Connect");
-		connectButton.addActionListener(new ConnectListener(model, buildListener, display));
+		connectButton.addActionListener(listeners.get("connectL"));
 		c.gridx = 1;
 		c.gridy = 1;
 		buttonSetup(connectButton);
 		operation.add(connectButton, c);
 
 		JButton bindButton = new JButton("Bind Key");
-		bindButton.addActionListener(new BindListener(model, buildListener, display));
+		bindButton.addActionListener(listeners.get("bindL"));
 		bindButton.addKeyListener(buildListener);
 		c.gridx = 2;
 		c.gridy = 1;
@@ -152,7 +149,7 @@ public class BuildButtons extends JPanel {
 		operation.add(bindButton, c);
 
 		JButton disconnectButton = new JButton("Disconnect");
-		disconnectButton.addActionListener(new DisconnectListener(model, buildListener, display));
+		disconnectButton.addActionListener(listeners.get("disconnectL"));
 		c.gridx = 1;
 		c.gridy = 2;
 		buttonSetup(disconnectButton);
@@ -170,13 +167,13 @@ public class BuildButtons extends JPanel {
 		c.weightx = 0.5;
 
 		JButton frictionButton = new JButton("Friction");
-		frictionButton.addActionListener(new FrictionListener(model, display));
+		frictionButton.addActionListener(listeners.get("fL"));
 		setup.add(frictionButton);
 		buttonSetup(frictionButton);
 		setup.add(frictionButton, c);
 
 		JButton gravityButton = new JButton("Gravity");
-		gravityButton.addActionListener(new GravityListener(model, display));
+		gravityButton.addActionListener(listeners.get("gL"));
 		setup.add(gravityButton);
 		buttonSetup(gravityButton);
 		setup.add(gravityButton, c);
@@ -186,7 +183,7 @@ public class BuildButtons extends JPanel {
 		JPanel run = new JPanel();
 		JButton runButton = new JButton("Run Mode");
 		runButton.setActionCommand("run");
-		runButton.addActionListener(mL);
+		runButton.addActionListener(listeners.get("modeL"));
 		buttonSetup(runButton);
 		run.add(runButton);
 		add(run);

@@ -28,13 +28,13 @@ public class RunBoard extends JPanel implements Observer {
 	protected Model gm;
 	public boolean triggered;
 
-	public RunBoard(int w, int h, Model m) {
+	public RunBoard(int w, int h, Model model) {
 		// Observe changes in Model
-		m.addObserver(this);
+		model.addObserver(this);
 		width = w;
 		height = h;
 		scale = w / 20;
-		gm = m;
+		gm = model;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		setBackground(Color.BLACK);
 	}

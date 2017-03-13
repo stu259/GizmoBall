@@ -29,12 +29,12 @@ public class BuildBoard extends JPanel implements Observer {
 	protected int width, height, scale;
 	protected Model gm;
 
-	public BuildBoard(int w, int h, Model m) {
-		m.addObserver(this);
+	public BuildBoard(int w, int h, Model model) {
+		model.addObserver(this);
 		width = w;
 		height = h;
 		scale = w / 20;
-		gm = m;
+		gm = model;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setFocusable(true);
 		this.requestFocus();

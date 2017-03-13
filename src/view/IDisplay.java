@@ -1,7 +1,11 @@
 package view;
 
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Map;
 
+import controller.buildListeners.BuildListener;
+import controller.runListeners.RunListener;
 import model.IModel;
 
 public interface IDisplay {
@@ -17,11 +21,15 @@ public interface IDisplay {
 
 	public void errorPopup(String errorMessage);
 
-	public IModel getModel();
-
 	public double[] inputPopup(String[] message, int[] max, int[] min, int[] init);
 
 	public int getScale();
 
 	public void changeText(String m);
+	
+	public void addListeners(Map<String, ActionListener> l);
+	
+	public void addBuildListener(BuildListener b);
+	
+	public void addRunListener(RunListener r);
 }

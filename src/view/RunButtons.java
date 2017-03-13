@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,41 +22,37 @@ public class RunButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private ActionListener mL, tL;
-	private TimerListener timer;
+	private Map<String, ActionListener> listeners;
 	private RunListener runListener;
 
-	public RunButtons(IDisplay d, IModel m, TimerListener t) {
-		timer = t;
-		runListener=new RunListener();
-		mL = new ModeListener(d, timer);
-		tL = new TickListener(m);
+	public RunButtons(Map<String, ActionListener> l, RunListener rL) {
+		runListener = rL;
+		listeners = l;
 		addButtons();
-		m.runMode();
 	}
 
 	private void addButtons() {
 		setLayout(new GridLayout(4, 1));
 
 		JButton startButton = new JButton("Start");
-		startButton.addActionListener(timer);
+		startButton.addActionListener(listeners.get("timerL"));
 		startButton.addKeyListener(runListener);
 		buttonSetup(startButton);
 		add(startButton);
 
 		JButton stopButton = new JButton("Stop");
-		stopButton.addActionListener(timer);
+		stopButton.addActionListener(listeners.get("timerL"));
 		buttonSetup(stopButton);
 		add(stopButton);
 
 		JButton tickButton = new JButton("Tick");
-		tickButton.addActionListener(tL);
+		tickButton.addActionListener(listeners.get("tL"));
 		buttonSetup(tickButton);
 		add(tickButton);
 
 		JButton buildButton = new JButton("Build Mode");
 		buildButton.setActionCommand("build");
-		buildButton.addActionListener(mL);
+		buildButton.addActionListener(listeners.get("modeL"));
 		buttonSetup(buildButton);
 		add(buildButton);
 

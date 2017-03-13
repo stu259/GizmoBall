@@ -7,12 +7,12 @@ import model.IModel;
 import model.Model;
 import view.IDisplay;
 
-public class NewBoardActionListener implements ActionListener {
+public class NewBoardListener implements ActionListener {
 	
 	IDisplay display;
 	IModel model;
 
-	public NewBoardActionListener(IDisplay d, IModel m) {
+	public NewBoardListener(IDisplay d, IModel m) {
 		display=d;
 		model=m;
 	}

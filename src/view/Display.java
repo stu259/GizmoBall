@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.Map;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -18,17 +21,20 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import controller.ExitActionListener;
 import controller.LoadListener;
-import controller.NewBoardActionListener;
+import controller.NewBoardListener;
 import controller.SaveListener;
 import controller.TimerListener;
+import controller.buildListeners.BuildListener;
+import controller.runListeners.RunListener;
 import model.IModel;
 import model.Model;
 
 public class Display implements IDisplay {
 
-	private Model m;
 	private JFrame frame;
 	private JPanel buttons;
 	private BuildButtons build;
@@ -36,19 +42,32 @@ public class Display implements IDisplay {
 	private JPanel boards;
 	private BuildBoard bB;
 	private RunBoard rB;
-	private TimerListener timer;
 	private JTextField output;
+	private Map<String, ActionListener> listeners;
+	private Model model;
+	private BuildListener bL;
+	private RunListener rL;
+	private Container cp;
 
-	Container cp;
+	public Display(Model m) {
+		model =m;
+	}
 
-	public Display(Model model) {
-		m = model;
-		timer = new TimerListener(model);
+	public void addListeners(Map<String, ActionListener> l){
+		listeners=l;
+	}
+	
+	public void addBuildListener(BuildListener b){
+		bL =b;
+	}
+	
+	public void addRunListener(RunListener r){
+		rL =r;
 		initialise();
 		addMenuBar();
 		tidy();
 	}
-
+	
 	private void initialise() {
 		frame = new JFrame("Gizmo Ball");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,11 +89,11 @@ public class Display implements IDisplay {
 		JMenu menu = new JMenu("File");
 
 		JMenuItem newBoard = new JMenuItem("New");
-		newBoard.addActionListener(new NewBoardActionListener(this, m));
+		newBoard.addActionListener(new NewBoardListener(this, model));
 		JMenuItem load = new JMenuItem("Load");
-		load.addActionListener(new LoadListener(this, m));
+		load.addActionListener(new LoadListener(this, model));
 		JMenuItem save = new JMenuItem("Save");
-		save.addActionListener(new SaveListener(this, m));
+		save.addActionListener(new SaveListener(this, model));
 		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(new ExitActionListener());
 
@@ -113,15 +132,15 @@ public class Display implements IDisplay {
 	}
 
 	public void build() {
-		bB = new BuildBoard(700, 700, m);
-		build = new BuildButtons(this, m, bB, frame);
+		bB = new BuildBoard(700, 700, model);
+		build = new BuildButtons(listeners, bL, bB);
 		buttons.add(build, "build");
 		boards.add(bB, "build");
 	}
 
 	public void run() {
-		run = new RunButtons(this, m, timer);
-		rB = new RunBoard(700, 700, m);
+		run = new RunButtons(listeners, rL);
+		rB = new RunBoard(700, 700, model);
 		buttons.add(run, "run");
 		boards.add(rB, "run");
 	}
@@ -189,12 +208,9 @@ public class Display implements IDisplay {
 		return output;
 	}
 
-	public IModel getModel() {
-		return this.m;
-	}
-
 	@Override
 	public int getScale() {
 		return bB.getScale();
 	}
+
 }
