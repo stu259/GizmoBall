@@ -920,9 +920,8 @@ public class Model extends Observable implements IModel {
 
 	public List<IDrawableGizmo> drawableGizmos() {
 		List<IDrawableGizmo> drawables = new ArrayList<IDrawableGizmo>();
-		List<IGizmo> tempGizmo = this.getGizmos();
 
-		for (IGizmo gizmo : tempGizmo) {
+		for (IGizmo gizmo : gizmos.values()) {
 			drawables.add(new DrawableGizmo(gizmo));
 		}
 
@@ -931,9 +930,8 @@ public class Model extends Observable implements IModel {
 
 	public List<IDrawableBall> drawableBalls() {
 		List<IDrawableBall> drawables = new ArrayList<IDrawableBall>();
-		List<Ball> tempBall = this.getBalls();
 
-		for (Ball ball : tempBall) {
+		for (Ball ball : balls.values()) {
 			drawables.add(new DrawableBall(ball));
 		}
 
