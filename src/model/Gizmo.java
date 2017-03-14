@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +8,11 @@ import physics.*;
 public class Gizmo implements IGizmo{
 
 	protected int x, y, angle, size;
-	protected double coef;
+	protected double coef, angularVel;
 	protected String key, keyboardPress;
 	protected IGizmo outgoingConnection;//gizmo to trigger when this gizmo is hit by the ball
 	protected List<IGizmo> incomingConnections;//list of gizmos which can trigger this gizmo
-	protected boolean triggered;
+	protected boolean triggered, rotating;
 	protected List<LineSegment> lines;
 	protected List<Circle> corners;
 
@@ -28,9 +27,48 @@ public class Gizmo implements IGizmo{
 		triggered = false;
 		lines = new ArrayList<LineSegment>();
 		corners = new ArrayList<Circle>();
+		rotating = false;
+		angularVel = 0;
 	}
 	
+	@Override
+	public Vect getPivotPoint() {
+		return this.getCenter();
+	}
+
+	@Override
+	public double getAngularVel() {
+		return angularVel;
+	}
+
+	@Override
+	public void setAngularVel(double angularVel) {
+		this.angularVel = angularVel;
+	}
+
+	@Override
+	public void rotateOnPivot(boolean state){
+		rotating = state;
+	}
 	
+	@Override
+	public boolean isRotatingOnPivot(){
+		return rotating;
+	}
+	
+	@Override
+	public void setCorners(List<Circle> corners) {
+		this.corners.clear();
+		this.corners = corners;
+	}
+
+	@Override
+	public void setLines(List<LineSegment> lines) {
+		this.lines.clear();
+		this.lines = lines;
+	}
+
+
 	@Override	
 	public List<LineSegment> getLines() {
 		return lines;

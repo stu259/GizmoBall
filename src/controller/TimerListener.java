@@ -13,7 +13,7 @@ public class TimerListener implements ActionListener {
 
 	public TimerListener(IModel m) {
 		model=m;
-		timer = new Timer(50, this);
+		timer = new Timer(25, this);
 	}
 
 	public void startTimer() {

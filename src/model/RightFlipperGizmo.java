@@ -1,24 +1,23 @@
 package model;
 
-import java.awt.Color;
-
 import physics.Circle;
 import physics.LineSegment;
+import physics.Vect;
 
 public class RightFlipperGizmo extends Gizmo{
 	
-	private int angularVel;
-	private boolean rotating;
+	private int currentAngle, maxAngle;
 	
 	public RightFlipperGizmo (int x1, int y1) {
 		super(x1, y1);
 		size = 2; //flipper has predefined size of 2
 		coef = 0.95;
-		angularVel = -1080;
-		rotating = false;
 		makeRightFlipper();
+		currentAngle = 0;
+		maxAngle = 90;
+		this.setAngularVel(1080);
 	}
-	
+
 	private void makeRightFlipper(){
 		double radius = (double) size/8;
 		int y2 = this.getEndY();
@@ -30,19 +29,25 @@ public class RightFlipperGizmo extends Gizmo{
 		lines.add(new LineSegment(x2 - (2 * radius), y + (radius), x2 - (2 * radius), y2 - (radius)));
 	}
 	
-	public void rotateOnPivot(){
-		rotating = !rotating;
+	@Override
+	public Vect getPivotPoint() {
+		return corners.get(0).getCenter();
 	}
 	
-	public boolean rotatingOnPivot(){
-		return rotating;
+	public int getMaxAngle() {
+		return maxAngle;
+	}
+
+	public void setMaxAngle(int maxAngle) {
+		this.maxAngle = maxAngle;
 	}
 	
-	/*
-	 * Returns the value of angularVel
-	 */
-	public int getAngularVel(){
-		return angularVel;
+	public int getCurrentAngle() {
+		return currentAngle;
+	}
+
+	public void setCurrentAngle(int currentAngle) {
+		this.currentAngle = currentAngle;
 	}
 	
 	@Override

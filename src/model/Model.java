@@ -22,7 +22,7 @@ public class Model extends Observable implements IModel {
 	private double gravity = 25;
 	private double frictionMU = 0.025;
 	private double frictionMUTwo = 0.025;
-	private double time = 0.05;
+	private double time = 0.025;
 
 	// connections for triggering both redrawing of lines and
 	private Map<LineSegment, IGizmo> linesToAbsorber;
@@ -150,7 +150,11 @@ public class Model extends Observable implements IModel {
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
+					if(linesToGizmos.get(line).isRotatingOnPivot()){
+						IGizmo gizmo = linesToGizmos.get(line);
+						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), gizmo.getAngularVel(), circ, ball.getVelocity(), gizmo.getCof()); //DOUBLE CHECK THIS COULD CAUSE ISSUES
+					}else
+						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
 					absorber = null;
 				}
 			}
@@ -159,8 +163,13 @@ public class Model extends Observable implements IModel {
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
-							circlesToGizmos.get(circle).getCof());
+					
+					if(circlesToGizmos.get(circle).isRotatingOnPivot()){
+						IGizmo gizmo = circlesToGizmos.get(circle);
+						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(), gizmo.getAngularVel(), circ, ball.getVelocity(), gizmo.getCof());
+					}else
+						updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
+								circlesToGizmos.get(circle).getCof());
 					absorber = null;
 				}
 			}
@@ -223,37 +232,147 @@ public class Model extends Observable implements IModel {
 			}
 		}
 	}
-
-	//DO NOT TOUCH PLEB
-//	private void rotateFlipper(IGizmo flipper, boolean rotate){
-//		IGizmo
-//		if(flipper.gizmoType().toLowerCase().equals("leftflipper")){
-//			LeftFlipperGizmo f = (LeftFlipperGizmo) flipper;
-//		}else if(flipper.gizmoType().toLowerCase().equals("rightflipper")){
-//			RightFlipperGizmo f = (RightFlipperGizmo) flipper;
-//		}
-//		
-//		if(rotate){
-//			List<Circle> circles = flippersToCircles.get(flipper); 
-//			List<LineSegment> lines = flippersToLines.get(flipper);
-//			f.
-//			//the pivot is always index 0 (from make*Flipper methods)
-//			Vect pivot = circles.get(0).getCenter();
-//			
-//			
-//		}else{
-//			
-//		}
-//	}
-//	
-//	public void triggerFlipper() {
-//		for(IGizmo flipper : flippersToLines.keySet()){
-//			if(flipper.triggered())
-//				rotateFlipper(flipper, true);
-//			else
-//				rotateFlipper(flipper, false);
-//		}
-//	}
+	
+	public void tick(){
+		//move balls
+		moveBalls();
+		
+	}
+	
+	public void triggerFlipper(){
+		for(IGizmo gizmo: gizmos.values()){
+			if(gizmo.gizmoType().toLowerCase().equals("leftflipper")){
+				LeftFlipperGizmo flipper = (LeftFlipperGizmo) gizmo;
+				if(flipper.triggered()){
+					//check if already on maxAngle
+					//	if not set rotateOnPivot to true
+					//get lines and circles, rotate them via pivot
+					
+					if(flipper.getCurrentAngle() != flipper.getMaxAngle()){ 
+						flipper.rotateOnPivot(true);
+						
+						List<LineSegment> lines = flipper.getLines();
+						List<Circle> corners = flipper.getCorners();
+						List<LineSegment> newLines = new ArrayList<LineSegment>();
+						List<Circle> newCorners = new ArrayList<Circle>();
+						Vect pivot = corners.get(0).getCenter();
+						
+						int angle = (int) (-1 * flipper.getAngularVel() / (1/time));
+						
+						if(angle + flipper.getCurrentAngle() > flipper.getMaxAngle())
+							angle = flipper.getMaxAngle() - flipper.getCurrentAngle();
+						
+						Angle newAngle = new Angle(360 - angle);
+						
+						for(LineSegment line : lines)
+							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
+						for(Circle corner : corners)
+							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
+						
+						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
+					}else{
+						flipper.rotateOnPivot(false);
+						continue;
+					}
+					
+					
+				}else{//NOT TRIGGERED move back down
+					if(flipper.getCurrentAngle() != 0){
+						flipper.rotateOnPivot(true);
+						
+						List<LineSegment> lines = flipper.getLines();
+						List<Circle> corners = flipper.getCorners();
+						List<LineSegment> newLines = new ArrayList<LineSegment>();
+						List<Circle> newCorners = new ArrayList<Circle>();
+						Vect pivot = corners.get(0).getCenter();
+						
+						int angle = (int) (-1 * flipper.getAngularVel() / (1/time));
+						
+						if(flipper.getCurrentAngle() - angle < 0)
+							angle = flipper.getCurrentAngle();
+						
+						Angle newAngle = new Angle(angle);
+						
+						for(LineSegment line : lines)
+							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
+						for(Circle corner : corners)
+							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
+						
+						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
+					}else{
+						flipper.rotateOnPivot(false);
+						continue;
+					}
+				}
+				
+				
+			}else if(gizmo.gizmoType().toLowerCase().equals("rightflipper")){
+				RightFlipperGizmo flipper = (RightFlipperGizmo) gizmo;
+				
+				if(flipper.triggered()){
+					//check if already on maxAngle
+					//	if not set rotateOnPivot to true
+					//get lines and circles, rotate them via pivot
+					
+					if(flipper.getCurrentAngle() != flipper.getMaxAngle()){ 
+						flipper.rotateOnPivot(true);
+						
+						List<LineSegment> lines = flipper.getLines();
+						List<Circle> corners = flipper.getCorners();
+						List<LineSegment> newLines = new ArrayList<LineSegment>();
+						List<Circle> newCorners = new ArrayList<Circle>();
+						Vect pivot = corners.get(0).getCenter();
+						
+						int angle = (int) (flipper.getAngularVel() / (1/time));
+						
+						if(angle + flipper.getCurrentAngle() > flipper.getMaxAngle())
+							angle = flipper.getMaxAngle() - flipper.getCurrentAngle();
+						
+						Angle newAngle = new Angle(angle);
+						
+						for(LineSegment line : lines)
+							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
+						for(Circle corner : corners)
+							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
+						
+						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
+					}else{
+						flipper.rotateOnPivot(false);
+						continue;
+					}
+					
+					
+				}else{//NOT TRIGGERED move back down
+					if(flipper.getCurrentAngle() != 0){
+						flipper.rotateOnPivot(true);
+						
+						List<LineSegment> lines = flipper.getLines();
+						List<Circle> corners = flipper.getCorners();
+						List<LineSegment> newLines = new ArrayList<LineSegment>();
+						List<Circle> newCorners = new ArrayList<Circle>();
+						Vect pivot = corners.get(0).getCenter();
+						
+						int angle = (int) (flipper.getAngularVel() / (1/time));
+						
+						if(flipper.getCurrentAngle() - angle < 0)
+							angle = flipper.getCurrentAngle();
+						
+						Angle newAngle = new Angle(360 - angle);
+						
+						for(LineSegment line : lines)
+							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
+						for(Circle corner : corners)
+							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
+						
+						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
+					}else{
+						flipper.rotateOnPivot(false);
+						continue;
+					}
+				}
+			}
+		}
+	}
 	
 	@Override
 	public void moveBalls() {
@@ -907,16 +1026,6 @@ public class Model extends Observable implements IModel {
 		return gizmosList;
 	}
 
-	public void moveFlipper(IGizmo gizmo) {
-		if (gizmo instanceof LeftFlipperGizmo) {
-
-		}
-		if (gizmo instanceof RightFlipperGizmo) {
-
-		}
-		this.setChanged();
-		this.notifyObservers();
-	}
 
 	public List<IDrawableGizmo> drawableGizmos() {
 		List<IDrawableGizmo> drawables = new ArrayList<IDrawableGizmo>();
@@ -937,5 +1046,5 @@ public class Model extends Observable implements IModel {
 
 		return drawables;
 	}
-
+	
 }

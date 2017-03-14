@@ -97,4 +97,18 @@ public interface IGizmo {
 	List<LineSegment> getLines();
 
 	List<Circle> getCorners();
+
+	void rotateOnPivot(boolean state);
+
+	void setCorners(List<Circle> corners);
+
+	boolean isRotatingOnPivot();
+
+	void setLines(List<LineSegment> lines);
+
+	double getAngularVel();
+
+	void setAngularVel(double angularVel);
+
+	Vect getPivotPoint();
 }
