@@ -9,17 +9,20 @@ import view.IDisplay;
 
 public class NewBoardListener implements ActionListener {
 	
-	IDisplay display;
-	IModel model;
+	private IDisplay display;
+	private IModel model;
+	private TimerListener timer;
 
-	public NewBoardListener(IDisplay d, IModel m) {
+	public NewBoardListener(IDisplay d, IModel m, TimerListener t) {
 		display=d;
 		model=m;
+		timer =t;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		model.clear();
+		timer.stopTimer();
 		display.changeMode("build");
 	}
 

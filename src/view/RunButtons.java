@@ -24,10 +24,12 @@ public class RunButtons extends JPanel {
 
 	private Map<String, ActionListener> listeners;
 	private RunListener runListener;
+	private TimerListener timer;
 
-	public RunButtons(Map<String, ActionListener> l, RunListener rL) {
+	public RunButtons(Map<String, ActionListener> l, RunListener rL, TimerListener t) {
 		runListener = rL;
 		listeners = l;
+		timer = t;
 		addButtons();
 	}
 
@@ -35,13 +37,13 @@ public class RunButtons extends JPanel {
 		setLayout(new GridLayout(4, 1));
 
 		JButton startButton = new JButton("Start");
-		startButton.addActionListener(listeners.get("timerL"));
+		startButton.addActionListener(timer);
 		startButton.addKeyListener(runListener);
 		buttonSetup(startButton);
 		add(startButton);
 
 		JButton stopButton = new JButton("Stop");
-		stopButton.addActionListener(listeners.get("timerL"));
+		stopButton.addActionListener(timer);
 		buttonSetup(stopButton);
 		add(stopButton);
 

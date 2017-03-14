@@ -12,14 +12,12 @@ public class ModeListener implements ActionListener{
 	private TimerListener timer;
 	private IModel model;
 
-	public ModeListener(IDisplay d, IModel m) {
+	public ModeListener(IDisplay d, IModel m,TimerListener t) {
 		display=d;
 		model =m;
-	}
-	public ModeListener(IDisplay d, TimerListener t) {
-		display =d;
 		timer=t;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		display.changeMode(e.getActionCommand());

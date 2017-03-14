@@ -29,6 +29,7 @@ public class Driver {
 	private static Map<String, ActionListener> listeners;
 	private static BuildListener buildL;
 	private static RunListener runL;
+	private static TimerListener timer;
 
 	public static void main(String[] args) {
 		Model m = new Model();
@@ -37,11 +38,15 @@ public class Driver {
 		d.addListeners(listeners);
 		d.addBuildListener(buildL);
 		d.addRunListener(runL);
+		d.addTimer(timer);
+		d.start();
 	}
 
 	private static void createControllers(IModel m, IDisplay d) {
 		buildL = new BuildListener();
 		runL = new RunListener(m);
+		timer = new TimerListener(m);
+
 		listeners = new HashMap<>();
 		listeners.put("aAL", new AddAbsorberListener(m, buildL, d));
 		listeners.put("aBL", new AddBallListener(m, buildL, d));
@@ -57,12 +62,11 @@ public class Driver {
 		listeners.put("rL", new RotateListener(m, buildL, d));
 
 		listeners.put("tL", new TickListener(m));
-
 		listeners.put("eL", new ExitActionListener());
 		listeners.put("lL", new LoadListener(d, m));
-		listeners.put("modeL", new ModeListener(d, m));
-		listeners.put("nBL", new NewBoardListener(d, m));
+		listeners.put("modeL", new ModeListener(d, m, timer));
+		listeners.put("nBL", new NewBoardListener(d, m, timer));
 		listeners.put("sL", new SaveListener(d, m));
-		listeners.put("timerL", new TimerListener(m));
+
 	}
 }

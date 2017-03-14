@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Map;
 
+import controller.TimerListener;
 import controller.buildListeners.BuildListener;
 import controller.runListeners.RunListener;
 import model.IModel;
@@ -32,4 +33,8 @@ public interface IDisplay {
 	public void addBuildListener(BuildListener b);
 	
 	public void addRunListener(RunListener r);
+	
+	public void addTimer(TimerListener t);
+	
+	public void start();
 }

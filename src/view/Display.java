@@ -51,6 +51,7 @@ public class Display implements IDisplay {
 	private RunListener rL;
 	private Container cp;
 	private int boardSize;
+	private TimerListener timer;
 
 	public Display(Model m) {
 		model =m;
@@ -66,6 +67,13 @@ public class Display implements IDisplay {
 	
 	public void addRunListener(RunListener r){
 		rL =r;
+	}
+
+	public void addTimer(TimerListener t){
+		timer =t;
+	}
+	
+	public void start(){
 		initialise();
 		addMenuBar();
 		tidy();
@@ -96,13 +104,13 @@ public class Display implements IDisplay {
 		JMenu menu = new JMenu("File");
 
 		JMenuItem newBoard = new JMenuItem("New");
-		newBoard.addActionListener(new NewBoardListener(this, model));
+		newBoard.addActionListener(listeners.get("nBL"));
 		JMenuItem load = new JMenuItem("Load");
-		load.addActionListener(new LoadListener(this, model));
+		load.addActionListener(listeners.get("lL"));
 		JMenuItem save = new JMenuItem("Save");
-		save.addActionListener(new SaveListener(this, model));
+		save.addActionListener(listeners.get("sL"));
 		JMenuItem exit = new JMenuItem("Exit");
-		exit.addActionListener(new ExitActionListener());
+		exit.addActionListener(listeners.get("eL"));
 
 		menu.add(newBoard);
 		menu.add(load);
@@ -144,7 +152,7 @@ public class Display implements IDisplay {
 	}
 
 	public void run() {
-		run = new RunButtons(listeners, rL);
+		run = new RunButtons(listeners, rL, timer);
 		rB = new RunBoard(boardSize, model);
 		buttons.add(run, "run");
 		boards.add(rB, "run");
