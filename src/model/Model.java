@@ -30,6 +30,7 @@ public class Model extends Observable implements IModel {
 	private Map<Circle, IGizmo> circlesToGizmos;
 	private Map<LineSegment, IGizmo> linesToGizmos;
 	private Map<String, Ball> balls;
+	private Map<String, List<IGizmo>> keylistToGizmos;
 
 	private List<LineSegment> walls;
 	
@@ -45,6 +46,7 @@ public class Model extends Observable implements IModel {
 		circlesToAbsorber = new HashMap<Circle, IGizmo>();
 		linesToGizmos = new HashMap<LineSegment, IGizmo>();
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
+		keylistToGizmos = new HashMap<String, List<IGizmo>>();
 		
 		walls = new ArrayList<LineSegment>();
 		makeWalls(boardSize);
@@ -127,6 +129,9 @@ public class Model extends Observable implements IModel {
 		Vect updatedVel = new Vect(0, 0);
 		Vect updatedVel2 = null; //only used for ball-to-ball collisions
 		AbsorberGizmo absorber = null;
+		LineSegment lineHit = null;
+		Circle circleHit = null;
+		
 
 		for (Ball ball : balls.values()) {
 			
@@ -148,11 +153,13 @@ public class Model extends Observable implements IModel {
 			for (LineSegment line : linesToGizmos.keySet()) {
 				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
 				if (nextTime < lowestColTime) {
+					lineHit = line;
+					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					if(linesToGizmos.get(line).isRotatingOnPivot()){
 						IGizmo gizmo = linesToGizmos.get(line);
-						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), gizmo.getAngularVel(), circ, ball.getVelocity(), gizmo.getCof()); //DOUBLE CHECK THIS COULD CAUSE ISSUES
+						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), gizmo.getAngularVel(), circ, vel, gizmo.getCof()); //DOUBLE CHECK THIS COULD CAUSE ISSUES
 					}else
 						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
 					absorber = null;
@@ -161,12 +168,13 @@ public class Model extends Observable implements IModel {
 			for (Circle circle : circlesToGizmos.keySet()) {
 				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);
 				if (nextTime < lowestColTime) {
+					lineHit = null;
+					circleHit = circle;
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					
 					if(circlesToGizmos.get(circle).isRotatingOnPivot()){
 						IGizmo gizmo = circlesToGizmos.get(circle);
-						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(), gizmo.getAngularVel(), circ, ball.getVelocity(), gizmo.getCof());
+						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(), gizmo.getAngularVel(), circ, vel, gizmo.getCof());
 					}else
 						updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
 								circlesToGizmos.get(circle).getCof());
@@ -176,6 +184,8 @@ public class Model extends Observable implements IModel {
 			for (LineSegment line : linesToAbsorber.keySet()) {
 				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
 				if (nextTime < lowestColTime) {
+					lineHit = null;
+					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					absorber = (AbsorberGizmo) linesToAbsorber.get(line);
@@ -185,6 +195,8 @@ public class Model extends Observable implements IModel {
 			for (Circle circle : circlesToAbsorber.keySet()) {
 				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);
 				if (nextTime < lowestColTime) {
+					lineHit = null;
+					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					absorber = (AbsorberGizmo) circlesToAbsorber.get(circle);
@@ -197,6 +209,8 @@ public class Model extends Observable implements IModel {
 				
 				nextTime = Geometry.timeUntilBallBallCollision(ball.getCircle(), ball.getVelocity(), ball2.getCircle(), ball2.getVelocity());
 				if (nextTime < lowestColTime) {
+					lineHit = null;
+					circleHit = null;
 					VectPair vectPair = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
@@ -219,27 +233,40 @@ public class Model extends Observable implements IModel {
 			}
 		}
 
+		if(lineHit != null)
+			linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
+		else if(circleHit != null)
+			circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
+		
 		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, collidingBall2, updatedVel2, absorber));
 
 	}
 
-	public void triggerAbsorber() {
-		CollisionInfo colInfo = timeUntilCollision();
-		for (Ball ball : balls.values()) {
-			if (ball.isAbsorbed()) {
-				ball.resume();
-				ball.setVelocity(colInfo.getUpdatedVel());
+	private void triggerAbsorber() {
+		for(IGizmo gizmo : gizmos.values()){
+			if(!gizmo.gizmoType().equals("absorber")) return;
+			if(gizmo.triggered()){
+				AbsorberGizmo abs = (AbsorberGizmo) gizmo;
+				for (Ball ball : balls.values()) {
+					if (ball.isAbsorbed()) {
+						ball.resume();
+						ball.setVelocity(abs.getExitVeloicty());
+					}
+				}
+				abs.trigger();//untrigger
 			}
 		}
 	}
 	
+	@Override
 	public void tick(){
 		//move balls
 		moveBalls();
-		
+		triggerFlippers();
+		triggerAbsorber();
 	}
 	
-	public void triggerFlipper(){
+	private void triggerFlippers(){
 		for(IGizmo gizmo: gizmos.values()){
 			if(gizmo.gizmoType().toLowerCase().equals("leftflipper")){
 				LeftFlipperGizmo flipper = (LeftFlipperGizmo) gizmo;
@@ -495,6 +522,15 @@ public class Model extends Observable implements IModel {
 
 	}
 
+	public void keyPressed(String key){
+		List<IGizmo> keyGiz = keylistToGizmos.get(key);
+		if(keyGiz==null)
+			return;
+		
+		for(IGizmo gizmo : keyGiz)
+			gizmo.trigger();
+	}
+	
 	/**
 	 * 
 	 * 
@@ -747,7 +783,13 @@ public class Model extends Observable implements IModel {
 	
 	@Override
 	public void keyConnectGizmo(IGizmo gizmo, String k) {
-		gizmo.setKeyboardPress(k);
+		//gizmo.setKeyboardPress(k);
+		List<IGizmo> tempList = keylistToGizmos.get(k);
+		
+		if(tempList == null)
+			tempList = new ArrayList<IGizmo>();
+		tempList.add(gizmo);
+		keylistToGizmos.put(k, tempList);
 	}
 	
 	@Override
@@ -1026,7 +1068,6 @@ public class Model extends Observable implements IModel {
 		return gizmosList;
 	}
 
-
 	public List<IDrawableGizmo> drawableGizmos() {
 		List<IDrawableGizmo> drawables = new ArrayList<IDrawableGizmo>();
 
@@ -1046,5 +1087,6 @@ public class Model extends Observable implements IModel {
 
 		return drawables;
 	}
-	
+
+
 }

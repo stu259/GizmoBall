@@ -125,8 +125,6 @@ public interface IModel {
 
 	public List<IDrawableBall> drawableBalls();
 
-	public void triggerAbsorber();
-
 	/*
 	 * Disconnects key actions bound to the given gizmo
 	 */
@@ -145,5 +143,7 @@ public interface IModel {
 	public double[] getFriction();
 	
 	public double getGravity();
+
+	void tick();
 
 }
