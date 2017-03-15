@@ -28,7 +28,9 @@ public class RotateListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale());
+		if (!model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale())){
+			display.errorPopup("This shape cannot be rotated.");
+		}
 	}
 
 

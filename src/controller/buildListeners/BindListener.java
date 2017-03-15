@@ -44,7 +44,8 @@ public class BindListener implements ActionListener,  MouseInputListener, KeyLis
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
-		model.keyConnectGizmo(x,y, Character.toString(e.getKeyChar()));	
+		Integer s= e.getKeyCode();
+		model.keyConnectGizmo(x,y, s.toString());	
 	}
 
 	@Override

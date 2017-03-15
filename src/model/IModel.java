@@ -145,5 +145,7 @@ public interface IModel {
 	public double getGravity();
 
 	void tick();
-
+	
+	public void keyPressed(String k);
+	
 }

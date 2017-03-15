@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.MagicKeyListener;
 import controller.ModeListener;
 import controller.TimerListener;
 import controller.runListeners.RunListener;
@@ -38,7 +39,7 @@ public class RunButtons extends JPanel {
 
 		JButton startButton = new JButton("Start");
 		startButton.addActionListener(timer);
-		startButton.addKeyListener(runListener);
+		startButton.addKeyListener(new MagicKeyListener(runListener));
 		buttonSetup(startButton);
 		add(startButton);
 

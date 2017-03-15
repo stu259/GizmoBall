@@ -51,7 +51,10 @@ public class AddBallListener implements ActionListener, MouseInputListener {
 		init[0]=0;
 		velocity = display.inputPopup(message,min,max,init);
 		if (velocity != null) {
-			model.addBall(x, y, velocity[0], velocity[1]);
+			if (!model.addBall(x, y, velocity[0], velocity[1]))
+			{
+				display.errorPopup("You can't add a ball on top of an existing gizmo");
+			}
 		}
 		display.changeText("Select Ball Location");
 	}

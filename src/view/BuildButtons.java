@@ -120,12 +120,11 @@ public class BuildButtons extends JPanel {
 		operation.add(deleteButton, c);
 
 		JButton moveButton = new JButton("Move");
-		moveButton.addActionListener(listeners.get("mL"));
+		moveButton.addActionListener(listeners.get("ml"));
 		c.gridx = 2;
 		c.gridy = 0;
 		buttonSetup(moveButton);
 		operation.add(moveButton, c);
-
 		JButton clearButton = new JButton("Clear");
 		clearButton.addActionListener(listeners.get("cL"));
 		c.gridx = 0;

@@ -39,7 +39,9 @@ public class MoveListener implements ActionListener, MouseInputListener {
 			display.changeText("Select New Location");
 		} 
 		else if (isClicked == true){
-			model.moveGizmo(x, y, e.getX()/display.getScale(),e.getY()/display.getScale());
+			if (!model.moveGizmo(x, y, e.getX()/display.getScale(),e.getY()/display.getScale())){
+				display.errorPopup("This shape cannot be moved to the selected location.");
+			}
 			isClicked = false;
 		}
 		

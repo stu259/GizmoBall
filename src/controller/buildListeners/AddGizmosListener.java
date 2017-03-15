@@ -35,7 +35,10 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 		if (gizmo == "rightflipper") {
 			x--;
 		}
-		model.addGizmo(gizmo, x, e.getY() / display.getScale());
+		if (!model.addGizmo(gizmo, x, e.getY() / display.getScale())){
+			display.errorPopup("Invalid Gizmo Position. Try Again");
+		}
+		
 	}
 
 	@Override

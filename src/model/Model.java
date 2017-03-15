@@ -524,11 +524,15 @@ public class Model extends Observable implements IModel {
 
 	public void keyPressed(String key){
 		List<IGizmo> keyGiz = keylistToGizmos.get(key);
+		for (int i=0; i<keylistToGizmos.size();i++){
+			System.out.println(keylistToGizmos.keySet());
+		}
 		if(keyGiz==null)
 			return;
 		
-		for(IGizmo gizmo : keyGiz)
+		for(IGizmo gizmo : keyGiz){
 			gizmo.trigger();
+		}
 	}
 	
 	/**
@@ -711,8 +715,8 @@ public class Model extends Observable implements IModel {
 	@Override
 	public boolean rotateGizmo(int x, int y) {
 		String key = findGizmo(x, y);
-
-		if (key == null)
+		System.out.println(key);
+		if (key == null || key.contains("absorber"))
 			return false;
 
 		rotateGizmo(key);
