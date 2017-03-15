@@ -531,6 +531,7 @@ public class Model extends Observable implements IModel {
 			return;
 		
 		for(IGizmo gizmo : keyGiz){
+			System.out.println(gizmo);
 			gizmo.trigger();
 		}
 	}
@@ -1092,5 +1093,11 @@ public class Model extends Observable implements IModel {
 		return drawables;
 	}
 
+	public boolean containsGizmo(int x, int y){
+		String key = findGizmo(x, y);
+		if (key == null)
+			return false;
+		return true;
+	}
 
 }

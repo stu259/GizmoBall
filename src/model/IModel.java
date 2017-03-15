@@ -148,4 +148,6 @@ public interface IModel {
 	
 	public void keyPressed(String k);
 	
+	public boolean containsGizmo(int x, int y);
+	
 }

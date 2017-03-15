@@ -11,6 +11,9 @@ public class BuildListener implements KeyListener, MouseInputListener  {
 	private MouseInputListener mouseListener;
 	private KeyListener keyListener;
 
+	public BuildListener(){
+		keyListener = new NoActionKeyListener();
+	}
 
 	public void setKeyListener(KeyListener k) {
 		keyListener = k;
