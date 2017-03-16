@@ -164,4 +164,20 @@ public class Ball {
 	public void setVelocity(Vect vel){
 		this.vel = vel;
 	}
+	
+	public double getStartX(){
+		return x-radius;
+	}
+	
+	public double getStartY(){
+		return y-radius;
+	}
+	
+	public double getEndX(){
+		return x+radius;
+	}
+	
+	public double getEndY(){
+		return y+radius;
+	}
 }

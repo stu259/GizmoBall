@@ -110,7 +110,6 @@ public class Model extends Observable implements IModel, IdrawModel {
 	}
 
 	private void makeWalls(int boardSize) {
-		System.out.println("Drawing walls!");
 		LineSegment topWall = new LineSegment(0, 0, boardSize, 0);
 		LineSegment rightWall = new LineSegment(boardSize, 0, boardSize, boardSize);
 		LineSegment bottomWall = new LineSegment(0, boardSize, boardSize, boardSize);
@@ -232,13 +231,13 @@ public class Model extends Observable implements IModel, IdrawModel {
 			}
 		}
 		if(lowestColTime < time){
-			if(lineHit != null){
+			if(lineHit != null  && collidingBall2 != null){
 				linesToGizmos.get(lineHit).trigger();
 				if(linesToGizmos.get(lineHit).getOutgoingConnection() != null){
 					linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
 				}
 			}
-			else if(circleHit != null){
+			else if(circleHit != null && collidingBall2 != null){
 				circlesToGizmos.get(circleHit).trigger();
 				if(circlesToGizmos.get(circleHit).getOutgoingConnection() != null){
 					circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
@@ -542,14 +541,13 @@ public class Model extends Observable implements IModel, IdrawModel {
 
 	public void keyPressed(String key){
 		List<IGizmo> keyGiz = keylistToGizmos.get(key);
-		for (int i=0; i<keylistToGizmos.size();i++){
-			System.out.println(keylistToGizmos.keySet());
-		}
+//		for (int i=0; i<keylistToGizmos.size();i++){
+//			System.out.println(keylistToGizmos.keySet());
+//		}
 		if(keyGiz==null)
 			return;
 		
 		for(IGizmo gizmo : keyGiz){
-			System.out.println(gizmo);
 			gizmo.trigger();
 		}
 	}
@@ -600,6 +598,11 @@ public class Model extends Observable implements IModel, IdrawModel {
 			if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
 				return false;
 		}
+		
+		for (Ball b: balls.values()){
+			if (sx < b.getEndX() && ex > b.getStartX() && sy < b.getEndY() && ey > b.getStartY())
+				return false;
+		}
 		return true;
 	}
 
@@ -624,19 +627,16 @@ public class Model extends Observable implements IModel, IdrawModel {
 		switch (gizmo.toLowerCase()) {
 		case "triangle":
 			if (addGizmo(new TriangleGizmo(x, y), key)) {
-				System.out.println("Adding triangle at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
 		case "circle":
 			if (addGizmo(new CircleGizmo(x, y), key)) {
-				System.out.println("Adding circle at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
 		case "square":
 			if (addGizmo(new SquareGizmo(x, y), key)) {
-				System.out.println("Adding square at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
@@ -746,9 +746,11 @@ public class Model extends Observable implements IModel, IdrawModel {
 	@Override
 	public boolean rotateGizmo(int x, int y) {
 		String key = findGizmo(x, y);
-		System.out.println(key);
-		if (key == null || key.contains("absorber"))
+		if (key == null)
 			return false;
+		else if(gizmos.get(key).gizmoType().toLowerCase().equals("absorber")){
+			return false;
+		}
 
 		rotateGizmo(key);
 		return true;
@@ -922,6 +924,9 @@ public class Model extends Observable implements IModel, IdrawModel {
 
 		if (gizmoKey == null)
 			return false;
+		else if(gizmos.get(gizmoKey).gizmoType().toLowerCase().equals("absorber")){
+			return false;
+		}
 		else
 			gizmo = gizmos.get(gizmoKey);
 
