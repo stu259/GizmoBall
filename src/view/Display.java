@@ -209,7 +209,6 @@ public class Display implements IDisplay {
 			Hashtable labelTable = new Hashtable();
 			for (double x = min[i]; x <= max[i]; x += max[i] / 5) {
 				double temp;
-				System.out.println(max[i] / 5 );
 				if (max[i] / 5 >= 1) {
 					temp = Math.round(x);
 					labelTable.put(new Integer((int) (temp * 1000)), new JLabel(Integer.toString((int)temp)));
@@ -230,7 +229,7 @@ public class Display implements IDisplay {
 		JOptionPane.showMessageDialog(frame, inputPopup, "Input", JOptionPane.PLAIN_MESSAGE);
 
 		for (int i = 0; i < message.length; i++) {
-			output[i] = slider[i].getValue() / 1000;
+			output[i] = (double)slider[i].getValue() / 1000;
 		}
 
 		return output;
