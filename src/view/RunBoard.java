@@ -61,6 +61,9 @@ public class RunBoard extends JPanel implements Observer {
 
 			if (gizmo.getGizmoType().toLowerCase().equals("square")) {
 				g2.setColor(color.red);
+				if (gizmo.isTriggered()) {
+					g2.setColor(color.yellow);
+				}
 				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("circle")) {
@@ -86,7 +89,8 @@ public class RunBoard extends JPanel implements Observer {
 						(y2 - y1), (y2 - y1) / 4, (y2 - y1) / 4);
 				AffineTransform transform = new AffineTransform();
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
-				transform.rotate(Math.toRadians(gizmo.getAngle()), rf.getX() + rf.getWidth() / 2, rf.getY() + rf.getWidth() / 2);
+				transform.rotate(Math.toRadians(gizmo.getAngle()), rf.getX() + rf.getWidth() / 2,
+						rf.getY() + rf.getWidth() / 2);
 				Shape transformed = transform.createTransformedShape(rf);
 				g2.fill(transformed);
 
@@ -96,7 +100,8 @@ public class RunBoard extends JPanel implements Observer {
 						(y2 - y1) / 4);
 				AffineTransform transform = new AffineTransform();
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
-				transform.rotate(Math.toRadians(-gizmo.getAngle()), lf.getX() + lf.getWidth() / 2, lf.getY() + lf.getWidth() / 2);
+				transform.rotate(Math.toRadians(-gizmo.getAngle()), lf.getX() + lf.getWidth() / 2,
+						lf.getY() + lf.getWidth() / 2);
 				Shape transformed = transform.createTransformedShape(lf);
 				g2.fill(transformed);
 

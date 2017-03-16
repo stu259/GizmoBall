@@ -25,6 +25,7 @@ public class ModeListener implements ActionListener{
 			timer.stopTimer();
 		}else if(e.getActionCommand()=="run"){
 			model.runMode();
+			display.changeText("Press a button");
 		}
 	}
 	
