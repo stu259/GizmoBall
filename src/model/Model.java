@@ -1070,19 +1070,29 @@ public class Model extends Observable implements IModel, IdrawModel {
 					writer.write(rotation);
 				}
 
-				// KeyConnect keyword
-				// DOUBLE CHECK THIS, MIGHT NOT BE CORRECT
-				if (gizmo.getKeyboardPress() != null) {
-					String keyConnection = "KeyConnect key " + gizmo.getKey() + " " + key + "\n";
-					writer.write(keyConnection);
-				}
+				
+			}
+			
+			//connect
 
+			for (String key : gizmos.keySet()) {
+				IGizmo gizmo = gizmos.get(key);
 				// Connect keyword
 				if (gizmo.getOutgoingConnection() != null) {
 					String connect = "Connect " + key + " " + gizmo.getOutgoingConnection().getKey() + "\n";
 					writer.write(connect);
 				}
 			}
+			
+			//Keys
+			for(String key:keylistToGizmos.keySet()){
+				List<IGizmo> g =keylistToGizmos.get(key);
+				for(int i=0; i<g.size();i++){
+					String keyConnection = "KeyConnect key " + key + "up" + g.get(i).getKey() + "\n";
+					writer.write(keyConnection);
+				}
+			}
+
 
 			// Ball
 			for (Ball ball : balls.values()) {
