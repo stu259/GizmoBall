@@ -233,15 +233,19 @@ public class Model extends Observable implements IModel, IdrawModel {
 		}
 		if(lowestColTime < time){
 			if(lineHit != null){
-				linesToGizmos.get(lineHit).trigger();
-				if(linesToGizmos.get(lineHit).getOutgoingConnection() != null){
-					linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
+				if(!(linesToGizmos.get(lineHit).gizmoType().equals("leftflipper") || linesToGizmos.get(lineHit).gizmoType().equals("rightflipper"))){
+					linesToGizmos.get(lineHit).trigger();
+					if(linesToGizmos.get(lineHit).getOutgoingConnection() != null){
+						linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
+					}
 				}
 			}
 			else if(circleHit != null){
-				circlesToGizmos.get(circleHit).trigger();
-				if(circlesToGizmos.get(circleHit).getOutgoingConnection() != null){
-					circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
+				if(!(circlesToGizmos.get(circleHit).gizmoType().equals("leftflipper") || circlesToGizmos.get(circleHit).gizmoType().equals("rightflipper"))){
+					circlesToGizmos.get(circleHit).trigger();
+					if(circlesToGizmos.get(circleHit).getOutgoingConnection() != null){
+						circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
+					}
 				}
 			}
 		}
