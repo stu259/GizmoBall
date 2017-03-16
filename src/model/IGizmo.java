@@ -111,4 +111,6 @@ public interface IGizmo {
 	void setAngularVel(double angularVel);
 
 	Vect getPivotPoint();
+
+	int getCurrentAngle();
 }
