@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Model extends Observable implements IModel {
+public class Model extends Observable implements IModel, IdrawModel {
 	private Map<String, IGizmo> gizmos;
 
 	private double gravity = 25;
@@ -557,6 +557,20 @@ public class Model extends Observable implements IModel {
 		return 	gravity;
 	}
 	
+	private boolean validatePosition(double sx, double sy, double ex, double ey, IGizmo giz){
+		if (sx < 0 || ex > boardSize || sy < 0 || ey > boardSize)
+			return false;
+
+		// check if given coordinates overlaps with any other gizmo position
+		for (IGizmo gizmo : gizmos.values()) {
+			if(!gizmo.equals(giz)){
+				if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
+					return false;
+			}
+		}
+		return true;
+	}
+	
 	// check if object can be added (check outside board, position, size, then
 	// scale)
 	// Params: startx, starty, endx, endy
@@ -806,10 +820,15 @@ public class Model extends Observable implements IModel {
 			keyConnectGizmo( gizmos.get(gizmo),k);
 		}
 	}
-
-	@Override
-	public void removeKeyPress(IGizmo gizmo) {
+	
+	
+	private void removeKeyPress(IGizmo gizmo) {
 		gizmo.setKeyboardPress(null);
+	}
+	
+	@Override
+	public void removeKeyPress(int x, int y) {
+		removeKeyPress(gizmos.get(findGizmo(x, y)));
 	}
 	
 	@Override
@@ -864,7 +883,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	private boolean moveGizmo(int x, int y, IGizmo gizmo) {
-		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize())) {
+		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize(), gizmo)) {
 			gizmo.newPosition(x, y);
 			this.setChanged();
 			this.notifyObservers();
@@ -1101,5 +1120,8 @@ public class Model extends Observable implements IModel {
 			return false;
 		return true;
 	}
+
+
+
 
 }

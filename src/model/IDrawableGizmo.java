@@ -8,4 +8,5 @@ public interface IDrawableGizmo {
 	public int getRotation();
 	public String getGizmoType();
 	public boolean isTriggered();
+	public double getAngle();
 }
