@@ -21,14 +21,12 @@ public class RunListener implements KeyListener {
 		//System.out.println(e.getKeyCode());
 		Integer s=e.getKeyCode();
 		model.keyPressed(s.toString());
-		System.out.println(s.toString());
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		Integer s=e.getKeyCode();
 		model.keyPressed(s.toString());
-		System.out.println(s.toString());
 	}
 
 	@Override

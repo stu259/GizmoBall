@@ -232,13 +232,13 @@ public class Model extends Observable implements IModel, IdrawModel {
 			}
 		}
 		if(lowestColTime < time){
-			if(lineHit != null  && collidingBall2 != null){
+			if(lineHit != null){
 				linesToGizmos.get(lineHit).trigger();
 				if(linesToGizmos.get(lineHit).getOutgoingConnection() != null){
 					linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
 				}
 			}
-			else if(circleHit != null && collidingBall2 != null){
+			else if(circleHit != null){
 				circlesToGizmos.get(circleHit).trigger();
 				if(circlesToGizmos.get(circleHit).getOutgoingConnection() != null){
 					circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
@@ -292,12 +292,19 @@ public class Model extends Observable implements IModel, IdrawModel {
 					//check if already on maxAngle
 					//	if not set rotateOnPivot to true
 					//get lines and circles, rotate them via pivot
-					
 					if(flipper.getCurrentAngle() != flipper.getMaxAngle()){ 
 						flipper.rotateOnPivot(true);
-						
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
+						
+						//remove from global list
+						for(LineSegment l: lines){
+							linesToGizmos.remove(l);
+						}
+						for(Circle c: corners){
+							circlesToGizmos.remove(c);
+						}
+						
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
@@ -314,9 +321,21 @@ public class Model extends Observable implements IModel, IdrawModel {
 						for(Circle corner : corners)
 							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
 						
+						flipper.setCorners(newCorners);
+						flipper.setLines(newLines);	
+						
+						//add back to global list
+						for(LineSegment l: newLines){
+							linesToGizmos.put(l,gizmo);
+						}
+						for(Circle c: corners){
+							circlesToGizmos.put(c,gizmo);
+						}
+						
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
 					}else{
 						flipper.rotateOnPivot(false);
+						
 						continue;
 					}
 					
@@ -327,6 +346,15 @@ public class Model extends Observable implements IModel, IdrawModel {
 						
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
+						
+						//remove from global list
+						for(LineSegment l: lines){
+							linesToGizmos.remove(l);
+						}
+						for(Circle c: corners){
+							circlesToGizmos.remove(c);
+						}
+						
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
@@ -342,6 +370,17 @@ public class Model extends Observable implements IModel, IdrawModel {
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
 						for(Circle corner : corners)
 							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
+						
+						flipper.setCorners(newCorners);
+						flipper.setLines(newLines);	
+						
+						//add back to global list
+						for(LineSegment l: newLines){
+							linesToGizmos.put(l,gizmo);
+						}
+						for(Circle c: corners){
+							circlesToGizmos.put(c,gizmo);
+						}
 						
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
 					}else{
@@ -364,6 +403,15 @@ public class Model extends Observable implements IModel, IdrawModel {
 						
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
+						
+						//remove from global list
+						for(LineSegment l: lines){
+							linesToGizmos.remove(l);
+						}
+						for(Circle c: corners){
+							circlesToGizmos.remove(c);
+						}
+						
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
@@ -380,6 +428,17 @@ public class Model extends Observable implements IModel, IdrawModel {
 						for(Circle corner : corners)
 							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
 						
+						flipper.setCorners(newCorners);
+						flipper.setLines(newLines);	
+						
+						//add back to global list
+						for(LineSegment l: newLines){
+							linesToGizmos.put(l,gizmo);
+						}
+						for(Circle c: corners){
+							circlesToGizmos.put(c,gizmo);
+						}
+						
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
 					}else{
 						flipper.rotateOnPivot(false);
@@ -393,6 +452,15 @@ public class Model extends Observable implements IModel, IdrawModel {
 						
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
+						
+						//remove from global list
+						for(LineSegment l: lines){
+							linesToGizmos.remove(l);
+						}
+						for(Circle c: corners){
+							circlesToGizmos.remove(c);
+						}
+						
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
@@ -408,6 +476,17 @@ public class Model extends Observable implements IModel, IdrawModel {
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
 						for(Circle corner : corners)
 							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
+						
+						flipper.setCorners(newCorners);
+						flipper.setLines(newLines);	
+						
+						//add back to global list
+						for(LineSegment l: newLines){
+							linesToGizmos.put(l,gizmo);
+						}
+						for(Circle c: corners){
+							circlesToGizmos.put(c,gizmo);
+						}
 						
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
 					}else{
@@ -930,6 +1009,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 	public void applyGravity(Ball ball, double time) {
 		Vect currentVel = ball.getVelocity();
 		Vect velGravity = new Vect(currentVel.x(), (currentVel.y() + (gravity * time)));
+		System.out.println(gravity);
 		ball.setVelocity(velGravity);
 	}
 
@@ -1230,6 +1310,12 @@ public class Model extends Observable implements IModel, IdrawModel {
 		for(Ball b: balls.values()){
 			b.resetBall();
 			b.resume();
+		}
+	}
+	
+	private void printList(List<?> l){
+		for(int i = 0;i<l.size();i++){
+			System.out.println(l.get(i).toString());
 		}
 	}
 

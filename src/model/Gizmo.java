@@ -60,13 +60,13 @@ public class Gizmo implements IGizmo{
 	@Override
 	public void setCorners(List<Circle> corners) {
 		this.corners.clear();
-		this.corners = corners;
+		this.corners.addAll(corners);
 	}
 
 	@Override
 	public void setLines(List<LineSegment> lines) {
 		this.lines.clear();
-		this.lines = lines;
+		this.lines.addAll(lines);
 	}
 
 
