@@ -232,16 +232,18 @@ public class Model extends Observable implements IModel, IdrawModel {
 			}
 		}
 		if(lowestColTime < time){
-			if(lineHit != null)
+			if(lineHit != null){
+				linesToGizmos.get(lineHit).trigger();
 				if(linesToGizmos.get(lineHit).getOutgoingConnection() != null){
 					linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
-					linesToGizmos.get(lineHit).trigger();
 				}
-			else if(circleHit != null)
+			}
+			else if(circleHit != null){
+				circlesToGizmos.get(circleHit).trigger();
 				if(circlesToGizmos.get(circleHit).getOutgoingConnection() != null){
 					circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
-					circlesToGizmos.get(circleHit).trigger();
-				}	
+				}
+			}
 		}
 		
 		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, collidingBall2, updatedVel2, absorber));
@@ -270,11 +272,16 @@ public class Model extends Observable implements IModel, IdrawModel {
 		moveBalls();
 		triggerFlippers();
 		triggerAbsorber();
-//		for(IGizmo giz: gizmos.values()){
-//			if(giz.gizmoType().toLowerCase().equals("leftflipper") || giz.gizmoType().toLowerCase().equals("rightflipper")){
-//				System.out.println("flipper angle: " + giz.getCurrentAngle());
-//			}
-//		}
+		this.setChanged();
+		this.notifyObservers();
+		
+		
+		for(IGizmo giz: gizmos.values()){
+			System.out.println(giz.triggered());
+			if(giz.gizmoType().toLowerCase().equals("leftflipper") || giz.gizmoType().toLowerCase().equals("rightflipper")){
+				System.out.println("flipper angle: " + giz.getCurrentAngle());
+			}
+		}
 	}
 	
 	private void triggerFlippers(){
@@ -830,7 +837,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 	
 	
 	private void removeKeyPress(IGizmo gizmo) {
-		gizmo.setKeyboardPress(null);
+		keylistToGizmos.get(gizmo);
 	}
 	
 	@Override
