@@ -37,7 +37,6 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
             isClicked = true;
             display.changeText("Select Absorber Bottom Right Location");
         } else if (isClicked == true) {
-            System.out.println(e.getY() / display.getScale());
             if (!model.addAbsorber(x, y, e.getX() / display.getScale() + 1, e.getY() / display.getScale() + 1)) {
                 display.errorPopup("Absorber cannot overlap existing gizmos. \n"
                         + "Make sure no gizmos exist between the top left and bottom right coordinates of the absorber.");

@@ -94,7 +94,6 @@ public class Model extends Observable implements IModel, IdrawModel {
 			linesToGizmos.put(line, gizmo);
 		}
 		for(Circle corner : corners){  // create connections for the circles -> absorber
-			System.out.println("Adding a corner");
 			circlesToGizmos.put(corner, gizmo);
 		}
 	}
@@ -632,13 +631,11 @@ public class Model extends Observable implements IModel, IdrawModel {
 			break;
 		case "rightflipper":
 			if (addGizmo(new RightFlipperGizmo(x, y), key)) {
-				System.out.println("Adding right flipper , 19, 20, 20at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
 		case "leftflipper":
 			if (addGizmo(new LeftFlipperGizmo(x, y), key)) {
-				System.out.println("Adding left flipper at (" + x + "," + y + ")");
 				return true;
 			}
 			break;
