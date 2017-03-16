@@ -107,6 +107,7 @@ public class BuildBoard extends JPanel implements Observer {
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
 				Shape transformed = transform.createTransformedShape(rf);
 				g2.fill(transformed);
+				g2.drawRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("leftflipper")) {
 				g2.setColor(color.YELLOW);
@@ -117,6 +118,7 @@ public class BuildBoard extends JPanel implements Observer {
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
 				Shape transformed = transform.createTransformedShape(lf);
 				g2.fill(transformed);
+				g2.drawRect(x1, y1, x2 - x1, y2 - y1);
 
 			}
 		}

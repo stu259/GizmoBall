@@ -96,7 +96,7 @@ public class RunBoard extends JPanel implements Observer {
 						(y2 - y1) / 4);
 				AffineTransform transform = new AffineTransform();
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
-				//transform.rotate(Math.toRadians(gizmo.getAngle), lf.getX() + lf.getWidth() / 2, lf.getY() + lf.getWidth() / 2);
+				transform.rotate(Math.toRadians(gizmo.getAngle()), lf.getX() + lf.getWidth() / 2, lf.getY() + lf.getWidth() / 2);
 				Shape transformed = transform.createTransformedShape(lf);
 				g2.fill(transformed);
 
