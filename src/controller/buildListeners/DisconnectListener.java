@@ -29,7 +29,7 @@ public class DisconnectListener implements ActionListener, MouseInputListener {
 
 	public void mousePressed(MouseEvent e) {
 		model.disconnectGizmo(e.getX()/display.getScale(),e.getY()/display.getScale());
-		//model.removeKeyPress(gizmo);
+		model.removeKeyPress(e.getX()/display.getScale(),e.getY()/display.getScale());
 	}
 
 	public void mouseReleased(MouseEvent e) {

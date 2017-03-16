@@ -128,7 +128,7 @@ public interface IModel {
 	/*
 	 * Disconnects key actions bound to the given gizmo
 	 */
-	void removeKeyPress(IGizmo gizmo);
+	void removeKeyPress(int x, int y);
 
 	boolean addAbsorber(int x, int y, int ex, int ey);
 

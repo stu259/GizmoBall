@@ -820,10 +820,15 @@ public class Model extends Observable implements IModel, IdrawModel {
 			keyConnectGizmo( gizmos.get(gizmo),k);
 		}
 	}
-
-	@Override
-	public void removeKeyPress(IGizmo gizmo) {
+	
+	
+	private void removeKeyPress(IGizmo gizmo) {
 		gizmo.setKeyboardPress(null);
+	}
+	
+	@Override
+	public void removeKeyPress(int x, int y) {
+		removeKeyPress(gizmos.get(findGizmo(x, y)));
 	}
 	
 	@Override
