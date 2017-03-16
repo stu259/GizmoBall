@@ -276,12 +276,12 @@ public class Model extends Observable implements IModel, IdrawModel {
 		this.notifyObservers();
 		
 		
-		for(IGizmo giz: gizmos.values()){
-			System.out.println(giz.triggered());
-			if(giz.gizmoType().toLowerCase().equals("leftflipper") || giz.gizmoType().toLowerCase().equals("rightflipper")){
-				System.out.println("flipper angle: " + giz.getCurrentAngle());
-			}
-		}
+//		for(IGizmo giz: gizmos.values()){
+//			System.out.println(giz.triggered());
+//			if(giz.gizmoType().toLowerCase().equals("leftflipper") || giz.gizmoType().toLowerCase().equals("rightflipper")){
+//				System.out.println("flipper angle: " + giz.getCurrentAngle());
+//			}
+//		}
 	}
 	
 	private void triggerFlippers(){
@@ -837,7 +837,14 @@ public class Model extends Observable implements IModel, IdrawModel {
 	
 	
 	private void removeKeyPress(IGizmo gizmo) {
-		keylistToGizmos.get(gizmo);
+		List<IGizmo> temp = new ArrayList<IGizmo>();
+		for(String key: keylistToGizmos.keySet()){
+			temp.clear();
+			temp.addAll(keylistToGizmos.get(key));
+			temp.remove(gizmo);
+			keylistToGizmos.remove(key);
+			keylistToGizmos.put(key,temp);
+		}
 	}
 	
 	@Override
