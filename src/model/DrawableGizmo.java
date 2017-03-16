@@ -42,4 +42,9 @@ public class DrawableGizmo implements IDrawableGizmo {
 	public boolean isTriggered(){
 		return gizmo.triggered();
 	}
+
+	@Override
+	public double getAngle() {
+		return gizmo.getAngularVel();
+	}
 }
