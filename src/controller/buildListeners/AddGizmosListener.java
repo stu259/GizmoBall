@@ -30,11 +30,7 @@ public class AddGizmosListener implements ActionListener, MouseInputListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int x = e.getX() / display.getScale();
-        if (gizmo == "rightflipper") {
-            x--;
-        }
-        if (!model.addGizmo(gizmo, x, e.getY() / display.getScale())) {
+        if (!model.addGizmo(gizmo, e.getX() / display.getScale(), e.getY() / display.getScale())) {
             display.errorPopup("Invalid Gizmo Position. \n"
                     + "Try placing a gizmo on an empty grid position. \n"
                     + "Keep in mind that flippers take up 4 grid positions.");
