@@ -249,6 +249,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 			if(!gizmo.gizmoType().equals("absorber")) return;
 			if(gizmo.triggered()){
 				AbsorberGizmo abs = (AbsorberGizmo) gizmo;
+				System.out.println("trigerred absorber");
 				for (Ball ball : balls.values()) {
 					if (ball.isAbsorbed()) {
 						ball.resume();
@@ -266,6 +267,11 @@ public class Model extends Observable implements IModel, IdrawModel {
 		moveBalls();
 		triggerFlippers();
 		triggerAbsorber();
+		for(IGizmo giz: gizmos.values()){
+			if(giz.gizmoType().toLowerCase().equals("leftflipper") || giz.gizmoType().toLowerCase().equals("rightflipper")){
+				System.out.println("flipper angle: " + giz.getCurrentAngle());
+			}
+		}
 	}
 	
 	private void triggerFlippers(){
@@ -850,6 +856,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 	public void clear() {
 		gizmos.clear();
 		balls.clear();
+		keylistToGizmos.clear();
 		this.setChanged();
 		this.notifyObservers();
 	}

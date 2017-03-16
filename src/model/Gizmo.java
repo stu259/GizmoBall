@@ -7,7 +7,7 @@ import physics.*;
 
 public class Gizmo implements IGizmo{
 
-	protected int x, y, angle, size;
+	protected int x, y, angle, size, currentAngle;
 	protected double coef, angularVel;
 	protected String key, keyboardPress;
 	protected IGizmo outgoingConnection;//gizmo to trigger when this gizmo is hit by the ball
@@ -29,6 +29,7 @@ public class Gizmo implements IGizmo{
 		corners = new ArrayList<Circle>();
 		rotating = false;
 		angularVel = 0;
+		currentAngle = 0;
 	}
 	
 	@Override
@@ -229,6 +230,11 @@ public class Gizmo implements IGizmo{
 	@Override
 	public String gizmoType() {
 		return "gizmo";
+	}
+	
+	@Override
+	public int getCurrentAngle(){
+		return currentAngle;
 	}
 
 }

@@ -31,7 +31,7 @@ public class TimerListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == timer) {
-			model.moveBalls();
+			model.tick();
 		} else if (e.getActionCommand().toLowerCase().equals("start")) {
 			timer.start();
 		} else if (e.getActionCommand().toLowerCase().equals("stop")) {
