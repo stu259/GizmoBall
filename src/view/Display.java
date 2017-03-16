@@ -190,7 +190,7 @@ public class Display implements IDisplay {
 		JOptionPane.showMessageDialog(new JFrame(), errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
-	public double[] inputPopup(String[] message, int[] min, int[] max, int[] init) {
+	public double[] inputPopup(String[] message, double[] min, double[] max, double[] init) {
 		JSlider[] slider = new JSlider[message.length];
 		JPanel inputPopup = new JPanel(new BorderLayout());
 		double[] output = new double[message.length];
@@ -203,10 +203,23 @@ public class Display implements IDisplay {
 
 		JPanel input = new JPanel(new GridLayout(message.length, 1));
 		for (int i = 0; i < message.length; i++) {
-			System.out.println(init[i]);
-			slider[i] = new JSlider(JSlider.HORIZONTAL, min[i], max[i], init[i]);
-			slider[i].setMajorTickSpacing(max[i] / 5);
-			slider[i].setMinorTickSpacing(max[i] / 10);
+			slider[i] = new JSlider(JSlider.HORIZONTAL, (int) (min[i] * 1000), (int) (max[i] * 1000),
+					(int) (init[i] * 1000));
+			Hashtable labelTable = new Hashtable();
+			for (double x = min[i]; x <= max[i]; x += max[i] / 5) {
+				double temp;
+				System.out.println(max[i] / 5 );
+				if (max[i] / 5 >= 1) {
+					temp = Math.round(x);
+					labelTable.put(new Integer((int) (temp * 1000)), new JLabel(Integer.toString((int)temp)));
+				} else {
+					temp = ((double) Math.round((x) * 1000)) / 1000;
+					labelTable.put(new Integer((int) (temp * 1000)), new JLabel(Double.toString(temp)));
+				}
+				
+			}
+			slider[i].setLabelTable(labelTable);
+			slider[i].setMinorTickSpacing((int) (max[i] * 1000) / 10);
 			slider[i].setPaintTicks(true);
 			slider[i].setPaintLabels(true);
 			input.add(slider[i]);
@@ -216,12 +229,11 @@ public class Display implements IDisplay {
 		JOptionPane.showMessageDialog(frame, inputPopup, "Input", JOptionPane.PLAIN_MESSAGE);
 
 		for (int i = 0; i < message.length; i++) {
-			output[i] = slider[i].getValue();
+			output[i] = slider[i].getValue() / 1000;
 		}
 
 		return output;
 	}
-
 	@Override
 	public int getScale() {
 		return bB.getScale();
