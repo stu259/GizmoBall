@@ -33,6 +33,7 @@ import controller.TimerListener;
 import controller.buildListeners.BuildListener;
 import controller.runListeners.RunListener;
 import model.IModel;
+import model.IdrawModel;
 import model.Model;
 
 public class Display implements IDisplay {
@@ -46,7 +47,7 @@ public class Display implements IDisplay {
 	private RunBoard rB;
 	private JTextField output;
 	private Map<String, ActionListener> listeners;
-	private Model model;
+	private IdrawModel model;
 	private BuildListener bL;
 	private RunListener rL;
 	private Container cp;

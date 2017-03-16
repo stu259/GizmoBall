@@ -19,15 +19,16 @@ import controller.TimerListener;
 import model.IDrawableBall;
 import model.IDrawableGizmo;
 import model.IModel;
+import model.IdrawModel;
 import model.Model;
 
 public class RunBoard extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 	protected int size, scale;
-	protected Model gm;
+	protected IdrawModel gm;
 
-	public RunBoard(int s, Model model) {
+	public RunBoard(int s, IdrawModel model) {
 		// Observe changes in Model
 		model.addObserver(this);
 		size = s;

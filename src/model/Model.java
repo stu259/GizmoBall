@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Model extends Observable implements IModel {
+public class Model extends Observable implements IModel, IdrawModel {
 	private Map<String, IGizmo> gizmos;
 
 	private double gravity = 25;
@@ -1101,5 +1101,8 @@ public class Model extends Observable implements IModel {
 			return false;
 		return true;
 	}
+
+
+
 
 }
