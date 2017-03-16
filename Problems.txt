@@ -1,0 +1,12 @@
+Remaining Problems
+
+Absorber triggering (Firing ball)
+Absorber doesn't absorb on the bottom row
+Moving an absorber
+Flipper collisions
+Disconnecting keypresses
+Balls cannot be deleted, rotated etc.
+Loading game doesn't load connections
+Restore state from build mode
+Add absorber messages aren't correct
+J-Unit
