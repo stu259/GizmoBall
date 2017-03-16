@@ -22,19 +22,19 @@ public interface IDisplay {
 
 	public void errorPopup(String errorMessage);
 
-	public double[] inputPopup(String[] message, int[] max, int[] min, int[] init);
+	public double[] inputPopup(String[] message, double[] min, double[] max, double[] init);
 
 	public int getScale();
 
 	public void changeText(String m);
-	
+
 	public void addListeners(Map<String, ActionListener> l);
-	
+
 	public void addBuildListener(BuildListener b);
-	
+
 	public void addRunListener(RunListener r);
-	
+
 	public void addTimer(TimerListener t);
-	
+
 	public void start();
 }

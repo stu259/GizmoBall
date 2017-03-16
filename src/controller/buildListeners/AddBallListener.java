@@ -37,9 +37,9 @@ public class AddBallListener implements ActionListener, MouseInputListener {
     public void mouseReleased(MouseEvent e) {
         display.changeText("Enter Ball Velocity");
         String[] message = new String[2];
-        int[] max = new int[2];
-        int[] min = new int[2];
-        int[] init = new int[2];
+        double[] max = new double[2];
+        double[] min = new double[2];
+        double[] init = new double[2];
         message[0] = "Velocity x";
         message[1] = "Velocity y";
         max[0] = 10;

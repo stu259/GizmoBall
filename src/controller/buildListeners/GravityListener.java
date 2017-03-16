@@ -19,9 +19,9 @@ public class GravityListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String[] message = new String[1];
-		int[] max = new int[1];
-		int[] min = new int[1];
-		int[] init = new int[1];
+		double[] max = new double[1];
+		double[] min = new double[1];
+		double[] init = new double[1];
 		message[0]="Gravity";
 		max[0]=50;
 		min[0]=-50;
