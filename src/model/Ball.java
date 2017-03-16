@@ -4,7 +4,8 @@ import physics.*;
 
 public class Ball {
 	private Vect vel;
-	private double minSpeed, maxSpeed, radius, x, y, mass;
+	private double minSpeed, maxSpeed, radius, x, y, mass, startX, startY, 
+	               startXVel, startYVel;
 	private Color color;
 	private boolean paused, absorbed;
 	private String key;
@@ -24,8 +25,14 @@ public class Ball {
 		absorbed = false;
 		key = null;
 		mass = 1;
+		startX = x;
+		startY = y;
+		startXVel = xVel;
+		startYVel = yVel;
 	}
 
+	
+	
 	public double getMass(){
 		return mass;
 	}
@@ -179,5 +186,11 @@ public class Ball {
 	
 	public double getEndY(){
 		return y+radius;
+	}
+	
+	public void resetBall(){
+		x = startX;
+		y = startY;
+		setVelocity(startXVel, startYVel);
 	}
 }

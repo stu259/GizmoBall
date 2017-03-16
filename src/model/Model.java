@@ -84,6 +84,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 			else
 				drawGizmos(gizmo);
 		}
+		resetBalls();
 	}
 
 	private void drawGizmos(IGizmo gizmo){
@@ -582,6 +583,32 @@ public class Model extends Observable implements IModel, IdrawModel {
 					return false;
 			}
 		}
+		
+		for (Ball b: balls.values()){
+			if (sx < b.getEndX() && ex > b.getStartX() && sy < b.getEndY() && ey > b.getStartY())
+				return false;
+		}
+		
+		return true;
+	}
+	
+	private boolean validatePosition(double sx, double sy, double ex, double ey, Ball ball){
+		if (sx < 0 || ex > boardSize || sy < 0 || ey > boardSize)
+			return false;
+
+		// check if given coordinates overlaps with any other gizmo position
+		for (IGizmo gizmo : gizmos.values()) {
+			if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
+					return false;
+		}
+		
+		for (Ball b: balls.values()){
+			if(!b.equals(ball)){
+				if (sx < b.getEndX() && ex > b.getStartX() && sy < b.getEndY() && ey > b.getStartY())
+					return false;
+			}
+		}
+		
 		return true;
 	}
 	
@@ -1148,9 +1175,62 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return true;
 	}
 
+	@Override
+	public void deleteBall(double x, double y){
+		String ballKey = findBall(x,y);
 
-	private void printList(){
-		
+		if (ballKey != null)
+			deleteBall(ballKey);
+	}
+	
+	private void deleteBall(String key){
+		balls.remove(key);
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	@Override
+	public Boolean moveBall(double x, double y, double newX, double newY){
+		String ballKey = findBall(x,y);
+
+		if (ballKey != null){
+			return moveBall(ballKey,newX,newY);			
+		}
+		return false;
+	}
+	
+	private Boolean moveBall(String key, double x, double y){
+		Ball b = balls.get(key);
+		if (validatePosition(x - b.getRadius(), y - b.getRadius(), x + b.getRadius(), y + b.getRadius(),  b)) {
+			b.setX(x);
+			b.setY(y);
+			this.setChanged();
+			this.notifyObservers();
+			return true;
+		}
+
+		return false;
+	}
+	
+	private String findBall(double x, double y){
+		double ex = x + 1;
+		double ey = y + 1;
+
+		for (String key : balls.keySet()) {
+			if (x < balls.get(key).getEndX() && ex > balls.get(key).getStartX() && y < balls.get(key).getEndY()
+					&& ey > balls.get(key).getStartY())
+				return key;
+		}
+
+		return null;
+	}
+	
+	@Override
+	public void resetBalls(){
+		for(Ball b: balls.values()){
+			b.resetBall();
+			b.resume();
+		}
 	}
 
 }

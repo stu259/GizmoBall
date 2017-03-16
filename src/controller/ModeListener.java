@@ -23,6 +23,7 @@ public class ModeListener implements ActionListener{
 		display.changeMode(e.getActionCommand());
 		if(e.getActionCommand()=="build"){
 			timer.stopTimer();
+			model.resetBalls();
 		}else if(e.getActionCommand()=="run"){
 			model.runMode();
 			display.changeText("Press a button");

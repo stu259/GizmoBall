@@ -10,4 +10,5 @@ public interface IdrawModel {
 	public List<IDrawableBall> drawableBalls();
 	
 	public void addObserver(Observer o);
+
 }
