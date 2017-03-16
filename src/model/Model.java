@@ -555,7 +555,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 	public double[] getFriction(){
 		double[] friction= new double[2];
 		friction[0]=frictionMU;
-		friction[0]=frictionMUTwo;
+		friction[1]=frictionMUTwo;
 		return 	friction;
 	}
 	
