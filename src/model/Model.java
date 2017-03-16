@@ -557,6 +557,20 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return 	gravity;
 	}
 	
+	private boolean validatePosition(double sx, double sy, double ex, double ey, IGizmo giz){
+		if (sx < 0 || ex > boardSize || sy < 0 || ey > boardSize)
+			return false;
+
+		// check if given coordinates overlaps with any other gizmo position
+		for (IGizmo gizmo : gizmos.values()) {
+			if(!gizmo.equals(giz)){
+				if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
+					return false;
+			}
+		}
+		return true;
+	}
+	
 	// check if object can be added (check outside board, position, size, then
 	// scale)
 	// Params: startx, starty, endx, endy
@@ -864,7 +878,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 	}
 
 	private boolean moveGizmo(int x, int y, IGizmo gizmo) {
-		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize())) {
+		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize(), gizmo)) {
 			gizmo.newPosition(x, y);
 			this.setChanged();
 			this.notifyObservers();
