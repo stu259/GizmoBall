@@ -9,4 +9,5 @@ public interface IDrawableGizmo {
 	public String getGizmoType();
 	public boolean isTriggered();
 	public int getAngle();
+	public boolean isHit();
 }

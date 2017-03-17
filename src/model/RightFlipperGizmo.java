@@ -54,4 +54,11 @@ public class RightFlipperGizmo extends Gizmo{
 	public String gizmoType() {
 		return "rightflipper";
 	}
+	
+	@Override
+	public void redraw(){
+		lines.clear();
+		corners.clear();
+		makeRightFlipper();
+	}
 }

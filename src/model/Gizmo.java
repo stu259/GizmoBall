@@ -7,7 +7,7 @@ import physics.*;
 
 public class Gizmo implements IGizmo{
 
-	protected int x, y, angle, size, currentAngle;
+	protected int x, y, angle, size, currentAngle, hit;
 	protected double coef, angularVel;
 	protected String key, keyboardPress;
 	protected IGizmo outgoingConnection;//gizmo to trigger when this gizmo is hit by the ball
@@ -30,8 +30,26 @@ public class Gizmo implements IGizmo{
 		rotating = false;
 		angularVel = 0;
 		currentAngle = 0;
+		hit = 0;
 	}
 	
+	@Override
+	public boolean isHit() {
+		if(hit>0) return true;
+		return false;
+	}
+	
+	@Override
+	public void cooldownHit(){
+		if(hit!=0)
+			hit--;
+	}
+	
+	@Override
+	public void setHit(int hitNo){
+		this.hit = hitNo;
+	}
+
 	@Override
 	public Vect getPivotPoint() {
 		return this.getCenter();
@@ -114,6 +132,7 @@ public class Gizmo implements IGizmo{
 	public void newPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.redraw();
 	}
 	
 	@Override
@@ -153,7 +172,7 @@ public class Gizmo implements IGizmo{
 	}
 
 	@Override
-	public double getCof() {
+	public double getCoef() {
 		return coef;
 	}
 
@@ -235,6 +254,10 @@ public class Gizmo implements IGizmo{
 	@Override
 	public int getCurrentAngle(){
 		return currentAngle;
+	}
+	
+	protected void redraw(){
+		return;
 	}
 
 }

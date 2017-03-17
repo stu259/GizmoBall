@@ -47,4 +47,9 @@ public class DrawableGizmo implements IDrawableGizmo {
 	public int getAngle() {
 		return gizmo.getCurrentAngle();
 	}
+
+	@Override
+	public boolean isHit() {
+		return gizmo.isHit();
+	}
 }
