@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
+import controller.ErrorMessage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,7 +38,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 	private int boardSize;
 
-	public Model() {
+	private ErrorMessage errorMessage;
+
+	public Model(ErrorMessage eM) {
+		errorMessage = eM;
 		boardSize = 20;
 
 		gizmos = new HashMap<String, IGizmo>();
@@ -996,8 +1001,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		double mu = frictionMU;
 		double mu2 = frictionMUTwo;
 
-//		double xVel = ball.getVelocity().x();
-//		double yVel = ball.getVelocity().y();
+		// double xVel = ball.getVelocity().x();
+		// double yVel = ball.getVelocity().y();
 
 		double fValue = (1 - mu * time - ball.getVelocity().length() * mu2 * time);
 		ball.setVelocity(ball.getVelocity().times(fValue));
@@ -1120,7 +1125,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public boolean load(File f) {
+	public void load(File f) {
 		clear();
 		int lineNumber = 0;
 		String line;
@@ -1136,55 +1141,50 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				case "leftflipper":
 				case "rightflipper":
 					if (splitCommand.length != 4)
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
 					else if (!addGizmo(splitCommand[0], splitCommand[1], (Integer.parseInt(splitCommand[2])),
 							(Integer.parseInt(splitCommand[3]))))
-						System.out.println("Skipping instruction at line " + lineNumber + " overlapping gizmo");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "absorber":
 					if (splitCommand.length != 6)
-						System.out.println(
-								"Skipping instruction at line " + lineNumber + " invalid absorber instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid absorber instruction");
 					else if (!addAbsorber(splitCommand[1], Integer.parseInt(splitCommand[2]),
 							Integer.parseInt(splitCommand[3]), Integer.parseInt(splitCommand[4]),
 							Integer.parseInt(splitCommand[5])))
-						System.out.println("Skipping instruction at line " + lineNumber + " overlapping gizmo");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "ball":
 					if (splitCommand.length != 6)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid ball instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid ball instruction");
 					else if (!addBall(splitCommand[1], Double.parseDouble(splitCommand[2]),
 							Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
 							Double.parseDouble(splitCommand[5])))
-						System.out.println("Skipping instruction at line " + lineNumber + " overlapping ball");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " overlapping ball");
 
 					break;
 				case "rotate":
 					if (splitCommand.length != 2)
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
 					else
 						rotateGizmo(splitCommand[1]);
 					break;
 				case "delete":
 					if (splitCommand.length != 2)
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid delete instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid delete instruction");
 					else
 						deleteGizmo(splitCommand[1]);
 					break;
 				case "move":
 					if (splitCommand.length != 4)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid move instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid move instruction");
 					else if (!moveGizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]),
 							gizmos.get(splitCommand[1])))
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid move location");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid move location");
 					break;
 				case "keyconnect":
 					if (splitCommand.length != 5)
-						System.out.println(
-								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
 						if (splitCommand[3].equals("up"))
 							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2]);// connect
@@ -1192,24 +1192,21 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					break;
 				case "connect":
 					if (splitCommand.length != 3)
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid connect instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid connect instruction");
 					else
 						connectGizmo(gizmos.get(splitCommand[1]), gizmos.get(splitCommand[2]));
 					break;
 				case "friction":
 					if (splitCommand.length != 3)
-						System.out.println(
-								"Skipping instruction at line " + lineNumber + " invalid friction instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid friction instruction");
 					else {
-						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
+						errorMessage.error(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						setFriction(Double.parseDouble((splitCommand[1])), Double.parseDouble((splitCommand[2])));
 					}
 					break;
 				case "gravity":
 					if (splitCommand.length != 2) {
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
 					} else {
 						setGravity(Double.parseDouble((splitCommand[1])));
 					}
@@ -1217,20 +1214,18 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				case "":
 					break;
 				default:
-					return false;
+					errorMessage.error("Invalid Line Ignoring");
 				}
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {
-			return false;
+			errorMessage.error("No file found");
 		} catch (IOException e) {
-			System.out.println("IO Exception");
+			errorMessage.error("IO Exception");
 		}
 
 		this.setChanged();
 		this.notifyObservers();
-
-		return true;
 	}
 
 	@Override
