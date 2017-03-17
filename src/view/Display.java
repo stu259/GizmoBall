@@ -29,7 +29,7 @@ import controller.runListeners.RunListener;
 import model.IDrawableModel;
 import model.Model;
 
-public class Display implements IDisplay {
+public class Display implements IDisplay, IViewError {
 
 	private JFrame frame;
 	private JPanel buttons;
@@ -198,7 +198,7 @@ public class Display implements IDisplay {
 		for (int i = 0; i < message.length; i++) {
 			slider[i] = new JSlider(JSlider.HORIZONTAL, (int) (min[i] * 1000), (int) (max[i] * 1000),
 					(int) (init[i] * 1000));
-			Hashtable labelTable = new Hashtable();
+			Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
 			for (double x = min[i]; x <= max[i]; x += max[i] / 5) {
 				double temp;
 				if (max[i] / 5 >= 1) {

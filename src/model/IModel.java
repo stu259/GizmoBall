@@ -66,7 +66,7 @@ public interface IModel {
 	 * @return
 	 * @throws InvalidGizmoException
 	 */
-	public boolean load(File f);
+	public void load(File f);
 
 	/**
 	 * Creates a Drawable object so that the view can obtain information of the

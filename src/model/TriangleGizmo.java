@@ -26,4 +26,11 @@ public class TriangleGizmo extends Gizmo{
 	public String gizmoType() {
 		return "triangle";
 	}
+	
+	@Override
+	public void redraw(){
+		lines.clear();
+		corners.clear();
+		makeTriangle();
+	}
 }

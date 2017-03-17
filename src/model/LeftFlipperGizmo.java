@@ -50,10 +50,15 @@ public class LeftFlipperGizmo extends Gizmo{
 		this.currentAngle = currentAngle;
 	}
 	
-
-	
 	@Override
 	public String gizmoType() {
 		return "leftflipper";
+	}
+	
+	@Override
+	public void redraw(){
+		lines.clear();
+		corners.clear();
+		makeLeftFlipper();
 	}
 }

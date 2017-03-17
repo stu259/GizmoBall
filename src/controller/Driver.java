@@ -32,8 +32,10 @@ public class Driver {
 	private static TimerListener timer;
 
 	public static void main(String[] args) {
-		Model m = new Model();
-		IDisplay d = new Display(m);
+		ErrorMessage eM = new ErrorMessage();
+		Model m = new Model(eM);
+		Display d = new Display(m);
+		eM.giveDisplay(d);
 		createControllers(m, d);
 		d.addListeners(listeners);
 		d.addBuildListener(buildL);

@@ -29,4 +29,11 @@ public class SquareGizmo extends Gizmo{
 	public String gizmoType() {
 		return "square";
 	}
+	
+	@Override
+	public void redraw(){
+		lines.clear();
+		corners.clear();
+		makeSquare();
+	}
 }

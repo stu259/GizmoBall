@@ -6,7 +6,7 @@ import physics.Vect;
 
 public class AbsorberGizmo extends Gizmo{
 
-	int x, y, ex, ey;
+	int ex, ey;
 	Vect velo;
 	
 	public AbsorberGizmo(int x, int y, int ex, int ey) {
@@ -14,14 +14,18 @@ public class AbsorberGizmo extends Gizmo{
 		this.ex = ex;
 		this.ey = ey;
 		velo = new Vect(0,-50);
+		System.out.println("Absorber -  x:"+x+" y:"+y);
+		System.out.println("Absorber - ex:"+ex+" ey:"+ey);
 		makeAbsorber();
+		coef = 1;
 	}
 
 	private void makeAbsorber(){
-		lines.add(new LineSegment(x, y, x, ey));
-		lines.add(new LineSegment(x, ey, ex, ey));
-		lines.add(new LineSegment(ex, ey, ex, y));
-		lines.add(new LineSegment(ex, y, x, y));
+		System.out.println("MakeAbsorber -  x:"+x+" y:"+y);
+		lines.add(new LineSegment(x, y, ex, y));	//top
+		lines.add(new LineSegment(ex, y, ex, ey));	//right
+		lines.add(new LineSegment(x, y, x, ey));	//left
+		lines.add(new LineSegment(x, ey, ex, ey));	//bottom
 		corners.add(new Circle(x, y, 0));
 		corners.add(new Circle(x, ey, 0));
 		corners.add(new Circle(ex, y, 0));

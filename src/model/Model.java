@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
+import controller.ErrorMessage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +16,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.Queue;
+
+import physics.Angle;
+import physics.Circle;
+import physics.Geometry;
+import physics.Geometry.VectPair;
+import physics.LineSegment;
+import physics.Vect;
 
 public class Model extends Observable implements IModel, IDrawableModel {
 	private Map<String, IGizmo> gizmos;
@@ -25,25 +39,27 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private final double time = 0.025;
 
 	// connections for triggering both redrawing of lines and
-	private Map<LineSegment, IGizmo> linesToAbsorber;
-	private Map<Circle, IGizmo> circlesToAbsorber;
+//	private Map<LineSegment, IGizmo> linesToAbsorber;
+//	private Map<Circle, IGizmo> circlesToAbsorber;
 	private Map<Circle, IGizmo> circlesToGizmos;
 	private Map<LineSegment, IGizmo> linesToGizmos;
 	private Map<String, Ball> balls;
 	private Map<String, List<IGizmo>> keylistToGizmos;
+	
+	private Map<IGizmo, Queue<Ball>> absorberToBalls;
 
 	private List<LineSegment> walls;
 
 	private int boardSize;
 
-	public Model() {
+	private ErrorMessage errorMessage;
+
+	public Model(ErrorMessage eM) {
+		errorMessage = eM;
 		boardSize = 20;
 
 		gizmos = new HashMap<String, IGizmo>();
 		balls = new HashMap<String, Ball>();
-
-		linesToAbsorber = new HashMap<LineSegment, IGizmo>();
-		circlesToAbsorber = new HashMap<Circle, IGizmo>();
 		linesToGizmos = new HashMap<LineSegment, IGizmo>();
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
 		keylistToGizmos = new HashMap<String, List<IGizmo>>();
@@ -71,19 +87,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		// clear dataStructures
 		linesToGizmos.clear();
 		circlesToGizmos.clear();
-		linesToAbsorber.clear();
-		circlesToAbsorber.clear();
-
+		
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
-			String gizmoType = gizmo.gizmoType().toLowerCase();
-
-			// add method to draw gizmo
-			if (gizmoType.equals("absorber"))
-				makeAbsorberGizmo(gizmo.copy());
-			else
-				drawGizmos(gizmo);
+			drawGizmos(gizmo);
 		}
+		
 		resetBalls();
 	}
 
@@ -91,27 +100,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		List<LineSegment> lines = gizmo.getLines();
 		List<Circle> corners = gizmo.getCorners();
 
-		for (LineSegment line : lines) { // create connections for the lines ->
-											// absorber
+		for (LineSegment line : lines) {
 			linesToGizmos.put(line, gizmo);
 		}
-		for (Circle corner : corners) { // create connections for the circles ->
-										// absorber
+		for (Circle corner : corners) {
 			circlesToGizmos.put(corner, gizmo);
 		}
-	}
-
-	private void makeAbsorberGizmo(IGizmo gizmo) {
-		List<LineSegment> gizLines = gizmo.getLines();
-		List<Circle> gizCorners = gizmo.getCorners();
-
-		for (LineSegment line : gizLines) { // create connections for the lines
-											// -> absorber
-			linesToAbsorber.put(line, gizmo);
-		}
-		for (Circle corner : gizCorners) // create connections for the circles
-											// -> absorber
-			circlesToAbsorber.put(corner, gizmo);
+		printList(lines);
+		printList(corners);
 	}
 
 	private void makeWalls(int boardSize) {
@@ -132,12 +128,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 									// plz tyvm xo
 		Vect updatedVel = new Vect(0, 0);
 		Vect updatedVel2 = null; // only used for ball-to-ball collisions
-		AbsorberGizmo absorber = null;
 		LineSegment lineHit = null;
 		Circle circleHit = null;
 
 		for (Ball ball : balls.values()) {
-
 			if (ball.paused())
 				continue;
 
@@ -150,7 +144,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					updatedVel = Geometry.reflectWall(line, vel, 1);
-					absorber = null;
 				}
 			}
 			for (LineSegment line : linesToGizmos.keySet()) {
@@ -163,12 +156,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					if (linesToGizmos.get(line).isRotatingOnPivot()) {
 						IGizmo gizmo = linesToGizmos.get(line);
 						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), gizmo.getAngularVel(),
-								circ, vel, gizmo.getCof()); // DOUBLE CHECK THIS
-															// COULD CAUSE
-															// ISSUES
+								circ, vel, gizmo.getCoef());
 					} else
-						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
-					absorber = null;
+						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
 				}
 			}
 			for (Circle circle : circlesToGizmos.keySet()) {
@@ -180,34 +170,11 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					collidingBall = ball;
 					if (circlesToGizmos.get(circle).isRotatingOnPivot()) {
 						IGizmo gizmo = circlesToGizmos.get(circle);
-						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(),
-								gizmo.getAngularVel(), circ, vel, gizmo.getCof());
+						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(), gizmo.getAngularVel(), 
+								circ, vel, gizmo.getCoef());
 					} else
 						updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
-								circlesToGizmos.get(circle).getCof());
-					absorber = null;
-				}
-			}
-			for (LineSegment line : linesToAbsorber.keySet()) {
-				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
-				if (nextTime < lowestColTime) {
-					lineHit = null;
-					circleHit = null;
-					lowestColTime = nextTime;
-					collidingBall = ball;
-					absorber = (AbsorberGizmo) linesToAbsorber.get(line);
-					updatedVel = absorber.getExitVeloicty();
-				}
-			}
-			for (Circle circle : circlesToAbsorber.keySet()) {
-				nextTime = Geometry.timeUntilCircleCollision(circle, circ, vel);
-				if (nextTime < lowestColTime) {
-					lineHit = null;
-					circleHit = null;
-					lowestColTime = nextTime;
-					collidingBall = ball;
-					absorber = (AbsorberGizmo) circlesToAbsorber.get(circle);
-					updatedVel = absorber.getExitVeloicty();
+								circlesToGizmos.get(circle).getCoef());
 				}
 			}
 			for (Ball ball2 : balls.values()) {
@@ -225,26 +192,22 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					collidingBall2 = ball2;
 					vectPair = Geometry.reflectBalls(ball.getCenter(), ball.getMass(), ball.getVelocity(),
 							ball2.getCenter(), ball2.getMass(), ball2.getVelocity());
-					absorber = null;
 					updatedVel = vectPair.v1;
 					updatedVel2 = vectPair.v2;
 				}
 			}
 
 		}
-
-		if (absorber != null && lowestColTime < time) {
-			collidingBall.setAbsorbed(!collidingBall.isAbsorbed());
-			if (lowestColTime == 0.0) {
-				lowestColTime = 0.02;
-				collidingBall.setAbsorbed(false);
-			}
-		}
 		if (lowestColTime < time) {
 			if (lineHit != null) {
-				if (!(linesToGizmos.get(lineHit).gizmoType().equals("leftflipper")
+				
+				if(linesToGizmos.get(lineHit).gizmoType().equals("absorber")){
+					
+					
+					
+				} else if (!(linesToGizmos.get(lineHit).gizmoType().equals("leftflipper")
 						|| linesToGizmos.get(lineHit).gizmoType().equals("rightflipper"))) {
-					linesToGizmos.get(lineHit).trigger();
+					linesToGizmos.get(lineHit).setHit(120); //120 = 3 seconds  (40ticks/second)
 					if (linesToGizmos.get(lineHit).getOutgoingConnection() != null) {
 						linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
 					}
@@ -252,7 +215,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			} else if (circleHit != null) {
 				if (!(circlesToGizmos.get(circleHit).gizmoType().equals("leftflipper")
 						|| circlesToGizmos.get(circleHit).gizmoType().equals("rightflipper"))) {
-					circlesToGizmos.get(circleHit).trigger();
+					circlesToGizmos.get(circleHit).setHit(120); //120 = 3 seconds  (40ticks/second)
 					if (circlesToGizmos.get(circleHit).getOutgoingConnection() != null) {
 						circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
 					}
@@ -260,47 +223,23 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			}
 		}
 
-		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, collidingBall2, updatedVel2, absorber));
+		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, collidingBall2, updatedVel2));
 
-	}
-
-	private void triggerAbsorber() {
-		for (IGizmo gizmo : gizmos.values()) {
-			if (!gizmo.gizmoType().equals("absorber"))
-				return;
-			if (gizmo.triggered()) {
-				AbsorberGizmo abs = (AbsorberGizmo) gizmo;
-				System.out.println("trigerred absorber");
-				for (Ball ball : balls.values()) {
-					if (ball.isAbsorbed()) {
-						ball.resume();
-						ball.setVelocity(abs.getExitVeloicty());
-					}
-				}
-				abs.trigger();// untrigger
-			}
-		}
 	}
 
 	@Override
 	public void tick() {
 		moveBalls();
 		triggerFlippers();
-		triggerAbsorber();
 		this.setChanged();
 		this.notifyObservers();
-
-		// for(IGizmo giz: gizmos.values()){
-		// System.out.println(giz.triggered());
-		// if(giz.gizmoType().toLowerCase().equals("leftflipper") ||
-		// giz.gizmoType().toLowerCase().equals("rightflipper")){
-		// System.out.println("flipper angle: " + giz.getCurrentAngle());
-		// }
-		// }
 	}
 
 	private void triggerFlippers() {
 		for (IGizmo gizmo : gizmos.values()) {
+			
+			gizmo.cooldownHit();	//Put this here so that there is no need to float through the rest of the list
+			
 			if (gizmo.gizmoType().toLowerCase().equals("leftflipper")) {
 				LeftFlipperGizmo flipper = (LeftFlipperGizmo) gizmo;
 				if (flipper.triggered()) {
@@ -537,18 +476,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				applyGravity(colBall, colTime);
 				applyFriction(colBall2, colTime);
 				applyGravity(colBall2, colTime);
-			} else if (colInfo.getAbs() != null) {
-				if (colBall.isAbsorbed()) {
-					AbsorberGizmo absorber = colInfo.getAbs();
-					colBall.setX(absorber.getEndX() - colBall.getRadius());
-					colBall.setY(absorber.getEndY() - colBall.getRadius());
-					colBall.pause();
-					colBall.setVelocity(colInfo.getUpdatedVel());
-				} else {
-					colBall = calculateBallMove(colBall, colTime);
-					applyFriction(colBall, colTime);
-					applyGravity(colBall, colTime);
-				}
 			} else {
 				colBall = calculateBallMove(colBall, colTime);
 				colBall.setVelocity(colInfo.getUpdatedVel());
@@ -593,15 +520,13 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		double colTime;
 		Ball collidingBall, collidingBall2;
 		Vect updatedVel, updatedVel2;
-		AbsorberGizmo abs;
 
-		public CollisionInfo(double t, Ball b, Vect v, Ball b2, Vect v2, AbsorberGizmo a) {
+		public CollisionInfo(double t, Ball b, Vect v, Ball b2, Vect v2) {
 			colTime = t;
 			collidingBall = b;
 			collidingBall2 = b2;
 			updatedVel = v;
 			updatedVel2 = v2;
-			abs = a;
 		}
 
 		public double getColTime() {
@@ -624,17 +549,11 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			return updatedVel2;
 		}
 
-		public AbsorberGizmo getAbs() {
-			return abs;
-		}
 
 	}
 
 	public void keyPressed(String key) {
 		List<IGizmo> keyGiz = keylistToGizmos.get(key);
-		// for (int i=0; i<keylistToGizmos.size();i++){
-		// System.out.println(keylistToGizmos.keySet());
-		// }
 		if (keyGiz == null)
 			return;
 
@@ -829,7 +748,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 		this.setChanged();
 		this.notifyObservers();
-		System.out.println(findGizmo(x, y));
 		return true;
 	}
 
@@ -996,8 +914,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		double mu = frictionMU;
 		double mu2 = frictionMUTwo;
 
-//		double xVel = ball.getVelocity().x();
-//		double yVel = ball.getVelocity().y();
+		// double xVel = ball.getVelocity().x();
+		// double yVel = ball.getVelocity().y();
 
 		double fValue = (1 - mu * time - ball.getVelocity().length() * mu2 * time);
 		ball.setVelocity(ball.getVelocity().times(fValue));
@@ -1120,7 +1038,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public boolean load(File f) {
+	public void load(File f) {
 		clear();
 		int lineNumber = 0;
 		String line;
@@ -1136,55 +1054,50 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				case "leftflipper":
 				case "rightflipper":
 					if (splitCommand.length != 4)
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
 					else if (!addGizmo(splitCommand[0], splitCommand[1], (Integer.parseInt(splitCommand[2])),
 							(Integer.parseInt(splitCommand[3]))))
-						System.out.println("Skipping instruction at line " + lineNumber + " overlapping gizmo");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "absorber":
 					if (splitCommand.length != 6)
-						System.out.println(
-								"Skipping instruction at line " + lineNumber + " invalid absorber instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid absorber instruction");
 					else if (!addAbsorber(splitCommand[1], Integer.parseInt(splitCommand[2]),
 							Integer.parseInt(splitCommand[3]), Integer.parseInt(splitCommand[4]),
 							Integer.parseInt(splitCommand[5])))
-						System.out.println("Skipping instruction at line " + lineNumber + " overlapping gizmo");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "ball":
 					if (splitCommand.length != 6)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid ball instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid ball instruction");
 					else if (!addBall(splitCommand[1], Double.parseDouble(splitCommand[2]),
 							Double.parseDouble(splitCommand[3]), Double.parseDouble(splitCommand[4]),
 							Double.parseDouble(splitCommand[5])))
-						System.out.println("Skipping instruction at line " + lineNumber + " overlapping ball");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " overlapping ball");
 
 					break;
 				case "rotate":
 					if (splitCommand.length != 2)
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
 					else
 						rotateGizmo(splitCommand[1]);
 					break;
 				case "delete":
 					if (splitCommand.length != 2)
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid delete instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid delete instruction");
 					else
 						deleteGizmo(splitCommand[1]);
 					break;
 				case "move":
 					if (splitCommand.length != 4)
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid move instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid move instruction");
 					else if (!moveGizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]),
 							gizmos.get(splitCommand[1])))
-						System.out.println("Skipping instruction at line " + lineNumber + " invalid move location");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid move location");
 					break;
 				case "keyconnect":
 					if (splitCommand.length != 5)
-						System.out.println(
-								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
 						if (splitCommand[3].equals("up"))
 							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2]);// connect
@@ -1192,24 +1105,21 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					break;
 				case "connect":
 					if (splitCommand.length != 3)
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid connect instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid connect instruction");
 					else
 						connectGizmo(gizmos.get(splitCommand[1]), gizmos.get(splitCommand[2]));
 					break;
 				case "friction":
 					if (splitCommand.length != 3)
-						System.out.println(
-								"Skipping instruction at line " + lineNumber + " invalid friction instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid friction instruction");
 					else {
-						System.out.println(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
+						errorMessage.error(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						setFriction(Double.parseDouble((splitCommand[1])), Double.parseDouble((splitCommand[2])));
 					}
 					break;
 				case "gravity":
 					if (splitCommand.length != 2) {
-						System.out
-								.println("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
+						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
 					} else {
 						setGravity(Double.parseDouble((splitCommand[1])));
 					}
@@ -1217,20 +1127,18 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				case "":
 					break;
 				default:
-					return false;
+					errorMessage.error("Invalid Line Ignoring");
 				}
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {
-			return false;
+			errorMessage.error("No file found");
 		} catch (IOException e) {
-			System.out.println("IO Exception");
+			errorMessage.error("IO Exception");
 		}
 
 		this.setChanged();
 		this.notifyObservers();
-
-		return true;
 	}
 
 	@Override
@@ -1320,9 +1228,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		}
 	}
 
-	private void printList(List<?> l) {
-		for (int i = 0; i < l.size(); i++) {
-			System.out.println(l.get(i).toString());
+	private void printList(Collection<?> l) {
+		for(Object o : l){
+			System.out.println(o.toString());
 		}
 	}
 

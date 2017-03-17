@@ -45,7 +45,7 @@ public interface IGizmo {
 	/*
 	 * Returns the coefficient of reflection
 	 */
-	public double getCof();
+	public double getCoef();
 	
 	/*
 	 * Returns the angle that the gizmo is pointing in
@@ -112,4 +112,10 @@ public interface IGizmo {
 	Vect getPivotPoint();
 
 	int getCurrentAngle();
+
+	boolean isHit();
+
+	void cooldownHit();
+	
+	void setHit(int hitNo);
 }

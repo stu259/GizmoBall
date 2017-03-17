@@ -56,7 +56,7 @@ public class RunBoard extends JPanel implements Observer {
 
 			if (gizmo.getGizmoType().toLowerCase().equals("square")) {
 				g2.setColor(Color.red);
-				if (gizmo.isTriggered()) {
+				if (gizmo.isHit()) {
 					g2.setColor(Color.yellow);
 				}
 				g2.fillRect(x1, y1, x2 - x1, y2 - y1);

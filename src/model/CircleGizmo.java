@@ -24,4 +24,10 @@ public class CircleGizmo extends Gizmo{
 	public String gizmoType() {
 		return "circle";
 	}
+	
+	@Override
+	public void redraw(){
+		corners.clear();
+		makeCircle();
+	}
 }
