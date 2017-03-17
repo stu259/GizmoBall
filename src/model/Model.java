@@ -16,13 +16,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Model extends Observable implements IModel, IdrawModel {
+public class Model extends Observable implements IModel, IDrawableModel {
 	private Map<String, IGizmo> gizmos;
 
 	private double gravity = 25;
 	private double frictionMU = 0.025;
 	private double frictionMUTwo = 0.025;
-	private double time = 0.025;
+	private final double time = 0.025;
 
 	// connections for triggering both redrawing of lines and
 	private Map<LineSegment, IGizmo> linesToAbsorber;
@@ -510,8 +510,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		}
 	}
 
-	@Override
-	public void moveBalls() {
+	private void moveBalls() {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
@@ -740,8 +739,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 	}
 
 	// adds a gizmo given the type of gizmo, a key and coords.
-	@Override
-	public boolean addGizmo(String gizmo, String key, int x, int y) {
+	private boolean addGizmo(String gizmo, String key, int x, int y) {
 		switch (gizmo.toLowerCase()) {
 		case "triangle":
 			if (addGizmo(new TriangleGizmo(x, y), key)) {
@@ -774,8 +772,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return false;
 	}
 
-	@Override
-	public boolean addGizmo(IGizmo gizmo, String key) {
+	private boolean addGizmo(IGizmo gizmo, String key) {
 		if (!validatePosition(gizmo.getStartX(), gizmo.getStartY(), gizmo.getEndX(), gizmo.getEndY()))
 			return false;
 
@@ -790,7 +787,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return true;
 	}
 
-	public boolean addBall(String key, double x, double y, double velx, double vely) {
+	private boolean addBall(String key, double x, double y, double velx, double vely) {
 		Ball ball = new Ball(x, y, velx, vely);
 
 		double r = ball.getRadius();
@@ -820,7 +817,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return addBall(uniqueKey, x, y, velx, vely);
 	}
 
-	public boolean addAbsorber(String key, int x, int y, int ex, int ey) {
+	private boolean addAbsorber(String key, int x, int y, int ex, int ey) {
 		if (!validatePosition(x, y, ex, ey))
 			return false;
 
@@ -876,16 +873,14 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return true;
 	}
 
-	@Override
-	public void rotateGizmo(String key) {
+	private void rotateGizmo(String key) {
 		gizmos.get(key).rotate();
 
 		this.setChanged();
 		this.notifyObservers();
 	}
 
-	@Override
-	public void connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
+	private void connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
 		if (gizmo2.getOutgoingConnection() != null) {
 			gizmo2.getOutgoingConnection().removeIncomingConnection(gizmo2);
 			gizmo2.clearOutgoingConnection();
@@ -911,8 +906,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		}
 	}
 
-	@Override
-	public void disconnectGizmo(IGizmo gizmo) {
+	private void disconnectGizmo(IGizmo gizmo) {
 		if (gizmo.getOutgoingConnection() != null) {
 			gizmo.getOutgoingConnection().removeIncomingConnection(gizmo);
 			gizmo.clearOutgoingConnection();
@@ -934,8 +928,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		}
 	}
 
-	@Override
-	public void keyConnectGizmo(IGizmo gizmo, String k) {
+	private void keyConnectGizmo(IGizmo gizmo, String k) {
 		// gizmo.setKeyboardPress(k);
 		List<IGizmo> tempList = keylistToGizmos.get(k);
 
@@ -943,6 +936,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 			tempList = new ArrayList<IGizmo>();
 		tempList.add(gizmo);
 		keylistToGizmos.put(k, tempList);
+		printList(keylistToGizmos.get(k));
 	}
 
 	@Override
@@ -969,8 +963,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		removeKeyPress(gizmos.get(findGizmo(x, y)));
 	}
 
-	@Override
-	public void deleteGizmo(String key) {
+	private void deleteGizmo(String key) {
 		gizmos.remove(key);
 		this.setChanged();
 		this.notifyObservers();
@@ -999,12 +992,12 @@ public class Model extends Observable implements IModel, IdrawModel {
 		frictionMUTwo = fTwo;
 	}
 
-	public void applyFriction(Ball ball, double time) {
+	private void applyFriction(Ball ball, double time) {
 		double mu = frictionMU;
 		double mu2 = frictionMUTwo;
 
-		double xVel = ball.getVelocity().x();
-		double yVel = ball.getVelocity().y();
+//		double xVel = ball.getVelocity().x();
+//		double yVel = ball.getVelocity().y();
 
 		double fValue = (1 - mu * time - ball.getVelocity().length() * mu2 * time);
 		ball.setVelocity(ball.getVelocity().times(fValue));
@@ -1015,7 +1008,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		gravity = g;
 	}
 
-	public void applyGravity(Ball ball, double time) {
+	private void applyGravity(Ball ball, double time) {
 		Vect currentVel = ball.getVelocity();
 		Vect velGravity = new Vect(currentVel.x(), (currentVel.y() + (gravity * time)));
 		ball.setVelocity(velGravity);
@@ -1240,19 +1233,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return true;
 	}
 
-	public List<Ball> getBalls() {
-		return new ArrayList<Ball>(balls.values());
-	}
-
-	public List<IGizmo> getGizmos() {
-		List<IGizmo> gizmosList = new ArrayList<IGizmo>();
-		for (IGizmo gizmo : gizmos.values()) {
-			gizmosList.add(gizmo);
-		}
-
-		return gizmosList;
-	}
-
+	@Override
 	public List<IDrawableGizmo> drawableGizmos() {
 		List<IDrawableGizmo> drawables = new ArrayList<IDrawableGizmo>();
 
@@ -1263,6 +1244,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return drawables;
 	}
 
+	@Override
 	public List<IDrawableBall> drawableBalls() {
 		List<IDrawableBall> drawables = new ArrayList<IDrawableBall>();
 

@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import model.IDrawableBall;
 import model.IDrawableGizmo;
 import model.IModel;
-import model.IdrawModel;
+import model.IDrawableModel;
 import model.Model;
 
 public class BuildBoard extends JPanel implements Observer {
@@ -28,9 +28,9 @@ public class BuildBoard extends JPanel implements Observer {
 	 */
 	private static final long serialVersionUID = 1L;
 	protected int size, scale;
-	protected IdrawModel gm;
+	protected IDrawableModel gm;
 
-	public BuildBoard(int s, IdrawModel model) {
+	public BuildBoard(int s, IDrawableModel model) {
 		model.addObserver(this);
 		size=s;
 		scale = size / 20;

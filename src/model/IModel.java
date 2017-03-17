@@ -7,13 +7,6 @@ public interface IModel {
 	/*
 	 * checks if there is room for that gizmo. then adds it to the board.
 	 */
-	public boolean addGizmo(IGizmo gizmo, String key);
-
-	public boolean addGizmo(String gizmo, String key, int x, int y);
-
-	/*
-	 * Generates a random key if only given gizmo type and coordinates
-	 */
 	public boolean addGizmo(String gizmo, int x, int y);
 
 	// /*
@@ -22,47 +15,14 @@ public interface IModel {
 	// public void addBall(Ball ball);
 
 	/*
-	 * Adds a ball to the board, given a key and coordinates
+	 * Adds a ball to the board using the coordinates and velocity given
 	 */
-	public boolean addBall(String key, double x, double y, double velx, double vely);
-
 	public boolean addBall(double x, double y, double velx, double vely);
-
-	/*
-	 * adds an absorber to the
-	 */
-	public boolean addAbsorber(String key, int x, int y, int ex, int ey);
 
 	/*
 	 * Rotates the gizmo at the given x and y coordinates
 	 */
 	public boolean rotateGizmo(int x, int y);
-
-	/*
-	 * Rotates the given Gizmo by rotating its line segments and corners in the
-	 * model
-	 */
-	public void rotateGizmo(String key);
-
-	/*
-	 * Connects gizmos to trigger on another
-	 */
-	public void connectGizmo(IGizmo gizmo1, IGizmo gizmo2);
-
-	/*
-	 * Disconnects connected gizmos
-	 */
-	public void disconnectGizmo(IGizmo gizmo);
-
-	/*
-	 * Connects key actions to given gizmo
-	 */
-	public void keyConnectGizmo(IGizmo gizmo, String key);
-
-	/*
-	 * Removes a given gizmo from the board
-	 */
-	public void deleteGizmo(String key);
 
 	/*
 	 * Removes a gizmo at the given coordinate
@@ -93,11 +53,6 @@ public interface IModel {
 	 * Calls methods when switched to run mode
 	 */
 	public void runMode();
-
-	/*
-	 * Moves balls based on their direction and collisions
-	 */
-	public void moveBalls();
 
 	/**
 	 * Saves current game state
@@ -137,8 +92,6 @@ public interface IModel {
 	void disconnectGizmo(int x, int y);
 
 	void keyConnectGizmo(int x, int y, String k);
-
-	public List<IGizmo> getGizmos();
 	
 	public double[] getFriction();
 	

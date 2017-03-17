@@ -15,7 +15,7 @@ public class TickListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		m.moveBalls();
+		m.tick();
 	}
 
 }

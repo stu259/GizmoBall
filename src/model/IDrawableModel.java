@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public interface IdrawModel {
+public interface IDrawableModel {
 	public List<IDrawableGizmo> drawableGizmos();
 
 	public List<IDrawableBall> drawableBalls();
