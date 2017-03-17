@@ -46,7 +46,7 @@ public class BindListener implements ActionListener, MouseInputListener, KeyList
 	@Override
 	public void keyPressed(KeyEvent e) {
 		Integer s = e.getKeyCode();
-		model.keyConnectGizmo(x, y, s.toString());
+		model.keyConnectGizmo(x, y, s.toString() + "pressed");
 	}
 
 	@Override
@@ -56,6 +56,8 @@ public class BindListener implements ActionListener, MouseInputListener, KeyList
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
+		Integer s = arg0.getKeyCode();
+		model.keyConnectGizmo(x, y, s.toString() + "released");
 		buildListener.setKeyListener(new NoActionKeyListener());
 		display.changeText("Select Gizmo to Bind");
 

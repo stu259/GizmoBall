@@ -14,14 +14,11 @@ public class AbsorberGizmo extends Gizmo{
 		this.ex = ex;
 		this.ey = ey;
 		velo = new Vect(0,-50);
-		System.out.println("Absorber -  x:"+x+" y:"+y);
-		System.out.println("Absorber - ex:"+ex+" ey:"+ey);
 		makeAbsorber();
 		coef = 1;
 	}
 
 	private void makeAbsorber(){
-		System.out.println("MakeAbsorber -  x:"+x+" y:"+y);
 		lines.add(new LineSegment(x, y, ex, y));	//top
 		lines.add(new LineSegment(ex, y, ex, ey));	//right
 		lines.add(new LineSegment(x, y, x, ey));	//left
