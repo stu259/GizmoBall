@@ -33,7 +33,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 	private Map<String, List<IGizmo>> keylistToGizmos;
 
 	private List<LineSegment> walls;
-	
+
 	private int boardSize;
 
 	public Model() {
@@ -41,13 +41,13 @@ public class Model extends Observable implements IModel, IdrawModel {
 
 		gizmos = new HashMap<String, IGizmo>();
 		balls = new HashMap<String, Ball>();
-		
+
 		linesToAbsorber = new HashMap<LineSegment, IGizmo>();
 		circlesToAbsorber = new HashMap<Circle, IGizmo>();
 		linesToGizmos = new HashMap<LineSegment, IGizmo>();
 		circlesToGizmos = new HashMap<Circle, IGizmo>();
 		keylistToGizmos = new HashMap<String, List<IGizmo>>();
-		
+
 		walls = new ArrayList<LineSegment>();
 		makeWalls(boardSize);
 	}
@@ -77,7 +77,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
 			String gizmoType = gizmo.gizmoType().toLowerCase();
-			
+
 			// add method to draw gizmo
 			if (gizmoType.equals("absorber"))
 				makeAbsorberGizmo(gizmo.copy());
@@ -87,26 +87,30 @@ public class Model extends Observable implements IModel, IdrawModel {
 		resetBalls();
 	}
 
-	private void drawGizmos(IGizmo gizmo){
+	private void drawGizmos(IGizmo gizmo) {
 		List<LineSegment> lines = gizmo.getLines();
 		List<Circle> corners = gizmo.getCorners();
-		
-		for(LineSegment line : lines){ // create connections for the lines -> absorber
+
+		for (LineSegment line : lines) { // create connections for the lines ->
+											// absorber
 			linesToGizmos.put(line, gizmo);
 		}
-		for(Circle corner : corners){  // create connections for the circles -> absorber
+		for (Circle corner : corners) { // create connections for the circles ->
+										// absorber
 			circlesToGizmos.put(corner, gizmo);
 		}
 	}
-	
+
 	private void makeAbsorberGizmo(IGizmo gizmo) {
 		List<LineSegment> gizLines = gizmo.getLines();
 		List<Circle> gizCorners = gizmo.getCorners();
-		
-		for(LineSegment line : gizLines){ // create connections for the lines -> absorber
+
+		for (LineSegment line : gizLines) { // create connections for the lines
+											// -> absorber
 			linesToAbsorber.put(line, gizmo);
 		}
-		for(Circle corner : gizCorners)  // create connections for the circles -> absorber
+		for (Circle corner : gizCorners) // create connections for the circles
+											// -> absorber
 			circlesToAbsorber.put(corner, gizmo);
 	}
 
@@ -124,19 +128,19 @@ public class Model extends Observable implements IModel, IdrawModel {
 	private CollisionInfo timeUntilCollision() {
 		double lowestColTime = Double.MAX_VALUE;
 		Ball collidingBall = null;
-		Ball collidingBall2 = null; //this is hard code method, change later plz tyvm xo
+		Ball collidingBall2 = null; // this is hard code method, change later
+									// plz tyvm xo
 		Vect updatedVel = new Vect(0, 0);
-		Vect updatedVel2 = null; //only used for ball-to-ball collisions
+		Vect updatedVel2 = null; // only used for ball-to-ball collisions
 		AbsorberGizmo absorber = null;
 		LineSegment lineHit = null;
 		Circle circleHit = null;
-		
 
 		for (Ball ball : balls.values()) {
-			
-			if(ball.paused())
+
+			if (ball.paused())
 				continue;
-			
+
 			Circle circ = ball.getCircle();
 			Vect vel = ball.getVelocity();
 			double nextTime = 0;
@@ -156,10 +160,13 @@ public class Model extends Observable implements IModel, IdrawModel {
 					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					if(linesToGizmos.get(line).isRotatingOnPivot()){
+					if (linesToGizmos.get(line).isRotatingOnPivot()) {
 						IGizmo gizmo = linesToGizmos.get(line);
-						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), gizmo.getAngularVel(), circ, vel, gizmo.getCof()); //DOUBLE CHECK THIS COULD CAUSE ISSUES
-					}else
+						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), gizmo.getAngularVel(),
+								circ, vel, gizmo.getCof()); // DOUBLE CHECK THIS
+															// COULD CAUSE
+															// ISSUES
+					} else
 						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCof());
 					absorber = null;
 				}
@@ -171,10 +178,11 @@ public class Model extends Observable implements IModel, IdrawModel {
 					circleHit = circle;
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					if(circlesToGizmos.get(circle).isRotatingOnPivot()){
+					if (circlesToGizmos.get(circle).isRotatingOnPivot()) {
 						IGizmo gizmo = circlesToGizmos.get(circle);
-						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(), gizmo.getAngularVel(), circ, vel, gizmo.getCof());
-					}else
+						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(),
+								gizmo.getAngularVel(), circ, vel, gizmo.getCof());
+					} else
 						updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
 								circlesToGizmos.get(circle).getCof());
 					absorber = null;
@@ -202,11 +210,12 @@ public class Model extends Observable implements IModel, IdrawModel {
 					updatedVel = absorber.getExitVeloicty();
 				}
 			}
-			for(Ball ball2 : balls.values()){
-				if(ball2.equals(ball))
+			for (Ball ball2 : balls.values()) {
+				if (ball2.equals(ball))
 					continue;
-				
-				nextTime = Geometry.timeUntilBallBallCollision(ball.getCircle(), ball.getVelocity(), ball2.getCircle(), ball2.getVelocity());
+
+				nextTime = Geometry.timeUntilBallBallCollision(ball.getCircle(), ball.getVelocity(), ball2.getCircle(),
+						ball2.getVelocity());
 				if (nextTime < lowestColTime) {
 					lineHit = null;
 					circleHit = null;
@@ -215,7 +224,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 					collidingBall = ball;
 					collidingBall2 = ball2;
 					vectPair = Geometry.reflectBalls(ball.getCenter(), ball.getMass(), ball.getVelocity(),
-										  ball2.getCenter(), ball2.getMass(), ball2.getVelocity());
+							ball2.getCenter(), ball2.getMass(), ball2.getVelocity());
 					absorber = null;
 					updatedVel = vectPair.v1;
 					updatedVel2 = vectPair.v2;
@@ -231,33 +240,35 @@ public class Model extends Observable implements IModel, IdrawModel {
 				collidingBall.setAbsorbed(false);
 			}
 		}
-		if(lowestColTime < time){
-			if(lineHit != null){
-				if(!(linesToGizmos.get(lineHit).gizmoType().equals("leftflipper") || linesToGizmos.get(lineHit).gizmoType().equals("rightflipper"))){
+		if (lowestColTime < time) {
+			if (lineHit != null) {
+				if (!(linesToGizmos.get(lineHit).gizmoType().equals("leftflipper")
+						|| linesToGizmos.get(lineHit).gizmoType().equals("rightflipper"))) {
 					linesToGizmos.get(lineHit).trigger();
-					if(linesToGizmos.get(lineHit).getOutgoingConnection() != null){
+					if (linesToGizmos.get(lineHit).getOutgoingConnection() != null) {
 						linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
 					}
 				}
-			}
-			else if(circleHit != null){
-				if(!(circlesToGizmos.get(circleHit).gizmoType().equals("leftflipper") || circlesToGizmos.get(circleHit).gizmoType().equals("rightflipper"))){
+			} else if (circleHit != null) {
+				if (!(circlesToGizmos.get(circleHit).gizmoType().equals("leftflipper")
+						|| circlesToGizmos.get(circleHit).gizmoType().equals("rightflipper"))) {
 					circlesToGizmos.get(circleHit).trigger();
-					if(circlesToGizmos.get(circleHit).getOutgoingConnection() != null){
+					if (circlesToGizmos.get(circleHit).getOutgoingConnection() != null) {
 						circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
 					}
 				}
 			}
 		}
-		
+
 		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, collidingBall2, updatedVel2, absorber));
 
 	}
 
 	private void triggerAbsorber() {
-		for(IGizmo gizmo : gizmos.values()){
-			if(!gizmo.gizmoType().equals("absorber")) return;
-			if(gizmo.triggered()){
+		for (IGizmo gizmo : gizmos.values()) {
+			if (!gizmo.gizmoType().equals("absorber"))
+				return;
+			if (gizmo.triggered()) {
 				AbsorberGizmo abs = (AbsorberGizmo) gizmo;
 				System.out.println("trigerred absorber");
 				for (Ball ball : balls.values()) {
@@ -266,234 +277,231 @@ public class Model extends Observable implements IModel, IdrawModel {
 						ball.setVelocity(abs.getExitVeloicty());
 					}
 				}
-				abs.trigger();//untrigger
+				abs.trigger();// untrigger
 			}
 		}
 	}
-	
+
 	@Override
-	public void tick(){
+	public void tick() {
 		moveBalls();
 		triggerFlippers();
 		triggerAbsorber();
 		this.setChanged();
 		this.notifyObservers();
-		
-		
-//		for(IGizmo giz: gizmos.values()){
-//			System.out.println(giz.triggered());
-//			if(giz.gizmoType().toLowerCase().equals("leftflipper") || giz.gizmoType().toLowerCase().equals("rightflipper")){
-//				System.out.println("flipper angle: " + giz.getCurrentAngle());
-//			}
-//		}
+
+		// for(IGizmo giz: gizmos.values()){
+		// System.out.println(giz.triggered());
+		// if(giz.gizmoType().toLowerCase().equals("leftflipper") ||
+		// giz.gizmoType().toLowerCase().equals("rightflipper")){
+		// System.out.println("flipper angle: " + giz.getCurrentAngle());
+		// }
+		// }
 	}
-	
-	private void triggerFlippers(){
-		for(IGizmo gizmo: gizmos.values()){
-			if(gizmo.gizmoType().toLowerCase().equals("leftflipper")){
+
+	private void triggerFlippers() {
+		for (IGizmo gizmo : gizmos.values()) {
+			if (gizmo.gizmoType().toLowerCase().equals("leftflipper")) {
 				LeftFlipperGizmo flipper = (LeftFlipperGizmo) gizmo;
-				if(flipper.triggered()){
-					//check if already on maxAngle
-					//	if not set rotateOnPivot to true
-					//get lines and circles, rotate them via pivot
-					if(flipper.getCurrentAngle() != flipper.getMaxAngle()){ 
+				if (flipper.triggered()) {
+					// check if already on maxAngle
+					// if not set rotateOnPivot to true
+					// get lines and circles, rotate them via pivot
+					if (flipper.getCurrentAngle() != flipper.getMaxAngle()) {
 						flipper.rotateOnPivot(true);
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
-						
-						//remove from global list
-						for(LineSegment l: lines){
+
+						// remove from global list
+						for (LineSegment l : lines) {
 							linesToGizmos.remove(l);
 						}
-						for(Circle c: corners){
+						for (Circle c : corners) {
 							circlesToGizmos.remove(c);
 						}
-						
+
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
-						
-						int angle = (int) (-1 * flipper.getAngularVel() / (1/time));
-						
-						if(angle + flipper.getCurrentAngle() > flipper.getMaxAngle())
+
+						int angle = (int) (-1 * flipper.getAngularVel() / (1 / time));
+
+						if (angle + flipper.getCurrentAngle() > flipper.getMaxAngle())
 							angle = flipper.getMaxAngle() - flipper.getCurrentAngle();
-						
+
 						Angle newAngle = new Angle(360 - angle);
-						
-						for(LineSegment line : lines)
+
+						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
-						for(Circle corner : corners)
+						for (Circle corner : corners)
 							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
-						
+
 						flipper.setCorners(newCorners);
-						flipper.setLines(newLines);	
-						
-						//add back to global list
-						for(LineSegment l: newLines){
-							linesToGizmos.put(l,gizmo);
+						flipper.setLines(newLines);
+
+						// add back to global list
+						for (LineSegment l : newLines) {
+							linesToGizmos.put(l, gizmo);
 						}
-						for(Circle c: corners){
-							circlesToGizmos.put(c,gizmo);
+						for (Circle c : corners) {
+							circlesToGizmos.put(c, gizmo);
 						}
-						
+
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
-					}else{
+					} else {
 						flipper.rotateOnPivot(false);
-						
+
 						continue;
 					}
-					
-					
-				}else{//NOT TRIGGERED move back down
-					if(flipper.getCurrentAngle() != 0){
+
+				} else {// NOT TRIGGERED move back down
+					if (flipper.getCurrentAngle() != 0) {
 						flipper.rotateOnPivot(true);
-						
+
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
-						
-						//remove from global list
-						for(LineSegment l: lines){
+
+						// remove from global list
+						for (LineSegment l : lines) {
 							linesToGizmos.remove(l);
 						}
-						for(Circle c: corners){
+						for (Circle c : corners) {
 							circlesToGizmos.remove(c);
 						}
-						
+
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
-						
-						int angle = (int) (-1 * flipper.getAngularVel() / (1/time));
-						
-						if(flipper.getCurrentAngle() - angle < 0)
+
+						int angle = (int) (-1 * flipper.getAngularVel() / (1 / time));
+
+						if (flipper.getCurrentAngle() - angle < 0)
 							angle = flipper.getCurrentAngle();
-						
+
 						Angle newAngle = new Angle(angle);
-						
-						for(LineSegment line : lines)
+
+						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
-						for(Circle corner : corners)
+						for (Circle corner : corners)
 							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
-						
+
 						flipper.setCorners(newCorners);
-						flipper.setLines(newLines);	
-						
-						//add back to global list
-						for(LineSegment l: newLines){
-							linesToGizmos.put(l,gizmo);
+						flipper.setLines(newLines);
+
+						// add back to global list
+						for (LineSegment l : newLines) {
+							linesToGizmos.put(l, gizmo);
 						}
-						for(Circle c: corners){
-							circlesToGizmos.put(c,gizmo);
+						for (Circle c : corners) {
+							circlesToGizmos.put(c, gizmo);
 						}
-						
+
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
-					}else{
+					} else {
 						flipper.rotateOnPivot(false);
 						continue;
 					}
 				}
-				
-				
-			}else if(gizmo.gizmoType().toLowerCase().equals("rightflipper")){
+
+			} else if (gizmo.gizmoType().toLowerCase().equals("rightflipper")) {
 				RightFlipperGizmo flipper = (RightFlipperGizmo) gizmo;
-				
-				if(flipper.triggered()){
-					//check if already on maxAngle
-					//	if not set rotateOnPivot to true
-					//get lines and circles, rotate them via pivot
-					
-					if(flipper.getCurrentAngle() != flipper.getMaxAngle()){ 
+
+				if (flipper.triggered()) {
+					// check if already on maxAngle
+					// if not set rotateOnPivot to true
+					// get lines and circles, rotate them via pivot
+
+					if (flipper.getCurrentAngle() != flipper.getMaxAngle()) {
 						flipper.rotateOnPivot(true);
-						
+
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
-						
-						//remove from global list
-						for(LineSegment l: lines){
+
+						// remove from global list
+						for (LineSegment l : lines) {
 							linesToGizmos.remove(l);
 						}
-						for(Circle c: corners){
+						for (Circle c : corners) {
 							circlesToGizmos.remove(c);
 						}
-						
+
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
-						
-						int angle = (int) (flipper.getAngularVel() / (1/time));
-						
-						if(angle + flipper.getCurrentAngle() > flipper.getMaxAngle())
+
+						int angle = (int) (flipper.getAngularVel() / (1 / time));
+
+						if (angle + flipper.getCurrentAngle() > flipper.getMaxAngle())
 							angle = flipper.getMaxAngle() - flipper.getCurrentAngle();
-						
+
 						Angle newAngle = new Angle(angle);
-						
-						for(LineSegment line : lines)
+
+						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
-						for(Circle corner : corners)
+						for (Circle corner : corners)
 							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
-						
+
 						flipper.setCorners(newCorners);
-						flipper.setLines(newLines);	
-						
-						//add back to global list
-						for(LineSegment l: newLines){
-							linesToGizmos.put(l,gizmo);
+						flipper.setLines(newLines);
+
+						// add back to global list
+						for (LineSegment l : newLines) {
+							linesToGizmos.put(l, gizmo);
 						}
-						for(Circle c: corners){
-							circlesToGizmos.put(c,gizmo);
+						for (Circle c : corners) {
+							circlesToGizmos.put(c, gizmo);
 						}
-						
+
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
-					}else{
+					} else {
 						flipper.rotateOnPivot(false);
 						continue;
 					}
-					
-					
-				}else{//NOT TRIGGERED move back down
-					if(flipper.getCurrentAngle() != 0){
+
+				} else {// NOT TRIGGERED move back down
+					if (flipper.getCurrentAngle() != 0) {
 						flipper.rotateOnPivot(true);
-						
+
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
-						
-						//remove from global list
-						for(LineSegment l: lines){
+
+						// remove from global list
+						for (LineSegment l : lines) {
 							linesToGizmos.remove(l);
 						}
-						for(Circle c: corners){
+						for (Circle c : corners) {
 							circlesToGizmos.remove(c);
 						}
-						
+
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
-						
-						int angle = (int) (flipper.getAngularVel() / (1/time));
-						
-						if(flipper.getCurrentAngle() - angle < 0)
+
+						int angle = (int) (flipper.getAngularVel() / (1 / time));
+
+						if (flipper.getCurrentAngle() - angle < 0)
 							angle = flipper.getCurrentAngle();
-						
+
 						Angle newAngle = new Angle(360 - angle);
-						
-						for(LineSegment line : lines)
+
+						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
-						for(Circle corner : corners)
+						for (Circle corner : corners)
 							newCorners.add(Geometry.rotateAround(corner, pivot, newAngle));
-						
+
 						flipper.setCorners(newCorners);
-						flipper.setLines(newLines);	
-						
-						//add back to global list
-						for(LineSegment l: newLines){
-							linesToGizmos.put(l,gizmo);
+						flipper.setLines(newLines);
+
+						// add back to global list
+						for (LineSegment l : newLines) {
+							linesToGizmos.put(l, gizmo);
 						}
-						for(Circle c: corners){
-							circlesToGizmos.put(c,gizmo);
+						for (Circle c : corners) {
+							circlesToGizmos.put(c, gizmo);
 						}
-						
+
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
-					}else{
+					} else {
 						flipper.rotateOnPivot(false);
 						continue;
 					}
@@ -501,7 +509,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 			}
 		}
 	}
-	
+
 	@Override
 	public void moveBalls() {
 		CollisionInfo colInfo = timeUntilCollision();
@@ -509,23 +517,23 @@ public class Model extends Observable implements IModel, IdrawModel {
 		Ball colBall = colInfo.getCollidingBall();
 		Ball colBall2 = null;
 		boolean colbal2check = false;
-		
+
 		if (colTime < time) { // collision detected
 			String key = colBall.getKey();
 			String key2 = null;
 			balls.remove(key);
-			
-			if(colInfo.getCollidingBall2() != null){
+
+			if (colInfo.getCollidingBall2() != null) {
 				colBall2 = colInfo.getCollidingBall2();
 				key2 = colBall2.getKey();
 				balls.remove(key2);
 				colbal2check = true;
-				
+
 				colBall = calculateBallMove(colBall, colTime);
 				colBall.setVelocity(colInfo.getUpdatedVel());
 				colBall2 = calculateBallMove(colBall2, colTime);
 				colBall2.setVelocity(colInfo.getUpdatedVel2());
-				
+
 				applyFriction(colBall, colTime);
 				applyGravity(colBall, colTime);
 				applyFriction(colBall2, colTime);
@@ -548,18 +556,18 @@ public class Model extends Observable implements IModel, IdrawModel {
 				applyFriction(colBall, colTime);
 				applyGravity(colBall, colTime);
 			}
-			
+
 			for (Ball ball : balls.values()) {
 				ball = calculateBallMove(ball, colTime);
 				applyFriction(ball, colTime);
 				applyGravity(ball, colTime);
 			}
 			balls.put(key, colBall);
-			if(colbal2check)
+			if (colbal2check)
 				balls.put(key2, colBall2);
 		} else {
 			for (Ball ball : balls.values()) {
-				if(!ball.paused() && !ball.isAbsorbed()){
+				if (!ball.paused() && !ball.isAbsorbed()) {
 					ball = calculateBallMove(ball, time);
 					applyFriction(ball, time);
 					applyGravity(ball, time);
@@ -605,37 +613,37 @@ public class Model extends Observable implements IModel, IdrawModel {
 			return collidingBall;
 		}
 
-		public Ball getCollidingBall2(){
+		public Ball getCollidingBall2() {
 			return collidingBall2;
 		}
-		
+
 		public Vect getUpdatedVel() {
 			return updatedVel;
 		}
 
-		public Vect getUpdatedVel2(){
+		public Vect getUpdatedVel2() {
 			return updatedVel2;
 		}
-		
+
 		public AbsorberGizmo getAbs() {
 			return abs;
 		}
 
 	}
 
-	public void keyPressed(String key){
+	public void keyPressed(String key) {
 		List<IGizmo> keyGiz = keylistToGizmos.get(key);
-//		for (int i=0; i<keylistToGizmos.size();i++){
-//			System.out.println(keylistToGizmos.keySet());
-//		}
-		if(keyGiz==null)
+		// for (int i=0; i<keylistToGizmos.size();i++){
+		// System.out.println(keylistToGizmos.keySet());
+		// }
+		if (keyGiz == null)
 			return;
-		
-		for(IGizmo gizmo : keyGiz){
+
+		for (IGizmo gizmo : keyGiz) {
 			gizmo.trigger();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * 
@@ -644,57 +652,57 @@ public class Model extends Observable implements IModel, IdrawModel {
 	 * 
 	 */
 
-	public double[] getFriction(){
-		double[] friction= new double[2];
-		friction[0]=frictionMU;
-		friction[1]=frictionMUTwo;
-		return 	friction;
+	public double[] getFriction() {
+		double[] friction = new double[2];
+		friction[0] = frictionMU;
+		friction[1] = frictionMUTwo;
+		return friction;
 	}
-	
-	public double getGravity(){
-		return 	gravity;
+
+	public double getGravity() {
+		return gravity;
 	}
-	
-	private boolean validatePosition(double sx, double sy, double ex, double ey, IGizmo giz){
+
+	private boolean validatePosition(double sx, double sy, double ex, double ey, IGizmo giz) {
 		if (sx < 0 || ex > boardSize || sy < 0 || ey > boardSize)
 			return false;
 
 		// check if given coordinates overlaps with any other gizmo position
 		for (IGizmo gizmo : gizmos.values()) {
-			if(!gizmo.equals(giz)){
+			if (!gizmo.equals(giz)) {
 				if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
 					return false;
 			}
 		}
-		
-		for (Ball b: balls.values()){
+
+		for (Ball b : balls.values()) {
 			if (sx < b.getEndX() && ex > b.getStartX() && sy < b.getEndY() && ey > b.getStartY())
 				return false;
 		}
-		
+
 		return true;
 	}
-	
-	private boolean validatePosition(double sx, double sy, double ex, double ey, Ball ball){
+
+	private boolean validatePosition(double sx, double sy, double ex, double ey, Ball ball) {
 		if (sx < 0 || ex > boardSize || sy < 0 || ey > boardSize)
 			return false;
 
 		// check if given coordinates overlaps with any other gizmo position
 		for (IGizmo gizmo : gizmos.values()) {
 			if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
-					return false;
+				return false;
 		}
-		
-		for (Ball b: balls.values()){
-			if(!b.equals(ball)){
+
+		for (Ball b : balls.values()) {
+			if (!b.equals(ball)) {
 				if (sx < b.getEndX() && ex > b.getStartX() && sy < b.getEndY() && ey > b.getStartY())
 					return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	// check if object can be added (check outside board, position, size, then
 	// scale)
 	// Params: startx, starty, endx, endy
@@ -708,8 +716,8 @@ public class Model extends Observable implements IModel, IdrawModel {
 			if (sx < gizmo.getEndX() && ex > gizmo.getStartX() && sy < gizmo.getEndY() && ey > gizmo.getStartY())
 				return false;
 		}
-		
-		for (Ball b: balls.values()){
+
+		for (Ball b : balls.values()) {
 			if (sx < b.getEndX() && ex > b.getStartX() && sy < b.getEndY() && ey > b.getStartY())
 				return false;
 		}
@@ -816,13 +824,15 @@ public class Model extends Observable implements IModel, IdrawModel {
 		if (!validatePosition(x, y, ex, ey))
 			return false;
 
+		Gizmo gizmo = new AbsorberGizmo(x, y, ex, ey);
 		// add to list of gizmos
-		gizmos.put(key, new AbsorberGizmo(x, y, ex, ey));
-
+		gizmos.put(key, gizmo);
+		gizmo.setKey(key);
 		// draw absorber
 
 		this.setChanged();
 		this.notifyObservers();
+		System.out.println(findGizmo(x, y));
 		return true;
 	}
 
@@ -839,7 +849,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return addAbsorber(uniqueKey, x, y, ex, ey);
 	}
 
-	//return key for gizmo at (x,y)
+	// return key for gizmo at (x,y)
 	private String findGizmo(int x, int y) {
 		int ex = x + 1;
 		int ey = y + 1;
@@ -858,7 +868,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		String key = findGizmo(x, y);
 		if (key == null)
 			return false;
-		else if(gizmos.get(key).gizmoType().toLowerCase().equals("absorber")){
+		else if (gizmos.get(key).gizmoType().toLowerCase().equals("absorber")) {
 			return false;
 		}
 
@@ -890,21 +900,17 @@ public class Model extends Observable implements IModel, IdrawModel {
 
 		gizmo1.setOutgoingConnection(gizmo2);
 		gizmo2.addIncomingConnection(gizmo1);
-		// System.out.println("connection done");
-		// System.out.println(gizmo1.getKey());
-		// System.out.println(gizmo2.getKey());
-
 	}
 
 	@Override
-	public void connectGizmo(int x1, int y1, int x2, int y2){
+	public void connectGizmo(int x1, int y1, int x2, int y2) {
 		String gizmo1 = findGizmo(x1, y1);
 		String gizmo2 = findGizmo(x2, y2);
-		if(gizmo1!=null && gizmo2!=null){
-			 connectGizmo( gizmos.get(gizmo1) , gizmos.get(gizmo2) );
+		if (gizmo1 != null && gizmo2 != null) {
+			connectGizmo(gizmos.get(gizmo1), gizmos.get(gizmo2));
 		}
 	}
-	
+
 	@Override
 	public void disconnectGizmo(IGizmo gizmo) {
 		if (gizmo.getOutgoingConnection() != null) {
@@ -919,51 +925,50 @@ public class Model extends Observable implements IModel, IdrawModel {
 			gizmo.clearIncomingConnections();
 		}
 	}
-	
+
 	@Override
-	public void disconnectGizmo(int x, int y){
-		String gizmo= findGizmo(x, y);
-		if(gizmo!=null){
-			disconnectGizmo( gizmos.get(gizmo));
+	public void disconnectGizmo(int x, int y) {
+		String gizmo = findGizmo(x, y);
+		if (gizmo != null) {
+			disconnectGizmo(gizmos.get(gizmo));
 		}
 	}
-	
+
 	@Override
 	public void keyConnectGizmo(IGizmo gizmo, String k) {
-		//gizmo.setKeyboardPress(k);
+		// gizmo.setKeyboardPress(k);
 		List<IGizmo> tempList = keylistToGizmos.get(k);
-		
-		if(tempList == null)
+
+		if (tempList == null)
 			tempList = new ArrayList<IGizmo>();
 		tempList.add(gizmo);
 		keylistToGizmos.put(k, tempList);
 	}
-	
+
 	@Override
-	public void keyConnectGizmo(int x, int y, String k){
-		String gizmo= findGizmo(x, y);
-		if(gizmo!=null){
-			keyConnectGizmo( gizmos.get(gizmo),k);
+	public void keyConnectGizmo(int x, int y, String k) {
+		String gizmo = findGizmo(x, y);
+		if (gizmo != null) {
+			keyConnectGizmo(gizmos.get(gizmo), k);
 		}
 	}
-	
-	
+
 	private void removeKeyPress(IGizmo gizmo) {
 		List<IGizmo> temp = new ArrayList<IGizmo>();
-		for(String key: keylistToGizmos.keySet()){
+		for (String key : keylistToGizmos.keySet()) {
 			temp.clear();
 			temp.addAll(keylistToGizmos.get(key));
 			temp.remove(gizmo);
 			keylistToGizmos.remove(key);
-			keylistToGizmos.put(key,temp);
+			keylistToGizmos.put(key, temp);
 		}
 	}
-	
+
 	@Override
 	public void removeKeyPress(int x, int y) {
 		removeKeyPress(gizmos.get(findGizmo(x, y)));
 	}
-	
+
 	@Override
 	public void deleteGizmo(String key) {
 		gizmos.remove(key);
@@ -1013,7 +1018,6 @@ public class Model extends Observable implements IModel, IdrawModel {
 	public void applyGravity(Ball ball, double time) {
 		Vect currentVel = ball.getVelocity();
 		Vect velGravity = new Vect(currentVel.x(), (currentVel.y() + (gravity * time)));
-		System.out.println(gravity);
 		ball.setVelocity(velGravity);
 	}
 
@@ -1035,10 +1039,9 @@ public class Model extends Observable implements IModel, IdrawModel {
 
 		if (gizmoKey == null)
 			return false;
-		else if(gizmos.get(gizmoKey).gizmoType().toLowerCase().equals("absorber")){
+		else if (gizmos.get(gizmoKey).gizmoType().toLowerCase().equals("absorber")) {
 			return false;
-		}
-		else
+		} else
 			gizmo = gizmos.get(gizmoKey);
 
 		return moveGizmo(newX, newY, gizmo);
@@ -1056,12 +1059,23 @@ public class Model extends Observable implements IModel, IdrawModel {
 
 				// Gizmo
 				// capitalises first letter
-				String type = gizmo.gizmoType().substring(0, 1).toUpperCase()
-						+ gizmo.gizmoType().substring(1).toLowerCase();
-				String x = String.valueOf(gizmo.getStartX());
-				String y = String.valueOf(gizmo.getStartY());
-				String gizmoString = type + " " + key + " " + x + " " + y + "\n";
-				writer.write(gizmoString);
+				if (gizmo.gizmoType() != "absorber") {
+					String type = gizmo.gizmoType().substring(0, 1).toUpperCase()
+							+ gizmo.gizmoType().substring(1).toLowerCase();
+					String x = String.valueOf(gizmo.getStartX());
+					String y = String.valueOf(gizmo.getStartY());
+					String gizmoString = type + " " + key + " " + x + " " + y + "\n";
+					writer.write(gizmoString);
+				} else {
+					String type = gizmo.gizmoType().substring(0, 1).toUpperCase()
+							+ gizmo.gizmoType().substring(1).toLowerCase();
+					String x = String.valueOf(gizmo.getStartX());
+					String y = String.valueOf(gizmo.getStartY());
+					String x2 = String.valueOf(gizmo.getEndX());
+					String y2 = String.valueOf(gizmo.getEndY());
+					String gizmoString = type + " " + key + " " + x + " " + y + " " + x2 + " " + y2 + "\n";
+					writer.write(gizmoString);
+				}
 
 				// Rotate
 				int rot = gizmo.getRotation() / 90;
@@ -1070,11 +1084,9 @@ public class Model extends Observable implements IModel, IdrawModel {
 					writer.write(rotation);
 				}
 
-				
 			}
-			
-			//connect
 
+			// connect
 			for (String key : gizmos.keySet()) {
 				IGizmo gizmo = gizmos.get(key);
 				// Connect keyword
@@ -1083,16 +1095,15 @@ public class Model extends Observable implements IModel, IdrawModel {
 					writer.write(connect);
 				}
 			}
-			
-			//Keys
-			for(String key:keylistToGizmos.keySet()){
-				List<IGizmo> g =keylistToGizmos.get(key);
-				for(int i=0; i<g.size();i++){
-					String keyConnection = "KeyConnect key " + key + "up" + g.get(i).getKey() + "\n";
+
+			// Keys
+			for (String key : keylistToGizmos.keySet()) {
+				List<IGizmo> g = keylistToGizmos.get(key);
+				for (int i = 0; i < g.size(); i++) {
+					String keyConnection = "KeyConnect key " + key + " " + "up" + " " + g.get(i).getKey() + "\n";
 					writer.write(keyConnection);
 				}
 			}
-
 
 			// Ball
 			for (Ball ball : balls.values()) {
@@ -1182,8 +1193,9 @@ public class Model extends Observable implements IModel, IdrawModel {
 						System.out.println(
 								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
-						keyConnectGizmo(gizmos.get(splitCommand[4]),splitCommand[2]);// connect
-											}
+						if (splitCommand[3].equals("up"))
+							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2]);// connect
+					}
 					break;
 				case "connect":
 					if (splitCommand.length != 3)
@@ -1207,7 +1219,6 @@ public class Model extends Observable implements IModel, IdrawModel {
 								.println("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
 					} else {
 						setGravity(Double.parseDouble((splitCommand[1])));
-						System.out.println(splitCommand[0] + " " + splitCommand[1]);
 					}
 					break;
 				case "":
@@ -1262,7 +1273,7 @@ public class Model extends Observable implements IModel, IdrawModel {
 		return drawables;
 	}
 
-	public boolean containsGizmo(int x, int y){
+	public boolean containsGizmo(int x, int y) {
 		String key = findGizmo(x, y);
 		if (key == null)
 			return false;
@@ -1270,32 +1281,32 @@ public class Model extends Observable implements IModel, IdrawModel {
 	}
 
 	@Override
-	public void deleteBall(double x, double y){
-		String ballKey = findBall(x,y);
+	public void deleteBall(double x, double y) {
+		String ballKey = findBall(x, y);
 
 		if (ballKey != null)
 			deleteBall(ballKey);
 	}
-	
-	private void deleteBall(String key){
+
+	private void deleteBall(String key) {
 		balls.remove(key);
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
-	@Override
-	public Boolean moveBall(double x, double y, double newX, double newY){
-		String ballKey = findBall(x,y);
 
-		if (ballKey != null){
-			return moveBall(ballKey,newX,newY);			
+	@Override
+	public Boolean moveBall(double x, double y, double newX, double newY) {
+		String ballKey = findBall(x, y);
+
+		if (ballKey != null) {
+			return moveBall(ballKey, newX, newY);
 		}
 		return false;
 	}
-	
-	private Boolean moveBall(String key, double x, double y){
+
+	private Boolean moveBall(String key, double x, double y) {
 		Ball b = balls.get(key);
-		if (validatePosition(x - b.getRadius(), y - b.getRadius(), x + b.getRadius(), y + b.getRadius(),  b)) {
+		if (validatePosition(x - b.getRadius(), y - b.getRadius(), x + b.getRadius(), y + b.getRadius(), b)) {
 			b.setX(x);
 			b.setY(y);
 			this.setChanged();
@@ -1305,8 +1316,8 @@ public class Model extends Observable implements IModel, IdrawModel {
 
 		return false;
 	}
-	
-	private String findBall(double x, double y){
+
+	private String findBall(double x, double y) {
 		double ex = x + 1;
 		double ey = y + 1;
 
@@ -1318,17 +1329,17 @@ public class Model extends Observable implements IModel, IdrawModel {
 
 		return null;
 	}
-	
+
 	@Override
-	public void resetBalls(){
-		for(Ball b: balls.values()){
+	public void resetBalls() {
+		for (Ball b : balls.values()) {
 			b.resetBall();
 			b.resume();
 		}
 	}
-	
-	private void printList(List<?> l){
-		for(int i = 0;i<l.size();i++){
+
+	private void printList(List<?> l) {
+		for (int i = 0; i < l.size(); i++) {
 			System.out.println(l.get(i).toString());
 		}
 	}
