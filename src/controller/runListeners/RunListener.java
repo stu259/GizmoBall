@@ -2,9 +2,6 @@ package controller.runListeners;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-
-import javax.swing.event.MouseInputListener;
 
 import model.IModel;
 

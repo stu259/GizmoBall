@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,10 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.MagicKeyListener;
-import controller.ModeListener;
 import controller.buildListeners.*;
-import controller.runListeners.RunListener;
-import model.IModel;
 
 public class BuildButtons extends JPanel {
 

@@ -15,12 +15,9 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import controller.TimerListener;
 import model.IDrawableBall;
 import model.IDrawableGizmo;
-import model.IModel;
 import model.IDrawableModel;
-import model.Model;
 
 public class RunBoard extends JPanel implements Observer {
 
@@ -57,17 +54,15 @@ public class RunBoard extends JPanel implements Observer {
 			int x2 = gizmo.getEndX() * scale;
 			int y2 = gizmo.getEndY() * scale;
 
-			Color color = Color.BLUE;
-
 			if (gizmo.getGizmoType().toLowerCase().equals("square")) {
-				g2.setColor(color.red);
+				g2.setColor(Color.red);
 				if (gizmo.isTriggered()) {
-					g2.setColor(color.yellow);
+					g2.setColor(Color.yellow);
 				}
 				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("circle")) {
-				g2.setColor(color.GREEN);
+				g2.setColor(Color.GREEN);
 				g2.fillOval(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("absorber")) {
@@ -75,7 +70,7 @@ public class RunBoard extends JPanel implements Observer {
 				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("triangle")) {
-				g2.setColor(color.BLUE);
+				g2.setColor(Color.BLUE);
 				Polygon p = new Polygon(new int[] { x1, x2, x1 }, new int[] { y2, y1, y1 }, 3);
 				AffineTransform transform = new AffineTransform();
 				transform.rotate(Math.toRadians(gizmo.getRotation()), p.getBounds().getCenterX(),
@@ -84,7 +79,7 @@ public class RunBoard extends JPanel implements Observer {
 				g2.fill(transformed);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("rightflipper")) {
-				g2.setColor(color.YELLOW);
+				g2.setColor(Color.YELLOW);
 				RoundRectangle2D rf = new RoundRectangle2D.Double(x1 + 2 * scale - ((x2 - x1) / 4), y1, (x2 - x1) / 4,
 						(y2 - y1), (y2 - y1) / 4, (y2 - y1) / 4);
 				AffineTransform transform = new AffineTransform();
@@ -95,7 +90,7 @@ public class RunBoard extends JPanel implements Observer {
 				g2.fill(transformed);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("leftflipper")) {
-				g2.setColor(color.YELLOW);
+				g2.setColor(Color.YELLOW);
 				RoundRectangle2D lf = new RoundRectangle2D.Double(x1, y1, (x2 - x1) / 4, (y2 - y1), (y2 - y1) / 4,
 						(y2 - y1) / 4);
 				AffineTransform transform = new AffineTransform();

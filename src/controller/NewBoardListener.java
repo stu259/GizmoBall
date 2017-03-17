@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.IModel;
-import model.Model;
 import view.IDisplay;
 
 public class NewBoardListener implements ActionListener {

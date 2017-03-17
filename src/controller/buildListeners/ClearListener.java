@@ -1,7 +1,6 @@
 package controller.buildListeners;
 
 import model.IModel;
-import view.BuildBoard;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

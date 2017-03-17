@@ -3,21 +3,15 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import controller.MagicKeyListener;
-import controller.ModeListener;
 import controller.TimerListener;
 import controller.runListeners.RunListener;
-import controller.runListeners.TickListener;
-import model.IModel;
 
 public class RunButtons extends JPanel {
 

@@ -7,7 +7,6 @@ import java.util.Map;
 import controller.TimerListener;
 import controller.buildListeners.BuildListener;
 import controller.runListeners.RunListener;
-import model.IModel;
 
 public interface IDisplay {
 	public void build();

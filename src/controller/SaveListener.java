@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import model.IModel;
-import model.Model;
 import view.IDisplay;
 
 public class SaveListener implements ActionListener {

@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.Hashtable;
 import java.util.Map;
@@ -24,16 +23,9 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-import controller.ExitActionListener;
-import controller.LoadListener;
-import controller.NewBoardListener;
-import controller.SaveListener;
 import controller.TimerListener;
 import controller.buildListeners.BuildListener;
 import controller.runListeners.RunListener;
-import model.IModel;
 import model.IDrawableModel;
 import model.Model;
 
