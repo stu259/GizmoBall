@@ -97,16 +97,16 @@ public interface IModel {
 	
 	public double getGravity();
 
-	void tick();
+	public void tick();
 	
 	public void keyPressed(String k);
 	
 	public boolean containsGizmo(int x, int y);
 
-	void deleteBall(double x, double y);
+	public void deleteBall(double x, double y);
 
-	Boolean moveBall(double x, double y, double newX, double newY);
+	public Boolean moveBall(double x, double y, double newX, double newY);
 
-	void resetBalls();
+	public void resetBalls();
 	
 }
