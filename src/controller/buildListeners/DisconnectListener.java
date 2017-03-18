@@ -14,22 +14,30 @@ public class DisconnectListener implements ActionListener, MouseInputListener {
 	private IModel model;
 	private BuildListener buildListener;
 	private IDisplay display;
+	private int x,y;
 
 	public DisconnectListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
 		buildListener = bL;
-		display =d;
+		display = d;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
-		display.changeText("Select Gizmo to disconect");
+		display.changeText("Select Gizmo to disconnect");
 	}
 
 	public void mousePressed(MouseEvent e) {
-		model.disconnectGizmo(e.getX()/display.getScale(),e.getY()/display.getScale());
-		model.removeKeyPress(e.getX()/display.getScale(),e.getY()/display.getScale());
+		x= e.getX()/display.getScale();
+		y = e.getY()/display.getScale();
+		if (!model.containsGizmo(x, y)) {
+			display.errorPopup("No Gizmo Selected");
+			display.changeText("Select Gizmo to disconnect");
+		} else {
+			model.disconnectGizmo(x,y);
+			model.removeKeyPress(x,y);
+		}
 	}
 
 	public void mouseReleased(MouseEvent e) {

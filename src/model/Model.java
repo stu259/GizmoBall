@@ -36,13 +36,13 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private final double time = 0.025;
 
 	// connections for triggering both redrawing of lines and
-//	private Map<LineSegment, IGizmo> linesToAbsorber;
-//	private Map<Circle, IGizmo> circlesToAbsorber;
+	// private Map<LineSegment, IGizmo> linesToAbsorber;
+	// private Map<Circle, IGizmo> circlesToAbsorber;
 	private Map<Circle, IGizmo> circlesToGizmos;
 	private Map<LineSegment, IGizmo> linesToGizmos;
 	private Map<String, Ball> balls;
 	private Map<String, List<IGizmo>> keylistToGizmos;
-	
+
 	private Map<IGizmo, Queue<Ball>> absorberToBalls;
 
 	private List<LineSegment> walls;
@@ -86,12 +86,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		linesToGizmos.clear();
 		circlesToGizmos.clear();
 		absorberToBalls.clear();
-		
+
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
 			drawGizmos(gizmo);
 		}
-		
+
 		resetBalls();
 	}
 
@@ -154,8 +154,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					collidingBall = ball;
 					if (linesToGizmos.get(line).isRotatingOnPivot()) {
 						IGizmo gizmo = linesToGizmos.get(line);
-						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), (gizmo.getAngularVel()/180) * time,
-								circ, vel, gizmo.getCoef());
+						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(),
+								(gizmo.getAngularVel() / 180) * time, circ, vel, gizmo.getCoef());
 					} else
 						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
 				}
@@ -169,8 +169,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					collidingBall = ball;
 					if (circlesToGizmos.get(circle).isRotatingOnPivot()) {
 						IGizmo gizmo = circlesToGizmos.get(circle);
-						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(), (gizmo.getAngularVel()/180) * time, 
-								circ, vel, gizmo.getCoef());
+						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(),
+								(gizmo.getAngularVel() / 180) * time, circ, vel, gizmo.getCoef());
 					} else
 						updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
 								circlesToGizmos.get(circle).getCoef());
@@ -198,53 +198,58 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 		}
 		if (lowestColTime < time) {
-			//line collision
+			// line collision
 			if (lineHit != null) {
-				//absorber collision
-				if(linesToGizmos.get(lineHit).gizmoType().equals("absorber")){
-					//pause ball
+				// absorber collision
+				if (linesToGizmos.get(lineHit).gizmoType().equals("absorber")) {
+					// pause ball
 					collidingBall.pause();
-					//add ball to absorbers queue
+					// add ball to absorbers queue
 					AbsorberGizmo abs = (AbsorberGizmo) linesToGizmos.get(lineHit);
 					collidingBall.setVelocity(abs.getExitVeloicty());
 					Queue<Ball> temp = new LinkedList<Ball>();
-					if(absorberToBalls.get(abs) != null)
+					if (absorberToBalls.get(abs) != null)
 						temp.addAll(absorberToBalls.get(abs));
 					temp.add(collidingBall);
 					absorberToBalls.put(abs, temp);
-					//move ball to top right of absorber
-					collidingBall.setX((double)abs.getEndX() + collidingBall.getRadius() - collidingBall.getRadius() * temp.size() * 2);
-					collidingBall.setY((double)abs.getStartY() + collidingBall.getRadius());
-				} 
-				//all other gizmos collisions
-				else{
-					linesToGizmos.get(lineHit).setHit(120); //120 = 3 seconds  (40ticks/second)
+					// move ball to top right of absorber
+					collidingBall.setX((double) abs.getEndX() + collidingBall.getRadius()
+							- collidingBall.getRadius() * temp.size() * 2);
+					collidingBall.setY((double) abs.getStartY() + collidingBall.getRadius());
+				}
+				// all other gizmos collisions
+				else {
+					linesToGizmos.get(lineHit).setHit(120); // 120 = 3 seconds
+															// (40ticks/second)
 					if (linesToGizmos.get(lineHit).getOutgoingConnection() != null) {
 						linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
 					}
 				}
-			} 
-			//circle collision
+			}
+			// circle collision
 			else if (circleHit != null) {
-				//absorber collision
-				if(circlesToGizmos.get(circleHit).gizmoType().equals("absorber")){
-					//pause ball
+				// absorber collision
+				if (circlesToGizmos.get(circleHit).gizmoType().equals("absorber")) {
+					// pause ball
 					collidingBall.pause();
-					//add ball to absorbers queue
+					// add ball to absorbers queue
 					AbsorberGizmo abs = (AbsorberGizmo) linesToGizmos.get(lineHit);
 					collidingBall.setVelocity(abs.getExitVeloicty());
 					Queue<Ball> temp = new LinkedList<Ball>();
-					if(absorberToBalls.get(abs) != null)
+					if (absorberToBalls.get(abs) != null)
 						temp.addAll(absorberToBalls.get(abs));
 					temp.add(collidingBall);
 					absorberToBalls.put(abs, temp);
-					//move ball to top right of absorber
-					collidingBall.setX((double)abs.getEndX() + collidingBall.getRadius() - collidingBall.getRadius() * temp.size() * 2);
-					collidingBall.setY((double)abs.getStartY() + collidingBall.getRadius());
+					// move ball to top right of absorber
+					collidingBall.setX((double) abs.getEndX() + collidingBall.getRadius()
+							- collidingBall.getRadius() * temp.size() * 2);
+					collidingBall.setY((double) abs.getStartY() + collidingBall.getRadius());
 				}
-				//all other gizmo collisions
-				else{
-					circlesToGizmos.get(circleHit).setHit(120); //120 = 3 seconds  (40ticks/second)
+				// all other gizmo collisions
+				else {
+					circlesToGizmos.get(circleHit).setHit(120); // 120 = 3
+																// seconds
+																// (40ticks/second)
 					if (circlesToGizmos.get(circleHit).getOutgoingConnection() != null) {
 						circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
 					}
@@ -264,14 +269,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	private void fireAbsorber() {
 		for (IGizmo gizmo : gizmos.values()) {
 			if (!gizmo.gizmoType().equals("absorber"))
 				return;
 			if (gizmo.triggered()) {
 				AbsorberGizmo abs = (AbsorberGizmo) gizmo;
-				if(!absorberToBalls.get(abs).isEmpty()){
+				if (!absorberToBalls.get(abs).isEmpty()) {
 					Ball ballToFire = absorberToBalls.get(abs).remove();
 					ballToFire.setY(abs.getStartY() - ballToFire.getRadius());
 					ballToFire.resume();
@@ -282,18 +287,19 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			}
 		}
 	}
-	
-	private void moveBallsInAbsorber(AbsorberGizmo abs){
-		for(Ball b:absorberToBalls.get(abs)){
+
+	private void moveBallsInAbsorber(AbsorberGizmo abs) {
+		for (Ball b : absorberToBalls.get(abs)) {
 			b.setX(b.getX() + b.getRadius() * 2);
 		}
 	}
 
 	private void triggerFlippers() {
 		for (IGizmo gizmo : gizmos.values()) {
-			
-			gizmo.cooldownHit();	//Put this here so that there is no need to float through the rest of the list
-			
+
+			gizmo.cooldownHit(); // Put this here so that there is no need to
+									// float through the rest of the list
+
 			if (gizmo.gizmoType().toLowerCase().equals("leftflipper")) {
 				LeftFlipperGizmo flipper = (LeftFlipperGizmo) gizmo;
 				if (flipper.triggered()) {
@@ -538,7 +544,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			}
 
 			for (Ball ball : balls.values()) {
-				if(ball.paused())
+				if (ball.paused())
 					continue;
 				ball = calculateBallMove(ball, colTime);
 				applyFriction(ball, colTime);
@@ -604,7 +610,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		public Vect getUpdatedVel2() {
 			return updatedVel2;
 		}
-
 
 	}
 
@@ -917,7 +922,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	public void keyConnectGizmo(int x, int y, String k) {
 		String gizmo = findGizmo(x, y);
 		if (gizmo != null) {
-			if(gizmos.get(gizmo).gizmoType().equals("absorber") && k.contains("released")){
+			if (gizmos.get(gizmo).gizmoType().equals("absorber") && k.contains("released")) {
 				return;
 			}
 			keyConnectGizmo(gizmos.get(gizmo), k);
@@ -1113,14 +1118,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				case "leftflipper":
 				case "rightflipper":
 					if (splitCommand.length != 4)
-						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
+						errorMessage
+								.error("Skipping instruction at line " + lineNumber + " invalid gizmos instruction");
 					else if (!addGizmo(splitCommand[0], splitCommand[1], (Integer.parseInt(splitCommand[2])),
 							(Integer.parseInt(splitCommand[3]))))
 						errorMessage.error("Skipping instruction at line " + lineNumber + " overlapping gizmo");
 					break;
 				case "absorber":
 					if (splitCommand.length != 6)
-						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid absorber instruction");
+						errorMessage
+								.error("Skipping instruction at line " + lineNumber + " invalid absorber instruction");
 					else if (!addAbsorber(splitCommand[1], Integer.parseInt(splitCommand[2]),
 							Integer.parseInt(splitCommand[3]), Integer.parseInt(splitCommand[4]),
 							Integer.parseInt(splitCommand[5])))
@@ -1137,13 +1144,15 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					break;
 				case "rotate":
 					if (splitCommand.length != 2)
-						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
+						errorMessage
+								.error("Skipping instruction at line " + lineNumber + " invalid rotate instruction");
 					else
 						rotateGizmo(splitCommand[1]);
 					break;
 				case "delete":
 					if (splitCommand.length != 2)
-						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid delete instruction");
+						errorMessage
+								.error("Skipping instruction at line " + lineNumber + " invalid delete instruction");
 					else
 						deleteGizmo(splitCommand[1]);
 					break;
@@ -1156,7 +1165,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					break;
 				case "keyconnect":
 					if (splitCommand.length != 5)
-						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid key connect instruction");
+						errorMessage.error(
+								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
 						if (splitCommand[3].equals("up"))
 							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + "released");// connect
@@ -1166,13 +1176,15 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					break;
 				case "connect":
 					if (splitCommand.length != 3)
-						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid connect instruction");
+						errorMessage
+								.error("Skipping instruction at line " + lineNumber + " invalid connect instruction");
 					else
 						connectGizmo(gizmos.get(splitCommand[1]), gizmos.get(splitCommand[2]));
 					break;
 				case "friction":
 					if (splitCommand.length != 3)
-						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid friction instruction");
+						errorMessage
+								.error("Skipping instruction at line " + lineNumber + " invalid friction instruction");
 					else {
 						errorMessage.error(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						setFriction(Double.parseDouble((splitCommand[1])), Double.parseDouble((splitCommand[2])));
@@ -1180,7 +1192,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					break;
 				case "gravity":
 					if (splitCommand.length != 2) {
-						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
+						errorMessage
+								.error("Skipping instruction at line " + lineNumber + " invalid gravity instruction");
 					} else {
 						setGravity(Double.parseDouble((splitCommand[1])));
 					}
@@ -1224,8 +1237,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		return drawables;
 	}
 
-	public boolean containsGizmo(int x, int y) {
-		String key = findGizmo(x, y);
+	public boolean containsGizmo(double x, double y) {
+		String key = findGizmo((int)x,(int)y);
+		if (key == null)
+			key = findBall(x, y);
 		if (key == null)
 			return false;
 		return true;
@@ -1290,7 +1305,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	private void printList(Collection<?> l) {
-		for(Object o : l){
+		for (Object o : l) {
 			System.out.println(o.toString());
 		}
 	}

@@ -101,7 +101,7 @@ public interface IModel {
 	
 	public void keyPressed(String k);
 	
-	public boolean containsGizmo(int x, int y);
+	public boolean containsGizmo(double x, double y);
 
 	public void deleteBall(double x, double y);
 
