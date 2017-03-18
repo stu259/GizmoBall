@@ -154,7 +154,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					collidingBall = ball;
 					if (linesToGizmos.get(line).isRotatingOnPivot()) {
 						IGizmo gizmo = linesToGizmos.get(line);
-						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), gizmo.getAngularVel(),
+						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(), (gizmo.getAngularVel()/180) * time,
 								circ, vel, gizmo.getCoef());
 					} else
 						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
@@ -169,7 +169,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					collidingBall = ball;
 					if (circlesToGizmos.get(circle).isRotatingOnPivot()) {
 						IGizmo gizmo = circlesToGizmos.get(circle);
-						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(), gizmo.getAngularVel(), 
+						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(), (gizmo.getAngularVel()/180) * time, 
 								circ, vel, gizmo.getCoef());
 					} else
 						updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
