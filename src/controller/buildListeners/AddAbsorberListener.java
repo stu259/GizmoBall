@@ -28,6 +28,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
     public void actionPerformed(ActionEvent e) {
         buildListener.setMouseListener(this);
         display.changeText("Select Absorber Top Left Location");
+        isClicked=false;
     }
 
     public void mousePressed(MouseEvent e) {

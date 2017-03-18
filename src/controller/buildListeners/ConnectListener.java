@@ -29,6 +29,7 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
 		display.changeText("Select Gizmo 1");
+		isClicked = false;
 	}
 
 	public void mousePressed(MouseEvent e) {

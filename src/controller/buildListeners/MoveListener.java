@@ -29,6 +29,7 @@ public class MoveListener implements ActionListener, MouseInputListener {
     public void actionPerformed(ActionEvent e) {
         buildListener.setMouseListener(this);
         display.changeText("Select Gizmo");
+        isClicked = false;
     }
 
     public void mousePressed(MouseEvent e) {
