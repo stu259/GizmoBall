@@ -86,6 +86,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		linesToGizmos.clear();
 		circlesToGizmos.clear();
 		absorberToBalls.clear();
+		
 
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
@@ -93,6 +94,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		}
 
 		resetBalls();
+		resetGizmos();
+		
 	}
 
 	private void drawGizmos(IGizmo gizmo) {
@@ -295,6 +298,30 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		}
 	}
 
+	private void resetGizmos(){
+		for (IGizmo gizmo : gizmos.values()) {
+			//make sure all gizmos aren't hit and triggered
+			gizmo.setHit(0);
+			if(gizmo.triggered()){
+				gizmo.trigger();
+			}
+			
+			//moves flippers back down
+			if (gizmo.gizmoType().toLowerCase().equals("leftflipper")) {
+				LeftFlipperGizmo flipper = (LeftFlipperGizmo) gizmo;
+				flipper.setCurrentAngle(0);
+				flipper.rotateOnPivot(false);
+				flipper.redraw();
+			}
+			else if (gizmo.gizmoType().toLowerCase().equals("rightflipper")) {
+				RightFlipperGizmo flipper = (RightFlipperGizmo) gizmo;
+				flipper.setCurrentAngle(0);
+				flipper.rotateOnPivot(false);
+				flipper.redraw();
+			}
+		}
+	}
+	
 	private void triggerFlippers() {
 		for (IGizmo gizmo : gizmos.values()) {
 

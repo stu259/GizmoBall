@@ -18,7 +18,7 @@ public class RightFlipperGizmo extends Gizmo{
 		this.setAngularVel(1080);
 	}
 
-	private void makeRightFlipper(){
+	private void makeRightFlipper(){		
 		double radius = (double) size/8;
 		int y2 = this.getEndY();
 		int x2 = this.getEndX();
