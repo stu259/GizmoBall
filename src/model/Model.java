@@ -105,8 +105,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		for (Circle corner : corners) {
 			circlesToGizmos.put(corner, gizmo);
 		}
-		printList(lines);
-		printList(corners);
 	}
 
 	private void makeWalls(int boardSize) {
@@ -233,7 +231,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					// pause ball
 					collidingBall.pause();
 					// add ball to absorbers queue
-					AbsorberGizmo abs = (AbsorberGizmo) linesToGizmos.get(lineHit);
+					AbsorberGizmo abs = (AbsorberGizmo) circlesToGizmos.get(circleHit);
 					collidingBall.setVelocity(abs.getExitVeloicty());
 					Queue<Ball> temp = new LinkedList<Ball>();
 					if (absorberToBalls.get(abs) != null)
@@ -276,11 +274,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				return;
 			if (gizmo.triggered()) {
 				AbsorberGizmo abs = (AbsorberGizmo) gizmo;
+				if(!absorberToBalls.keySet().contains(abs)){
+					abs.trigger();
+					return;
+				}
 				if (!absorberToBalls.get(abs).isEmpty()) {
 					Ball ballToFire = absorberToBalls.get(abs).remove();
 					ballToFire.setY(abs.getStartY() - ballToFire.getRadius());
 					ballToFire.resume();
-					System.out.println("moved one ball");
 					moveBallsInAbsorber(abs);
 				}
 				abs.trigger();// untrigger
@@ -932,7 +933,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			tempList = new ArrayList<IGizmo>();
 		tempList.add(gizmo);
 		keylistToGizmos.put(k, tempList);
-		printList(keylistToGizmos.get(k));
 	}
 
 	@Override
