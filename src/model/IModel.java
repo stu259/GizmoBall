@@ -27,7 +27,7 @@ public interface IModel {
 	/*
 	 * Removes a gizmo at the given coordinate
 	 */
-	public void deleteGizmo(int x, int y);
+	public boolean deleteGizmo(int x, int y);
 
 	/*
 	 * Removes all gizmos from the board
@@ -83,15 +83,15 @@ public interface IModel {
 	/*
 	 * Disconnects key actions bound to the given gizmo
 	 */
-	void removeKeyPress(int x, int y);
+//	public void removeKeyPress(int x, int y);
 
-	boolean addAbsorber(int x, int y, int ex, int ey);
+	public boolean addAbsorber(int x, int y, int ex, int ey);
 
-	void connectGizmo(int x1, int y1, int x2, int y2);
+	public boolean connectGizmo(int x1, int y1, int x2, int y2);
 
-	void disconnectGizmo(int x, int y);
+	public boolean disconnectGizmo(int x, int y);
 
-	void keyConnectGizmo(int x, int y, String k);
+	public boolean keyConnectGizmo(int x, int y, String k);
 	
 	public double[] getFriction();
 	
@@ -103,9 +103,9 @@ public interface IModel {
 	
 	public boolean containsGizmo(double x, double y);
 
-	public void deleteBall(double x, double y);
+	public boolean deleteBall(double x, double y);
 
-	public Boolean moveBall(double x, double y, double newX, double newY);
+	public boolean moveBall(double x, double y, double newX, double newY);
 
 	public void resetBalls();
 	

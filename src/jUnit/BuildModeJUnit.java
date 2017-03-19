@@ -262,12 +262,6 @@ public class BuildModeJUnit {
 		model.connectGizmo(x, y, ex, ey);
 	}
 
-	@Test
-	public void removeKeypress() {
-		model.addGizmo(gizmo, x, y);
-		model.keyConnectGizmo(x, y, "32");
-		model.removeKeyPress(x, y);
-	}
 
 	@Test
 	public void disconnectGizmo() {

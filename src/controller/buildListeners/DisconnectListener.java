@@ -36,7 +36,6 @@ public class DisconnectListener implements ActionListener, MouseInputListener {
 			display.changeText("Select Gizmo to disconnect");
 		} else {
 			model.disconnectGizmo(x,y);
-			model.removeKeyPress(x,y);
 		}
 	}
 

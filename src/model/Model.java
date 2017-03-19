@@ -889,12 +889,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public void connectGizmo(int x1, int y1, int x2, int y2) {
+	public boolean connectGizmo(int x1, int y1, int x2, int y2) {
 		String gizmo1 = findGizmo(x1, y1);
 		String gizmo2 = findGizmo(x2, y2);
 		if (gizmo1 != null && gizmo2 != null) {
 			connectGizmo(gizmos.get(gizmo1), gizmos.get(gizmo2));
+			return true;
 		}
+		return false;
 	}
 
 	private void disconnectGizmo(IGizmo gizmo) {
@@ -909,14 +911,17 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			}
 			gizmo.clearIncomingConnections();
 		}
+		removeKeyPress(gizmo);
 	}
 
 	@Override
-	public void disconnectGizmo(int x, int y) {
+	public boolean disconnectGizmo(int x, int y) {
 		String gizmo = findGizmo(x, y);
 		if (gizmo != null) {
 			disconnectGizmo(gizmos.get(gizmo));
+			return true;
 		}
+		return false;
 	}
 
 	private void keyConnectGizmo(IGizmo gizmo, String k) {
@@ -931,14 +936,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public void keyConnectGizmo(int x, int y, String k) {
+	public boolean keyConnectGizmo(int x, int y, String k) {
 		String gizmo = findGizmo(x, y);
 		if (gizmo != null) {
 			if (gizmos.get(gizmo).gizmoType().equals("absorber") && k.contains("released")) {
-				return;
+				return false;
 			}
 			keyConnectGizmo(gizmos.get(gizmo), k);
+			return true;
 		}
+		return false;
 	}
 
 	private void removeKeyPress(IGizmo gizmo) {
@@ -952,11 +959,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		}
 	}
 
-	@Override
-	public void removeKeyPress(int x, int y) {
-		removeKeyPress(gizmos.get(findGizmo(x, y)));
-	}
-
 	private void deleteGizmo(String key) {
 		gizmos.remove(key);
 		this.setChanged();
@@ -964,11 +966,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public void deleteGizmo(int x, int y) {
+	public boolean deleteGizmo(int x, int y) {
 		String gizmoKey = findGizmo(x, y);
 
-		if (gizmoKey != null)
+		if (gizmoKey != null){
 			deleteGizmo(gizmoKey);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -1249,6 +1254,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		return drawables;
 	}
 
+	@Override
 	public boolean containsGizmo(double x, double y) {
 		String key = findGizmo((int)x,(int)y);
 		if (key == null)
@@ -1259,11 +1265,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public void deleteBall(double x, double y) {
+	public boolean deleteBall(double x, double y) {
 		String ballKey = findBall(x, y);
 
-		if (ballKey != null)
+		if (ballKey != null){
 			deleteBall(ballKey);
+			return true;
+		}
+		return false;
 	}
 
 	private void deleteBall(String key) {
@@ -1273,7 +1282,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public Boolean moveBall(double x, double y, double newX, double newY) {
+	public boolean moveBall(double x, double y, double newX, double newY) {
 		String ballKey = findBall(x, y);
 
 		if (ballKey != null) {
