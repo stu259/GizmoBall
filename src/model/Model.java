@@ -1,8 +1,6 @@
 package model;
 
 //import physics.*;
-import physics.Geometry.VectPair;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -42,10 +40,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private Map<LineSegment, IGizmo> linesToGizmos;
 	private Map<String, Ball> balls;
 	private Map<String, List<IGizmo>> keylistToGizmos;
-
 	private Map<IGizmo, Queue<Ball>> absorberToBalls;
 
 	private List<LineSegment> walls;
+	private List<IGizmo> rotatingFlippers;
 
 	private int boardSize;
 
@@ -63,6 +61,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		absorberToBalls = new HashMap<IGizmo, Queue<Ball>>();
 
 		walls = new ArrayList<LineSegment>();
+		rotatingFlippers = new ArrayList<IGizmo>();
+		
 		makeWalls(boardSize);
 	}
 
@@ -87,6 +87,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		circlesToGizmos.clear();
 		absorberToBalls.clear();
 		
+		resetGizmos();
 
 		for (String key : gizmos.keySet()) {
 			IGizmo gizmo = gizmos.get(key);
@@ -94,7 +95,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		}
 
 		resetBalls();
-		resetGizmos();
 		
 	}
 
@@ -124,10 +124,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private CollisionInfo timeUntilCollision() {
 		double lowestColTime = Double.MAX_VALUE;
 		Ball collidingBall = null;
-		Ball collidingBall2 = null; // this is hard code method, change later
+//		Ball collidingBall2 = null; // this is hard code method, change later
 									// plz tyvm xo
 		Vect updatedVel = new Vect(0, 0);
-		Vect updatedVel2 = null; // only used for ball-to-ball collisions
+//		Vect updatedVel2 = null; // only used for ball-to-ball collisions
 		LineSegment lineHit = null;
 		Circle circleHit = null;
 
@@ -153,12 +153,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					if (linesToGizmos.get(line).isRotatingOnPivot()) {
-						IGizmo gizmo = linesToGizmos.get(line);
-						updatedVel = Geometry.reflectRotatingWall(line, gizmo.getPivotPoint(),
-								(gizmo.getAngularVel() / 180) * time, circ, vel, gizmo.getCoef());
-					} else
-						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
+					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
 				}
 			}
 			for (Circle circle : circlesToGizmos.keySet()) {
@@ -168,35 +163,55 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					circleHit = circle;
 					lowestColTime = nextTime;
 					collidingBall = ball;
-					if (circlesToGizmos.get(circle).isRotatingOnPivot()) {
-						IGizmo gizmo = circlesToGizmos.get(circle);
-						updatedVel = Geometry.reflectRotatingCircle(circle, gizmo.getPivotPoint(),
-								(gizmo.getAngularVel() / 180) * time, circ, vel, gizmo.getCoef());
-					} else
-						updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
-								circlesToGizmos.get(circle).getCoef());
+					updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
+							circlesToGizmos.get(circle).getCoef());
 				}
 			}
-			for (Ball ball2 : balls.values()) {
-				if (ball2.equals(ball) || ball2.paused())
-					continue;
-
-				nextTime = Geometry.timeUntilBallBallCollision(ball.getCircle(), ball.getVelocity(), ball2.getCircle(),
-						ball2.getVelocity());
-				if (nextTime < lowestColTime) {
-					lineHit = null;
-					circleHit = null;
-					VectPair vectPair = null;
-					lowestColTime = nextTime;
-					collidingBall = ball;
-					collidingBall2 = ball2;
-					vectPair = Geometry.reflectBalls(ball.getCenter(), ball.getMass(), ball.getVelocity(),
-							ball2.getCenter(), ball2.getMass(), ball2.getVelocity());
-					updatedVel = vectPair.v1;
-					updatedVel2 = vectPair.v2;
+			for(IGizmo flipper : rotatingFlippers){
+				for(LineSegment line : flipper.getLines()){
+					nextTime = Geometry.timeUntilRotatingWallCollision(line, flipper.getPivotPoint(),
+							flipper.getAngularVel()/(1 / time), ball.getCircle(), vel);
+					if(nextTime < lowestColTime){ //collision
+						lineHit = null;
+						circleHit = null;
+						lowestColTime = nextTime;
+						collidingBall = ball;
+						updatedVel = Geometry.reflectRotatingWall(line, flipper.getPivotPoint(),
+								(flipper.getAngularVel() / (1 / time)), circ, vel, flipper.getCoef());
+					}
+				}
+				for(Circle circle : flipper.getCorners()){
+					nextTime = Geometry.timeUntilRotatingCircleCollision(circle, flipper.getPivotPoint(), 
+							flipper.getAngularVel()/(1 / time), ball.getCircle(), vel);
+					if(nextTime < lowestColTime){
+						lineHit = null;
+						circleHit = null;
+						lowestColTime = nextTime;
+						collidingBall = ball;
+						updatedVel = Geometry.reflectRotatingCircle(circle, flipper.getPivotPoint(),
+								(flipper.getAngularVel() / (1 / time)), circ, vel, flipper.getCoef());
+					}
 				}
 			}
-
+//			for (Ball ball2 : balls.values()) {
+//				if (ball2.equals(ball) || ball2.paused())
+//					continue;
+//
+//				nextTime = Geometry.timeUntilBallBallCollision(ball.getCircle(), ball.getVelocity(), ball2.getCircle(),
+//						ball2.getVelocity());
+//				if (nextTime < lowestColTime) {
+//					lineHit = null;
+//					circleHit = null;
+//					VectPair vectPair = null;
+//					lowestColTime = nextTime;
+//					collidingBall = ball;
+//					collidingBall2 = ball2;
+//					vectPair = Geometry.reflectBalls(ball.getCenter(), ball.getMass(), ball.getVelocity(),
+//							ball2.getCenter(), ball2.getMass(), ball2.getVelocity());
+//					updatedVel = vectPair.v1;
+//					updatedVel2 = vectPair.v2;
+//				}
+//			}
 		}
 		if (lowestColTime < time) {
 			// line collision
@@ -258,38 +273,33 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			}
 		}
 
-		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, collidingBall2, updatedVel2));
+		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel));
 
 	}
 
 	@Override
 	public void tick() {
-		fireAbsorber();
+//		System.out.println("tick");
+		loopGizmos();
 		moveBalls();
-		triggerFlippers();
 		this.setChanged();
 		this.notifyObservers();
 	}
 
-	private void fireAbsorber() {
-		for (IGizmo gizmo : gizmos.values()) {
-			if (!gizmo.gizmoType().equals("absorber"))
-				return;
-			if (gizmo.triggered()) {
-				AbsorberGizmo abs = (AbsorberGizmo) gizmo;
-				if(!absorberToBalls.keySet().contains(abs)){
-					abs.trigger();
+	private void fireAbsorber(AbsorberGizmo absorber) {
+			if (absorber.triggered()) {
+				if(!absorberToBalls.keySet().contains(absorber)){
+					absorber.trigger();
 					return;
 				}
-				if (!absorberToBalls.get(abs).isEmpty()) {
-					Ball ballToFire = absorberToBalls.get(abs).remove();
-					ballToFire.setY(abs.getStartY() - ballToFire.getRadius());
+				if (!absorberToBalls.get(absorber).isEmpty()) {
+					Ball ballToFire = absorberToBalls.get(absorber).remove();
+					ballToFire.setY(absorber.getStartY() - ballToFire.getRadius());
 					ballToFire.resume();
-					moveBallsInAbsorber(abs);
+					moveBallsInAbsorber(absorber);
 				}
-				abs.trigger();// untrigger
+				absorber.trigger();// untrigger
 			}
-		}
 	}
 
 	private void moveBallsInAbsorber(AbsorberGizmo abs) {
@@ -322,11 +332,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		}
 	}
 	
-	private void triggerFlippers() {
+	private void loopGizmos() {
+		rotatingFlippers.clear();
+		
 		for (IGizmo gizmo : gizmos.values()) {
 
-			gizmo.cooldownHit(); // Put this here so that there is no need to
-									// float through the rest of the list
+			gizmo.cooldownHit();
 
 			if (gizmo.gizmoType().toLowerCase().equals("leftflipper")) {
 				LeftFlipperGizmo flipper = (LeftFlipperGizmo) gizmo;
@@ -336,6 +347,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					// get lines and circles, rotate them via pivot
 					if (flipper.getCurrentAngle() != flipper.getMaxAngle()) {
 						flipper.rotateOnPivot(true);
+						rotatingFlippers.add(flipper); //add to the list of rotating flippers
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
 
@@ -366,15 +378,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						flipper.setCorners(newCorners);
 						flipper.setLines(newLines);
 
-						// add back to global list
-						for (LineSegment l : newLines) {
-							linesToGizmos.put(l, gizmo);
-						}
-						for (Circle c : corners) {
-							circlesToGizmos.put(c, gizmo);
-						}
-
+				
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
+						
+						// add back to global list
+						if(flipper.getCurrentAngle()==flipper.getMaxAngle() || flipper.getCurrentAngle()==0){
+							for (LineSegment l : newLines)
+								linesToGizmos.put(l, gizmo);
+							for (Circle c : corners)
+								circlesToGizmos.put(c, gizmo);
+						}
 					} else {
 						flipper.rotateOnPivot(false);
 
@@ -384,6 +397,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				} else {// NOT TRIGGERED move back down
 					if (flipper.getCurrentAngle() != 0) {
 						flipper.rotateOnPivot(true);
+						rotatingFlippers.add(flipper);
 
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
@@ -414,16 +428,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 						flipper.setCorners(newCorners);
 						flipper.setLines(newLines);
-
-						// add back to global list
-						for (LineSegment l : newLines) {
-							linesToGizmos.put(l, gizmo);
-						}
-						for (Circle c : corners) {
-							circlesToGizmos.put(c, gizmo);
-						}
-
+						
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
+						
+						// add back to global list
+						if(flipper.getCurrentAngle()==flipper.getMaxAngle()|| flipper.getCurrentAngle()==0){
+							for (LineSegment l : newLines)
+								linesToGizmos.put(l, gizmo);
+							for (Circle c : corners)
+								circlesToGizmos.put(c, gizmo);
+						}
 					} else {
 						flipper.rotateOnPivot(false);
 						continue;
@@ -440,6 +454,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 					if (flipper.getCurrentAngle() != flipper.getMaxAngle()) {
 						flipper.rotateOnPivot(true);
+						rotatingFlippers.add(flipper);
 
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
@@ -470,16 +485,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 						flipper.setCorners(newCorners);
 						flipper.setLines(newLines);
-
-						// add back to global list
-						for (LineSegment l : newLines) {
-							linesToGizmos.put(l, gizmo);
-						}
-						for (Circle c : corners) {
-							circlesToGizmos.put(c, gizmo);
-						}
-
+						
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
+						
+						// add back to global list
+						if(flipper.getCurrentAngle()==flipper.getMaxAngle()|| flipper.getCurrentAngle()==0){
+							for (LineSegment l : newLines)
+								linesToGizmos.put(l, gizmo);
+							for (Circle c : corners)
+								circlesToGizmos.put(c, gizmo);
+						}
 					} else {
 						flipper.rotateOnPivot(false);
 						continue;
@@ -488,6 +503,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				} else {// NOT TRIGGERED move back down
 					if (flipper.getCurrentAngle() != 0) {
 						flipper.rotateOnPivot(true);
+						rotatingFlippers.add(flipper);
 
 						List<LineSegment> lines = flipper.getLines();
 						List<Circle> corners = flipper.getCorners();
@@ -519,20 +535,23 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						flipper.setCorners(newCorners);
 						flipper.setLines(newLines);
 
-						// add back to global list
-						for (LineSegment l : newLines) {
-							linesToGizmos.put(l, gizmo);
-						}
-						for (Circle c : corners) {
-							circlesToGizmos.put(c, gizmo);
-						}
-
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
+						
+						// add back to global list
+						if(flipper.getCurrentAngle()==flipper.getMaxAngle()|| flipper.getCurrentAngle()==0){
+							for (LineSegment l : newLines)
+								linesToGizmos.put(l, gizmo);
+							for (Circle c : corners)
+								circlesToGizmos.put(c, gizmo);
+						}
 					} else {
 						flipper.rotateOnPivot(false);
 						continue;
 					}
 				}
+			}else if(gizmo.gizmoType().equals("absorber")){
+				AbsorberGizmo abs = (AbsorberGizmo) gizmo;
+				fireAbsorber(abs);
 			}
 		}
 	}
@@ -541,35 +560,15 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
-		Ball colBall2 = null;
-		boolean colbal2check = false;
 
 		if (colTime < time && !colBall.paused()) { // collision detected
 			String key = colBall.getKey();
-			String key2 = null;
 			balls.remove(key);
 
-			if (colInfo.getCollidingBall2() != null) {
-				colBall2 = colInfo.getCollidingBall2();
-				key2 = colBall2.getKey();
-				balls.remove(key2);
-				colbal2check = true;
-
-				colBall = calculateBallMove(colBall, colTime);
-				colBall.setVelocity(colInfo.getUpdatedVel());
-				colBall2 = calculateBallMove(colBall2, colTime);
-				colBall2.setVelocity(colInfo.getUpdatedVel2());
-
-				applyFriction(colBall, colTime);
-				applyGravity(colBall, colTime);
-				applyFriction(colBall2, colTime);
-				applyGravity(colBall2, colTime);
-			} else {
-				colBall = calculateBallMove(colBall, colTime);
-				colBall.setVelocity(colInfo.getUpdatedVel());
-				applyFriction(colBall, colTime);
-				applyGravity(colBall, colTime);
-			}
+			colBall = calculateBallMove(colBall, colTime);
+			colBall.setVelocity(colInfo.getUpdatedVel());
+			applyFriction(colBall, colTime);
+			applyGravity(colBall, colTime);
 
 			for (Ball ball : balls.values()) {
 				if (ball.paused())
@@ -579,8 +578,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				applyGravity(ball, colTime);
 			}
 			balls.put(key, colBall);
-			if (colbal2check)
-				balls.put(key2, colBall2);
 		} else {
 			for (Ball ball : balls.values()) {
 				if (!ball.paused() && !ball.isAbsorbed()) {
@@ -608,15 +605,13 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 	private class CollisionInfo {
 		double colTime;
-		Ball collidingBall, collidingBall2;
-		Vect updatedVel, updatedVel2;
+		Ball collidingBall;
+		Vect updatedVel;
 
-		public CollisionInfo(double t, Ball b, Vect v, Ball b2, Vect v2) {
+		public CollisionInfo(double t, Ball b, Vect v) {
 			colTime = t;
 			collidingBall = b;
-			collidingBall2 = b2;
 			updatedVel = v;
-			updatedVel2 = v2;
 		}
 
 		public double getColTime() {
@@ -627,17 +622,11 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			return collidingBall;
 		}
 
-		public Ball getCollidingBall2() {
-			return collidingBall2;
-		}
 
 		public Vect getUpdatedVel() {
 			return updatedVel;
 		}
 
-		public Vect getUpdatedVel2() {
-			return updatedVel2;
-		}
 
 	}
 
