@@ -813,6 +813,18 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	public boolean addAbsorber(int x, int y, int ex, int ey) {
+		if(x > ex){
+			int temp = x;
+			x = ex;
+			ex = temp;
+		}
+		
+		if(y > ey){
+			int temp = y;
+			y = ey;
+			ey = temp;
+		}
+		
 		String xCoord = String.valueOf(x);
 		String yCoord = String.valueOf(y);
 
