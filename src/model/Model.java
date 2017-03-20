@@ -1428,12 +1428,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	private String findBall(double x, double y) {
-		double ex = x + 1;
-		double ey = y + 1;
 
 		for (String key : balls.keySet()) {
-			if (x < balls.get(key).getEndX() && ex > balls.get(key).getStartX() && y < balls.get(key).getEndY()
-					&& ey > balls.get(key).getStartY())
+			if ( (x > balls.get(key).getStartX()) && (x < balls.get(key).getEndX()) && 
+					 (y > balls.get(key).getStartY()) && (y < balls.get(key).getEndY()) );
 				return key;
 		}
 
