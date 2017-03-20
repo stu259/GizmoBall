@@ -49,14 +49,11 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 	private int boardSize;
 	
-	private int tick; 	//REMOVE TESTING ONLY
-	
 	private ErrorMessage errorMessage;
 
 	public Model(ErrorMessage eM) {
 		errorMessage = eM;
 		boardSize = 20;
-		tick = 0; //TESTING ONLY REMOVE PLEASE
 		
 		gizmos = new HashMap<String, IGizmo>();
 		balls = new HashMap<String, Ball>();
@@ -293,24 +290,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 	@Override
 	public void tick() {
-//		System.out.println("tick");
-		tick++;
-		boolean complete=true;
-		
-		IGizmo abs = null;
-		Queue<Ball> q = new LinkedList<Ball>();
-		
-		for(IGizmo gizmo : gizmos.values()){
-			if(gizmo.gizmoType().toLowerCase().equals("absorber"))
-				abs = gizmo;
-		}
-		
-		if(complete && tick==200)
-//			for(Ball ball : balls.values())
-			System.out.println(absorberToBalls.get(abs).size());
-		
-		complete=false;
-		
 		loopGizmos();
 		moveBalls();
 		this.setChanged();
@@ -416,10 +395,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	
 	private void loopGizmos() {
 		rotatingFlippers.clear();
-		
-		for(Ball ball : balls.values()){
-			
-		}
 		
 		for (IGizmo gizmo : gizmos.values()) {
 
