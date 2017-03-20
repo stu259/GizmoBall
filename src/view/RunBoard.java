@@ -55,14 +55,17 @@ public class RunBoard extends JPanel implements Observer {
 			int y2 = gizmo.getEndY() * scale;
 
 			if (gizmo.getGizmoType().toLowerCase().equals("square")) {
-				g2.setColor(Color.red);
+				g2.setColor(Color.RED);
 				if (gizmo.isHit()) {
-					g2.setColor(Color.yellow);
+					g2.setColor(Color.YELLOW);
 				}
 				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("circle")) {
 				g2.setColor(Color.GREEN);
+				if (gizmo.isHit()) {
+					g2.setColor(Color.ORANGE);
+				}
 				g2.fillOval(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("absorber")) {
@@ -71,6 +74,9 @@ public class RunBoard extends JPanel implements Observer {
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("triangle")) {
 				g2.setColor(Color.BLUE);
+				if (gizmo.isHit()) {
+					g2.setColor(Color.MAGENTA);
+				}
 				Polygon p = new Polygon(new int[] { x1, x2, x1 }, new int[] { y2, y1, y1 }, 3);
 				AffineTransform transform = new AffineTransform();
 				transform.rotate(Math.toRadians(gizmo.getRotation()), p.getBounds().getCenterX(),
