@@ -90,10 +90,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		absorberToBalls.clear();
 		
 		resetGizmos();
+		
+		Queue<Ball> q;
 
 		for (String key : gizmos.keySet()) {
-			if(gizmos.get(key).gizmoType().toLowerCase().equals("absorber"))
-				absorberToBalls.put(gizmos.get(key), null);
+			if(gizmos.get(key).gizmoType().toLowerCase().equals("absorber")){
+				q = new LinkedList<Ball>();
+				absorberToBalls.put(gizmos.get(key), q);
+			}
 			IGizmo gizmo = gizmos.get(key);
 			drawGizmos(gizmo);
 		}
@@ -908,8 +912,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		gizmos.put(key, gizmo);
 		gizmo.setKey(key);
 		// draw absorber
-
-		absorberToBalls.put(gizmo, null); //adds fresh keys to the hashmap
+		Queue<Ball> q = new LinkedList<Ball>();
+		absorberToBalls.put(gizmo, q); //adds fresh keys to the hashmap
 		
 		this.setChanged();
 		this.notifyObservers();
