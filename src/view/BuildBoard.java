@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -30,7 +31,7 @@ public class BuildBoard extends JPanel implements Observer {
 
 	public BuildBoard(int s, IDrawableModel model) {
 		model.addObserver(this);
-		size=s;
+		size = s;
 		scale = size / 20;
 		gm = model;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -83,7 +84,7 @@ public class BuildBoard extends JPanel implements Observer {
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("absorber")) {
 				g2.setColor(Color.PINK);
-				g2.fillRect(x1, y1, x2 - x1 , y2 - y1 );
+				g2.fillRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("triangle")) {
 				g2.setColor(Color.BLUE);
@@ -102,6 +103,7 @@ public class BuildBoard extends JPanel implements Observer {
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
 				Shape transformed = transform.createTransformedShape(rf);
 				g2.fill(transformed);
+				g2.setStroke(new BasicStroke(2));
 				g2.drawRect(x1, y1, x2 - x1, y2 - y1);
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("leftflipper")) {
@@ -113,6 +115,7 @@ public class BuildBoard extends JPanel implements Observer {
 				transform.rotate(Math.toRadians(gizmo.getRotation()), x1 + 1 * scale, y1 + 1 * scale);
 				Shape transformed = transform.createTransformedShape(lf);
 				g2.fill(transformed);
+				g2.setStroke(new BasicStroke(2));
 				g2.drawRect(x1, y1, x2 - x1, y2 - y1);
 
 			}
