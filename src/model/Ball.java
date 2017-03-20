@@ -170,8 +170,20 @@ public class Ball {
 	/*
 	 * Params: (Vect) vel
 	 */
-	public void setVelocity(Vect vel){
-		this.vel = vel;
+	public void setVelocity(Vect v){
+		double tempX = v.x();
+		double tempY = v.y();
+		if(tempX > maxSpeed)
+			tempX = maxSpeed;
+		else if(tempX < minSpeed)
+			tempX = minSpeed;
+		
+		if(tempY > maxSpeed)
+			tempY = maxSpeed;
+		else if(tempY < minSpeed)
+			tempY = minSpeed;
+		
+		this.vel = new Vect(tempX,tempY);
 	}
 	
 	public double getStartX(){
