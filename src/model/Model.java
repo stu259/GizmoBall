@@ -23,6 +23,7 @@ import java.util.Queue;
 import physics.Angle;
 import physics.Circle;
 import physics.Geometry;
+import physics.Geometry.VectPair;
 import physics.LineSegment;
 import physics.Vect;
 
@@ -102,9 +103,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 		resetBalls();
 		
-		printList(keylistToGizmos.values());
-		printList(keylistToGizmos.keySet());
-		
 	}
 
 	private void drawGizmos(IGizmo gizmo) {
@@ -133,10 +131,13 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private CollisionInfo timeUntilCollision() {
 		double lowestColTime = Double.MAX_VALUE;
 		Ball collidingBall = null;
+		boolean skip = false;
+		VectPair vectPair = null;
 		Vect updatedVel = new Vect(0, 0);
 		LineSegment lineHit = null;
 		Circle circleHit = null;
-		boolean skip = false;
+		Ball collidingBall2 = null;
+		Vect updatedVel2 = null;
 		Geometry.setForesight(time * 2);
 
 		for (Ball ball : balls.values()) {
@@ -162,6 +163,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				if (nextTime < lowestColTime) {
 					lowestColTime = nextTime;
 					collidingBall = ball;
+					collidingBall2 = null;
 					updatedVel = Geometry.reflectWall(line, vel, 1);
 				}
 			}
@@ -172,6 +174,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
+					collidingBall2 = null;
 					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
 				}
 			}
@@ -182,6 +185,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					circleHit = circle;
 					lowestColTime = nextTime;
 					collidingBall = ball;
+					collidingBall2 = null;
 					updatedVel = Geometry.reflectCircle(circle.getCenter(), ball.getCenter(), vel,
 							circlesToGizmos.get(circle).getCoef());
 				}
@@ -195,6 +199,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						circleHit = null;
 						lowestColTime = nextTime;
 						collidingBall = ball;
+						collidingBall2 = null;
 						updatedVel = Geometry.reflectRotatingWall(line, flipper.getPivotPoint(),
 								(flipper.getAngularVel() / (1 / time)), circ, vel, flipper.getCoef());
 					}
@@ -205,11 +210,29 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					if(nextTime < lowestColTime){
 						lineHit = null;
 						circleHit = null;
+						collidingBall2 = null;
 						lowestColTime = nextTime;
 						collidingBall = ball;
 						updatedVel = Geometry.reflectRotatingCircle(circle, flipper.getPivotPoint(),
 								(flipper.getAngularVel() / (1 / time)), circ, vel, flipper.getCoef());
 					}
+				}
+			}
+			for (Ball ball2: balls.values()){
+				if (ball2.equals(ball) || ball2.paused())
+					continue;
+				nextTime = Geometry.timeUntilBallBallCollision(ball.getCircle(), ball.getVelocity(), ball2.getCircle(),
+						ball2.getVelocity());
+				if (nextTime < lowestColTime) {
+					lineHit = null;
+					circleHit = null;
+					lowestColTime = nextTime;
+					collidingBall = ball;
+					collidingBall2 = ball2;
+					vectPair = Geometry.reflectBalls(ball.getCenter(), ball.getMass(), ball.getVelocity(),
+							ball2.getCenter(), ball2.getMass(), ball2.getVelocity());
+					updatedVel = vectPair.v1;
+					updatedVel2 = vectPair.v2;
 				}
 			}
 		}
@@ -251,7 +274,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			}
 		}
 
-		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel));
+		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel, collidingBall2, updatedVel2));
 
 	}
 	
@@ -623,58 +646,79 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
 		Ball colBall = colInfo.getCollidingBall();
-
-		if (colTime < time && !colBall.paused()) { // collision detected
-			String key = colBall.getKey();
-			balls.remove(key);
-
-			colBall = calculateBallMove(colBall, colTime);
-			colBall.setVelocity(colInfo.getUpdatedVel());
-			applyFriction(colBall, colTime);
-			applyGravity(colBall, colTime);
-
+		Ball colBall2 = colInfo.getCollidingBall2();
+		
+		//collisions
+		if(colTime < time){
+			//move colliding ball
+			if(colBall != null){
+				if(!(colBall.isAbsorbed() || colBall.paused())){
+					calculateBallMove(colBall, colTime);
+					colBall.setVelocity(colInfo.getUpdatedVel());
+					applyFriction(colBall, colTime);
+					applyGravity(colBall, colTime);
+				}
+			}
+			//move colliding ball2
+			if(colBall2 != null){
+				if(!(colBall2.isAbsorbed() || colBall2.paused())){
+					calculateBallMove(colBall2, colTime);
+					colBall2.setVelocity(colInfo.getUpdatedVel2());
+					applyFriction(colBall2, colTime);
+					applyGravity(colBall2, colTime);
+				}
+			}
+			//move rest of balls
 			for (Ball ball : balls.values()) {
-				if (ball.paused())
+				if(ball.equals(colBall) || ball.equals(colBall2) || (ball.isAbsorbed() || ball.paused()))
 					continue;
-				ball = calculateBallMove(ball, colTime);
+				calculateBallMove(ball, colTime);
 				applyFriction(ball, colTime);
 				applyGravity(ball, colTime);
 			}
-			balls.put(key, colBall);
-		} else {
+		}
+		//no collision. normal movement
+		else{
 			for (Ball ball : balls.values()) {
-				if (!ball.paused() && !ball.isAbsorbed()) {
-					ball = calculateBallMove(ball, time);
-					applyFriction(ball, time);
-					applyGravity(ball, time);
-				}
+				if(ball.isAbsorbed() || ball.paused())
+					continue;
+				calculateBallMove(ball, time);
+				applyFriction(ball, time);
+				applyGravity(ball, time);
 			}
 		}
-
 		this.setChanged();
 		this.notifyObservers(); // update board both in gui and model
 	}
 
-	private Ball calculateBallMove(Ball ball, double newTime) {
-		double vectX = ball.getVelocity().x();
-		double vectY = ball.getVelocity().y();
-		double x = ball.getX() + (vectX * newTime);
-		double y = ball.getY() + (vectY * newTime);
+	private void calculateBallMove(Ball ball, double newTime) {
+		double x = ball.getX() + (ball.getVelocity().x() * newTime);
+		double y = ball.getY() + (ball.getVelocity().y() * newTime);
 		ball.setX(x);
 		ball.setY(y);
-
-		return ball;
 	}
 
 	private class CollisionInfo {
 		double colTime;
 		Ball collidingBall;
+		Ball collidingBall2;
 		Vect updatedVel;
+		Vect updatedVel2;
 
-		public CollisionInfo(double t, Ball b, Vect v) {
+		public Ball getCollidingBall2() {
+			return collidingBall2;
+		}
+
+		public Vect getUpdatedVel2() {
+			return updatedVel2;
+		}
+
+		public CollisionInfo(double t, Ball b, Vect v, Ball b2, Vect v2) {
 			colTime = t;
 			collidingBall = b;
 			updatedVel = v;
+			collidingBall2 = b2;
+			updatedVel2 = v2;
 		}
 
 		public double getColTime() {
@@ -1089,9 +1133,25 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		ball.setVelocity(velGravity);
 	}
 
-	private boolean moveGizmo(int x, int y, IGizmo gizmo) {
+	private boolean moveGizmo(int x, int y, IGizmo gizmo, String key) {
 		if (validatePosition(x, y, x + gizmo.getSize(), y + gizmo.getSize(), gizmo)) {
 			gizmo.newPosition(x, y);
+			
+			//change the key when moving a gizmo
+			String type = String.valueOf(gizmo.gizmoType().charAt(0));
+			String xCoord = String.valueOf(x);
+			String yCoord = String.valueOf(y);
+
+			if (x < 10)
+				xCoord = "0" + xCoord;
+			if (y < 10)
+				yCoord = "0" + yCoord;
+
+			String uniqueKey = type + xCoord + yCoord;
+			
+			gizmos.remove(key);
+			gizmos.put(uniqueKey, gizmo);
+			
 			this.setChanged();
 			this.notifyObservers();
 			return true;
@@ -1112,12 +1172,13 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		} else
 			gizmo = gizmos.get(gizmoKey);
 
-		return moveGizmo(newX, newY, gizmo);
+		return moveGizmo(newX, newY, gizmo, gizmoKey);
 	}
 
 	@Override
 	public void save(File f) {
 		FileWriter writer;
+		resetBalls();
 
 		try {
 			writer = new FileWriter(f);
@@ -1253,7 +1314,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					if (splitCommand.length != 4)
 						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid move instruction");
 					else if (!moveGizmo(Integer.parseInt(splitCommand[2]), Integer.parseInt(splitCommand[3]),
-							gizmos.get(splitCommand[1])))
+							gizmos.get(splitCommand[1]), splitCommand[1]))
 						errorMessage.error("Skipping instruction at line " + lineNumber + " invalid move location");
 					break;
 				case "keyconnect":
@@ -1261,7 +1322,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						errorMessage.error(
 								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
-						keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + splitCommand[3]);
+						keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + " " + splitCommand[3]);
 					}
 					break;
 				case "connect":

@@ -48,36 +48,36 @@ public class Display implements IDisplay, IViewError {
 	private TimerListener timer;
 
 	public Display(Model m) {
-		model =m;
+		model = m;
 	}
 
-	public void addListeners(Map<String, ActionListener> l){
-		listeners=l;
-	}
-	
-	public void addBuildListener(BuildListener b){
-		bL =b;
-	}
-	
-	public void addRunListener(RunListener r){
-		rL =r;
+	public void addListeners(Map<String, ActionListener> l) {
+		listeners = l;
 	}
 
-	public void addTimer(TimerListener t){
-		timer =t;
+	public void addBuildListener(BuildListener b) {
+		bL = b;
 	}
-	
-	public void start(){
+
+	public void addRunListener(RunListener r) {
+		rL = r;
+	}
+
+	public void addTimer(TimerListener t) {
+		timer = t;
+	}
+
+	public void start() {
 		initialise();
 		addMenuBar();
 		tidy();
 	}
-	
+
 	private void initialise() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int size = (int)(screenSize.getHeight()-100)/100;
-		size=size*100;
-		boardSize=(int)size;
+		int size = (int) (screenSize.getHeight() - 100) / 100;
+		size = size * 100;
+		boardSize = (int) size;
 		frame = new JFrame("Gizmo Ball");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		cp = frame.getContentPane();
@@ -203,12 +203,12 @@ public class Display implements IDisplay, IViewError {
 				double temp;
 				if (max[i] / 5 >= 1) {
 					temp = Math.round(x);
-					labelTable.put(new Integer((int) (temp * 1000)), new JLabel(Integer.toString((int)temp)));
+					labelTable.put(new Integer((int) (temp * 1000)), new JLabel(Integer.toString((int) temp)));
 				} else {
 					temp = ((double) Math.round((x) * 1000)) / 1000;
 					labelTable.put(new Integer((int) (temp * 1000)), new JLabel(Double.toString(temp)));
 				}
-				
+
 			}
 			slider[i].setLabelTable(labelTable);
 			slider[i].setMinorTickSpacing((int) (max[i] * 1000) / 10);
@@ -218,14 +218,18 @@ public class Display implements IDisplay, IViewError {
 		}
 		inputPopup.add(input, BorderLayout.CENTER);
 
-		JOptionPane.showMessageDialog(frame, inputPopup, "Input", JOptionPane.PLAIN_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(frame, inputPopup, "Input", JOptionPane.OK_CANCEL_OPTION);
 
-		for (int i = 0; i < message.length; i++) {
-			output[i] = (double)slider[i].getValue() / 1000;
+		if (JOptionPane.OK_OPTION == result) {
+			for (int i = 0; i < message.length; i++) {
+				output[i] = (double) slider[i].getValue() / 1000;
+			}
+
+			return output;
 		}
-
-		return output;
+		return null;
 	}
+
 	@Override
 	public int getScale() {
 		return bB.getScale();

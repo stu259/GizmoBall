@@ -26,7 +26,7 @@ public class MoveListener implements ActionListener, MouseInputListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
-		display.changeText("Select Gizmo to move");
+		display.changeText("Select Gizmo to Move");
 		isClicked = false;
 	}
 
@@ -36,7 +36,7 @@ public class MoveListener implements ActionListener, MouseInputListener {
 			y = (double) e.getY() / (double) display.getScale();
 			if (!model.containsGizmo(x, y)) {
 				display.errorPopup("No Gizmo Selected");
-				display.changeText("Select Gizmo to move");
+				display.changeText("Select Gizmo to Move");
 				isClicked=false;
 			} else {
 				isClicked = true;
@@ -54,14 +54,14 @@ public class MoveListener implements ActionListener, MouseInputListener {
 			}
 
 			isClicked = false;
-			display.changeText("Select Gizmo");
+			display.changeText("Select Gizmo to Move");
 		}
 
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		if (isClicked == false) {
-			display.changeText("Select Gizmo");
+			display.changeText("Select Gizmo to Move");
 		}
 	}
 
