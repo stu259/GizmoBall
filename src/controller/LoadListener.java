@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import jUnit.InvalidLineException;
 import model.IModel;
 import view.IDisplay;
 
@@ -21,7 +22,11 @@ public class LoadListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		File f = d.loadDialog();
 		if (f != null) {
-			m.load(f) ;
+			try {
+				m.load(f) ;
+			} catch (InvalidLineException e1) {
+				//Should never happen
+			}
 			}
 	}
 

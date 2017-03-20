@@ -140,28 +140,25 @@ public class BuildModeJUnit {
 	@Test
 	public void deleteGizmo() {
 		model.addGizmo(gizmo, x, y);
-		model.deleteGizmo(x, y);
-		// assertTrue(model.deleteGizmo(x, y));
+		assertTrue(model.deleteGizmo(x, y));
 	}
 
 	@Test
 	public void deleteGizmonoGizmo() {
-		model.deleteGizmo(x, y);
-		// assertTrue(model.deleteGizmo(x, y));
+		assertFalse(model.deleteGizmo(x, y));
 	}
 
-	
 	@Test
 	public void deleteBall() {
 		model.addBall(xd, yd, velx, vely);
-		model.deleteBall(xd, yd);
+		assertTrue(model.deleteBall(xd, yd));
 	}
-	
+
 	@Test
 	public void deleteBallNoBall() {
-		model.deleteBall(xd, yd);
+		assertFalse(model.deleteBall(xd, yd));
 	}
-	
+
 	@Test
 	public void clear() {
 		model.addGizmo(gizmo, x, y);
@@ -209,21 +206,21 @@ public class BuildModeJUnit {
 		model.addGizmo(gizmo, x, y);
 		model.addGizmo(gizmo, ex, ey);
 		assertFalse(model.moveGizmo(x, y, ex, ey));
-	}	
-	
+	}
+
 	@Test
-	public void moveBall(){
+	public void moveBall() {
 		model.addBall(xd, yd, velx, vely);
 		assertTrue(model.moveBall(xd, yd, 10, 10));
 	}
-	
+
 	@Test
-	public void moveBallNoBall(){
+	public void moveBallNoBall() {
 		assertFalse(model.moveBall(xd, yd, 10, 10));
 	}
-	
+
 	@Test
-	public void moveBallInvalidCoordinate(){
+	public void moveBallInvalidCoordinate() {
 		model.addBall(xd, yd, velx, vely);
 		assertFalse(model.moveBall(xd, yd, 100, 100));
 	}
@@ -231,22 +228,22 @@ public class BuildModeJUnit {
 	@Test
 	public void keyConnect() {
 		model.addGizmo(gizmo, x, y);
-		model.keyConnectGizmo(x, y, "32");
+		assertTrue(model.keyConnectGizmo(x, y, "32"));
 	}
 
 	@Test
 	public void keyConnectNoGizmo() {
 		model.addGizmo(gizmo, x, y);
-		model.keyConnectGizmo(x, y, "32");
+		assertTrue(model.keyConnectGizmo(x, y, "32"));
 	}
 
 	@Test
 	public void connect() {
 		model.addGizmo(gizmo, x, y);
 		model.addGizmo(gizmo, ex, ey);
-		model.connectGizmo(x, y, ex, ey);
+		assertTrue(model.connectGizmo(x, y, ex, ey));
 	}
-	
+
 	@Test
 	public void connect2() {
 		model.addGizmo(gizmo, x, y);
@@ -254,40 +251,39 @@ public class BuildModeJUnit {
 		model.addGizmo(gizmo, 3, 3);
 		model.connectGizmo(x, y, ex, ey);
 		model.connectGizmo(x, y, 3, 3);
-		model.connectGizmo(3, 3, ex, ey);
+		assertTrue(model.connectGizmo(3, 3, ex, ey));
 	}
 
 	@Test
 	public void connectNoGizmo() {
-		model.connectGizmo(x, y, ex, ey);
+		assertFalse(model.connectGizmo(x, y, ex, ey));
 	}
-
 
 	@Test
 	public void disconnectGizmo() {
 		model.addGizmo(gizmo, x, y);
 		model.addGizmo(gizmo, ex, ey);
 		model.connectGizmo(x, y, ex, ey);
-		model.disconnectGizmo(x, y);
+		assertTrue(model.disconnectGizmo(x, y));
 	}
-	
+
 	@Test
 	public void disconnectGizmo2() {
 		model.addGizmo(gizmo, x, y);
 		model.addGizmo(gizmo, ex, ey);
 		model.connectGizmo(ex, ey, x, y);
-		model.disconnectGizmo(x, y);
+		assertTrue(model.disconnectGizmo(x, y));
 	}
 
 	@Test
 	public void disconnectGizmoNoConnection() {
 		model.addGizmo(gizmo, x, y);
 		model.addGizmo(gizmo, ex, ey);
-		model.disconnectGizmo(x, y);
+		assertTrue(model.disconnectGizmo(x, y));
 	}
-	
+
 	@Test
-	public void resetBall(){
+	public void resetBall() {
 		model.addBall(xd, yd, velx, vely);
 		model.resetBalls();
 	}
