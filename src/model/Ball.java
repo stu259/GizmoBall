@@ -16,7 +16,7 @@ public class Ball {
 	public Ball(double x, double y, double xVel, double yVel){
 		this.x = x;
 		this.y = y;
-		minSpeed = 0.01;
+		minSpeed = -200;
 		maxSpeed = 200;
 		vel = new Vect(xVel, yVel);
 		color = Color.CYAN;
@@ -162,6 +162,8 @@ public class Ball {
 			yVel = maxSpeed;
 		else if(yVel < minSpeed)
 			yVel = minSpeed;
+		
+		
 		
 		vel = new Vect(xVel, yVel);
 	}
