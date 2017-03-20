@@ -1,0 +1,8 @@
+Absorber absorber0303 3 3 4 4
+Triangle t0102 1 2
+Rotate t0102
+Connect t0102 absorber0303
+KeyConnect key 32 up absorber0303
+Ball ball01.001.0 1.0 1.0 0.0 0.0
+Gravity 25.0
+Friction 0.025 0.025
