@@ -1203,9 +1203,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
 						if (splitCommand[3].equals("up"))
-							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + "released");// connect
+							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] );//+ "released");// connect
 						else if (splitCommand[3].equals("down"))
-							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + "pressed");// connect
+							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2]); //+ "pressed");// connect
 					}
 					break;
 				case "connect":
