@@ -40,8 +40,7 @@ public class AddAbsorberListener implements ActionListener, MouseInputListener {
         } else if (isClicked == true) {
             isClicked = false;
             if (!model.addAbsorber(x, y, e.getX() / display.getScale() + 1, e.getY() / display.getScale() + 1)) {
-                display.errorPopup("Absorber cannot overlap existing gizmos. \n"
-                        + "Make sure no gizmos exist between the top left and bottom right coordinates of the absorber.");
+                display.errorPopup("Absorber cannot overlap existing gizmos.");
             }
 
         }

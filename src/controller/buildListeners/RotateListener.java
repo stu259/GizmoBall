@@ -23,14 +23,12 @@ public class RotateListener implements ActionListener, MouseInputListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         buildListener.setMouseListener(this);
-        display.changeText("Select Gizmo");
+        display.changeText("Select Gizmo to Rotate");
     }
 
     public void mousePressed(MouseEvent e) {
         if (!model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale())) {
-            display.errorPopup("Cannot perform rotate action \n"
-                    + "Absorber gizmos cannot be rotated \n"
-                    + "It is not possible to rotate an empty grid position");
+            display.errorPopup("Cannot perform rotate action. Keep in mind absorbers cannot be rotated.");
         }
     }
 

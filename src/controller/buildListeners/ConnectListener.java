@@ -28,7 +28,7 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		buildListener.setMouseListener(this);
-		display.changeText("Select Gizmo 1");
+		display.changeText("Select Gizmo 1 to connect");
 		isClicked = false;
 	}
 
@@ -38,23 +38,31 @@ public class ConnectListener implements ActionListener, MouseInputListener {
 			y = e.getY() / display.getScale();
 			if (!model.containsGizmo(x, y)) {
 				display.errorPopup("No Gizmo Selected");
-				display.changeText("Select Gizmo to connect");
+				display.changeText("Select Gizmo 1 to connect");
 				isClicked = false;
 			} else {
 				isClicked = true;
-				display.changeText("Select Gizmo 2");
+				display.changeText("Select Gizmo 2 to connect");
 			}
 
 		} else if (isClicked == true) {
+			int x1 = e.getX() / display.getScale();
+			int y1 = e.getY() / display.getScale();
+			if (!model.containsGizmo(x1, y1)) {
+				display.errorPopup("No Gizmo Selected");
+				display.changeText("Select Gizmo 2 to connect");
+			}
+			else {
 			model.connectGizmo(x, y, e.getX() / display.getScale(), e.getY() / display.getScale());
 			isClicked = false;
+			}
 		}
 
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		if (isClicked == false) {
-			display.changeText("Select Gizmo 1");
+			display.changeText("Select Gizmo 1 to connect");
 		}
 	}
 

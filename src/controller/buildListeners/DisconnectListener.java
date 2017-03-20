@@ -40,7 +40,7 @@ public class DisconnectListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		display.changeText("Select Gizmo to disconect");
+		display.changeText("Select Gizmo to disconnect");
 	}
 
 	public void mouseEntered(MouseEvent e) {
