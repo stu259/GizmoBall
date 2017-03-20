@@ -32,5 +32,9 @@ public class TriangleGizmo extends Gizmo{
 		lines.clear();
 		corners.clear();
 		makeTriangle();
+		int currentRot = this.getRotation();
+		this.angle = 0;
+		for(int i=0; i < currentRot/90; i++)
+			this.rotate();
 	}
 }
