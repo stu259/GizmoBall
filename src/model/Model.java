@@ -1202,7 +1202,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						errorMessage.error(
 								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
-						keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + splitCommand[3]);
+						keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + " " + splitCommand[3]);
 					}
 					break;
 				case "connect":
