@@ -6,7 +6,6 @@ public class Ball {
 	private Vect vel;
 	private double minSpeed, maxSpeed, radius, x, y, mass, startX, startY, 
 	               startXVel, startYVel;
-	private Color color;
 	private boolean paused, absorbed;
 	private String key;
 	
@@ -19,7 +18,6 @@ public class Ball {
 		minSpeed = -200;
 		maxSpeed = 200;
 		vel = new Vect(xVel, yVel);
-		color = Color.CYAN;
 		radius = 0.25;
 		paused = false;
 		absorbed = false;
@@ -106,13 +104,6 @@ public class Ball {
 	}
 	
 	/*
-	 * Return get color of the ball
-	 */
-	public Color getColor(){
-		return color;
-	}
-	
-	/*
 	 * Returns a Circle object version of the ball
 	 */
 	public Circle getCircle(){
@@ -152,13 +143,6 @@ public class Ball {
 	 */
 	public Vect getCenter(){
 		return new Vect(x,y);
-	}
-	
-	/*
-	 * Set the color of the ball
-	 */
-	public void setColor(Color color){
-		this.color = color;
 	}
 	
 	/*
@@ -214,6 +198,14 @@ public class Ball {
 	
 	public double getEndY(){
 		return y+radius;
+	}
+	
+	public double getHomeX(){
+		return this.startX;
+	}
+	
+	public double getHomeY(){
+		return this.startY;
 	}
 	
 	public void resetBall(){

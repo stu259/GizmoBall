@@ -158,6 +158,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			for (LineSegment line : walls) {
 				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
 				if (nextTime < lowestColTime) {
+					lineHit = null;
+					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					collidingBall2 = null;
@@ -1211,8 +1213,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 			// Ball
 			for (Ball ball : balls.values()) {
-				String ballString = "Ball " + ball.getKey() + " " + String.valueOf(ball.getStartX()) + " "
-						+ String.valueOf(ball.getStartY()) + " " + String.valueOf(ball.getStartXVel()) + " "
+				String ballString = "Ball " + ball.getKey() + " " + String.valueOf(ball.getHomeX()) + " "
+						+ String.valueOf(ball.getHomeY()) + " " + String.valueOf(ball.getStartXVel()) + " "
 						+ String.valueOf(ball.getStartYVel()) + "\n";
 				writer.write(ballString);
 			}
