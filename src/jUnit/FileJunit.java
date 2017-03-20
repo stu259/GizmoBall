@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import controller.ErrorMessage;
-import model.IModel;
 import model.Model;
 import view.Display;
 
@@ -23,6 +22,7 @@ public class FileJunit {
 	@Before
 	public void setup() {
 		ErrorMessage eM = new ErrorMessage();
+		eM.setTest(true);
 		model = new Model(eM);
 		d= new Display(model);
 		eM.giveDisplay(d);
@@ -52,12 +52,12 @@ public class FileJunit {
 	}
 
 	@Test
-	public void load() {
+	public void load() throws NumberFormatException, InvalidLineException {
 		model.load(new File("fileformat.txt"));
 	}
 
-	@Test
-	public void loadInvalid() {
+	@Test (expected = InvalidLineException.class)
+	public void loadInvalid() throws NumberFormatException, InvalidLineException {
 		model.load(new File("invalidfileformat.txt"));
 	}
 

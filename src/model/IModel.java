@@ -3,6 +3,8 @@ package model;
 import java.io.File;
 import java.util.List;
 
+import jUnit.InvalidLineException;
+
 public interface IModel {
 	/*
 	 * checks if there is room for that gizmo. then adds it to the board.
@@ -64,9 +66,10 @@ public interface IModel {
 	 * 
 	 * @param f
 	 * @return
+	 * @throws InvalidLineException 
 	 * @throws InvalidGizmoException
 	 */
-	public void load(File f);
+	public void load(File f) throws InvalidLineException;
 
 	/**
 	 * Creates a Drawable object so that the view can obtain information of the

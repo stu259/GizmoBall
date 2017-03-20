@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import controller.ErrorMessage;
+import jUnit.InvalidLineException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -1135,7 +1136,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public void load(File f) {
+	public void load(File f) throws InvalidLineException, NumberFormatException {
 		clear();
 		int lineNumber = 0;
 		String line;
@@ -1202,9 +1203,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
 						if (splitCommand[3].equals("up"))
-							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + "released");// connect
+							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] );//+ "released");// connect
 						else if (splitCommand[3].equals("down"))
-							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + "pressed");// connect
+							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2]); //+ "pressed");// connect
 					}
 					break;
 				case "connect":
@@ -1219,7 +1220,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						errorMessage
 								.error("Skipping instruction at line " + lineNumber + " invalid friction instruction");
 					else {
-						errorMessage.error(splitCommand[0] + " " + splitCommand[1] + " " + splitCommand[2]);
 						setFriction(Double.parseDouble((splitCommand[1])), Double.parseDouble((splitCommand[2])));
 					}
 					break;
