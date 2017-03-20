@@ -971,13 +971,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	private void removeKeyPress(IGizmo gizmo) {
-		List<IGizmo> temp = new ArrayList<IGizmo>();
 		for (String key : keylistToGizmos.keySet()) {
-			temp.clear();
-			temp.addAll(keylistToGizmos.get(key));
-			temp.remove(gizmo);
-			keylistToGizmos.remove(key);
-			keylistToGizmos.put(key, temp);
+			keylistToGizmos.get(key).remove(gizmo);
 		}
 	}
 
