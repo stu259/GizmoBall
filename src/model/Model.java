@@ -1116,6 +1116,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	@Override
 	public void save(File f) {
 		FileWriter writer;
+		resetBalls();
 
 		try {
 			writer = new FileWriter(f);
