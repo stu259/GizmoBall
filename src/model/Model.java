@@ -568,23 +568,23 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 			colBall = calculateBallMove(colBall, colTime);
 			colBall.setVelocity(colInfo.getUpdatedVel());
-//			applyFriction(colBall, colTime);
-//			applyGravity(colBall, colTime);
+			applyFriction(colBall, colTime);
+			applyGravity(colBall, colTime);
 
 			for (Ball ball : balls.values()) {
 				if (ball.paused())
 					continue;
 				ball = calculateBallMove(ball, colTime);
-//				applyFriction(ball, colTime);
-//				applyGravity(ball, colTime);
+				applyFriction(ball, colTime);
+				applyGravity(ball, colTime);
 			}
 			balls.put(key, colBall);
 		} else {
 			for (Ball ball : balls.values()) {
 				if (!ball.paused() && !ball.isAbsorbed()) {
 					ball = calculateBallMove(ball, time);
-//					applyFriction(ball, time);
-//					applyGravity(ball, time);
+					applyFriction(ball, time);
+					applyGravity(ball, time);
 				}
 			}
 		}
