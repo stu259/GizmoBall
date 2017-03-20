@@ -13,6 +13,8 @@ public class RotateListener implements ActionListener, MouseInputListener {
     private IModel model;
     private BuildListener buildListener;
     private IDisplay display;
+    int x;
+    int y;
 
     public RotateListener(IModel m, BuildListener bL, IDisplay d) {
         model = m;
@@ -27,14 +29,19 @@ public class RotateListener implements ActionListener, MouseInputListener {
     }
 
     public void mousePressed(MouseEvent e) {
-        if (!model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale())) {
+		x = e.getX() / display.getScale();
+		y = e.getY() / display.getScale();
+		if (!model.containsGizmo(x, y)) {
+			display.errorPopup("No Gizmo Selected");
+		}
+		else if (!model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale())) {
             display.errorPopup("Cannot perform rotate action. Keep in mind absorbers cannot be rotated.");
         }
     }
 
 
     public void mouseExited(MouseEvent e) {
-        display.changeText("Select Gizmo");
+        display.changeText("Select Gizmo to Rotate");
     }
 
     public void mouseReleased(MouseEvent e) {
