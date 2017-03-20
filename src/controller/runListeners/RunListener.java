@@ -16,13 +16,13 @@ public class RunListener implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		Integer s=e.getKeyCode();
-		model.keyPressed(s.toString() + "pressed");
+		model.keyPressed(s.toString() + " down");
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		Integer s=e.getKeyCode();
-		model.keyPressed(s.toString() + "released");
+		model.keyPressed(s.toString() + " up");
 	}
 
 	@Override

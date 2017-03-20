@@ -221,4 +221,11 @@ public class Ball {
 		y = startY;
 		setVelocity(startXVel, startYVel);
 	}
+	
+	public double getStartXVel(){
+		return startXVel;
+	}
+	public double getStartYVel(){
+		return startYVel;
+	}
 }

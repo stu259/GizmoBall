@@ -97,6 +97,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 		resetBalls();
 		
+		printList(keylistToGizmos.values());
+		printList(keylistToGizmos.keySet());
+		
 	}
 
 	private void drawGizmos(IGizmo gizmo) {
@@ -131,6 +134,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 //		Vect updatedVel2 = null; // only used for ball-to-ball collisions
 		LineSegment lineHit = null;
 		Circle circleHit = null;
+		
+		Geometry.setForesight(time * 2);
 
 		for (Ball ball : balls.values()) {
 			if (ball.paused())
@@ -956,7 +961,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	public boolean keyConnectGizmo(int x, int y, String k) {
 		String gizmo = findGizmo(x, y);
 		if (gizmo != null) {
-			if (gizmos.get(gizmo).gizmoType().equals("absorber") && k.contains("released")) {
+			if (gizmos.get(gizmo).gizmoType().equals("absorber") && k.contains("up")) {
 				return false;
 			}
 			keyConnectGizmo(gizmos.get(gizmo), k);
@@ -1109,16 +1114,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			for (String key : keylistToGizmos.keySet()) {
 				List<IGizmo> g = keylistToGizmos.get(key);
 				for (int i = 0; i < g.size(); i++) {
-					String keyConnection = "KeyConnect key " + key + " " + "up" + " " + g.get(i).getKey() + "\n";
+					String keyConnection = "KeyConnect key " + key + " " + g.get(i).getKey() + "\n";
 					writer.write(keyConnection);
 				}
 			}
 
 			// Ball
 			for (Ball ball : balls.values()) {
-				String ballString = "Ball " + ball.getKey() + " " + String.valueOf(ball.getX()) + " "
-						+ String.valueOf(ball.getY()) + " " + String.valueOf(ball.getVelocity().x()) + " "
-						+ String.valueOf(ball.getVelocity().y()) + "\n";
+				String ballString = "Ball " + ball.getKey() + " " + String.valueOf(ball.getStartX()) + " "
+						+ String.valueOf(ball.getStartY()) + " " + String.valueOf(ball.getStartXVel()) + " "
+						+ String.valueOf(ball.getStartYVel()) + "\n";
 				writer.write(ballString);
 			}
 
@@ -1202,10 +1207,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						errorMessage.error(
 								"Skipping instruction at line " + lineNumber + " invalid key connect instruction");
 					else {
-						if (splitCommand[3].equals("up"))
-							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] );//+ "released");// connect
-						else if (splitCommand[3].equals("down"))
-							keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2]); //+ "pressed");// connect
+						keyConnectGizmo(gizmos.get(splitCommand[4]), splitCommand[2] + splitCommand[3]);
 					}
 					break;
 				case "connect":
