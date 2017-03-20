@@ -47,13 +47,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private List<IGizmo> rotatingFlippers;
 
 	private int boardSize;
-
+	
+	private int tick; 	//REMOVE TESTING ONLY
+	
 	private ErrorMessage errorMessage;
 
 	public Model(ErrorMessage eM) {
 		errorMessage = eM;
 		boardSize = 20;
-
+		tick = 0; //TESTING ONLY REMOVE PLEASE
+		
 		gizmos = new HashMap<String, IGizmo>();
 		balls = new HashMap<String, Ball>();
 		linesToGizmos = new HashMap<LineSegment, IGizmo>();
@@ -91,6 +94,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		resetGizmos();
 
 		for (String key : gizmos.keySet()) {
+			if(gizmos.get(key).gizmoType().toLowerCase().equals("absorber"))
+				absorberToBalls.put(gizmos.get(key), null);
 			IGizmo gizmo = gizmos.get(key);
 			drawGizmos(gizmo);
 		}
@@ -128,19 +133,27 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private CollisionInfo timeUntilCollision() {
 		double lowestColTime = Double.MAX_VALUE;
 		Ball collidingBall = null;
-//		Ball collidingBall2 = null; // this is hard code method, change later
-									// plz tyvm xo
 		Vect updatedVel = new Vect(0, 0);
-//		Vect updatedVel2 = null; // only used for ball-to-ball collisions
 		LineSegment lineHit = null;
 		Circle circleHit = null;
-		
+		boolean skip = false;
 		Geometry.setForesight(time * 2);
 
 		for (Ball ball : balls.values()) {
+			skip = false;
 			if (ball.paused())
 				continue;
-
+			
+			for(IGizmo gizmo : absorberToBalls.keySet())
+				if(gizmo.gizmoType().toLowerCase().equals("absorber"))
+					if(detectInsideAbsorber(ball, gizmo)){
+						AbsorberGizmo abs = (AbsorberGizmo) gizmo;
+						addBallToAbsorber(abs, ball);
+						skip = true;
+					}
+			
+			if(skip) continue;
+			
 			Circle circ = ball.getCircle();
 			Vect vel = ball.getVelocity();
 			double nextTime = 0;
@@ -199,45 +212,15 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					}
 				}
 			}
-//			for (Ball ball2 : balls.values()) {
-//				if (ball2.equals(ball) || ball2.paused())
-//					continue;
-//
-//				nextTime = Geometry.timeUntilBallBallCollision(ball.getCircle(), ball.getVelocity(), ball2.getCircle(),
-//						ball2.getVelocity());
-//				if (nextTime < lowestColTime) {
-//					lineHit = null;
-//					circleHit = null;
-//					VectPair vectPair = null;
-//					lowestColTime = nextTime;
-//					collidingBall = ball;
-//					collidingBall2 = ball2;
-//					vectPair = Geometry.reflectBalls(ball.getCenter(), ball.getMass(), ball.getVelocity(),
-//							ball2.getCenter(), ball2.getMass(), ball2.getVelocity());
-//					updatedVel = vectPair.v1;
-//					updatedVel2 = vectPair.v2;
-//				}
-//			}
 		}
 		if (lowestColTime < time) {
 			// line collision
 			if (lineHit != null) {
 				// absorber collision
 				if (linesToGizmos.get(lineHit).gizmoType().equals("absorber")) {
-					// pause ball
-					collidingBall.pause();
-					// add ball to absorbers queue
 					AbsorberGizmo abs = (AbsorberGizmo) linesToGizmos.get(lineHit);
-					collidingBall.setVelocity(abs.getExitVeloicty());
-					Queue<Ball> temp = new LinkedList<Ball>();
-					if (absorberToBalls.get(abs) != null)
-						temp.addAll(absorberToBalls.get(abs));
-					temp.add(collidingBall);
-					absorberToBalls.put(abs, temp);
-					// move ball to top right of absorber
-					collidingBall.setX((double) abs.getEndX() + collidingBall.getRadius()
-							- collidingBall.getRadius() * temp.size() * 2);
-					collidingBall.setY((double) abs.getStartY() + collidingBall.getRadius());
+					
+					addBallToAbsorber(abs, collidingBall);
 				}
 				// all other gizmos collisions
 				else {
@@ -252,20 +235,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			else if (circleHit != null) {
 				// absorber collision
 				if (circlesToGizmos.get(circleHit).gizmoType().equals("absorber")) {
-					// pause ball
-					collidingBall.pause();
-					// add ball to absorbers queue
 					AbsorberGizmo abs = (AbsorberGizmo) circlesToGizmos.get(circleHit);
-					collidingBall.setVelocity(abs.getExitVeloicty());
-					Queue<Ball> temp = new LinkedList<Ball>();
-					if (absorberToBalls.get(abs) != null)
-						temp.addAll(absorberToBalls.get(abs));
-					temp.add(collidingBall);
-					absorberToBalls.put(abs, temp);
-					// move ball to top right of absorber
-					collidingBall.setX((double) abs.getEndX() + collidingBall.getRadius()
-							- collidingBall.getRadius() * temp.size() * 2);
-					collidingBall.setY((double) abs.getStartY() + collidingBall.getRadius());
+					
+					addBallToAbsorber(abs, collidingBall);
 				}
 				// all other gizmo collisions
 				else {
@@ -282,10 +254,40 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		return (new CollisionInfo(lowestColTime, collidingBall, updatedVel));
 
 	}
+	
+	private boolean detectInsideAbsorber(Ball ball, IGizmo abs){
+		int aStartX = abs.getStartX();
+		int aStartY = abs.getStartY();
+		int aEndX = abs.getEndX();
+		int aEndY = abs.getEndY();
+		double bCenterX = ball.getCenter().x();
+		double bCenterY = ball.getCenter().y();
+		double r = ball.getRadius();
+		
+		return ( (bCenterX + r > aStartX) && (bCenterX - r < aEndX) && 
+				 (bCenterY + r > aStartY) && (bCenterY - r < aEndY) );
+	}
 
 	@Override
 	public void tick() {
 //		System.out.println("tick");
+		tick++;
+		boolean complete=true;
+		
+		IGizmo abs = null;
+		Queue<Ball> q = new LinkedList<Ball>();
+		
+		for(IGizmo gizmo : gizmos.values()){
+			if(gizmo.gizmoType().toLowerCase().equals("absorber"))
+				abs = gizmo;
+		}
+		
+		if(complete && tick==200)
+//			for(Ball ball : balls.values())
+			System.out.println(absorberToBalls.get(abs).size());
+		
+		complete=false;
+		
 		loopGizmos();
 		moveBalls();
 		this.setChanged();
@@ -302,15 +304,66 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					Ball ballToFire = absorberToBalls.get(absorber).remove();
 					ballToFire.setY(absorber.getStartY() - ballToFire.getRadius());
 					ballToFire.resume();
+					ballToFire.setAbsorbed(false);
 					moveBallsInAbsorber(absorber);
 				}
 				absorber.trigger();// untrigger
 			}
 	}
 
-	private void moveBallsInAbsorber(AbsorberGizmo abs) {
-		for (Ball b : absorberToBalls.get(abs)) {
+	private void addBallToAbsorber(AbsorberGizmo abs, Ball ball){
+		// pause ball
+		ball.pause();
+		ball.setAbsorbed(true);
+		
+		// add ball to absorbers queue
+		ball.setVelocity(abs.getExitVeloicty());
+		Queue<Ball> temp = new LinkedList<Ball>();
+		if (absorberToBalls.get(abs) != null)
+			temp.addAll(absorberToBalls.get(abs));
+		temp.add(ball);
+		absorberToBalls.put(abs, temp);
+		
+		List<Ball> q = new ArrayList<Ball>(temp);
+		
+		//move ball to top right of absorber
+		if(temp.size() == 1){
+			ball.setX((double) abs.getEndX() - ball.getRadius());
+			ball.setY((double) abs.getStartY() + ball.getRadius());
+			return;
+		}
+		
+		Ball scndLast = q.get(q.size() - 2);
+		ball.setX(scndLast.getCenter().x() - scndLast.getRadius()*2);
+		ball.setY(scndLast.getCenter().y());
+		
+		//when row is full
+		if(ball.getCenter().x() - ball.getRadius() < abs.getStartX()){
+			ball.setX(abs.getEndX() - ball.getRadius());
+			ball.setY(ball.getCenter().y() + 2*ball.getRadius());
+		}
+		if(ball.getCenter().y() > abs.getEndY()){
+			ball.setX(q.get(q.size()-2).getCenter().x());
+			ball.setY(q.get(q.size()-2).getCenter().y());
+		}
+	}
+	
+	private void moveBallsInAbsorber(AbsorberGizmo abs) { //check queue, compare to abs
+		List<Ball> q = new ArrayList<Ball>(absorberToBalls.get(abs));
+		
+		for (Ball b : q){
+			if(b.getCenter().x() - b.getRadius() == abs.getStartX()
+					&& abs.getEndY() - b.getRadius() == b.getCenter().y()){
+				b.setX(b.getX() + b.getRadius() * 2);
+				return;
+			}
+			
 			b.setX(b.getX() + b.getRadius() * 2);
+			
+			if(b.getX() - b.getRadius() >= abs.getEndX()){
+				b.setX(abs.getStartX() + b.getRadius());
+				b.setY(b.getY() - 2*b.getRadius());
+			}
 		}
 	}
 
@@ -340,6 +393,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	
 	private void loopGizmos() {
 		rotatingFlippers.clear();
+		
+		for(Ball ball : balls.values()){
+			
+		}
 		
 		for (IGizmo gizmo : gizmos.values()) {
 
@@ -830,6 +887,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		gizmo.setKey(key);
 		// draw absorber
 
+		absorberToBalls.put(gizmo, null); //adds fresh keys to the hashmap
+		
 		this.setChanged();
 		this.notifyObservers();
 		return true;
@@ -1304,7 +1363,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		return false;
 	}
 
-	private Boolean moveBall(String key, double x, double y) {
+	private boolean moveBall(String key, double x, double y) {
 		Ball b = balls.get(key);
 		if (validatePosition(x - b.getRadius(), y - b.getRadius(), x + b.getRadius(), y + b.getRadius(), b)) {
 			b.setNewX(x);
@@ -1337,6 +1396,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		for (Ball b : balls.values()) {
 			b.resetBall();
 			b.resume();
+			b.setAbsorbed(false);
 		}
 	}
 
