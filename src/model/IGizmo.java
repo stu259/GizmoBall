@@ -74,8 +74,6 @@ public interface IGizmo {
 	public String gizmoType();
 	
 	public void clearIncomingConnections();
-
-	public void clearOutgoingConnection();
 	
 	public void removeIncomingConnection(IGizmo gizmo);
 
@@ -85,7 +83,7 @@ public interface IGizmo {
 
 	void setOutgoingConnection(IGizmo connectedGizmo);
 
-	IGizmo getOutgoingConnection();
+	List<IGizmo> getOutgoingConnections();
 
 	void setKeyboardPress(String k);
 
@@ -118,4 +116,6 @@ public interface IGizmo {
 	void cooldownHit();
 	
 	void setHit(int hitNo);
+
+	void clearOutgoingConnections();
 }

@@ -10,7 +10,7 @@ public class Gizmo implements IGizmo{
 	protected int x, y, angle, size, currentAngle, hit;
 	protected double coef, angularVel;
 	protected String key, keyboardPress;
-	protected IGizmo outgoingConnection;//gizmo to trigger when this gizmo is hit by the ball
+	protected List<IGizmo> outgoingConnections;//gizmo to trigger when this gizmo is hit by the ball
 	protected List<IGizmo> incomingConnections;//list of gizmos which can trigger this gizmo
 	protected boolean triggered, rotating;
 	protected List<LineSegment> lines;
@@ -20,7 +20,7 @@ public class Gizmo implements IGizmo{
 		this.x = x;
 		this.y= y;
 		angle = 0;  //default angle facing upward
-		outgoingConnection = null;
+		outgoingConnections = new ArrayList<IGizmo>();
 		incomingConnections = new ArrayList<IGizmo>();
 		key = null;
 		keyboardPress = null;
@@ -212,13 +212,13 @@ public class Gizmo implements IGizmo{
 	}
 	
 	@Override
-	public IGizmo getOutgoingConnection() {
-		return outgoingConnection;
+	public List<IGizmo> getOutgoingConnections() {
+		return outgoingConnections;
 	}
 	
 	@Override
 	public void setOutgoingConnection(IGizmo connectedGizmo) {
-		this.outgoingConnection = connectedGizmo;
+		this.outgoingConnections.add(connectedGizmo);
 	}
 	
 	@Override
@@ -242,8 +242,8 @@ public class Gizmo implements IGizmo{
 	}
 
 	@Override
-	public void clearOutgoingConnection(){
-		outgoingConnection = null;
+	public void clearOutgoingConnections(){
+		outgoingConnections = null;
 	}
 	
 	@Override

@@ -248,8 +248,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				else {
 					linesToGizmos.get(lineHit).setHit(120); // 120 = 3 seconds
 															// (40ticks/second)
-					if (linesToGizmos.get(lineHit).getOutgoingConnection() != null) {
-						linesToGizmos.get(lineHit).getOutgoingConnection().trigger();
+					if (linesToGizmos.get(lineHit).getOutgoingConnections() != null) {
+						for(IGizmo outgoingGizmo : linesToGizmos.get(lineHit).getOutgoingConnections())
+							outgoingGizmo.trigger();
 					}
 				}
 			}
@@ -266,9 +267,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					circlesToGizmos.get(circleHit).setHit(120); // 120 = 3
 																// seconds
 																// (40ticks/second)
-					if (circlesToGizmos.get(circleHit).getOutgoingConnection() != null) {
-						circlesToGizmos.get(circleHit).getOutgoingConnection().trigger();
-					}
+					if (circlesToGizmos.get(circleHit).getOutgoingConnections() != null)
+						for(IGizmo outgoingGizmo : circlesToGizmos.get(circleHit).getOutgoingConnections())
+							outgoingGizmo.trigger();
 				}
 			}
 		}
@@ -975,14 +976,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	private void connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
-		if (gizmo2.getOutgoingConnection() != null) {
-			gizmo2.getOutgoingConnection().removeIncomingConnection(gizmo2);
-			gizmo2.clearOutgoingConnection();
+		if (gizmo2.getOutgoingConnections() != null) {
+			for(IGizmo outgoingGizmo : gizmo2.getOutgoingConnections()){
+				outgoingGizmo.removeIncomingConnection(gizmo2);
+				outgoingGizmo.clearOutgoingConnections();
+			}
 		}
 
 		if (!gizmo1.getIncomingConnections().isEmpty()) {
 			for (IGizmo incomingCon : gizmo1.getIncomingConnections()) {
-				incomingCon.clearOutgoingConnection();
+				incomingCon.clearOutgoingConnections();
 			}
 			gizmo1.clearIncomingConnections();
 		}
@@ -1003,14 +1006,16 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	private void disconnectGizmo(IGizmo gizmo) {
-		if (gizmo.getOutgoingConnection() != null) {
-			gizmo.getOutgoingConnection().removeIncomingConnection(gizmo);
-			gizmo.clearOutgoingConnection();
+		if (gizmo.getOutgoingConnections() != null) {
+			for(IGizmo outgoingGizmo : gizmo.getOutgoingConnections()){
+				outgoingGizmo.removeIncomingConnection(gizmo);
+				outgoingGizmo.clearOutgoingConnections();
+			}
 		}
 
 		if (!gizmo.getIncomingConnections().isEmpty()) {
 			for (IGizmo incomingCon : gizmo.getIncomingConnections()) {
-				incomingCon.clearOutgoingConnection();
+				incomingCon.clearOutgoingConnections();
 			}
 			gizmo.clearIncomingConnections();
 		}
@@ -1196,9 +1201,11 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			for (String key : gizmos.keySet()) {
 				IGizmo gizmo = gizmos.get(key);
 				// Connect keyword
-				if (gizmo.getOutgoingConnection() != null) {
-					String connect = "Connect " + key + " " + gizmo.getOutgoingConnection().getKey() + "\n";
-					writer.write(connect);
+				if (gizmo.getOutgoingConnections() != null) {
+					for(IGizmo outgoingGizmo : gizmo.getOutgoingConnections()){
+						String connect = "Connect " + key + " " + outgoingGizmo.getKey() + "\n";
+						writer.write(connect);
+					}
 				}
 			}
 
