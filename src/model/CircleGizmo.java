@@ -29,5 +29,9 @@ public class CircleGizmo extends Gizmo{
 	public void redraw(){
 		corners.clear();
 		makeCircle();
+		int currentRot = this.getRotation();
+		this.angle = 0;
+		for(int i=0; i < currentRot/90; i++)
+			this.rotate();
 	}
 }

@@ -62,8 +62,7 @@ public class LeftFlipperGizmo extends Gizmo{
 		makeLeftFlipper();
 		int currentRot = this.getRotation();
 		this.angle = 0;
-		for(int i=0; i < currentRot/90; i++){
+		for(int i=0; i < currentRot/90; i++)
 			this.rotate();
-		}
 	}
 }
