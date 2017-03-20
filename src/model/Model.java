@@ -1310,6 +1310,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private Boolean moveBall(String key, double x, double y) {
 		Ball b = balls.get(key);
 		if (validatePosition(x - b.getRadius(), y - b.getRadius(), x + b.getRadius(), y + b.getRadius(), b)) {
+			b.setNewX(x);
+			b.setNewY(y);
 			b.setX(x);
 			b.setY(y);
 			this.setChanged();

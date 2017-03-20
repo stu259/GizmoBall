@@ -134,6 +134,20 @@ public class Ball {
 	}
 	
 	/*
+	 * sets a new home position for x
+	 */
+	public void setNewX(double x){
+		this.startX = x;
+	}
+	
+	/*
+	 * Sets a new home position for y
+	 */
+	public void setNewY(double y){
+		this.startY = y;
+	}
+	
+	/*
 	 * returns the center of the ball
 	 */
 	public Vect getCenter(){
