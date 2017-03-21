@@ -217,7 +217,7 @@ public class Gizmo implements IGizmo{
 	}
 	
 	@Override
-	public void setOutgoingConnection(IGizmo connectedGizmo) {
+	public void addOutgoingConnection(IGizmo connectedGizmo) {
 		this.outgoingConnections.add(connectedGizmo);
 	}
 	

@@ -36,9 +36,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private final double time = 0.01;
 	private double currentTick = time;
 
-	// connections for triggering both redrawing of lines and
-	// private Map<LineSegment, IGizmo> linesToAbsorber;
-	// private Map<Circle, IGizmo> circlesToAbsorber;
 	private Map<Circle, IGizmo> circlesToGizmos;
 	private Map<LineSegment, IGizmo> linesToGizmos;
 	private Map<String, Ball> balls;
@@ -384,8 +381,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		}
 	}
 
-	private void moveBallsInAbsorber(AbsorberGizmo abs) { // check queue,
-															// compare to abs
+	private void moveBallsInAbsorber(AbsorberGizmo abs) {
 		List<Ball> q = new ArrayList<Ball>(absorberToBalls.get(abs));
 
 		for (Ball b : q) {
@@ -863,29 +859,25 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private boolean addGizmo(String gizmo, String key, int x, int y) {
 		switch (gizmo.toLowerCase()) {
 		case "triangle":
-			if (addGizmo(new TriangleGizmo(x, y), key)) {
+			if (addGizmo(new TriangleGizmo(x, y), key))
 				return true;
-			}
 			break;
 		case "circle":
-			if (addGizmo(new CircleGizmo(x, y), key)) {
+			if (addGizmo(new CircleGizmo(x, y), key))
 				return true;
-			}
 			break;
 		case "square":
-			if (addGizmo(new SquareGizmo(x, y), key)) {
+			if (addGizmo(new SquareGizmo(x, y), key))
 				return true;
-			}
 			break;
 		case "rightflipper":
-			if (addGizmo(new RightFlipperGizmo(x, y), key)) {
+			if (addGizmo(new RightFlipperGizmo(x, y), key))
 				return true;
-			}
+			
 			break;
 		case "leftflipper":
-			if (addGizmo(new LeftFlipperGizmo(x, y), key)) {
+			if (addGizmo(new LeftFlipperGizmo(x, y), key))
 				return true;
-			}
 			break;
 		}
 
@@ -999,9 +991,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		String key = findGizmo(x, y);
 		if (key == null)
 			return false;
-		else if (gizmos.get(key).gizmoType().toLowerCase().equals("absorber")) {
+		else if (gizmos.get(key).gizmoType().toLowerCase().equals("absorber"))
 			return false;
-		}
+
 
 		rotateGizmo(key);
 		return true;
@@ -1015,21 +1007,19 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	private void connectGizmo(IGizmo gizmo1, IGizmo gizmo2) {
-		if (gizmo2.getOutgoingConnections() != null) {
+		if (gizmo2.getOutgoingConnections() != null)
 			for (IGizmo outgoingGizmo : gizmo2.getOutgoingConnections()) {
 				outgoingGizmo.removeIncomingConnection(gizmo2);
 				outgoingGizmo.clearOutgoingConnections();
 			}
-		}
 
 		if (!gizmo1.getIncomingConnections().isEmpty()) {
-			for (IGizmo incomingCon : gizmo1.getIncomingConnections()) {
+			for (IGizmo incomingCon : gizmo1.getIncomingConnections())
 				incomingCon.clearOutgoingConnections();
-			}
 			gizmo1.clearIncomingConnections();
 		}
 
-		gizmo1.setOutgoingConnection(gizmo2);
+		gizmo1.addOutgoingConnection(gizmo2);
 		gizmo2.addIncomingConnection(gizmo1);
 	}
 
@@ -1137,10 +1127,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private void applyFriction(Ball ball, double t) {
 		double mu = frictionMU;
 		double mu2 = frictionMUTwo;
-
-		// double xVel = ball.getVelocity().x();
-		// double yVel = ball.getVelocity().y();
-
+		
 		double fValue = (1 - mu * t - ball.getVelocity().length() * mu2 * t);
 		ball.setVelocity(ball.getVelocity().times(fValue));
 	}
@@ -1190,9 +1177,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 		if (gizmoKey == null)
 			return false;
-		else if (gizmos.get(gizmoKey).gizmoType().toLowerCase().equals("absorber")) {
+		else if (gizmos.get(gizmoKey).gizmoType().toLowerCase().equals("absorber"))
 			return false;
-		} else
+		else
 			gizmo = gizmos.get(gizmoKey);
 
 		return moveGizmo(newX, newY, gizmo, gizmoKey);
@@ -1484,10 +1471,5 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		}
 	}
 
-	private void printList(Collection<?> l) {
-		for (Object o : l) {
-			System.out.println(o.toString());
-		}
-	}
 
 }
