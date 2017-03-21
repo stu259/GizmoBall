@@ -47,7 +47,6 @@ public class MoveListener implements ActionListener, MouseInputListener {
 			double newX = (double) e.getX() / (double) display.getScale();
 			double newY = (double) e.getY() / (double) display.getScale();
 			Boolean moved = false;
-			System.out.println(x + " " + y + " " + newX + " " + newY);
 			if (model.containsGizmo(x, y)=="g") {
 				moved = (model.moveGizmo((int) x, (int) y, (int) newX, (int) newY));
 			} else if(model.containsGizmo(x, y)=="b") {
