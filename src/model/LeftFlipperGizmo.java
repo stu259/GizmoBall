@@ -6,8 +6,7 @@ import physics.Vect;
 
 public class LeftFlipperGizmo extends Gizmo{
 	
-	private int maxAngle;
-	private double currentAngle;
+	private double currentAngle, maxAngle;
 	
 	public LeftFlipperGizmo (int x1, int y1) {
 		super(x1, y1);
@@ -35,7 +34,7 @@ public class LeftFlipperGizmo extends Gizmo{
 		return corners.get(0).getCenter();
 	}
 	
-	public int getMaxAngle() {
+	public double getMaxAngle() {
 		return maxAngle;
 	}
 

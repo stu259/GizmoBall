@@ -145,10 +145,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		for (Ball ball : balls.values()) {
 			skip = false;
 			
-			if (ball.paused() || ball.getVelocity().y()==0) {
-				System.out.println("continuing");
-				continue;
-			}
+			if (ball.paused()) continue;
 
 			for (IGizmo gizmo : absorberToBalls.keySet())
 				if (gizmo.gizmoType().toLowerCase().equals("absorber"))
@@ -218,10 +215,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 							circlesToGizmos.get(circle).getCoef());
 				}
 			}
+			//rotating flippers
 			for (IGizmo flipper : rotatingFlippers) {
+				double angVel = flipper.getAngularVel()*(Math.PI/180);
+				if(!flipper.triggered())
+					angVel = angVel * -1;
 				for (LineSegment line : flipper.getLines()) {
 					nextTime = Geometry.timeUntilRotatingWallCollision(line, flipper.getPivotPoint(),
-							flipper.getAngularVel() / (180), ball.getCircle(), vel);
+					angVel, ball.getCircle(), vel);
 					if (nextTime < lowestColTime) { // collision
 						lineHit = null;
 						circleHit = null;
@@ -229,12 +230,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						collidingBall = ball;
 						collidingBall2 = null;
 						updatedVel = Geometry.reflectRotatingWall(line, flipper.getPivotPoint(),
-								(flipper.getAngularVel() / (180)), circ, vel, flipper.getCoef());
+								angVel, circ, vel, flipper.getCoef());
 					}
 				}
 				for (Circle circle : flipper.getCorners()) {
 					nextTime = Geometry.timeUntilRotatingCircleCollision(circle, flipper.getPivotPoint(),
-							flipper.getAngularVel() / (180), ball.getCircle(), vel);
+							angVel, ball.getCircle(), vel);
 					if (nextTime < lowestColTime) {
 						lineHit = null;
 						circleHit = null;
@@ -242,7 +243,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						lowestColTime = nextTime;
 						collidingBall = ball;
 						updatedVel = Geometry.reflectRotatingCircle(circle, flipper.getPivotPoint(),
-								(flipper.getAngularVel() / (180)), circ, vel, flipper.getCoef());
+								angVel, circ, vel, flipper.getCoef());
 					}
 				}
 			}
@@ -435,20 +436,19 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 			if (gizmo.gizmoType().toLowerCase().equals("leftflipper")) {
 				LeftFlipperGizmo flipper = (LeftFlipperGizmo) gizmo;
+				
 				if (flipper.triggered()) {
 					// check if already on maxAngle
 					// if not set rotateOnPivot to true
 					// get lines and circles, rotate them via pivot
-					if (flipper.getCurrentAngle() <= flipper.getMaxAngle()) {
+					
+					if (flipper.getCurrentAngle() != flipper.getMaxAngle()) {
 						flipper.rotateOnPivot(true);
 						rotatingFlippers.add(flipper); // add to the list of
 														// rotating flippers
-						List<LineSegment> lines = new ArrayList<LineSegment>(); 
-						lines.addAll(flipper.getLines());
-						List<Circle> corners = new ArrayList<Circle>(); 
-						corners.addAll(flipper.getCorners());
+						List<LineSegment> lines = flipper.getLines();
+						List<Circle> corners = flipper.getCorners();
 						
-
 						// remove from global list
 						for (LineSegment l : lines) {
 							linesToGizmos.remove(l);
@@ -467,7 +467,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 							angle = flipper.getMaxAngle() - flipper.getCurrentAngle();
 
 						Angle newAngle = new Angle((360 - angle)*(Math.PI/180));
-System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
+						
 						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
 						for (Circle corner : corners)
@@ -479,7 +479,7 @@ System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
 
 						// add back to global list
-						if (flipper.getCurrentAngle() == flipper.getMaxAngle() || flipper.getCurrentAngle() == 0) {
+						if (flipper.getCurrentAngle() == flipper.getMaxAngle() || flipper.getCurrentAngle() == 0.0) {
 							for (LineSegment l : newLines)
 								linesToGizmos.put(l, gizmo);
 							for (Circle c : corners)
@@ -515,6 +515,10 @@ System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
 
 						if (flipper.getCurrentAngle() - angle < 0)
 							angle = flipper.getCurrentAngle();
+						
+						double angleTest = ((-1 * flipper.getAngularVel() * (Math.PI/180)) / (1 / currentTick));
+						System.out.println(angleTest);
+						System.out.println(angle*(Math.PI/180));
 
 						Angle newAngle = new Angle(angle*(Math.PI/180));
 
@@ -529,7 +533,7 @@ System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
 
 						// add back to global list
-						if (flipper.getCurrentAngle() == flipper.getMaxAngle() || flipper.getCurrentAngle() == 0) {
+						if (flipper.getCurrentAngle() == 0) {
 							for (LineSegment l : newLines)
 								linesToGizmos.put(l, gizmo);
 							for (Circle c : corners)
@@ -587,7 +591,7 @@ System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
 
 						// add back to global list
-						if (flipper.getCurrentAngle() == (double)flipper.getMaxAngle() || flipper.getCurrentAngle() == (double)0) {
+						if (flipper.getCurrentAngle() == flipper.getMaxAngle() || flipper.getCurrentAngle() == 0.0) {
 							for (LineSegment l : newLines)
 								linesToGizmos.put(l, gizmo);
 							for (Circle c : corners)
@@ -595,6 +599,7 @@ System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
 						}
 					} else {
 						flipper.rotateOnPivot(false);
+						rotatingFlippers.remove(flipper);
 						continue;
 					}
 
@@ -636,7 +641,7 @@ System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
 
 						// add back to global list
-						if (flipper.getCurrentAngle() == (double)flipper.getMaxAngle() || flipper.getCurrentAngle() == 0) {
+						if (flipper.getCurrentAngle() == 0) {
 							for (LineSegment l : newLines)
 								linesToGizmos.put(l, gizmo);
 							for (Circle c : corners)
@@ -644,6 +649,7 @@ System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
 						}
 					} else {
 						flipper.rotateOnPivot(false);
+						rotatingFlippers.remove(flipper);
 						continue;
 					}
 				}

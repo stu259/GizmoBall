@@ -96,12 +96,12 @@ public class RunBoard extends JPanel implements Observer {
 						rf.getY() + rf.getWidth() / 2);
 				Shape transformed = transform.createTransformedShape(rf);
 				g2.fill(transformed);
-				for(LineSegment l :gizmo.getLines()){
-					g2.drawLine((int)(l.p1().x() * scale), (int)( l.p1().y() * scale), (int)(l.p2().x() * scale), (int)(l.p2().y() * scale));
-				}
-				for(Circle c :gizmo.getCorners()){
-					g2.drawOval((int)(c.getCenter().x()*scale),(int)(c.getCenter().y()*scale), (int)(c.getRadius()*scale), (int)(c.getRadius()*scale));
-				}
+//				for(LineSegment l :gizmo.getLines()){
+//					g2.drawLine((int)(l.p1().x() * scale), (int)( l.p1().y() * scale), (int)(l.p2().x() * scale), (int)(l.p2().y() * scale));
+//				}
+//				for(Circle c :gizmo.getCorners()){
+//					g2.drawOval((int)(c.getCenter().x()*scale),(int)(c.getCenter().y()*scale), (int)(c.getRadius()*scale), (int)(c.getRadius()*scale));
+//				}
 
 			} else if (gizmo.getGizmoType().toLowerCase().equals("leftflipper")) {
 				g2.setColor(Color.YELLOW);
@@ -113,12 +113,12 @@ public class RunBoard extends JPanel implements Observer {
 						lf.getY() + lf.getWidth() / 2);
 				Shape transformed = transform.createTransformedShape(lf);
 				g2.fill(transformed);
-				for(LineSegment l :gizmo.getLines()){
-					g2.drawLine((int)(l.p1().x() * scale), (int)( l.p1().y() * scale), (int)(l.p2().x() * scale), (int)(l.p2().y() * scale));
-				}
-				for(Circle c :gizmo.getCorners()){
-					g2.drawOval((int)(c.getCenter().x()*scale),(int)(c.getCenter().y()*scale), (int)(c.getRadius()*scale), (int)(c.getRadius()*scale));
-				}
+//				for(LineSegment l :gizmo.getLines()){
+//					g2.drawLine((int)(l.p1().x() * scale), (int)( l.p1().y() * scale), (int)(l.p2().x() * scale), (int)(l.p2().y() * scale));
+//				}
+//				for(Circle c :gizmo.getCorners()){
+//					g2.drawOval((int)(c.getCenter().x()*scale),(int)(c.getCenter().y()*scale), (int)(c.getRadius()*scale), (int)(c.getRadius()*scale));
+//				}
 			}
 		}
 
