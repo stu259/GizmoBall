@@ -517,8 +517,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 							angle = flipper.getCurrentAngle();
 						
 						double angleTest = ((-1 * flipper.getAngularVel() * (Math.PI/180)) / (1 / currentTick));
-						System.out.println(angleTest);
-						System.out.println(angle*(Math.PI/180));
 
 						Angle newAngle = new Angle(angle*(Math.PI/180));
 

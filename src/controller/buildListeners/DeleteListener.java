@@ -32,7 +32,6 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 	public void mousePressed(MouseEvent e) {
 		x = (double) e.getX() / (double) display.getScale();
 		y = (double) e.getY() / (double) display.getScale();
-		System.out.println(model.containsGizmo(x, y));
 		if (model.containsGizmo(x, y) == null) {
 			display.errorPopup("No Gizmo Selected");
 		} else if (model.containsGizmo(x, y)=="g") {
