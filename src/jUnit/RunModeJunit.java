@@ -95,7 +95,7 @@ public class RunModeJunit {
 	public void fullTest() throws InvalidLineException{
 		model.load(new File("TestingTxt/fileformat.txt"));
 		model.runMode();
-		for(int i=0;i<1000000000;i++){
+		for(int i=0;i<10000;i++){
 			model.tick();
 			if(i%1000 ==0){
 				model.keyPressed("65 down");
