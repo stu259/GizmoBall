@@ -143,7 +143,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 		for (Ball ball : balls.values()) {
 			skip = false;
-			if (ball.paused())
+			if (ball.paused() || (ball.getVelocity().x()==0 && ball.getVelocity().y()==0))
 				continue;
 
 			for (IGizmo gizmo : absorberToBalls.keySet())
@@ -154,8 +154,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						skip = true;
 					}
 
-			if (skip)
-				continue;
+			if (skip) continue;
 
 			Circle circ = ball.getCircle();
 			Vect vel = ball.getVelocity();
@@ -168,7 +167,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					collidingBall2 = null;
-					updatedVel = Geometry.reflectWall(line, vel, 1);
+					if(ball.getVelocity().y() > -3.5 && ball.getVelocity().y() < 3.5 && line.p1().y()==20){ //if ball is so slow that it should stop
+						updatedVel = new Vect(ball.getVelocity().x(), 0);
+						System.out.println("making y vel = 0");
+					}
+					else
+						updatedVel = Geometry.reflectWall(line, vel, 1);
 				}
 			}
 			for (LineSegment line : linesToGizmos.keySet()) {
@@ -179,7 +183,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					collidingBall2 = null;
-					updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
+					if(ball.getVelocity().y() > -3.5 && ball.getVelocity().y() < 3.5 && (ball.getCenter().y() + ball.getRadius() < linesToGizmos.get(line).getStartY() )){
+						System.out.println("making y vel = 0");
+						updatedVel = new Vect(ball.getVelocity().x(), 0);
+					}
+					else
+						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
 				}
 			}
 			for (Circle circle : circlesToGizmos.keySet()) {
@@ -298,6 +307,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 	@Override
 	public void tick() {
+		if(!balls.isEmpty())
+			for(Ball ball : balls.values())
+				System.out.println("Ball velX:"+ball.getVelocity().x()+" velY:"+ball.getVelocity().y());
 		loopGizmos();
 		moveBalls();
 		this.setChanged();
