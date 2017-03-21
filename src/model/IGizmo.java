@@ -109,7 +109,7 @@ public interface IGizmo {
 
 	Vect getPivotPoint();
 
-	int getCurrentAngle();
+	double getCurrentAngle();
 
 	boolean isHit();
 

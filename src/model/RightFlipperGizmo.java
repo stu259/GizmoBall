@@ -7,7 +7,8 @@ import physics.Vect;
 
 public class RightFlipperGizmo extends Gizmo{
 	
-	private int currentAngle, maxAngle;
+	private int maxAngle;
+	private double currentAngle;
 	
 	public RightFlipperGizmo (int x1, int y1) {
 		super(x1, y1);
@@ -43,11 +44,13 @@ public class RightFlipperGizmo extends Gizmo{
 		this.maxAngle = maxAngle;
 	}
 	
-	public int getCurrentAngle() {
+	@Override
+	public double getCurrentAngle() {
+		System.out.println("current angle " + currentAngle);
 		return currentAngle;
 	}
 
-	public void setCurrentAngle(int currentAngle) {
+	public void setCurrentAngle(double currentAngle) {
 		this.currentAngle = currentAngle;
 	}
 	

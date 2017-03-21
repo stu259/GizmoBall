@@ -33,7 +33,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private double gravity = 25;
 	private double frictionMU = 0.025;
 	private double frictionMUTwo = 0.025;
-	private final double time = 0.005;
+	private final double time = 0.01;
+	private double currentTick = time;
 
 	// connections for triggering both redrawing of lines and
 	// private Map<LineSegment, IGizmo> linesToAbsorber;
@@ -139,7 +140,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		Circle circleHit = null;
 		Ball collidingBall2 = null;
 		Vect updatedVel2 = null;
-		Geometry.setForesight(time );
+		Geometry.setForesight(time * 1.2);
 
 		for (Ball ball : balls.values()) {
 			skip = false;
@@ -220,7 +221,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			for (IGizmo flipper : rotatingFlippers) {
 				for (LineSegment line : flipper.getLines()) {
 					nextTime = Geometry.timeUntilRotatingWallCollision(line, flipper.getPivotPoint(),
-							flipper.getAngularVel() / (1 / time), ball.getCircle(), vel);
+							flipper.getAngularVel() / (180), ball.getCircle(), vel);
 					if (nextTime < lowestColTime) { // collision
 						lineHit = null;
 						circleHit = null;
@@ -228,12 +229,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						collidingBall = ball;
 						collidingBall2 = null;
 						updatedVel = Geometry.reflectRotatingWall(line, flipper.getPivotPoint(),
-								(flipper.getAngularVel() / (1 / time)), circ, vel, flipper.getCoef());
+								(flipper.getAngularVel() / (180)), circ, vel, flipper.getCoef());
 					}
 				}
 				for (Circle circle : flipper.getCorners()) {
 					nextTime = Geometry.timeUntilRotatingCircleCollision(circle, flipper.getPivotPoint(),
-							flipper.getAngularVel() / (1 / time), ball.getCircle(), vel);
+							flipper.getAngularVel() / (180), ball.getCircle(), vel);
 					if (nextTime < lowestColTime) {
 						lineHit = null;
 						circleHit = null;
@@ -241,7 +242,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						lowestColTime = nextTime;
 						collidingBall = ball;
 						updatedVel = Geometry.reflectRotatingCircle(circle, flipper.getPivotPoint(),
-								(flipper.getAngularVel() / (1 / time)), circ, vel, flipper.getCoef());
+								(flipper.getAngularVel() / (180)), circ, vel, flipper.getCoef());
 					}
 				}
 			}
@@ -321,11 +322,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 	@Override
 	public void tick() {
-//		if(!balls.isEmpty())
-//			for(Ball ball : balls.values())
-//				System.out.println("Ball velX:"+ball.getVelocity().x()+" velY:"+ball.getVelocity().y());
+		currentTick = time;
 		loopGizmos();
 		moveBalls();
+		loopGizmos();
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -440,12 +440,15 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					// check if already on maxAngle
 					// if not set rotateOnPivot to true
 					// get lines and circles, rotate them via pivot
-					if (flipper.getCurrentAngle() != flipper.getMaxAngle()) {
+					if (flipper.getCurrentAngle() <= flipper.getMaxAngle()) {
 						flipper.rotateOnPivot(true);
 						rotatingFlippers.add(flipper); // add to the list of
 														// rotating flippers
-						List<LineSegment> lines = flipper.getLines();
-						List<Circle> corners = flipper.getCorners();
+						List<LineSegment> lines = new ArrayList<LineSegment>(); 
+						lines.addAll(flipper.getLines());
+						List<Circle> corners = new ArrayList<Circle>(); 
+						corners.addAll(flipper.getCorners());
+						
 
 						// remove from global list
 						for (LineSegment l : lines) {
@@ -459,13 +462,13 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
 
-						int angle = (int) (-1 * flipper.getAngularVel() / (1 / time));
+						double angle = (double) (-1 * flipper.getAngularVel() / (1 / currentTick));
 
 						if (angle + flipper.getCurrentAngle() > flipper.getMaxAngle())
 							angle = flipper.getMaxAngle() - flipper.getCurrentAngle();
 
-						Angle newAngle = new Angle(360 - angle);
-
+						Angle newAngle = new Angle((360 - angle)*(Math.PI/180));
+System.out.println(angle + " " + newAngle.toString() +" "+ (360-angle));
 						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
 						for (Circle corner : corners)
@@ -485,7 +488,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						}
 					} else {
 						flipper.rotateOnPivot(false);
-
+						rotatingFlippers.remove(flipper);
 						continue;
 					}
 
@@ -509,12 +512,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
 
-						int angle = (int) (-1 * flipper.getAngularVel() / (1 / time));
+						double angle = (double) (-1 * flipper.getAngularVel() / (1 / currentTick));
 
 						if (flipper.getCurrentAngle() - angle < 0)
 							angle = flipper.getCurrentAngle();
 
-						Angle newAngle = new Angle(angle);
+						Angle newAngle = new Angle(angle*(Math.PI/180));
 
 						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
@@ -535,6 +538,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						}
 					} else {
 						flipper.rotateOnPivot(false);
+						rotatingFlippers.remove(flipper);
 						continue;
 					}
 				}
@@ -566,12 +570,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
 
-						int angle = (int) (flipper.getAngularVel() / (1 / time));
+						double angle = (double) (flipper.getAngularVel() / (1 / currentTick));
 
 						if (angle + flipper.getCurrentAngle() > flipper.getMaxAngle())
 							angle = flipper.getMaxAngle() - flipper.getCurrentAngle();
 
-						Angle newAngle = new Angle(angle);
+						Angle newAngle = new Angle(angle*(Math.PI/180));
 
 						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
@@ -584,7 +588,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						flipper.setCurrentAngle(flipper.getCurrentAngle() + angle);
 
 						// add back to global list
-						if (flipper.getCurrentAngle() == flipper.getMaxAngle() || flipper.getCurrentAngle() == 0) {
+						if (flipper.getCurrentAngle() == (double)flipper.getMaxAngle() || flipper.getCurrentAngle() == (double)0) {
 							for (LineSegment l : newLines)
 								linesToGizmos.put(l, gizmo);
 							for (Circle c : corners)
@@ -615,12 +619,12 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						List<Circle> newCorners = new ArrayList<Circle>();
 						Vect pivot = corners.get(0).getCenter();
 
-						int angle = (int) (flipper.getAngularVel() / (1 / time));
+						double angle = (double) (flipper.getAngularVel() / (1 / currentTick));
 
 						if (flipper.getCurrentAngle() - angle < 0)
 							angle = flipper.getCurrentAngle();
 
-						Angle newAngle = new Angle(360 - angle);
+						Angle newAngle = new Angle((360 - angle)*(Math.PI/180));
 
 						for (LineSegment line : lines)
 							newLines.add(Geometry.rotateAround(line, pivot, newAngle));
@@ -633,7 +637,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						flipper.setCurrentAngle(flipper.getCurrentAngle() - angle);
 
 						// add back to global list
-						if (flipper.getCurrentAngle() == flipper.getMaxAngle() || flipper.getCurrentAngle() == 0) {
+						if (flipper.getCurrentAngle() == (double)flipper.getMaxAngle() || flipper.getCurrentAngle() == 0) {
 							for (LineSegment l : newLines)
 								linesToGizmos.put(l, gizmo);
 							for (Circle c : corners)
@@ -654,6 +658,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private void moveBalls() {
 		CollisionInfo colInfo = timeUntilCollision();
 		double colTime = colInfo.getColTime();
+		if(colTime < time){
+			currentTick = colTime;
+		}
 		Ball colBall = colInfo.getCollidingBall();
 		Ball colBall2 = colInfo.getCollidingBall2();
 
@@ -691,9 +698,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			for (Ball ball : balls.values()) {
 				if (ball.isAbsorbed() || ball.paused())
 					continue;
-				calculateBallMove(ball, time);
-				applyFriction(ball, time);
-				applyGravity(ball, time);
+				calculateBallMove(ball, currentTick);
+				applyFriction(ball, currentTick);
+				applyGravity(ball, currentTick);
 			}
 		}
 		this.setChanged();
@@ -1124,14 +1131,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		frictionMUTwo = fTwo;
 	}
 
-	private void applyFriction(Ball ball, double time) {
+	private void applyFriction(Ball ball, double t) {
 		double mu = frictionMU;
 		double mu2 = frictionMUTwo;
 
 		// double xVel = ball.getVelocity().x();
 		// double yVel = ball.getVelocity().y();
 
-		double fValue = (1 - mu * time - ball.getVelocity().length() * mu2 * time);
+		double fValue = (1 - mu * t - ball.getVelocity().length() * mu2 * t);
 		ball.setVelocity(ball.getVelocity().times(fValue));
 	}
 
@@ -1140,9 +1147,9 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		gravity = g;
 	}
 
-	private void applyGravity(Ball ball, double time) {
+	private void applyGravity(Ball ball, double t) {
 		Vect currentVel = ball.getVelocity();
-		Vect velGravity = new Vect(currentVel.x(), (currentVel.y() + (gravity * time)));
+		Vect velGravity = new Vect(currentVel.x(), (currentVel.y() + (gravity * t)));
 		ball.setVelocity(velGravity);
 	}
 
