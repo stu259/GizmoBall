@@ -1,5 +1,5 @@
-Triangle T 0
-Rotate T x
+Triangle T 19 0
+Rotate T
 Triangle T2 1 1
 Square S02 0 2
 Square S12 1 2
@@ -56,6 +56,7 @@ Connect C165 RF137
 Connect C174 RF137
 Connect C183 RF137
 Absorber A 0 19 20 20
-KeyConnect key 127 down A
+KeyConnect key 65 down A
 Connect A A
 Ball B 1.0 11.0 0.0 0.0
+Ball B 4.0 11.0 0.0 0.0

@@ -233,8 +233,18 @@ public class BuildModeJUnit {
 
 	@Test
 	public void keyConnectNoGizmo() {
+		assertFalse(model.keyConnectGizmo(x, y, "32"));
+	}
+	
+	@Test
+	public void keyDisconnectConnect() {
 		model.addGizmo(gizmo, x, y);
-		assertTrue(model.keyConnectGizmo(x, y, "32"));
+		model.keyConnectGizmo(x, y, "32");
+		model.keyConnectGizmo(x, y, "33");
+		model.keyConnectGizmo(x, y, "34");
+		model.keyConnectGizmo(x, y, "35");
+		model.keyConnectGizmo(x, y, "36");
+		model.disconnectGizmo(x, y);
 	}
 
 	@Test

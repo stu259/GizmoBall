@@ -24,7 +24,7 @@ public class FileJunit {
 		ErrorMessage eM = new ErrorMessage();
 		eM.setTest(true);
 		model = new Model(eM);
-		d= new Display(model);
+		d = new Display(model);
 		eM.giveDisplay(d);
 		gizmo = "triangle";
 		gx = 1;
@@ -47,18 +47,50 @@ public class FileJunit {
 	}
 
 	@Test
-	public void save() {
-		model.save(new File("JUnit"));
+	public void save() throws NumberFormatException, InvalidLineException {
+		model.save(new File("JUnit.txt"));
+		model.load(new File("JUnit.txt"));
+		model.containsGizmo(gx, gy);
 	}
 
 	@Test
 	public void load() throws NumberFormatException, InvalidLineException {
-		model.load(new File("fileformat.txt"));
+		model.load(new File("TestingTxt/fileformat.txt"));
 	}
 
-	@Test (expected = InvalidLineException.class)
-	public void loadInvalid() throws NumberFormatException, InvalidLineException {
-		model.load(new File("invalidfileformat.txt"));
+	@Test(expected = InvalidLineException.class)
+	public void loadInvalid2() throws NumberFormatException, InvalidLineException {
+		model.load(new File("TestingTxt/fileformat2.txt"));
+	}
+
+	@Test(expected = InvalidLineException.class)
+	public void loadInvalid3() throws NumberFormatException, InvalidLineException {
+		model.load(new File("TestingTxt/fileformat3.txt"));
+	}
+
+	@Test(expected = InvalidLineException.class)
+	public void loadInvalid4() throws NumberFormatException, InvalidLineException {
+		model.load(new File("TestingTxt/fileformat4.txt"));
+	}
+
+	@Test(expected = InvalidLineException.class)
+	public void loadInvalid5() throws NumberFormatException, InvalidLineException {
+		model.load(new File("TestingTxt/fileformat5.txt"));
+	}
+
+	@Test(expected = InvalidLineException.class)
+	public void loadInvalid6() throws NumberFormatException, InvalidLineException {
+		model.load(new File("TestingTxt/fileformat6.txt"));
+	}
+	
+	@Test(expected = InvalidLineException.class)
+	public void loadInvalid7() throws NumberFormatException, InvalidLineException {
+		model.load(new File("TestingTxt/fileformat7.txt"));
+	}
+	
+	@Test
+	public void loadEmpty() throws NumberFormatException, InvalidLineException {
+		model.load(new File("TestingTxt/empty.txt"));
 	}
 
 }
