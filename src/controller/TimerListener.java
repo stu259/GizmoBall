@@ -19,7 +19,7 @@ public class TimerListener implements ActionListener, Observer {
 		model = m;
 		model.addObserver(this);
 
-		timer = new Timer(1, this);
+		timer = new Timer(10, this);
 	}
 
 	public void startTimer() {
@@ -38,7 +38,7 @@ public class TimerListener implements ActionListener, Observer {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == timer) {
 			model.tick();
-			System.out.println(tickCount);
+//			System.out.println(tickCount);
 			tickCount++;
 		} else if (e.getActionCommand().toLowerCase().equals("start")) {
 			timer.start();

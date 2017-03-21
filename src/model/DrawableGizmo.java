@@ -1,5 +1,10 @@
 package model;
 
+import java.util.List;
+
+import physics.Circle;
+import physics.LineSegment;
+
 public class DrawableGizmo implements IDrawableGizmo {
 
 	private IGizmo gizmo;
@@ -44,12 +49,22 @@ public class DrawableGizmo implements IDrawableGizmo {
 	}
 
 	@Override
-	public int getAngle() {
+	public double getAngle() {
 		return gizmo.getCurrentAngle();
 	}
 
 	@Override
 	public boolean isHit() {
 		return gizmo.isHit();
+	}
+	
+	@Override	
+	public List<LineSegment> getLines() {
+		return gizmo.getLines();
+	}
+	
+	@Override
+	public List<Circle> getCorners() {
+		return gizmo.getCorners();
 	}
 }

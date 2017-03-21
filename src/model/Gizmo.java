@@ -258,7 +258,7 @@ public class Gizmo implements IGizmo{
 	}
 	
 	@Override
-	public int getCurrentAngle(){
+	public double getCurrentAngle(){
 		return currentAngle;
 	}
 	
