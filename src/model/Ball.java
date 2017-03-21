@@ -15,8 +15,8 @@ public class Ball {
 	public Ball(double x, double y, double xVel, double yVel){
 		this.x = x;
 		this.y = y;
-		minSpeed = -20;
-		maxSpeed = 20;
+		minSpeed = -100;
+		maxSpeed = 100;
 		vel = new Vect(xVel, yVel);
 		radius = 0.25;
 		paused = false;
