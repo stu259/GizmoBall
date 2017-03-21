@@ -18,7 +18,7 @@ public class TimerListener implements ActionListener, Observer {
 		model = m;
 		model.addObserver(this);
 
-		timer = new Timer(1, this);
+		timer = new Timer(5, this);
 	}
 
 	public void startTimer() {
