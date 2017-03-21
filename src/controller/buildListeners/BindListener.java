@@ -34,7 +34,7 @@ public class BindListener implements ActionListener, MouseInputListener, KeyList
 	public void mousePressed(MouseEvent e) {
 		x = e.getX() / display.getScale();
 		y = e.getY() / display.getScale();
-		if (model.containsGizmo(x, y) =="g") {
+		if (model.containsGizmo(x, y) == null) {
 			display.errorPopup("No Gizmo Selected");
 			display.changeText("Select Gizmo to Bind");
 		} else {
