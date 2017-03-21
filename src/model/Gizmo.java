@@ -240,6 +240,12 @@ public class Gizmo implements IGizmo{
 	public void removeIncomingConnection(IGizmo gizmo){
 		incomingConnections.remove(gizmo);
 	}
+	
+
+	@Override
+	public void removeOutgoingConnection(IGizmo gizmo){
+		outgoingConnections.remove(gizmo);
+	}
 
 	@Override
 	public void clearOutgoingConnections(){

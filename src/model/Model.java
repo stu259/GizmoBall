@@ -1010,15 +1010,17 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	private void disconnectGizmo(IGizmo gizmo) {
-		if (gizmo.getOutgoingConnections() != null) {
+
+		if (gizmo.getOutgoingConnections()!= null) {
 			for(IGizmo outgoingGizmo : gizmo.getOutgoingConnections()){
 				outgoingGizmo.removeIncomingConnection(gizmo);
 				outgoingGizmo.clearOutgoingConnections();
 			}
+			gizmo.clearOutgoingConnections();
 		}
 
 		if (!gizmo.getIncomingConnections().isEmpty()) {
-			for (IGizmo incomingCon : gizmo.getIncomingConnections()) {
+			for (IGizmo incomingCon : gizmo.getIncomingConnections()) {			
 				incomingCon.clearOutgoingConnections();
 			}
 			gizmo.clearIncomingConnections();

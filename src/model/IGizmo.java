@@ -118,4 +118,6 @@ public interface IGizmo {
 	void setHit(int hitNo);
 
 	void clearOutgoingConnections();
+
+	void removeOutgoingConnection(IGizmo gizmo);
 }
