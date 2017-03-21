@@ -13,7 +13,6 @@ import model.IModel;
 public class TimerListener implements ActionListener, Observer {
 	Timer timer;
 	IDrawableModel model;
-	private int  tickCount;
 
 	public TimerListener(IDrawableModel m) {
 		model = m;
@@ -38,8 +37,6 @@ public class TimerListener implements ActionListener, Observer {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == timer) {
 			model.tick();
-			System.out.println(tickCount);
-			tickCount++;
 		} else if (e.getActionCommand().toLowerCase().equals("start")) {
 			timer.start();
 		} else if (e.getActionCommand().toLowerCase().equals("stop")) {
