@@ -325,7 +325,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		currentTick = time;
 		loopGizmos();
 		moveBalls();
-		loopGizmos();
 		this.setChanged();
 		this.notifyObservers();
 	}
