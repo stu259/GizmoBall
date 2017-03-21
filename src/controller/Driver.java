@@ -64,10 +64,10 @@ public class Driver {
 		listeners.put("rL", new RotateListener(m, buildL, d));
 
 		listeners.put("tL", new TickListener(m));
-		listeners.put("eL", new ExitActionListener());
+		listeners.put("eL", new ExitListener());
 		listeners.put("lL", new LoadListener(d, m));
 		listeners.put("modeL", new ModeListener(d, m, timer));
-		listeners.put("nBL", new NewBoardListener(d, m, timer));
+		listeners.put("nBL", new NewListener(d, m, timer));
 		listeners.put("sL", new SaveListener(d, m));
 
 	}
