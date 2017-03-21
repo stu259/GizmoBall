@@ -46,6 +46,8 @@ public class Display implements IDisplay, IViewError {
 	private Container cp;
 	private int boardSize;
 	private TimerListener timer;
+	private JMenuItem load;
+	private JMenuItem save;
 
 	public Display(Model m) {
 		model = m;
@@ -71,6 +73,7 @@ public class Display implements IDisplay, IViewError {
 		initialise();
 		addMenuBar();
 		tidy();
+		changeMode("build");
 	}
 
 	private void initialise() {
@@ -89,8 +92,7 @@ public class Display implements IDisplay, IViewError {
 		cp.add(boards, BorderLayout.CENTER);
 		output = new JTextField("Select Button");
 		cp.add(output, BorderLayout.PAGE_END);
-		changeMode("build");
-	}
+		}
 
 	private void addMenuBar() {
 
@@ -99,9 +101,9 @@ public class Display implements IDisplay, IViewError {
 
 		JMenuItem newBoard = new JMenuItem("New");
 		newBoard.addActionListener(listeners.get("nBL"));
-		JMenuItem load = new JMenuItem("Load");
+		load = new JMenuItem("Load");
 		load.addActionListener(listeners.get("lL"));
-		JMenuItem save = new JMenuItem("Save");
+		save = new JMenuItem("Save");
 		save.addActionListener(listeners.get("sL"));
 		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(listeners.get("eL"));
@@ -115,6 +117,7 @@ public class Display implements IDisplay, IViewError {
 		menuBar.add(menu);
 		frame.setJMenuBar(menuBar);
 	}
+	
 
 	private void tidy() {
 		frame.setVisible(true);
@@ -129,8 +132,12 @@ public class Display implements IDisplay, IViewError {
 		cardLayout.show(boards, m);
 		if (m == "build") {
 			frame.setTitle("BUILD MODE");
+			load.setEnabled(true);
+			save.setEnabled(true);
 		} else {
 			frame.setTitle("RUN MODE");
+			load.setEnabled(false);
+			save.setEnabled(false);
 		}
 	}
 
@@ -150,7 +157,7 @@ public class Display implements IDisplay, IViewError {
 		rB = new RunBoard(boardSize, model);
 		buttons.add(run, "run");
 		boards.add(rB, "run");
-	}
+}
 
 	public File saveDialog() {
 		String filePath = (String) JOptionPane.showInputDialog(new JFrame(), "Enter name for save", "Save Dialog",

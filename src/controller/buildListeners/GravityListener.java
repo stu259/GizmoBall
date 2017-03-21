@@ -26,7 +26,11 @@ public class GravityListener implements ActionListener {
 		max[0]=50;
 		min[0]=-50;
 		init[0]=(int)model.getGravity();
-		model.setGravity(display.inputPopup(message,min,max,init)[0]);		
+		double[] gravity = display.inputPopup(message,min,max,init);	
+		if(gravity!=null){
+			model.setGravity(gravity[0]);
+		}
+		
 	}
 
 
