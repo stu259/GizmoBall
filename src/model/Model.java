@@ -144,8 +144,11 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 		for (Ball ball : balls.values()) {
 			skip = false;
-			if (ball.paused() || (ball.getVelocity().x()==0 && ball.getVelocity().y()==0))
+			
+			if (ball.paused() || ball.getVelocity().y()==0) {
+				System.out.println("continuing");
 				continue;
+			}
 
 			for (IGizmo gizmo : absorberToBalls.keySet())
 				if (gizmo.gizmoType().toLowerCase().equals("absorber"))
@@ -162,15 +165,20 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			double nextTime = 0;
 			for (LineSegment line : walls) {
 				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
+				if(nextTime == 0){ //ball has stopped bouncing
+					Vect noBounceVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
+					ball.setVelocity(new Vect(noBounceVel.x(), 0));
+					continue;
+				}
 				if (nextTime < lowestColTime) {
 					lineHit = null;
 					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					collidingBall2 = null;
-					if(ball.getVelocity().y() > -3.5 && ball.getVelocity().y() < 3.5 && line.p1().y()==20){ //if ball is so slow that it should stop
-						updatedVel = new Vect(ball.getVelocity().x(), 0);
-						System.out.println("making y vel = 0");
+					if(ball.getVelocity().y() > -1 && ball.getVelocity().y() < 1){ //if ball is so slow that it should stop
+						Vect noBounceVel = Geometry.reflectWall(line, vel, 1);
+						updatedVel = new Vect(noBounceVel.x(), 0);
 					}
 					else
 						updatedVel = Geometry.reflectWall(line, vel, 1);
@@ -178,15 +186,21 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			}
 			for (LineSegment line : linesToGizmos.keySet()) {
 				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
+				if(nextTime == 0){ //ball has stopped bouncing
+					Vect noBounceVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
+					ball.setVelocity(new Vect(noBounceVel.x(), 0));
+					continue;
+				}
 				if (nextTime < lowestColTime) {
 					lineHit = line;
 					circleHit = null;
 					lowestColTime = nextTime;
 					collidingBall = ball;
 					collidingBall2 = null;
-					if(ball.getVelocity().y() > -3.5 && ball.getVelocity().y() < 3.5 && (ball.getCenter().y() + ball.getRadius() < linesToGizmos.get(line).getStartY() )){
-						System.out.println("making y vel = 0");
-						updatedVel = new Vect(ball.getVelocity().x(), 0);
+					
+					if(ball.getVelocity().y() > -1 && ball.getVelocity().y() < 1){
+						Vect noBounceVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
+						updatedVel = new Vect(noBounceVel.x(), 0);
 					}
 					else
 						updatedVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
@@ -261,7 +275,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				}
 				// all other gizmos collisions
 				else {
-					linesToGizmos.get(lineHit).setHit(120); // 120 = 3 seconds
+					linesToGizmos.get(lineHit).setHit((int)(3 * 1/time)); // 120 = 3 seconds
 															// (40ticks/second)
 					if (linesToGizmos.get(lineHit).getOutgoingConnections() != null) {
 						for (IGizmo outgoingGizmo : linesToGizmos.get(lineHit).getOutgoingConnections())
@@ -279,7 +293,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				}
 				// all other gizmo collisions
 				else {
-					circlesToGizmos.get(circleHit).setHit(120); // 120 = 3
+					circlesToGizmos.get(circleHit).setHit((int)(3 * 1/time)); // 120 = 3
 																// seconds
 																// (40ticks/second)
 					if (circlesToGizmos.get(circleHit).getOutgoingConnections() != null)
@@ -309,12 +323,8 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	@Override
 	public void tick() {
 		currentTick = time;
-		if(!balls.isEmpty())
-			for(Ball ball : balls.values())
-				System.out.println("Ball velX:"+ball.getVelocity().x()+" velY:"+ball.getVelocity().y());
 		loopGizmos();
 		moveBalls();
-		loopGizmos();
 		this.setChanged();
 		this.notifyObservers();
 	}
