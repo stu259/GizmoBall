@@ -160,7 +160,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 			for (LineSegment line : walls) {
 				nextTime = Geometry.timeUntilWallCollision(line, circ, vel);
 				if(nextTime == 0){ //ball has stopped bouncing
-					Vect noBounceVel = Geometry.reflectWall(line, vel, linesToGizmos.get(line).getCoef());
+					Vect noBounceVel = Geometry.reflectWall(line, vel, 1);
 					ball.setVelocity(new Vect(noBounceVel.x(), 0));
 					continue;
 				}
