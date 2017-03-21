@@ -92,7 +92,7 @@ public class Display implements IDisplay, IViewError {
 		cp.add(boards, BorderLayout.CENTER);
 		output = new JTextField("Select Button");
 		cp.add(output, BorderLayout.PAGE_END);
-		}
+	}
 
 	private void addMenuBar() {
 
@@ -117,7 +117,6 @@ public class Display implements IDisplay, IViewError {
 		menuBar.add(menu);
 		frame.setJMenuBar(menuBar);
 	}
-	
 
 	private void tidy() {
 		frame.setVisible(true);
@@ -157,7 +156,7 @@ public class Display implements IDisplay, IViewError {
 		rB = new RunBoard(boardSize, model);
 		buttons.add(run, "run");
 		boards.add(rB, "run");
-}
+	}
 
 	public File saveDialog() {
 		String filePath = (String) JOptionPane.showInputDialog(new JFrame(), "Enter name for save", "Save Dialog",
@@ -205,8 +204,13 @@ public class Display implements IDisplay, IViewError {
 		for (int i = 0; i < message.length; i++) {
 			slider[i] = new JSlider(JSlider.HORIZONTAL, (int) (min[i] * 1000), (int) (max[i] * 1000),
 					(int) (init[i] * 1000));
+			slider[i].setPreferredSize(new Dimension(500, 50));
 			Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-			for (double x = min[i]; x <= max[i]; x += max[i] / 5) {
+			int divide = 5;
+			if(min[i] >= 0) {
+				divide =10;
+			}
+			for (double x = min[i]; x <= max[i]; x += max[i] / divide) {
 				double temp;
 				if (max[i] / 5 >= 1) {
 					temp = Math.round(x);
@@ -218,7 +222,11 @@ public class Display implements IDisplay, IViewError {
 
 			}
 			slider[i].setLabelTable(labelTable);
-			slider[i].setMinorTickSpacing((int) (max[i] * 1000) / 10);
+			if (min[i] >= 0) {
+				slider[i].setMinorTickSpacing((int) (max[i] * 1000) / 20);
+			} else {
+				slider[i].setMinorTickSpacing((int) (max[i] * 1000) / 10);
+			}
 			slider[i].setPaintTicks(true);
 			slider[i].setPaintLabels(true);
 			input.add(slider[i]);
