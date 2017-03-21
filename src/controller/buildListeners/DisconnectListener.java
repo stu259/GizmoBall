@@ -31,7 +31,7 @@ public class DisconnectListener implements ActionListener, MouseInputListener {
 	public void mousePressed(MouseEvent e) {
 		x= e.getX()/display.getScale();
 		y = e.getY()/display.getScale();
-		if (!model.containsGizmo(x, y)) {
+		if (model.containsGizmo(x, y)==null) {
 			display.errorPopup("No Gizmo Selected");
 			display.changeText("Select Gizmo to disconnect");
 		} else {

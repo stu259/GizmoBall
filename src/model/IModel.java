@@ -104,7 +104,7 @@ public interface IModel {
 	
 	public void keyPressed(String k);
 	
-	public boolean containsGizmo(double x, double y);
+	public String containsGizmo(double x, double y);
 
 	public boolean deleteBall(double x, double y);
 

@@ -10,57 +10,55 @@ import java.awt.event.MouseEvent;
 
 public class RotateListener implements ActionListener, MouseInputListener {
 
-    private IModel model;
-    private BuildListener buildListener;
-    private IDisplay display;
-    int x;
-    int y;
+	private IModel model;
+	private BuildListener buildListener;
+	private IDisplay display;
+	int x;
+	int y;
 
-    public RotateListener(IModel m, BuildListener bL, IDisplay d) {
-        model = m;
-        buildListener = bL;
-        display = d;
-    }
+	public RotateListener(IModel m, BuildListener bL, IDisplay d) {
+		model = m;
+		buildListener = bL;
+		display = d;
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        buildListener.setMouseListener(this);
-        display.changeText("Select Gizmo to Rotate");
-    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		buildListener.setMouseListener(this);
+		display.changeText("Select Gizmo to Rotate");
+	}
 
-    public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent e) {
 		x = e.getX() / display.getScale();
 		y = e.getY() / display.getScale();
-		if (!model.containsGizmo(x, y)) {
+		if (model.containsGizmo(x, y) == null) {
 			display.errorPopup("No Gizmo Selected");
+		} else if (!model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale())) {
+			display.errorPopup("Cannot perform rotate action. Keep in mind absorbers cannot be rotated.");
 		}
-		else if (!model.rotateGizmo(e.getX() / display.getScale(), e.getY() / display.getScale())) {
-            display.errorPopup("Cannot perform rotate action. Keep in mind absorbers cannot be rotated.");
-        }
-    }
+	}
 
+	public void mouseExited(MouseEvent e) {
+		display.changeText("Select Gizmo to Rotate");
+	}
 
-    public void mouseExited(MouseEvent e) {
-        display.changeText("Select Gizmo to Rotate");
-    }
+	public void mouseReleased(MouseEvent e) {
 
-    public void mouseReleased(MouseEvent e) {
+	}
 
-    }
+	public void mouseEntered(MouseEvent e) {
 
-    public void mouseEntered(MouseEvent e) {
+	}
 
-    }
+	public void mouseClicked(MouseEvent e) {
 
-    public void mouseClicked(MouseEvent e) {
+	}
 
-    }
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+	}
 
-    @Override
-    public void mouseDragged(MouseEvent arg0) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent arg0) {
-    }
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+	}
 }

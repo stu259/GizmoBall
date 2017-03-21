@@ -1376,13 +1376,14 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	@Override
-	public boolean containsGizmo(double x, double y) {
+	public String containsGizmo(double x, double y) {
 		String key = findGizmo((int)x,(int)y);
+		if (key != null)
+			return "g";
+		key = findBall(x, y);
 		if (key == null)
-			key = findBall(x, y);
-		if (key == null)
-			return false;
-		return true;
+			return null;
+		return "b";
 	}
 
 	@Override

@@ -163,7 +163,7 @@ public class BuildModeJUnit {
 	public void clear() {
 		model.addGizmo(gizmo, x, y);
 		model.clear();
-		assertFalse(model.containsGizmo(x, y));
+		assertNull(model.containsGizmo(x, y));
 	}
 
 	@Test

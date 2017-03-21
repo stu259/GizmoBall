@@ -34,22 +34,26 @@ public class MoveListener implements ActionListener, MouseInputListener {
 		if (isClicked == false) {
 			x = (double) e.getX() / (double) display.getScale();
 			y = (double) e.getY() / (double) display.getScale();
-			if (!model.containsGizmo(x, y)) {
+
+			if (model.containsGizmo(x, y)==null) {
 				display.errorPopup("No Gizmo Selected");
 				display.changeText("Select Gizmo to Move");
-				isClicked=false;
+				isClicked = false;
 			} else {
 				isClicked = true;
 				display.changeText("Select New Location");
 			}
 		} else if (isClicked == true) {
-
 			double newX = (double) e.getX() / (double) display.getScale();
 			double newY = (double) e.getY() / (double) display.getScale();
-			Boolean ballMoved = (model.moveBall(x, y, newX, newY));
-			Boolean gizmoMoved = (model.moveGizmo((int)x, (int)y, (int)newX, (int)newY));
-
-			if (!ballMoved && !gizmoMoved) {
+			Boolean moved = false;
+			System.out.println(x + " " + y + " " + newX + " " + newY);
+			if (model.containsGizmo(x, y)=="g") {
+				moved = (model.moveGizmo((int) x, (int) y, (int) newX, (int) newY));
+			} else if(model.containsGizmo(x, y)=="b") {
+				moved = (model.moveBall(x, y, newX, newY));
+			}
+			if (!moved) {
 				display.errorPopup("Move action invalid. First click a ball or gizmo. Second click on a empty space.");
 			}
 
