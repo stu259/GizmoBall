@@ -14,8 +14,8 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 	private IModel model;
 	private BuildListener buildListener;
 	private IDisplay display;
-	int x;
-	int y;
+	double x;
+	double y;
 
 	public DeleteListener(IModel m, BuildListener bL, IDisplay d) {
 		model = m;
@@ -30,15 +30,14 @@ public class DeleteListener implements ActionListener, MouseInputListener {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		x = e.getX() / display.getScale();
-		y = e.getY() / display.getScale();
+		x = (double) e.getX() / (double) display.getScale();
+		y = (double) e.getY() / (double) display.getScale();
+		System.out.println(model.containsGizmo(x, y));
 		if (model.containsGizmo(x, y) == null) {
 			display.errorPopup("No Gizmo Selected");
 		} else if (model.containsGizmo(x, y)=="g") {
 			model.deleteGizmo(e.getX() / display.getScale(), e.getY() / display.getScale());
 		} else {
-			double x = (double) e.getX() / (double) display.getScale();
-			double y = (double) e.getY() / (double) display.getScale();
 			model.deleteBall(x, y);
 		}
 

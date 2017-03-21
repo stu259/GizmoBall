@@ -249,7 +249,7 @@ public class Gizmo implements IGizmo{
 
 	@Override
 	public void clearOutgoingConnections(){
-		outgoingConnections = null;
+		outgoingConnections.clear();
 	}
 	
 	@Override
