@@ -9,5 +9,7 @@ public interface IDrawableModel {
 	public List<IDrawableBall> drawableBalls();
 	
 	public void addObserver(Observer o);
+	
+	public void tick();
 
 }

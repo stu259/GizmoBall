@@ -44,10 +44,11 @@ public class Driver {
 		d.start();
 	}
 
-	private static void createControllers(IModel m, IDisplay d) {
+	private static void createControllers(Model m, IDisplay d) {
 		buildL = new BuildListener();
 		runL = new RunListener(m);
 		timer = new TimerListener(m);
+		timer.stopTimer();
 
 		listeners = new HashMap<>();
 		listeners.put("aAL", new AddAbsorberListener(m, buildL, d));

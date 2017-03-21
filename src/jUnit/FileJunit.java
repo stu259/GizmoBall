@@ -33,7 +33,7 @@ public class FileJunit {
 		ay = 3;
 		aex = 4;
 		aey = 4;
-		ak = "32";
+		ak = "32 up";
 		bx = 1;
 		by = 1;
 		bvx = 0;
@@ -41,6 +41,7 @@ public class FileJunit {
 		model.addGizmo(gizmo, gx, gy);
 		model.addAbsorber(ax, ay, aex, aey);
 		model.addBall(bx, by, bvx, bvy);
+		model.keyConnectGizmo(ax, ay, ak);
 		model.keyConnectGizmo(ax, ay, ak);
 		model.rotateGizmo(gx, gy);
 		model.connectGizmo(gx, gy, ax, ay);

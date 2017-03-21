@@ -2,18 +2,24 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.Timer;
 
+import model.IDrawableModel;
 import model.IModel;
 
-public class TimerListener implements ActionListener {
+public class TimerListener implements ActionListener, Observer {
 	Timer timer;
-	IModel model;
+	IDrawableModel model;
+	private int  tickCount;
 
-	public TimerListener(IModel m) {
-		model=m;
-		timer = new Timer(25, this);
+	public TimerListener(IDrawableModel m) {
+		model = m;
+		model.addObserver(this);
+
+		timer = new Timer(1, this);
 	}
 
 	public void startTimer() {
@@ -32,10 +38,20 @@ public class TimerListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == timer) {
 			model.tick();
+			System.out.println(tickCount);
+			tickCount++;
 		} else if (e.getActionCommand().toLowerCase().equals("start")) {
 			timer.start();
 		} else if (e.getActionCommand().toLowerCase().equals("stop")) {
 			timer.stop();
+		}
+
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if (timer.isRunning()) {
+			timer.restart();
 		}
 
 	}

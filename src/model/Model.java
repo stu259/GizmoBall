@@ -33,7 +33,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	private double gravity = 25;
 	private double frictionMU = 0.025;
 	private double frictionMUTwo = 0.025;
-	private final double time = 0.025;
+	private final double time = 0.001;
 
 	// connections for triggering both redrawing of lines and
 	// private Map<LineSegment, IGizmo> linesToAbsorber;
@@ -139,7 +139,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 		Circle circleHit = null;
 		Ball collidingBall2 = null;
 		Vect updatedVel2 = null;
-		Geometry.setForesight(time * 2);
+		Geometry.setForesight(time );
 
 		for (Ball ball : balls.values()) {
 			skip = false;
