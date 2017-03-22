@@ -328,7 +328,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 	}
 
 	private void fireAbsorber(AbsorberGizmo absorber) {
-		if (absorber.triggered()) {
+		if (absorber.triggered() && findGizmo(absorber.getEndX()-1, absorber.getEndY()-2) == null) {
 			if (!absorberToBalls.keySet().contains(absorber)) {
 				absorber.trigger();
 				return;
@@ -340,7 +340,7 @@ public class Model extends Observable implements IModel, IDrawableModel {
 				ballToFire.setAbsorbed(false);
 				moveBallsInAbsorber(absorber);
 			}
-			absorber.trigger();// untrigger
+			absorber.trigger();//untrigger
 		}
 	}
 
@@ -446,12 +446,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						List<Circle> corners = flipper.getCorners();
 						
 						// remove from global list
-						for (LineSegment l : lines) {
+						for (LineSegment l : lines)
 							linesToGizmos.remove(l);
-						}
-						for (Circle c : corners) {
+						for (Circle c : corners)
 							circlesToGizmos.remove(c);
-						}
 
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
@@ -496,12 +494,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						List<Circle> corners = flipper.getCorners();
 
 						// remove from global list
-						for (LineSegment l : lines) {
+						for (LineSegment l : lines)
 							linesToGizmos.remove(l);
-						}
-						for (Circle c : corners) {
+						for (Circle c : corners)
 							circlesToGizmos.remove(c);
-						}
 
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
@@ -511,8 +507,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 
 						if (flipper.getCurrentAngle() - angle < 0)
 							angle = flipper.getCurrentAngle();
-						
-						double angleTest = ((-1 * flipper.getAngularVel() * (Math.PI/180)) / (1 / currentTick));
 
 						Angle newAngle = new Angle(angle*(Math.PI/180));
 
@@ -547,7 +541,6 @@ public class Model extends Observable implements IModel, IDrawableModel {
 					// check if already on maxAngle
 					// if not set rotateOnPivot to true
 					// get lines and circles, rotate them via pivot
-
 					if (flipper.getCurrentAngle() != flipper.getMaxAngle()) {
 						flipper.rotateOnPivot(true);
 						rotatingFlippers.add(flipper);
@@ -556,12 +549,10 @@ public class Model extends Observable implements IModel, IDrawableModel {
 						List<Circle> corners = flipper.getCorners();
 
 						// remove from global list
-						for (LineSegment l : lines) {
+						for (LineSegment l : lines)
 							linesToGizmos.remove(l);
-						}
-						for (Circle c : corners) {
+						for (Circle c : corners)
 							circlesToGizmos.remove(c);
-						}
 
 						List<LineSegment> newLines = new ArrayList<LineSegment>();
 						List<Circle> newCorners = new ArrayList<Circle>();
